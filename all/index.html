@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Calculators — calculate.website</title>
+<meta name="description" content="Browse all free calculators on calculate.website: BMI, percentage, age, days, compound interest, loan, unit converter, tip, profit margin and more.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/all/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:780px;margin:0 auto;padding:40px 20px 80px}
+  h1{font-size:clamp(24px,4vw,36px);font-weight:700;letter-spacing:-0.03em;margin-bottom:8px}
+  .sub{font-size:14px;color:var(--ink-light);margin-bottom:40px}
+  .cat-section{margin-bottom:36px}
+  .cat-heading{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .cat-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .calc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;text-decoration:none;display:flex;align-items:center;gap:12px;transition:all .15s;color:var(--ink)}
+  .calc-card:hover{border-color:var(--hi);background:var(--hi-soft);transform:translateY(-1px)}
+  .calc-icon{font-size:20px;flex-shrink:0}
+  .calc-name{font-size:14px;font-weight:600;color:var(--ink)}
+  .calc-desc{font-size:12px;color:var(--ink-light);margin-top:2px}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+<div class="page">
+  <h1>All calculators</h1>
+  <p class="sub">Every free tool on calculate.website, organized by category.</p>
+
+  <div class="cat-section">
+    <div class="cat-heading">Health &amp; Fitness</div>
+    <div class="calc-grid">
+      <a class="calc-card" href="/bmi/"><span class="calc-icon">⚖️</span><div><div class="calc-name">BMI Calculator</div><div class="calc-desc">Body mass index, metric &amp; imperial</div></div></a>
+      <a class="calc-card" href="/weight-loss/"><span class="calc-icon">📉</span><div><div class="calc-name">Weight Loss</div><div class="calc-desc">Time to reach your goal weight</div></div></a>
+      <a class="calc-card" href="/hydration/"><span class="calc-icon">💧</span><div><div class="calc-name">Hydration</div><div class="calc-desc">Daily water intake needed</div></div></a>
+      <a class="calc-card" href="/protein/"><span class="calc-icon">🥩</span><div><div class="calc-name">Protein</div><div class="calc-desc">Daily protein needs by weight &amp; goal</div></div></a>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-heading">Finance &amp; Money</div>
+    <div class="calc-grid">
+      <a class="calc-card" href="/percentage/"><span class="calc-icon">%</span><div><div class="calc-name">Percentage</div><div class="calc-desc">4 modes: of, what %, change, discount</div></div></a>
+      <a class="calc-card" href="/compound-interest/"><span class="calc-icon">📈</span><div><div class="calc-name">Compound Interest</div><div class="calc-desc">Investment growth with chart</div></div></a>
+      <a class="calc-card" href="/loan/"><span class="calc-icon">🏦</span><div><div class="calc-name">Loan Calculator</div><div class="calc-desc">Monthly payment &amp; amortization</div></div></a>
+      <a class="calc-card" href="/tip/"><span class="calc-icon">🍽️</span><div><div class="calc-name">Tip Calculator</div><div class="calc-desc">Split bill &amp; calculate gratuity</div></div></a>
+      <a class="calc-card" href="/margin/"><span class="calc-icon">📊</span><div><div class="calc-name">Profit Margin</div><div class="calc-desc">Cost, margin, price &amp; profit</div></div></a>
+      <a class="calc-card" href="/savings/"><span class="calc-icon">🏧</span><div><div class="calc-name">Savings Calculator</div><div class="calc-desc">How fast will your savings grow?</div></div></a>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-heading">Math &amp; Numbers</div>
+    <div class="calc-grid">
+      <a class="calc-card" href="/unit-converter/"><span class="calc-icon">📐</span><div><div class="calc-name">Unit Converter</div><div class="calc-desc">Length, weight, temp, speed &amp; more</div></div></a>
+      <a class="calc-card" href="/random/"><span class="calc-icon">🎲</span><div><div class="calc-name">Random Generator</div><div class="calc-desc">Numbers, passwords &amp; dice rolls</div></div></a>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-heading">Dates &amp; Time</div>
+    <div class="calc-grid">
+      <a class="calc-card" href="/age/"><span class="calc-icon">🎂</span><div><div class="calc-name">Age Calculator</div><div class="calc-desc">Exact age in years, months &amp; days</div></div></a>
+      <a class="calc-card" href="/days/"><span class="calc-icon">📅</span><div><div class="calc-name">Days Between Dates</div><div class="calc-desc">Calendar days &amp; business days</div></div></a>
+      <a class="calc-card" href="/day-of-week/"><span class="calc-icon">🗓️</span><div><div class="calc-name">Day of the Week</div><div class="calc-desc">What day was any date?</div></div></a>
+      <a class="calc-card" href="/life/"><span class="calc-icon">🌟</span><div><div class="calc-name">Life in Numbers</div><div class="calc-desc">Heartbeats, breaths &amp; more since birth</div></div></a>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-heading">Games &amp; Tests</div>
+    <div class="calc-grid">
+      <a class="calc-card" href="/reaction-time/"><span class="calc-icon">⚡</span><div><div class="calc-name">Reaction Time</div><div class="calc-desc">Test your reflexes in milliseconds</div></div></a>
+      <a class="calc-card" href="/keyboard/"><span class="calc-icon">⌨️</span><div><div class="calc-name">Keyboard Tester</div><div class="calc-desc">Test every key on your keyboard</div></div></a>
+      <a class="calc-card" href="/zodiac/"><span class="calc-icon">♈</span><div><div class="calc-name">Zodiac Sign</div><div class="calc-desc">Western &amp; Chinese zodiac by birthday</div></div></a>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-heading">World Cup 2026</div>
+    <div class="calc-grid">
+      <a class="calc-card" href="/world-cup/"><span class="calc-icon">🏆</span><div><div class="calc-name">World Cup Countdown</div><div class="calc-desc">Days until FIFA World Cup 2026</div></div></a>
+    </div>
+  </div>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

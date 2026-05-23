@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compound Interest Calculator — Investment Growth Projector</title>
+<meta name="description" content="Project the growth of your savings or investments with compound interest. Set initial capital, annual rate, compounding frequency and monthly contributions. Chart included.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/compound-interest/">
+<meta property="og:title" content="Compound Interest Calculator — calculate.website">
+<meta property="og:description" content="Project investment growth with compound interest. Chart, range and monthly contributions included.">
+<meta property="og:url" content="https://calculate.website/compound-interest/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:560px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  .field-label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .req-star{color:var(--hi);margin-left:2px}
+  .opt-hint{font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-faint);margin-left:4px}
+  .input-wrap{position:relative}
+  .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+  .input-pm{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:14px;pointer-events:none;font-weight:600}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]:focus{border-color:var(--hi)}
+  input.has-prefix{padding-left:30px}
+  input.has-pm{padding-left:30px}
+  select{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--surface);outline:none;cursor:pointer;transition:border-color .15s;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2360647A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+  select:focus{border-color:var(--hi)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:42px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-main .currency{font-size:24px;font-weight:500;opacity:0.6;margin-right:2px}
+  .result-range{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:4px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+  .result-row{display:flex;justify-content:space-between;align-items:center}
+  .result-row-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85)}
+  .result-row-val.pos{color:#86EFAC}
+  .result-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+  .bar-track{height:8px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;margin:8px 0 6px;display:flex}
+  .bar-capital{background:rgba(255,255,255,0.3);border-radius:99px 0 0 99px;transition:width .4s}
+  .bar-int{background:#86EFAC;border-radius:0 99px 99px 0;transition:width .4s}
+  .bar-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4)}
+  .chart-card{background:var(--surface);border-radius:var(--radius);padding:20px 20px 14px;margin-bottom:16px;border:1px solid var(--border)}
+  .chart-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px}
+  .chart-sub{font-size:11px;color:var(--ink-faint);margin-bottom:14px}
+  .chart-wrap{width:100%;overflow:hidden}
+  .chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+  .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-light)}
+  .legend-dot{width:10px;height:3px;border-radius:2px;flex-shrink:0}
+  .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
+  .info-box strong{color:var(--ink)}
+  .req-note{font-size:11px;color:var(--ink-faint);margin-bottom:16px}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+
+<div class="page">
+  <h1 class="page-title">Compound Interest</h1>
+  <p class="page-sub">Project the growth of your savings or investments over time.</p>
+
+  <div class="card">
+    <p class="req-note"><span class="req-star">*</span> Required fields</p>
+
+    <div class="field">
+      <label class="field-label">Initial investment<span class="req-star">*</span></label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="capital" class="has-prefix" placeholder="10000" min="0" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label class="field-label">Number of years<span class="req-star">*</span></label>
+        <div class="input-wrap">
+          <input type="number" id="years" placeholder="10" min="1" max="50" oninput="calculate()">
+          <span class="input-suffix">yrs</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Annual interest rate<span class="req-star">*</span></label>
+        <div class="input-wrap">
+          <input type="number" id="rate" placeholder="7" min="0" step="0.5" oninput="calculate()">
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label class="field-label">Rate variance <span class="opt-hint">optional</span></label>
+        <div class="input-wrap">
+          <span class="input-pm">±</span>
+          <input type="number" id="variance" class="has-pm" placeholder="0" min="0" max="50" step="0.5" oninput="calculate()">
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Compounding</label>
+        <select id="comp-freq" onchange="calculate()">
+          <option value="365">Daily</option>
+          <option value="12" selected>Monthly</option>
+          <option value="4">Quarterly</option>
+          <option value="2">Semi-annually</option>
+          <option value="1">Annually</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Monthly contribution <span class="opt-hint">optional</span></label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="contribution" class="has-prefix" placeholder="0" min="0" oninput="calculate()">
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Estimated future value</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Fill in the fields</span></div>
+    <div id="result-range" class="result-range"></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Capital + contributions invested</span>
+        <span class="result-row-val" id="r-invested">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Interest earned</span>
+        <span class="result-row-val pos" id="r-interest">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,0.85);font-weight:600">Total value</span>
+        <span class="result-row-val pos" id="r-total">—</span>
+      </div>
+      <div id="r-range-row" class="result-row" style="display:none">
+        <span class="result-row-lbl">Estimated range (±variance)</span>
+        <span class="result-row-val" id="r-range">—</span>
+      </div>
+      <div class="bar-wrap">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4)">Breakdown of future value</div>
+        <div class="bar-track">
+          <div class="bar-capital" id="bar-cap"></div>
+          <div class="bar-int" id="bar-int"></div>
+        </div>
+        <div class="bar-labels">
+          <span id="lbl-cap">Principal</span>
+          <span id="lbl-int">Interest</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-card" id="chart-card" style="display:none">
+    <div class="chart-title">Growth projection</div>
+    <div class="chart-sub" id="chart-sub"></div>
+    <div class="chart-wrap" id="chart-wrap"></div>
+    <div class="chart-legend" id="chart-legend"></div>
+  </div>
+
+  <div class="info-box">
+    <strong>What is compound interest?</strong><br>
+    Interest earned is added to the principal and also earns interest in the next period. The compounding frequency defines how often this effect is applied — the more frequent, the higher the final return. Over time, the gap between what you invest and the final value grows exponentially.
+  </div>
+</div>
+
+<script>
+function fmt(n){
+  if(Math.abs(n)>=1e9) return '$ '+(n/1e9).toFixed(2)+'B';
+  if(Math.abs(n)>=1e6) return '$ '+(n/1e6).toFixed(2)+'M';
+  return '$ '+Math.round(n).toLocaleString('en-US');
+}
+
+function calcSeries(capital,annualRate,years,compFreq,monthlyContrib){
+  var effMonthly=Math.pow(1+annualRate/compFreq,compFreq/12)-1;
+  var totalMonths=years*12;
+  var balance=capital;
+  var data=[capital];
+  for(var m=1;m<=totalMonths;m++){
+    balance=balance*(1+effMonthly)+monthlyContrib;
+    if(m%12===0) data.push(balance);
+  }
+  return data;
+}
+
+function calculate(){
+  var capital=parseFloat(document.getElementById('capital').value)||0;
+  var years=parseInt(document.getElementById('years').value)||0;
+  var rate=parseFloat(document.getElementById('rate').value)||0;
+  var variance=parseFloat(document.getElementById('variance').value)||0;
+  var compFreq=parseInt(document.getElementById('comp-freq').value)||12;
+  var contribution=parseFloat(document.getElementById('contribution').value)||0;
+
+  var mainEl=document.getElementById('result-main');
+  var rangeEl=document.getElementById('result-range');
+  var subEl=document.getElementById('result-sub');
+  var rowsEl=document.getElementById('result-rows');
+  var chartCard=document.getElementById('chart-card');
+
+  if((!capital&&!contribution)||!rate||!years){
+    mainEl.innerHTML='<span class="empty-state">Fill in the fields</span>';
+    rangeEl.textContent='';subEl.textContent='';
+    rowsEl.style.display='none';chartCard.style.display='none';
+    return;
+  }
+
+  var r=rate/100;
+  var rUp=(rate+variance)/100;
+  var rDn=Math.max(0,rate-variance)/100;
+
+  var seriesBase=calcSeries(capital,r,years,compFreq,contribution);
+  var seriesUp=variance>0?calcSeries(capital,rUp,years,compFreq,contribution):seriesBase;
+  var seriesDn=variance>0?calcSeries(capital,rDn,years,compFreq,contribution):seriesBase;
+
+  var total=seriesBase[seriesBase.length-1];
+  var totalUp=seriesUp[seriesUp.length-1];
+  var totalDn=seriesDn[seriesDn.length-1];
+  var invested=capital+contribution*years*12;
+  var interest=total-invested;
+
+  var freqNames={365:'daily',12:'monthly',4:'quarterly',2:'semi-annually',1:'annually'};
+  var freqName=freqNames[compFreq]||'monthly';
+
+  mainEl.innerHTML='<span class="currency">$</span>'+Math.round(total).toLocaleString('en-US');
+  subEl.textContent='in '+years+' year'+(years===1?'':'s')+' · '+rate+'% annual rate · compounded '+freqName;
+
+  if(variance>0){
+    rangeEl.textContent='Range ±'+variance+'%: '+fmt(totalDn)+' – '+fmt(totalUp);
+    document.getElementById('r-range-row').style.display='flex';
+    document.getElementById('r-range').textContent=fmt(totalDn)+' – '+fmt(totalUp);
+  } else {
+    rangeEl.textContent='';
+    document.getElementById('r-range-row').style.display='none';
+  }
+
+  rowsEl.style.display='flex';
+  document.getElementById('r-invested').textContent=fmt(invested);
+  document.getElementById('r-interest').textContent='+ '+fmt(interest);
+  document.getElementById('r-total').textContent=fmt(total);
+
+  var capPct=Math.round((invested/total)*100);
+  var intPct=100-capPct;
+  document.getElementById('bar-cap').style.width=capPct+'%';
+  document.getElementById('bar-int').style.width=intPct+'%';
+  document.getElementById('lbl-cap').textContent='Principal '+capPct+'%';
+  document.getElementById('lbl-int').textContent='Interest '+intPct+'%';
+
+  var seriesContrib=[];
+  for(var y=0;y<=years;y++) seriesContrib.push(capital+contribution*y*12);
+
+  renderChart(seriesBase,seriesUp,seriesDn,seriesContrib,variance>0,years);
+  chartCard.style.display='block';
+}
+
+function renderChart(base,upper,lower,contrib,hasVariance,years){
+  var W=520,H=200,PL=62,PR=12,PT=12,PB=28;
+  var cW=W-PL-PR,cH=H-PT-PB;
+  var n=base.length;
+
+  var allVals=[].concat(base,upper,lower,contrib).filter(function(v){return isFinite(v);});
+  var minV=Math.min.apply(null,[0].concat(allVals));
+  var maxV=Math.max.apply(null,allVals);
+  var range=maxV-minV||1;
+
+  function xOf(i){return PL+(i/(n-1))*cW;}
+  function yOf(v){return PT+cH-((v-minV)/range)*cH;}
+  function pts(arr){return arr.map(function(v,i){return xOf(i)+','+yOf(v);}).join(' ');}
+
+  var basePts=pts(base);
+  var upperPts=pts(upper);
+  var lowerPts=pts(lower);
+  var contribPts=pts(contrib);
+  var lastX=xOf(n-1);
+  var bottomY=PT+cH;
+
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block" xmlns="http://www.w3.org/2000/svg">';
+  svg+='<defs><linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1A5FE8" stop-opacity="0.18"/><stop offset="100%" stop-color="#1A5FE8" stop-opacity="0.02"/></linearGradient><linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#86EFAC" stop-opacity="0.15"/><stop offset="100%" stop-color="#86EFAC" stop-opacity="0.01"/></linearGradient></defs>';
+
+  var steps=4;
+  for(var i=0;i<=steps;i++){
+    var v=minV+range*(i/steps);
+    var y=yOf(v);
+    svg+='<line x1="'+PL+'" y1="'+y+'" x2="'+(PL+cW)+'" y2="'+y+'" stroke="#F0F2F7" stroke-width="1"/>';
+    svg+='<text x="'+(PL-4)+'" y="'+(y+3.5)+'" font-size="8" fill="#B4B8CC" text-anchor="end">'+fmt(v).replace('$ ','$')+'</text>';
+  }
+
+  if(hasVariance){
+    var lowerReverse=[].concat(lower).reverse().map(function(v,i){return xOf(n-1-i)+','+yOf(v);}).join(' ');
+    svg+='<polygon points="'+upperPts+' '+lowerReverse+'" fill="rgba(26,95,232,0.08)" stroke="none"/>';
+    svg+='<polyline points="'+upperPts+'" fill="none" stroke="rgba(26,95,232,0.45)" stroke-width="1.3" stroke-dasharray="5,3"/>';
+    svg+='<polyline points="'+lowerPts+'" fill="none" stroke="rgba(26,95,232,0.45)" stroke-width="1.3" stroke-dasharray="5,3"/>';
+  }
+
+  svg+='<polygon points="'+xOf(0)+','+bottomY+' '+contribPts+' '+lastX+','+bottomY+'" fill="url(#gGreen)" stroke="none"/>';
+  svg+='<polyline points="'+contribPts+'" fill="none" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="6,3"/>';
+  svg+='<polygon points="'+xOf(0)+','+bottomY+' '+basePts+' '+lastX+','+bottomY+'" fill="url(#gBlue)" stroke="none"/>';
+  svg+='<polyline points="'+basePts+'" fill="none" stroke="#1A5FE8" stroke-width="2" stroke-linejoin="round"/>';
+
+  for(var i=0;i<n;i++){
+    var skip=n<=11?1:Math.ceil((n-1)/8);
+    if(i%skip===0||i===n-1){
+      var lbl=i===0?'now':i+'y';
+      svg+='<text x="'+xOf(i)+'" y="'+(H-5)+'" font-size="8.5" fill="#B4B8CC" text-anchor="middle">'+lbl+'</text>';
+    }
+  }
+
+  svg+='<line id="cv-line" x1="0" y1="'+PT+'" x2="0" y2="'+(PT+cH)+'" stroke="#1A5FE8" stroke-width="1" stroke-dasharray="4,2" opacity="0" pointer-events="none"/>';
+  svg+='<circle id="cv-dot-base" r="4" fill="#1A5FE8" stroke="white" stroke-width="1.5" opacity="0" pointer-events="none"/>';
+  svg+='<circle id="cv-dot-contrib" r="3.5" fill="#86EFAC" stroke="white" stroke-width="1.5" opacity="0" pointer-events="none"/>';
+  svg+='<rect id="cv-overlay" x="'+PL+'" y="'+PT+'" width="'+cW+'" height="'+cH+'" fill="transparent" style="cursor:crosshair"/>';
+  svg+='</svg>';
+
+  window._chartMeta={base:base,upper:upper,lower:lower,contrib:contrib,hasVariance:hasVariance,years:years,minV:minV,maxV:maxV,range:range,W:W,H:H,PL:PL,PR:PR,PT:PT,PB:PB,cW:cW,cH:cH};
+
+  var wrap=document.getElementById('chart-wrap');
+  wrap.style.position='relative';
+  wrap.innerHTML=svg;
+
+  var tip=document.getElementById('cv-tip');
+  if(!tip){
+    tip=document.createElement('div');
+    tip.id='cv-tip';
+    tip.style.cssText='position:absolute;top:8px;pointer-events:none;z-index:20;background:#0C1528;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:9px 13px;min-width:140px;box-shadow:0 6px 24px rgba(0,0,0,0.25);opacity:0;transition:opacity .1s;';
+    wrap.appendChild(tip);
+  }
+
+  wrap.onmousemove=chartHover;
+  wrap.onmouseleave=chartLeave;
+
+  var legend='<div class="legend-item"><div class="legend-dot" style="background:#1A5FE8"></div>Future value</div>';
+  legend+='<div class="legend-item"><div class="legend-dot" style="background:#86EFAC"></div>Total invested</div>';
+  if(hasVariance) legend+='<div class="legend-item"><div class="legend-dot" style="background:rgba(26,95,232,0.4)"></div>Variance range</div>';
+  document.getElementById('chart-legend').innerHTML=legend;
+
+  var sub=hasVariance
+    ?'Central projection with variance band ±'+document.getElementById('variance').value+'%'
+    :'The green area shows contributions — the blue gap is the power of compound interest';
+  document.getElementById('chart-sub').textContent=sub;
+}
+
+function chartHover(e){
+  var m=window._chartMeta;
+  if(!m) return;
+  var wrap=document.getElementById('chart-wrap');
+  var svgEl=wrap.querySelector('svg');
+  if(!svgEl) return;
+  var svgRect=svgEl.getBoundingClientRect();
+  var scale=m.W/svgRect.width;
+  var svgX=(e.clientX-svgRect.left)*scale;
+  if(svgX<m.PL||svgX>m.PL+m.cW){chartLeave();return;}
+  var pct=(svgX-m.PL)/m.cW;
+  var n=m.base.length;
+  var idx=Math.max(0,Math.min(n-1,Math.round(pct*(n-1))));
+  var val=m.base[idx];
+  var valUp=m.upper[idx];
+  var valDn=m.lower[idx];
+  var valCont=m.contrib[idx];
+  var yearLabel=idx===0?'Now':'Year '+idx;
+  var lineX=m.PL+(idx/(n-1))*m.cW;
+  function svgY(v){return m.PT+m.cH-((v-m.minV)/m.range)*m.cH;}
+  var cvLine=svgEl.getElementById('cv-line');
+  var cvDot=svgEl.getElementById('cv-dot-base');
+  var cvDotC=svgEl.getElementById('cv-dot-contrib');
+  if(cvLine){cvLine.setAttribute('x1',lineX);cvLine.setAttribute('x2',lineX);cvLine.setAttribute('opacity','0.6');}
+  if(cvDot){cvDot.setAttribute('cx',lineX);cvDot.setAttribute('cy',svgY(val));cvDot.setAttribute('opacity','1');}
+  if(cvDotC){cvDotC.setAttribute('cx',lineX);cvDotC.setAttribute('cy',svgY(valCont));cvDotC.setAttribute('opacity','1');}
+  var html='<div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px">'+yearLabel+'</div>';
+  html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:8px;height:8px;border-radius:50%;background:#1A5FE8;flex-shrink:0"></div><span style="font-size:12px;color:white;font-weight:700">'+fmt(val)+'</span></div>';
+  html+='<div style="display:flex;align-items:center;gap:6px'+(m.hasVariance?';margin-bottom:3px':'')+'"><div style="width:8px;height:8px;border-radius:50%;background:#86EFAC;flex-shrink:0"></div><span style="font-size:11px;color:rgba(255,255,255,.55)">Invested: '+fmt(valCont)+'</span></div>';
+  if(m.hasVariance&&valUp!==val) html+='<div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:4px">Range: '+fmt(valDn)+' – '+fmt(valUp)+'</div>';
+  var tip=document.getElementById('cv-tip');
+  if(!tip) return;
+  tip.innerHTML=html;tip.style.opacity='1';
+  var wrapW=wrap.getBoundingClientRect().width;
+  var mouseXInWrap=e.clientX-wrap.getBoundingClientRect().left;
+  var tipW=160;
+  if(mouseXInWrap+tipW+16>wrapW){tip.style.right=(wrapW-mouseXInWrap+10)+'px';tip.style.left='auto';}
+  else{tip.style.left=(mouseXInWrap+10)+'px';tip.style.right='auto';}
+}
+
+function chartLeave(){
+  var tip=document.getElementById('cv-tip');
+  if(tip) tip.style.opacity='0';
+  var wrap=document.getElementById('chart-wrap');
+  if(!wrap) return;
+  var svgEl=wrap.querySelector('svg');
+  if(!svgEl) return;
+  ['cv-line','cv-dot-base','cv-dot-contrib'].forEach(function(id){
+    var el=svgEl.getElementById(id);
+    if(el) el.setAttribute('opacity','0');
+  });
+}
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is compound interest?","acceptedAnswer":{"@type":"Answer","text":"Compound interest is when the interest you earn is added to your principal, and then that larger amount also earns interest. Unlike simple interest, the balance grows exponentially over time."}},
+{"@type":"Question","name":"Why is compound interest called the eighth wonder of the world?","acceptedAnswer":{"@type":"Answer","text":"The phrase illustrates the power of exponential growth. With moderate rates and long time horizons, capital can multiply many times over. At 10% annual rate, $10,000 grows to $67,275 in 20 years."}},
+{"@type":"Question","name":"What is the Rule of 72?","acceptedAnswer":{"@type":"Answer","text":"The Rule of 72 is a quick way to estimate how long it takes to double your money: divide 72 by the annual interest rate. At 8% per year, money doubles in approximately 9 years (72 ÷ 8 = 9)."}},
+{"@type":"Question","name":"How often should interest compound?","acceptedAnswer":{"@type":"Answer","text":"The more frequently interest compounds, the higher the effective annual return. Daily compounding yields slightly more than monthly, which yields more than annual. The difference becomes more significant with higher rates and longer time periods."}},
+{"@type":"Question","name":"What is the difference between APR and APY?","acceptedAnswer":{"@type":"Answer","text":"APR (Annual Percentage Rate) is the nominal rate without compounding. APY (Annual Percentage Yield) includes the effect of compounding and reflects the true annual return. APY is always equal to or greater than APR."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>What is compound interest?</summary>
+    <div class="faq-a">Compound interest is when the interest you earn is <strong>added to your principal</strong>, and that larger amount also earns interest. Unlike simple interest, the balance grows <strong>exponentially</strong> over time.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Why is compound interest called the eighth wonder of the world?</summary>
+    <div class="faq-a">The phrase illustrates the power of exponential growth. With moderate rates and long time horizons, capital can multiply many times. At <strong>10% annual rate</strong>, $10,000 grows to $67,275 in 20 years.</div>
+  </details>
+  <details class="faq-item">
+    <summary>What is the Rule of 72?</summary>
+    <div class="faq-a">The Rule of 72 is a quick shortcut: divide <strong>72</strong> by the annual interest rate to estimate how long it takes to double your money. At 8% per year, that's approximately <strong>9 years</strong> (72 ÷ 8 = 9).</div>
+  </details>
+  <details class="faq-item">
+    <summary>What is the difference between APR and APY?</summary>
+    <div class="faq-a"><strong>APR</strong> (Annual Percentage Rate) is the nominal rate without compounding. <strong>APY</strong> (Annual Percentage Yield) includes the effect of compounding and reflects the true annual return — always ≥ APR.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

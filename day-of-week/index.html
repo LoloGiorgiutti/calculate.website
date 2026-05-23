@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day of the Week Calculator — What Day Was Any Date?</title>
+<meta name="description" content="Find out what day of the week any date fell on. Enter any date and instantly see the day — Monday, Tuesday, etc. Great for historical events and planning.">
+<link rel="canonical" href="https://calculate.website/day-of-week/">
+<meta property="og:title" content="Day of the Week — calculate.website">
+<meta property="og:url" content="https://calculate.website/day-of-week/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--hi)}
+.page{max-width:480px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+input[type=date]:focus{border-color:var(--hi)}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi);text-align:center}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.result-day{font-size:52px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+.result-date{font-size:15px;color:rgba(255,255,255,.5)}
+.empty-state{color:rgba(255,255,255,.3);font-size:15px}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px}
+.week-cell{padding:8px 4px;border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,.3)}
+.week-cell.active{background:rgba(26,95,232,.4);color:white}
+.week-cell.weekend{color:rgba(255,100,100,.4)}
+.week-cell.weekend.active{background:rgba(239,68,68,.3);color:#FCA5A5}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">calculate<span>.website</span></a></header>
+<div class="page">
+  <h1>Day of the Week</h1>
+  <p class="sub">Enter any date to find out what day of the week it is or was.</p>
+
+  <div class="card">
+    <label>Date</label>
+    <input type="date" id="date-input" oninput="calculate()">
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Day of the week</div>
+    <div id="result-day" class="result-day"><span class="empty-state">Select a date</span></div>
+    <div id="result-date" class="result-date"></div>
+    <div class="week-grid" id="week-grid">
+      <div class="week-cell">Su</div>
+      <div class="week-cell">Mo</div>
+      <div class="week-cell">Tu</div>
+      <div class="week-cell">We</div>
+      <div class="week-cell">Th</div>
+      <div class="week-cell">Fr</div>
+      <div class="week-cell weekend">Sa</div>
+    </div>
+  </div>
+</div>
+<script>
+var DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var SHORT=['Su','Mo','Tu','We','Th','Fr','Sa'];
+var WEEKEND=[0,6]; // Sun, Sat
+
+function calculate(){
+  var val=document.getElementById('date-input').value;
+  if(!val){
+    document.getElementById('result-day').innerHTML='<span class="empty-state">Select a date</span>';
+    document.getElementById('result-date').textContent='';
+    buildGrid(-1);return;
+  }
+  var p=val.split('-');
+  var d=new Date(+p[0],+p[1]-1,+p[2]);
+  var dow=d.getDay();
+  var isWeekend=(dow===0||dow===6);
+  document.getElementById('result-day').textContent=DAYS[dow];
+  document.getElementById('result-date').textContent=MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+  if(isWeekend) document.getElementById('result-day').style.color='#FCA5A5';
+  else document.getElementById('result-day').style.color='white';
+  buildGrid(dow);
+}
+
+function buildGrid(active){
+  var grid=document.getElementById('week-grid');
+  grid.innerHTML='';
+  for(var i=0;i<7;i++){
+    var div=document.createElement('div');
+    div.className='week-cell'+(WEEKEND.indexOf(i)!==-1?' weekend':'')+(i===active?' active':'');
+    div.textContent=SHORT[i];
+    grid.appendChild(div);
+  }
+}
+
+buildGrid(-1);
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip Calculator — Split the Bill & Calculate Gratuity</title>
+<meta name="description" content="Calculate tip amount, total bill per person and split evenly between friends. Choose tip percentage or enter a custom amount. Free and instant.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/tip/">
+<meta property="og:title" content="Tip Calculator — calculate.website">
+<meta property="og:description" content="Calculate tip, total, and split the bill between any number of people.">
+<meta property="og:url" content="https://calculate.website/tip/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:480px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:20px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
+  input[type=number]{width:100%;padding:13px 14px 13px 30px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:20px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]:focus{border-color:var(--hi)}
+  input.no-prefix{padding-left:14px}
+  /* Tip % chips */
+  .tip-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .tip-chip{padding:9px 16px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .tip-chip.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  /* People counter */
+  .people-row{display:flex;align-items:center;gap:12px}
+  .people-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface);font-size:20px;font-weight:600;color:var(--ink-light);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+  .people-btn:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}
+  .people-count{font-size:28px;font-weight:700;color:var(--ink);min-width:40px;text-align:center}
+  /* Results */
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:24px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .result-row:last-child{margin-bottom:0}
+  .result-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-val{font-size:18px;font-weight:700;color:white}
+  .result-main-row{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .result-main-lbl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px}
+  .result-main-val{font-size:48px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1}
+  .result-main-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+<div class="page">
+  <h1 class="page-title">Tip Calculator</h1>
+  <p class="page-sub">Calculate the tip, total, and how much each person owes.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Bill amount</label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="bill" placeholder="0.00" min="0" step="0.01" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Tip percentage</label>
+      <div class="tip-chips" id="tip-chips">
+        <button class="tip-chip" onclick="setTip(10)">10%</button>
+        <button class="tip-chip" onclick="setTip(15)">15%</button>
+        <button class="tip-chip active" onclick="setTip(18)">18%</button>
+        <button class="tip-chip" onclick="setTip(20)">20%</button>
+        <button class="tip-chip" onclick="setTip(25)">25%</button>
+      </div>
+      <div class="input-wrap">
+        <input type="number" class="no-prefix" id="tip-pct" value="18" min="0" max="100" step="1" oninput="onCustomTip()">
+        <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none">%</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Number of people</label>
+      <div class="people-row">
+        <button class="people-btn" onclick="changePeople(-1)">−</button>
+        <span class="people-count" id="people-count">1</span>
+        <button class="people-btn" onclick="changePeople(1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div class="result-main-row">
+      <div class="result-main-lbl">Per person</div>
+      <div class="result-main-val" id="r-per-person"><span class="empty-state" style="font-size:16px">Enter bill amount</span></div>
+      <div class="result-main-sub" id="r-per-sub"></div>
+    </div>
+    <div class="result-row">
+      <span class="result-lbl">Tip amount</span>
+      <span class="result-val" id="r-tip">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-lbl">Total (bill + tip)</span>
+      <span class="result-val" id="r-total">—</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  var tipPct=18;
+  var numPeople=1;
+
+  function setTip(pct){
+    tipPct=pct;
+    document.getElementById('tip-pct').value=pct;
+    document.querySelectorAll('.tip-chip').forEach(function(b){b.classList.remove('active');});
+    event.target.classList.add('active');
+    calculate();
+  }
+
+  function onCustomTip(){
+    tipPct=parseFloat(document.getElementById('tip-pct').value)||0;
+    document.querySelectorAll('.tip-chip').forEach(function(b){b.classList.remove('active');});
+    calculate();
+  }
+
+  function changePeople(delta){
+    numPeople=Math.max(1,numPeople+delta);
+    document.getElementById('people-count').textContent=numPeople;
+    calculate();
+  }
+
+  function fmt(n){
+    return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function calculate(){
+    var bill=parseFloat(document.getElementById('bill').value)||0;
+    if(!bill){
+      document.getElementById('r-per-person').innerHTML='<span class="empty-state" style="font-size:16px">Enter bill amount</span>';
+      document.getElementById('r-per-sub').textContent='';
+      document.getElementById('r-tip').textContent='—';
+      document.getElementById('r-total').textContent='—';
+      return;
+    }
+    var tip=bill*tipPct/100;
+    var total=bill+tip;
+    var perPerson=total/numPeople;
+    var tipPerPerson=tip/numPeople;
+    document.getElementById('r-per-person').textContent=fmt(perPerson);
+    document.getElementById('r-per-sub').textContent=
+      numPeople>1
+      ?'includes '+fmt(tipPerPerson)+' tip each'
+      :'includes '+fmt(tip)+' tip';
+    document.getElementById('r-tip').textContent=fmt(tip);
+    document.getElementById('r-total').textContent=fmt(total);
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much should I tip?","acceptedAnswer":{"@type":"Answer","text":"Standard tipping in the US is 15–20% for restaurants. 15% is considered a baseline, 18% is average, and 20%+ is for excellent service. For other services like taxis or hair salons, 10–15% is common."}},
+{"@type":"Question","name":"How is a tip calculated?","acceptedAnswer":{"@type":"Answer","text":"Tip amount = Bill × (Tip% ÷ 100). For example, a 20% tip on a $50 bill is $10, making the total $60. Divided among 4 people, each person pays $15."}},
+{"@type":"Question","name":"Should I tip on the pre-tax or post-tax amount?","acceptedAnswer":{"@type":"Answer","text":"Most etiquette guides suggest tipping on the pre-tax subtotal, since the tip is for the service — not the government's share. However, tipping on the total (including tax) is also common and makes calculation simpler."}},
+{"@type":"Question","name":"How do I split the bill with friends?","acceptedAnswer":{"@type":"Answer","text":"Enter the total bill, select the tip percentage, and set the number of people. The calculator shows exactly how much each person should pay including tip."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>How much should I tip?</summary>
+    <div class="faq-a">Standard tipping in the US is <strong>15–20%</strong> for restaurants. 15% is a baseline, 18% is average, 20%+ is for excellent service. For taxis or salons, <strong>10–15%</strong> is common.</div>
+  </details>
+  <details class="faq-item">
+    <summary>How is a tip calculated?</summary>
+    <div class="faq-a">Tip = Bill × (Tip% ÷ 100). For example, a <strong>20% tip on $50</strong> = $10 tip, making the total $60. Split 4 ways, each person pays $15.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Should I tip on the pre-tax or post-tax amount?</summary>
+    <div class="faq-a">Most etiquette guides say to tip on the <strong>pre-tax subtotal</strong>. However, tipping on the total (including tax) is also common and simpler to calculate.</div>
+  </details>
+  <details class="faq-item">
+    <summary>How do I split the bill with friends?</summary>
+    <div class="faq-a">Enter the total bill, choose your tip %, then press <strong>+</strong> to add people. The calculator instantly shows how much each person owes including tip.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

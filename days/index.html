@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Days Between Dates Calculator — Count Days, Weeks & Months</title>
+<meta name="description" content="Calculate how many days, weeks or months are between two dates. Includes business days and calendar days. Perfect for deadlines, contracts and countdowns. Free and instant.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/days/">
+<meta property="og:title" content="Days Between Dates — calculate.website">
+<meta property="og:description" content="Calculate days, weeks or months between two dates. Business days supported.">
+<meta property="og:url" content="https://calculate.website/days/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+  input[type=date]:focus{border-color:var(--hi)}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-unit{font-size:20px;font-weight:400;opacity:0.5;margin-left:6px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat-box{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px}
+  .stat-val{font-size:22px;font-weight:700;color:white;letter-spacing:-0.02em}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .toggle-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+  .toggle-lbl{font-size:14px;font-weight:500;color:var(--ink)}
+  .toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+  .toggle input{opacity:0;width:0;height:0}
+  .toggle-track{position:absolute;inset:0;background:var(--border);border-radius:99px;cursor:pointer;transition:background .2s}
+  .toggle input:checked + .toggle-track{background:var(--hi)}
+  .toggle-track::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .toggle input:checked + .toggle-track::after{transform:translateX(20px)}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+<div class="page">
+  <h1 class="page-title">Days Between Dates</h1>
+  <p class="page-sub">How many days are between two dates? Also shown in weeks and months.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Start date</label>
+      <input type="date" id="date1" oninput="calculate()">
+    </div>
+    <div class="field">
+      <label>End date</label>
+      <input type="date" id="date2" oninput="calculate()">
+    </div>
+    <div class="field">
+      <div class="toggle-row">
+        <span class="toggle-lbl">Business days only (Mon–Fri)</span>
+        <label class="toggle">
+          <input type="checkbox" id="business" onchange="calculate()">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Difference</div>
+    <div id="result-main" class="result-main"><span class="empty-state" style="font-size:16px">Select the dates</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="stat-box">
+        <div class="stat-val" id="r-weeks">—</div>
+        <div class="stat-lbl">Weeks</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-months">—</div>
+        <div class="stat-lbl">Months approx.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Default: today and +30 days
+  var today=new Date();
+  var in30=new Date();in30.setDate(today.getDate()+30);
+  document.getElementById('date1').value=today.toISOString().split('T')[0];
+  document.getElementById('date2').value=in30.toISOString().split('T')[0];
+  calculate();
+
+  function calculate(){
+    var f1=new Date(document.getElementById('date1').value);
+    var f2=new Date(document.getElementById('date2').value);
+    var mainEl=document.getElementById('result-main');
+    var subEl=document.getElementById('result-sub');
+    var rowsEl=document.getElementById('result-rows');
+    if(isNaN(f1)||isNaN(f2)){
+      mainEl.innerHTML='<span class="empty-state" style="font-size:16px">Select the dates</span>';
+      subEl.textContent='';rowsEl.style.display='none';return;
+    }
+    var businessOnly=document.getElementById('business').checked;
+    var start=f1<f2?f1:f2;
+    var end=f1<f2?f2:f1;
+    var sign=f1<=f2?1:-1;
+    var days=0;
+    if(businessOnly){
+      var d=new Date(start);
+      while(d<end){
+        var dow=d.getDay();
+        if(dow!==0&&dow!==6)days++;
+        d.setDate(d.getDate()+1);
+      }
+    } else {
+      days=Math.round(Math.abs(end-start)/(1000*60*60*24));
+    }
+    days*=sign<0?-1:1;
+    var weeks=(Math.abs(days)/7).toFixed(1);
+    var months=(Math.abs(days)/30.44).toFixed(1);
+    var absDays=Math.abs(days);
+    mainEl.innerHTML=absDays.toLocaleString('en-US')+'<span class="result-unit">day'+(absDays!==1?'s':'')+'</span>';
+    if(days<0) subEl.textContent='The start date is after the end date';
+    else if(days===0) subEl.textContent='The dates are the same';
+    else subEl.textContent=businessOnly?'business days (Mon–Fri)':'calendar days';
+    rowsEl.style.display='grid';
+    document.getElementById('r-weeks').textContent=weeks;
+    document.getElementById('r-months').textContent=months;
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I calculate the number of days between two dates?","acceptedAnswer":{"@type":"Answer","text":"Subtract the start date from the end date to get the total number of days. This calculator handles it automatically — just enter both dates and it shows days, weeks, and months instantly."}},
+{"@type":"Question","name":"What are business days?","acceptedAnswer":{"@type":"Answer","text":"Business days (also called working days) are Monday through Friday, excluding weekends. Public holidays are not automatically excluded as they vary by country."}},
+{"@type":"Question","name":"How many weeks is 90 days?","acceptedAnswer":{"@type":"Answer","text":"90 days equals exactly 12.86 weeks (90 ÷ 7 = 12.857). In months, 90 days is approximately 2.96 months (90 ÷ 30.44)."}},
+{"@type":"Question","name":"How do I count days for a deadline or contract?","acceptedAnswer":{"@type":"Answer","text":"Enter the contract start date as Date 1 and the deadline as Date 2. The calculator will show the exact number of calendar days between them, as well as business days if you toggle that option."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>How do I calculate the number of days between two dates?</summary>
+    <div class="faq-a">Subtract the start date from the end date to get the total number of days. This calculator handles it automatically — just enter both dates and it shows <strong>days, weeks, and months</strong> instantly.</div>
+  </details>
+  <details class="faq-item">
+    <summary>What are business days?</summary>
+    <div class="faq-a">Business days (also called working days) are <strong>Monday through Friday</strong>, excluding weekends. Public holidays are not automatically excluded as they vary by country.</div>
+  </details>
+  <details class="faq-item">
+    <summary>How many weeks is 90 days?</summary>
+    <div class="faq-a">90 days equals exactly <strong>12.86 weeks</strong> (90 ÷ 7 = 12.857). In months, 90 days is approximately <strong>2.96 months</strong> (90 ÷ 30.44).</div>
+  </details>
+  <details class="faq-item">
+    <summary>How do I count days for a deadline or contract?</summary>
+    <div class="faq-a">Enter the contract start date as <strong>Start date</strong> and the deadline as <strong>End date</strong>. The calculator shows the exact number of calendar days, and business days if you enable the toggle.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

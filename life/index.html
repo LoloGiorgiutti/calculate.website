@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life in Numbers — Heartbeats, Breaths & More Since Birth</title>
+<meta name="description" content="How many times has your heart beaten? How many breaths have you taken? Discover fascinating statistics about your life since birth. Free and instant.">
+<link rel="canonical" href="https://calculate.website/life/">
+<meta property="og:title" content="Life in Numbers — calculate.website">
+<meta property="og:url" content="https://calculate.website/life/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--hi)}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+input[type=date]:focus{border-color:var(--hi)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border)}
+.stat-icon{font-size:24px;margin-bottom:8px}
+.stat-val{font-size:22px;font-weight:700;color:var(--hi);letter-spacing:-.02em;line-height:1;margin-bottom:4px;word-break:break-word}
+.stat-lbl{font-size:12px;color:var(--ink-light);line-height:1.4}
+.empty{text-align:center;padding:40px 20px;color:var(--ink-faint);font-size:14px}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">calculate<span>.website</span></a></header>
+<div class="page">
+  <h1>Life in Numbers</h1>
+  <p class="sub">Discover fascinating statistics about your life since birth.</p>
+
+  <div class="card">
+    <label>Your date of birth</label>
+    <input type="date" id="birthdate" oninput="calculate()">
+  </div>
+
+  <div id="stats-area"><div class="empty">Enter your date of birth to see your life in numbers</div></div>
+</div>
+
+<script>
+function fmt(n){
+  if(n>=1e12) return (n/1e12).toFixed(2)+' trillion';
+  if(n>=1e9)  return (n/1e9).toFixed(2)+' billion';
+  if(n>=1e6)  return (n/1e6).toFixed(2)+' million';
+  return Math.round(n).toLocaleString('en-US');
+}
+
+function calculate(){
+  var val=document.getElementById('birthdate').value;
+  if(!val){document.getElementById('stats-area').innerHTML='<div class="empty">Enter your date of birth to see your life in numbers</div>';return;}
+  var p=val.split('-');
+  var birth=new Date(+p[0],+p[1]-1,+p[2]);
+  var now=new Date();
+  if(birth>now){document.getElementById('stats-area').innerHTML='<div class="empty">Date must be in the past</div>';return;}
+  var seconds=(now-birth)/1000;
+  var minutes=seconds/60;
+  var hours=minutes/60;
+  var days=hours/24;
+
+  var stats=[
+    {icon:'❤️',val:fmt(seconds*1.1),lbl:'Heartbeats<br><span style="font-size:10px;color:var(--ink-faint)">avg 66 bpm</span>'},
+    {icon:'🌬️',val:fmt(seconds/5),lbl:'Breaths taken<br><span style="font-size:10px;color:var(--ink-faint)">avg ~12/min</span>'},
+    {icon:'👁️',val:fmt(seconds*15),lbl:'Times you\'ve blinked<br><span style="font-size:10px;color:var(--ink-faint)">avg ~15/min</span>'},
+    {icon:'🛌',val:fmt(hours/3),lbl:'Hours spent sleeping<br><span style="font-size:10px;color:var(--ink-faint)">avg 8h/day</span>'},
+    {icon:'🚶',val:fmt(days*8000),lbl:'Steps walked<br><span style="font-size:10px;color:var(--ink-faint)">avg ~8,000/day</span>'},
+    {icon:'🍽️',val:fmt(days*3),lbl:'Meals eaten<br><span style="font-size:10px;color:var(--ink-faint)">avg 3/day</span>'},
+    {icon:'🌙',val:fmt(Math.floor(days)),lbl:'Days you\'ve been alive'},
+    {icon:'🔬',val:fmt(seconds*2500000),lbl:'New cells created<br><span style="font-size:10px;color:var(--ink-faint)">avg ~2.5M/sec</span>'},
+  ];
+
+  var html='<div class="stats-grid">';
+  stats.forEach(function(s){
+    html+='<div class="stat-card"><div class="stat-icon">'+s.icon+'</div><div class="stat-val">'+s.val+'</div><div class="stat-lbl">'+s.lbl+'</div></div>';
+  });
+  html+='</div>';
+  document.getElementById('stats-area').innerHTML=html;
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage Calculator — calculate.website</title>
+<meta name="description" content="Calculate X% of Y, what percentage X is of Y, percentage change between two values, and apply increases or discounts. Fill in two fields and the result appears automatically.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/percentage/">
+<meta property="og:title" content="Percentage Calculator | calculate.website">
+<meta property="og:description" content="Fill in two values and the third calculates itself. X% of Y, percentage change, increases and discounts.">
+<meta property="og:url" content="https://calculate.website/percentage/">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:580px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .mode-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .mode-tab{padding:8px 15px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;white-space:nowrap}
+  .mode-tab:hover{border-color:var(--hi);color:var(--hi)}
+  .mode-tab.active{background:var(--hi);border-color:var(--hi);color:#fff}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;border:1px solid var(--border);margin-bottom:14px}
+  .card-title{font-size:15px;font-weight:700;margin-bottom:4px}
+  .card-hint{font-size:12px;color:var(--ink-faint);margin-bottom:22px;display:flex;align-items:center;gap:5px}
+  .hint-dot{width:6px;height:6px;border-radius:50%;background:var(--hi);opacity:.5;flex-shrink:0}
+  .formula-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+  .tri-op{font-size:20px;font-weight:600;color:var(--ink-faint);padding-bottom:13px;flex-shrink:0}
+  .tri-eq{font-size:22px;font-weight:700;color:var(--hi);padding-bottom:12px;flex-shrink:0}
+  .tri-field{display:flex;flex-direction:column;gap:5px}
+  .tri-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);height:13px;transition:color .15s}
+  .tri-lbl.auto-lbl{color:var(--hi)}
+  .tri-inp{width:120px;padding:13px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s,background .15s,color .15s;text-align:center}
+  .tri-inp:focus{border-color:var(--hi)}
+  .tri-inp.pct-inp{padding-right:26px}
+  .tri-inp.wide-inp{width:150px}
+  .tri-inp.is-computed{background:var(--hi-soft);border-color:#BFDBFE;color:var(--hi);cursor:default}
+  .pct-wrap{position:relative;display:inline-flex;align-items:center}
+  .pct-wrap .pct-sign{position:absolute;right:10px;font-size:13px;font-weight:700;color:var(--ink-faint);pointer-events:none}
+  .pct-wrap .tri-inp.is-computed ~ .pct-sign{color:var(--hi)}
+  .result-box{background:linear-gradient(135deg,#0C1528 0%,#1a2540 100%);border-radius:var(--radius);padding:24px;text-align:center;border-top:3px solid var(--hi);display:none;margin-bottom:14px}
+  .result-box.visible{display:block}
+  .result-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+  .result-val{font-size:44px;font-weight:700;color:#fff;letter-spacing:-0.04em;line-height:1;margin-bottom:8px}
+  .result-val sup{font-size:22px;vertical-align:super}
+  .result-detail{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6}
+  .sign-badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;vertical-align:middle}
+  .sign-pos{background:#D1FAE5;color:#065F46}
+  .sign-neg{background:#FEE2E2;color:#991B1B}
+  .sign-zero{background:#F3F4F6;color:#6B7280}
+  .examples{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+  .ex-chip{padding:5px 11px;border-radius:99px;background:var(--hi-soft);border:1px solid #BFDBFE;font-size:11px;font-weight:600;color:var(--hi);cursor:pointer;transition:all .15s}
+  .ex-chip:hover{background:var(--hi);color:#fff}
+  .history-section{margin-bottom:14px;display:none}
+  .history-heading{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .history-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .hist-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:6px;cursor:pointer;transition:border-color .15s;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .hist-item:hover{border-color:var(--hi)}
+  .hist-item:last-child{margin-bottom:0}
+  .hist-formula{font-size:12px;color:var(--ink-light);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hist-result{font-size:13px;font-weight:700;color:var(--hi);flex-shrink:0}
+  .hist-clear{font-size:11px;color:var(--ink-faint);background:none;border:none;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif;margin-left:8px}
+  .hist-clear:hover{color:var(--ink)}
+  .ap-tabs{display:flex;gap:8px;margin-bottom:18px}
+  .ap-tab{flex:1;padding:9px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .ap-tab.active{background:var(--hi);border-color:var(--hi);color:#fff}
+  @media(max-width:480px){
+    .tri-inp{width:95px;font-size:14px}
+    .tri-inp.wide-inp{width:120px}
+    .formula-row{gap:6px}
+    .result-val{font-size:36px}
+  }
+  .faq-section{max-width:620px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number by the percentage and divide by 100. Example: 20% of 500 = 500 × 20 ÷ 100 = 100. Shortcut: multiply by the decimal: 500 × 0.20 = 100."}},{"@type":"Question","name":"How do I calculate a discount?","acceptedAnswer":{"@type":"Answer","text":"Calculate the percentage of the price and subtract it. Example: 30% discount on $100 = $100 × 0.30 = $30 discount → final price $70. Shortcut: multiply the price by (1 − discount/100)."}},{"@type":"Question","name":"How do I find what percentage one number is of another?","acceptedAnswer":{"@type":"Answer","text":"Divide the partial number by the total and multiply by 100. Example: 45 is what % of 180 = 45 ÷ 180 × 100 = 25%."}},{"@type":"Question","name":"How do I calculate percentage change?","acceptedAnswer":{"@type":"Answer","text":"Formula: (New value − Original value) ÷ Original value × 100. Example: from $100 to $130 = ($130 − $100) ÷ $100 × 100 = 30% increase. Negative result means a decrease."}},{"@type":"Question","name":"What is the difference between percentage points and percent?","acceptedAnswer":{"@type":"Answer","text":"Percentage points (pp) measure the arithmetic difference between two percentages. If interest rates go from 3% to 5%, that is 2 percentage points, not 2%. The percent change of the rate itself is 66.7%."}}]}
+</script>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+
+<div class="page">
+  <h1 class="page-title">Percentage Calculator</h1>
+  <p class="page-sub">Fill in any two fields and the third calculates itself automatically.</p>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active"  onclick="setMode('m1',this)">X% of Y</button>
+    <button class="mode-tab"         onclick="setMode('m2',this)">What % is X of Y?</button>
+    <button class="mode-tab"         onclick="setMode('m3',this)">% Change</button>
+    <button class="mode-tab"         onclick="setMode('m4',this)">Increase / Discount</button>
+  </div>
+
+  <div class="result-box" id="result-box">
+    <div class="result-eyebrow" id="res-eyebrow">Result</div>
+    <div class="result-val" id="res-val">—</div>
+    <div class="result-detail" id="res-detail"></div>
+  </div>
+
+  <div class="history-section" id="history-section">
+    <div class="history-heading">Recent calculations <button class="hist-clear" onclick="clearHistory()">✕ Clear</button></div>
+    <div id="history-list"></div>
+  </div>
+
+  <!-- MODE 1: X% of Y = Z -->
+  <div id="m1" class="card">
+    <div class="card-title">What is X% of Y?</div>
+    <div class="card-hint"><span class="hint-dot"></span>Fill in two fields, the third calculates automatically</div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m1-pct">Percentage</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m1-pct" placeholder="15" min="0">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+      <span class="tri-op">of</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m1-total">Total</div>
+        <input class="tri-inp wide-inp" type="number" id="m1-total" placeholder="200" min="0">
+      </div>
+      <span class="tri-eq">=</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m1-res">Result</div>
+        <input class="tri-inp wide-inp" type="number" id="m1-res" placeholder="30" min="0">
+      </div>
+    </div>
+    <div class="examples">
+      <span class="ex-chip" onclick="loadM1(10,1000,null)">10% of 1,000</span>
+      <span class="ex-chip" onclick="loadM1(20,500,null)">20% of 500</span>
+      <span class="ex-chip" onclick="loadM1(15,null,30)">15% of something = 30</span>
+      <span class="ex-chip" onclick="loadM1(null,200,50)">What % is 50 of 200?</span>
+    </div>
+  </div>
+
+  <!-- MODE 2: Part is X% of total -->
+  <div id="m2" class="card" style="display:none">
+    <div class="card-title">What percentage is X of Y?</div>
+    <div class="card-hint"><span class="hint-dot"></span>Fill in two fields, the third calculates automatically</div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m2-parte">Part</div>
+        <input class="tri-inp wide-inp" type="number" id="m2-parte" placeholder="30" min="0">
+      </div>
+      <span class="tri-op">is</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m2-pct">Percentage</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m2-pct" placeholder="15" min="0">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+      <span class="tri-op">of</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m2-total">Total</div>
+        <input class="tri-inp wide-inp" type="number" id="m2-total" placeholder="200" min="0">
+      </div>
+    </div>
+    <div class="examples">
+      <span class="ex-chip" onclick="loadM2(30,null,200)">30 of 200</span>
+      <span class="ex-chip" onclick="loadM2(1,null,4)">1 of 4</span>
+      <span class="ex-chip" onclick="loadM2(null,25,800)">What is 25% of 800?</span>
+      <span class="ex-chip" onclick="loadM2(750,null,1000)">750 of 1,000</span>
+    </div>
+  </div>
+
+  <!-- MODE 3: Percentage change -->
+  <div id="m3" class="card" style="display:none">
+    <div class="card-title">Percentage change between two numbers</div>
+    <div class="card-hint"><span class="hint-dot"></span>Fill in two fields, the third calculates automatically</div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m3-antes">Initial value</div>
+        <input class="tri-inp wide-inp" type="number" id="m3-antes" placeholder="100">
+      </div>
+      <span class="tri-op">→</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m3-despues">Final value</div>
+        <input class="tri-inp wide-inp" type="number" id="m3-despues" placeholder="150">
+      </div>
+      <span class="tri-eq">=</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m3-vari">Change</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m3-vari" placeholder="50">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="examples">
+      <span class="ex-chip" onclick="loadM3(100,150,null)">100 → 150</span>
+      <span class="ex-chip" onclick="loadM3(1000,800,null)">dropped 1,000 → 800</span>
+      <span class="ex-chip" onclick="loadM3(50000,85000,null)">salary $50k → $85k</span>
+      <span class="ex-chip" onclick="loadM3(null,1210,21)">+21% → what was the base?</span>
+    </div>
+  </div>
+
+  <!-- MODE 4: Increase / Discount -->
+  <div id="m4" class="card" style="display:none">
+    <div class="card-title">Apply an increase or discount</div>
+    <div class="card-hint"><span class="hint-dot"></span>Fill in two fields, the third calculates automatically</div>
+    <div class="ap-tabs">
+      <button class="ap-tab active" id="ap-up"   onclick="setApType('up')">⬆️ Increase</button>
+      <button class="ap-tab"        id="ap-down" onclick="setApType('down')">⬇️ Discount</button>
+    </div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m4-base">Base value</div>
+        <input class="tri-inp wide-inp" type="number" id="m4-base" placeholder="1000" min="0">
+      </div>
+      <span class="tri-op" id="ap-op-sign">+</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m4-pct">Percentage</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m4-pct" placeholder="20" min="0">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+      <span class="tri-eq">=</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m4-res">Result</div>
+        <input class="tri-inp wide-inp" type="number" id="m4-res" placeholder="1200" min="0">
+      </div>
+    </div>
+    <div class="examples" id="ap-examples">
+      <span class="ex-chip" onclick="loadM4(100,10,null,'up')">$100 + 10% tip</span>
+      <span class="ex-chip" onclick="loadM4(500,20,null,'down')">$500 − 20% off</span>
+      <span class="ex-chip" onclick="loadM4(null,8.25,108.25,'up')">+8.25% tax → base?</span>
+      <span class="ex-chip" onclick="loadM4(null,50,300,'down')">−50% → original?</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── Helpers ─────────────────────────────── */
+function fmtN(n, maxDec){
+  if(!isFinite(n)||isNaN(n)) return '—';
+  var dec = (maxDec===undefined)
+    ? (Math.abs(n - Math.round(n)) < 0.005 ? 0 : 2)
+    : maxDec;
+  return n.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+function fmtPct(n){
+  if(!isFinite(n)||isNaN(n)) return '—';
+  return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:4})+'%';
+}
+function val(id){ return parseFloat(document.getElementById(id).value); }
+
+function showResult(eyebrow, valHTML, detail){
+  document.getElementById('res-eyebrow').textContent = eyebrow;
+  document.getElementById('res-val').innerHTML = valHTML;
+  document.getElementById('res-detail').innerHTML = detail;
+  document.getElementById('result-box').classList.add('visible');
+  var tmpDiv = document.createElement('div');
+  tmpDiv.innerHTML = valHTML;
+  saveToHistory(eyebrow + ' → ' + detail, tmpDiv.textContent.trim());
+}
+function hideResult(){
+  document.getElementById('result-box').classList.remove('visible');
+}
+
+/* ── Triple solver ───────────────────────── */
+function makeTri(fids, computeFn, onResult){
+  var queue = [];
+  fids.forEach(function(id){
+    document.getElementById(id).addEventListener('input', function(){
+      var empty = this.value.trim() === '';
+      queue = queue.filter(function(q){ return q !== id; });
+      if(!empty){
+        queue.push(id);
+        if(queue.length > 2) queue.shift();
+      }
+      tick();
+    });
+  });
+
+  function tick(){
+    var outId = fids.find(function(f){ return !queue.includes(f); }) || queue[0];
+    var inputFids = fids.filter(function(f){ return f !== outId; });
+    fids.forEach(function(f){
+      var el  = document.getElementById(f);
+      var lbl = document.getElementById('lbl-'+f);
+      var isOut = f === outId && queue.length >= 1;
+      el.classList.toggle('is-computed', isOut && queue.length > 0);
+      if(lbl) lbl.classList.toggle('auto-lbl', isOut && queue.length >= 1);
+      if(lbl && isOut && queue.length >= 1) lbl.textContent = 'auto';
+      if(lbl && (!isOut || queue.length === 0)){
+        lbl.textContent = lbl.dataset.orig || lbl.textContent;
+      }
+    });
+    var v = {};
+    inputFids.forEach(function(f){ v[f] = val(f); });
+    if(Object.values(v).some(isNaN)){
+      document.getElementById(outId).value = '';
+      hideResult();
+      return;
+    }
+    var result = computeFn(outId, v);
+    var outEl  = document.getElementById(outId);
+    if(!isFinite(result) || isNaN(result)){
+      outEl.value = '';
+      hideResult();
+      return;
+    }
+    outEl.value = result;
+    var all = Object.assign({}, v);
+    all[outId] = result;
+    if(onResult) onResult(outId, all);
+  }
+}
+
+/* Save original labels */
+document.querySelectorAll('[id^="lbl-"]').forEach(function(el){
+  el.dataset.orig = el.textContent;
+});
+
+/* ── Mode 1: pct% of total = res ─────────── */
+makeTri(['m1-pct','m1-total','m1-res'],
+  function(outId, v){
+    if(outId==='m1-res')   return (v['m1-pct']/100) * v['m1-total'];
+    if(outId==='m1-total') return v['m1-pct']===0 ? NaN : v['m1-res']*100/v['m1-pct'];
+    return v['m1-total']===0 ? NaN : (v['m1-res']/v['m1-total'])*100;
+  },
+  function(outId, a){
+    var pct=a['m1-pct'], tot=a['m1-total'], res=a['m1-res'];
+    if(outId==='m1-res')
+      showResult(fmtPct(pct)+' of '+fmtN(tot), fmtN(res), fmtPct(pct)+' of '+fmtN(tot)+' is '+fmtN(res));
+    else if(outId==='m1-total')
+      showResult('Base when '+fmtN(res)+' is '+fmtPct(pct), fmtN(tot), fmtN(res)+' is '+fmtPct(pct)+' of '+fmtN(tot));
+    else
+      showResult('What % is '+fmtN(res)+' of '+fmtN(tot)+'?', fmtPct(pct), fmtN(res)+' is '+fmtPct(pct)+' of '+fmtN(tot));
+  }
+);
+function loadM1(pct,tot,res){
+  var ids=['m1-pct','m1-total','m1-res'], vals=[pct,tot,res];
+  ids.forEach(function(id,i){
+    var el=document.getElementById(id);
+    el.value = vals[i]!==null ? vals[i] : '';
+    el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* ── Mode 2: part is pct% of total ──────── */
+makeTri(['m2-parte','m2-pct','m2-total'],
+  function(outId, v){
+    if(outId==='m2-pct')   return v['m2-total']===0 ? NaN : (v['m2-parte']/v['m2-total'])*100;
+    if(outId==='m2-total') return v['m2-pct']===0   ? NaN : v['m2-parte']*100/v['m2-pct'];
+    return (v['m2-pct']/100)*v['m2-total'];
+  },
+  function(outId, a){
+    var pt=a['m2-parte'], pct=a['m2-pct'], tot=a['m2-total'];
+    if(outId==='m2-pct')
+      showResult('What % is '+fmtN(pt)+' of '+fmtN(tot)+'?', fmtPct(pct), fmtN(pt)+' is '+fmtPct(pct)+' of '+fmtN(tot));
+    else if(outId==='m2-total')
+      showResult('If '+fmtN(pt)+' is '+fmtPct(pct), fmtN(tot), 'The total is '+fmtN(tot));
+    else
+      showResult(fmtPct(pct)+' of '+fmtN(tot), fmtN(pt), fmtN(pt)+' is '+fmtPct(pct)+' of '+fmtN(tot));
+  }
+);
+function loadM2(pt,pct,tot){
+  [['m2-parte',pt],['m2-pct',pct],['m2-total',tot]].forEach(function(p){
+    var el=document.getElementById(p[0]);
+    el.value = p[1]!==null ? p[1] : '';
+    el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* ── Mode 3: percentage change ──────────── */
+makeTri(['m3-antes','m3-despues','m3-vari'],
+  function(outId, v){
+    if(outId==='m3-vari')    return v['m3-antes']===0 ? NaN : ((v['m3-despues']-v['m3-antes'])/Math.abs(v['m3-antes']))*100;
+    if(outId==='m3-despues') return v['m3-antes'] * (1 + v['m3-vari']/100);
+    return (1+v['m3-vari']/100)===0 ? NaN : v['m3-despues']/(1+v['m3-vari']/100);
+  },
+  function(outId, a){
+    var ant=a['m3-antes'], des=a['m3-despues'], v=a['m3-vari'];
+    var pos=v>0, zero=v===0;
+    var cls=zero?'sign-zero':pos?'sign-pos':'sign-neg';
+    var lbl=zero?'No change':pos?'▲ Increased':'▼ Decreased';
+    var sign=v>0?'+':'';
+    if(outId==='m3-vari')
+      showResult('Change from '+fmtN(ant)+' to '+fmtN(des),
+        '<span class="sign-badge '+cls+'">'+lbl+'</span><br><span style="font-size:36px">'+sign+fmtPct(v)+'</span>',
+        'Absolute difference: '+(des-ant>=0?'+':'')+fmtN(des-ant));
+    else if(outId==='m3-despues')
+      showResult('Applying '+sign+fmtPct(v)+' to '+fmtN(ant),
+        fmtN(des),
+        fmtN(ant)+' '+(pos?'increased':'decreased')+' by '+fmtPct(Math.abs(v))+' = '+fmtN(des));
+    else
+      showResult('If the result was '+fmtN(des)+' with '+sign+fmtPct(v),
+        fmtN(ant),
+        'The original value was '+fmtN(ant));
+  }
+);
+function loadM3(ant,des,v){
+  [['m3-antes',ant],['m3-despues',des],['m3-vari',v]].forEach(function(p){
+    var el=document.getElementById(p[0]);
+    el.value = p[1]!==null ? p[1] : '';
+    el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* ── Mode 4: base ± pct% = res ──────────── */
+var apType = 'up';
+function factor(){ return apType==='up' ? 1 : -1; }
+
+makeTri(['m4-base','m4-pct','m4-res'],
+  function(outId, v){
+    if(outId==='m4-res')  return v['m4-base'] * (1 + factor()*v['m4-pct']/100);
+    if(outId==='m4-base'){
+      var ff = 1 + factor()*v['m4-pct']/100;
+      return ff===0 ? NaN : v['m4-res']/ff;
+    }
+    if(v['m4-base']===0) return NaN;
+    return (v['m4-res']/v['m4-base'] - 1) * factor() * 100;
+  },
+  function(outId, a){
+    var base=a['m4-base'], pct=a['m4-pct'], res=a['m4-res'];
+    var word = apType==='up' ? 'increased by' : 'discounted by';
+    var sign = apType==='up' ? '+' : '−';
+    var diff = Math.abs(res - base);
+    if(outId==='m4-res')
+      showResult(fmtN(base)+' '+sign+' '+fmtPct(pct), fmtN(res),
+        fmtN(base)+' '+word+' '+fmtPct(pct)+' = '+fmtN(res)+'<br>'+(apType==='up'?'Increase: +':'Savings: ')+fmtN(diff));
+    else if(outId==='m4-base')
+      showResult('Original before '+sign+fmtPct(pct), fmtN(base),
+        'The result '+fmtN(res)+' corresponds to a base of '+fmtN(base)+' '+word+' '+fmtPct(pct));
+    else
+      showResult('What % separates '+fmtN(base)+' from '+fmtN(res)+'?', fmtPct(pct),
+        'The difference of '+fmtN(diff)+' represents '+fmtPct(pct));
+  }
+);
+function setApType(type){
+  apType = type;
+  document.getElementById('ap-up').classList.toggle('active', type==='up');
+  document.getElementById('ap-down').classList.toggle('active', type==='down');
+  document.getElementById('ap-op-sign').textContent = type==='up' ? '+' : '−';
+  ['m4-base','m4-pct','m4-res'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el.value.trim()) el.dispatchEvent(new Event('input'));
+  });
+}
+function loadM4(base,pct,res,type){
+  if(type && type!==apType) setApType(type);
+  [['m4-base',base],['m4-pct',pct],['m4-res',res]].forEach(function(p){
+    var el=document.getElementById(p[0]);
+    el.value = p[1]!==null ? p[1] : '';
+    el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* ── History ──────────────────────────────── */
+var HIST_KEY = 'pct_history_en';
+var MAX_HIST = 5;
+
+function saveToHistory(formula, result) {
+  var hist = getHistory();
+  if(hist.length && hist[0].formula === formula && hist[0].result === result) return;
+  hist.unshift({ formula: formula, result: result, ts: Date.now() });
+  if(hist.length > MAX_HIST) hist.length = MAX_HIST;
+  try { localStorage.setItem(HIST_KEY, JSON.stringify(hist)); } catch(e){}
+  renderHistory();
+}
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem(HIST_KEY)) || []; } catch(e){ return []; }
+}
+function clearHistory() {
+  try { localStorage.removeItem(HIST_KEY); } catch(e){}
+  renderHistory();
+}
+function escHist(s){ return String(s).replace(/'/g,"\\'"); }
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function restoreHist(formula, result) {
+  document.getElementById('res-detail').textContent = formula;
+  document.getElementById('res-val').textContent = result;
+  document.getElementById('result-box').classList.add('visible');
+}
+function renderHistory() {
+  var hist = getHistory();
+  var section = document.getElementById('history-section');
+  var list = document.getElementById('history-list');
+  if(!hist.length) { section.style.display='none'; return; }
+  section.style.display='block';
+  list.innerHTML = hist.map(function(h) {
+    return '<div class="hist-item" onclick="restoreHist(\''+escHist(h.formula)+'\',\''+escHist(h.result)+'\')">'+
+      '<span class="hist-formula">'+escHtml(h.formula)+'</span>'+
+      '<span class="hist-result">'+escHtml(h.result)+'</span>'+
+      '</div>';
+  }).join('');
+}
+renderHistory();
+
+/* ── Mode switching ──────────────────────── */
+function setMode(id, btn){
+  ['m1','m2','m3','m4'].forEach(function(m){
+    document.getElementById(m).style.display = m===id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  hideResult();
+  document.querySelectorAll('[id^="lbl-"]').forEach(function(el){
+    if(el.dataset.orig) el.textContent = el.dataset.orig;
+    el.classList.remove('auto-lbl');
+  });
+  document.querySelectorAll('.tri-inp').forEach(function(el){
+    el.classList.remove('is-computed');
+  });
+}
+</script>
+
+<div class="faq-section">
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>How do I calculate a percentage of a number?</summary>
+    <div class="faq-a">Multiply the number by the percentage and divide by 100. Example: <strong>20% of 500</strong> = 500 × 20 ÷ 100 = <strong>100</strong>. Shortcut: multiply by the decimal: 500 × 0.20 = 100.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>How do I calculate a discount?</summary>
+    <div class="faq-a">Calculate the percentage of the price and subtract it. Example: <strong>30% off $100</strong> = $100 × 0.30 = $30 off → final price <strong>$70</strong>. Shortcut: multiply the price by (1 − discount/100).</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>How do I find what percentage one number is of another?</summary>
+    <div class="faq-a">Divide the partial number by the total and multiply by 100. Example: <strong>45 is what % of 180</strong> = 45 ÷ 180 × 100 = <strong>25%</strong>.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>How do I calculate percentage change?</summary>
+    <div class="faq-a">Formula: <strong>(New value − Original value) ÷ Original value × 100</strong>. Example: from $100 to $130 = ($130 − $100) ÷ $100 × 100 = <strong>30% increase</strong>. Negative result means a decrease.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>What is the difference between percentage points and percent change?</summary>
+    <div class="faq-a">Percentage points (pp) measure the arithmetic difference between two percentages. If a tax rate goes from 3% to 5%, that is <strong>2 percentage points</strong> — not 2%. The actual percent change of the rate is 66.7%.</div>
+  </details>
+</div>
+
+<script src="/nav.js"></script>
+</body>
+</html>

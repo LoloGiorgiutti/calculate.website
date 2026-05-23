@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings Calculator — How Fast Will Your Money Grow?</title>
+<meta name="description" content="Calculate how your savings will grow over time with regular monthly deposits and compound interest. See your balance year by year. Free and instant.">
+<link rel="canonical" href="https://calculate.website/savings/">
+<meta property="og:title" content="Savings Calculator — calculate.website">
+<meta property="og:url" content="https://calculate.website/savings/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--hi)}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
+.input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number].has-prefix{padding-left:30px}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--hi)}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-main{font-size:42px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.result-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.result-rows{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.result-row{display:flex;justify-content:space-between;align-items:center}
+.result-row-lbl{font-size:13px;color:rgba(255,255,255,.5)}
+.result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,.85)}
+.result-row-val.pos{color:#86EFAC}
+.result-divider{height:1px;background:rgba(255,255,255,.08);margin:2px 0}
+.empty-state{color:rgba(255,255,255,.3);font-size:15px}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">calculate<span>.website</span></a></header>
+<div class="page">
+  <h1>Savings Calculator</h1>
+  <p class="sub">See how your savings will grow over time with deposits and compound interest.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Initial savings</label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="initial" class="has-prefix" placeholder="1000" min="0" oninput="calculate()">
+      </div>
+    </div>
+    <div class="field">
+      <label>Monthly deposit</label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0" oninput="calculate()">
+      </div>
+    </div>
+    <div class="field">
+      <label>Annual interest rate (APY)</label>
+      <div class="input-wrap">
+        <input type="number" id="rate" placeholder="5" min="0" step="0.25" oninput="calculate()">
+        <span class="input-suffix">%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Time period</label>
+      <div class="input-wrap">
+        <input type="number" id="years" placeholder="10" min="1" max="50" oninput="calculate()">
+        <span class="input-suffix">years</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Final balance</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Fill in the fields</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Total deposited</span>
+        <span class="result-row-val" id="r-deposited">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Interest earned</span>
+        <span class="result-row-val pos" id="r-interest">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Total balance</span>
+        <span class="result-row-val pos" id="r-total">—</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fmt(n){
+  if(Math.abs(n)>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
+  return '$'+Math.round(n).toLocaleString('en-US');
+}
+
+function calculate(){
+  var initial=parseFloat(document.getElementById('initial').value)||0;
+  var monthly=parseFloat(document.getElementById('monthly').value)||0;
+  var rate=parseFloat(document.getElementById('rate').value)||0;
+  var years=parseInt(document.getElementById('years').value)||0;
+
+  var mainEl=document.getElementById('result-main');
+  var subEl=document.getElementById('result-sub');
+  var rowsEl=document.getElementById('result-rows');
+
+  if((!initial&&!monthly)||!years){
+    mainEl.innerHTML='<span class="empty-state">Fill in the fields</span>';
+    subEl.textContent='';rowsEl.style.display='none';return;
+  }
+
+  // Monthly compound
+  var monthlyRate=(rate/100)/12;
+  var months=years*12;
+  var balance=initial;
+  for(var m=0;m<months;m++){
+    balance=balance*(1+monthlyRate)+monthly;
+  }
+
+  var totalDeposited=initial+monthly*months;
+  var interest=balance-totalDeposited;
+
+  mainEl.innerHTML='$'+Math.round(balance).toLocaleString('en-US');
+  subEl.textContent='after '+years+' year'+(years===1?'':'s')+' at '+rate+'% APY';
+  rowsEl.style.display='flex';
+  document.getElementById('r-deposited').textContent=fmt(totalDeposited);
+  document.getElementById('r-interest').textContent='+ '+fmt(interest);
+  document.getElementById('r-total').textContent=fmt(balance);
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

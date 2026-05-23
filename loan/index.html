@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Calculator — Monthly Payment & Amortization Schedule</title>
+<meta name="description" content="Calculate your monthly loan payment, total interest, and full amortization schedule. Enter loan amount, interest rate, and term. Fixed-rate (French amortization) system.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/loan/">
+<meta property="og:title" content="Loan Calculator — calculate.website">
+<meta property="og:description" content="Calculate monthly payment, total interest and amortization schedule for any loan.">
+<meta property="og:url" content="https://calculate.website/loan/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="en_US">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number].with-prefix{padding-left:30px}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]:focus{border-color:var(--hi)}
+  .term-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .term-chip{padding:8px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .term-chip.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:46px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-currency{font-size:22px;font-weight:400;opacity:0.5;margin-right:2px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+  .result-row{display:flex;justify-content:space-between;align-items:center}
+  .result-row-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85)}
+  .result-row-val.warn{color:#FCA5A5}
+  .result-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0}
+  .bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+  .bar-label-row{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px}
+  .bar-track{height:8px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;display:flex}
+  .bar-principal{background:rgba(255,255,255,0.35);border-radius:99px 0 0 99px;transition:width .4s}
+  .bar-interest{background:#FCA5A5;border-radius:0 99px 99px 0;transition:width .4s}
+  .bar-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
+  .info-box strong{color:var(--ink)}
+  .table-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);transition:all .15s;margin-bottom:16px}
+  .table-toggle:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}
+  .table-toggle .chevron{margin-left:auto;transition:transform .25s}
+  .table-toggle.open .chevron{transform:rotate(180deg)}
+  .amort-card{background:var(--surface);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;border:1px solid var(--border)}
+  .amort-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+  .amort-table-wrap{overflow-x:auto;max-height:320px;overflow-y:auto;border-radius:var(--radius-sm);border:1px solid var(--border)}
+  .amort-table{width:100%;border-collapse:collapse;font-size:12px}
+  .amort-table th{position:sticky;top:0;background:var(--bg);padding:8px 10px;text-align:right;font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}
+  .amort-table th:first-child{text-align:center}
+  .amort-table td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--border);color:var(--ink)}
+  .amort-table td:first-child{text-align:center;color:var(--ink-light);font-weight:600}
+  .amort-table tr:last-child td{border-bottom:none;font-weight:700;background:var(--hi-soft)}
+  .amort-table .int-col{color:#EF4444}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+<div class="page">
+  <h1 class="page-title">Loan Calculator</h1>
+  <p class="page-sub">Calculate your monthly payment, total interest, and full amortization schedule. Fixed-rate (equal installment) method.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Loan amount</label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="amount" class="with-prefix" placeholder="20000" min="0" step="100" oninput="calculate()">
+      </div>
+    </div>
+    <div class="field">
+      <label>Annual interest rate (APR)</label>
+      <div class="input-wrap">
+        <input type="number" id="apr" placeholder="7" min="0" step="0.25" oninput="calculate()">
+        <span class="input-suffix">%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Loan term</label>
+      <div class="term-chips" id="term-chips">
+        <button class="term-chip" onclick="setTerm(6)">6 mo</button>
+        <button class="term-chip active" onclick="setTerm(12)">1 yr</button>
+        <button class="term-chip" onclick="setTerm(24)">2 yr</button>
+        <button class="term-chip" onclick="setTerm(36)">3 yr</button>
+        <button class="term-chip" onclick="setTerm(48)">4 yr</button>
+        <button class="term-chip" onclick="setTerm(60)">5 yr</button>
+        <button class="term-chip" onclick="setTerm(84)">7 yr</button>
+        <button class="term-chip" onclick="setTerm(120)">10 yr</button>
+        <button class="term-chip" onclick="setTerm(180)">15 yr</button>
+        <button class="term-chip" onclick="setTerm(360)">30 yr</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Monthly payment</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Enter loan details</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Principal borrowed</span>
+        <span class="result-row-val" id="r-principal">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Total interest</span>
+        <span class="result-row-val warn" id="r-interest">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Total amount repaid</span>
+        <span class="result-row-val" id="r-total">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Effective annual rate (EAR)</span>
+        <span class="result-row-val warn" id="r-ear">—</span>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">Breakdown of total repaid</div>
+        <div class="bar-track">
+          <div class="bar-principal" id="bar-pri"></div>
+          <div class="bar-interest" id="bar-int"></div>
+        </div>
+        <div class="bar-labels">
+          <span id="lbl-pri">Principal</span>
+          <span id="lbl-int">Interest</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="table-toggle" id="table-toggle" onclick="toggleTable()" style="display:none">
+    📋 View month-by-month amortization schedule
+    <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="amort-card" id="amort-card" style="display:none">
+    <div class="amort-title">Amortization schedule</div>
+    <div class="amort-table-wrap">
+      <table class="amort-table" id="amort-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Payment</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody id="amort-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>How is the monthly payment calculated?</strong><br>
+    This calculator uses the <strong>fixed-rate (equal installment)</strong> method — also known as French amortization. Each monthly payment is the same amount. Early payments are mostly interest; later payments are mostly principal. This is the most common method for personal loans and mortgages.
+  </div>
+</div>
+<script>
+  var termMonths=12;
+  var pendingAmortRows=null;
+
+  function setTerm(m){
+    termMonths=m;
+    document.querySelectorAll('.term-chip').forEach(function(b){b.classList.remove('active');});
+    event.target.classList.add('active');
+    calculate();
+  }
+
+  function fmt(n){return '$ '+Math.round(n).toLocaleString('en-US');}
+
+  function buildAmortTable(amount,r,n,payment){
+    var balance=amount;
+    var rows='';
+    var totalPaid=0,totalPrincipal=0,totalInterest=0;
+    for(var i=1;i<=n;i++){
+      var interest=balance*r;
+      var principal=payment-interest;
+      balance-=principal;
+      if(balance<0.01) balance=0;
+      totalPaid+=payment;
+      totalPrincipal+=principal;
+      totalInterest+=interest;
+      rows+='<tr>'
+        +'<td>'+i+'</td>'
+        +'<td>'+fmt(payment)+'</td>'
+        +'<td>'+fmt(principal)+'</td>'
+        +'<td class="int-col">'+fmt(interest)+'</td>'
+        +'<td>'+fmt(Math.max(0,balance))+'</td>'
+        +'</tr>';
+    }
+    rows+='<tr>'
+      +'<td>Total</td>'
+      +'<td>'+fmt(totalPaid)+'</td>'
+      +'<td>'+fmt(totalPrincipal)+'</td>'
+      +'<td class="int-col">'+fmt(totalInterest)+'</td>'
+      +'<td>—</td>'
+      +'</tr>';
+    return rows;
+  }
+
+  function toggleTable(){
+    var card=document.getElementById('amort-card');
+    var btn=document.getElementById('table-toggle');
+    var open=card.style.display==='none';
+    if(open&&pendingAmortRows!==null){
+      document.getElementById('amort-tbody').innerHTML=pendingAmortRows;
+      pendingAmortRows=null;
+    }
+    card.style.display=open?'block':'none';
+    btn.classList.toggle('open',open);
+  }
+
+  function calculate(){
+    var amount=parseFloat(document.getElementById('amount').value)||0;
+    var apr=parseFloat(document.getElementById('apr').value)||0;
+    var mainEl=document.getElementById('result-main');
+    var subEl=document.getElementById('result-sub');
+    var rowsEl=document.getElementById('result-rows');
+    var toggleBtn=document.getElementById('table-toggle');
+    var amortCard=document.getElementById('amort-card');
+
+    if(!amount||!apr){
+      mainEl.innerHTML='<span class="empty-state">Enter loan details</span>';
+      subEl.textContent='';
+      rowsEl.style.display='none';
+      toggleBtn.style.display='none';
+      amortCard.style.display='none';
+      toggleBtn.classList.remove('open');
+      pendingAmortRows=null;
+      return;
+    }
+
+    var r=apr/100/12;
+    var n=termMonths;
+    var payment=amount*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+    var total=payment*n;
+    var interest=total-amount;
+    var ear=(Math.pow(payment*n/amount,12/n)-1)*100;
+    var priPct=Math.round((amount/total)*100);
+    var intPct=100-priPct;
+
+    var years=Math.floor(n/12);
+    var months=n%12;
+    var termStr='';
+    if(years>0) termStr+=years+' year'+(years>1?'s':'');
+    if(months>0) termStr+=(termStr?' ':'')+months+' month'+(months>1?'s':'');
+
+    mainEl.innerHTML='<span class="result-currency">$</span>'+Math.round(payment).toLocaleString('en-US');
+    subEl.textContent='per month for '+termStr+' · '+apr+'% APR';
+    rowsEl.style.display='flex';
+    document.getElementById('r-principal').textContent=fmt(amount);
+    document.getElementById('r-interest').textContent='+ '+fmt(interest);
+    document.getElementById('r-total').textContent=fmt(total);
+    document.getElementById('r-ear').textContent=ear.toFixed(2)+'% per year';
+    document.getElementById('bar-pri').style.width=priPct+'%';
+    document.getElementById('bar-int').style.width=intPct+'%';
+    document.getElementById('lbl-pri').textContent='Principal '+priPct+'%';
+    document.getElementById('lbl-int').textContent='Interest '+intPct+'%';
+
+    var newRows=buildAmortTable(amount,r,n,payment);
+    if(amortCard.style.display!=='none'){
+      document.getElementById('amort-tbody').innerHTML=newRows;
+      pendingAmortRows=null;
+    } else {
+      pendingAmortRows=newRows;
+    }
+    toggleBtn.style.display='flex';
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is the monthly loan payment calculated?","acceptedAnswer":{"@type":"Answer","text":"The monthly payment is calculated using the standard amortization formula: M = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the principal, r is the monthly interest rate (APR ÷ 12), and n is the number of months."}},
+{"@type":"Question","name":"What is APR vs EAR?","acceptedAnswer":{"@type":"Answer","text":"APR (Annual Percentage Rate) is the stated annual rate used to compute monthly payments. EAR (Effective Annual Rate) accounts for monthly compounding and reflects the true annual cost of the loan. EAR is always slightly higher than APR for monthly-payment loans."}},
+{"@type":"Question","name":"Should I pay off my loan early?","acceptedAnswer":{"@type":"Answer","text":"Paying off a loan early typically reduces total interest paid significantly. Early in a loan, most of your payment is interest — paying extra principal reduces the balance faster. Always check if your loan has a prepayment penalty before doing so."}},
+{"@type":"Question","name":"What is an amortization schedule?","acceptedAnswer":{"@type":"Answer","text":"An amortization schedule is a table showing each payment broken down into principal and interest portions, along with the remaining balance after each payment. It shows exactly how your loan is paid off over time."}},
+{"@type":"Question","name":"How does loan term affect my payment?","acceptedAnswer":{"@type":"Answer","text":"A longer term lowers your monthly payment but increases total interest paid. A shorter term means higher monthly payments but less interest overall. Use the term chips above to compare different scenarios instantly."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>How is the monthly loan payment calculated?</summary>
+    <div class="faq-a">The monthly payment uses the standard amortization formula: <strong>M = P × [r(1+r)^n] / [(1+r)^n − 1]</strong>, where P is the principal, r is the monthly rate (APR ÷ 12), and n is the number of months.</div>
+  </details>
+  <details class="faq-item">
+    <summary>What is APR vs EAR?</summary>
+    <div class="faq-a"><strong>APR</strong> (Annual Percentage Rate) is the stated rate used to compute payments. <strong>EAR</strong> (Effective Annual Rate) accounts for monthly compounding and reflects the true annual cost — always slightly higher than APR.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Should I pay off my loan early?</summary>
+    <div class="faq-a">Paying extra principal early in the loan typically <strong>reduces total interest significantly</strong>, since early payments are mostly interest. Always check for <strong>prepayment penalties</strong> before making extra payments.</div>
+  </details>
+  <details class="faq-item">
+    <summary>What is an amortization schedule?</summary>
+    <div class="faq-a">An amortization schedule is a month-by-month table showing each payment split into <strong>principal and interest</strong> portions, plus the remaining balance. Click the button above to view the full schedule for your loan.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>
