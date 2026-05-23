@@ -51,6 +51,18 @@
 
   <!-- Health & Fitness -->
   <url>
+    <loc>https://calculate.website/bmr/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/1rm/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://calculate.website/bmi/</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -115,6 +127,12 @@
 
   <!-- Math & Numbers -->
   <url>
+    <loc>https://calculate.website/rule-of-three/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://calculate.website/unit-converter/</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -128,6 +146,12 @@
   </url>
 
   <!-- Dates & Time -->
+  <url>
+    <loc>https://calculate.website/clock/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://calculate.website/age/</loc>
     <lastmod>2026-05-22</lastmod>
@@ -154,6 +178,12 @@
   </url>
 
   <!-- Games & Tests -->
+  <url>
+    <loc>https://calculate.website/cps/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://calculate.website/reaction-time/</loc>
     <lastmod>2026-05-22</lastmod>

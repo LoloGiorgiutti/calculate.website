@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rule of Three Calculator — Direct & Inverse Proportion | calculate.website</title>
+<meta name="description" content="Solve direct and inverse proportion problems instantly. Enter three values and get the fourth. Great for scaling recipes, maps, currency and more.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/rule-of-three/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=number],input[type=text]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number]:focus,input[type=text]:focus{border-color:var(--hi)}
+  .prop-grid{display:grid;grid-template-columns:1fr 32px 1fr;gap:10px;align-items:center}
+  .prop-eq{text-align:center;font-size:20px;color:var(--ink-faint);font-weight:300;padding-top:24px}
+  .prop-row{display:contents}
+  .prop-divider{height:1px;background:var(--border);margin:4px 0;grid-column:1/-1}
+  .unknown-field input{background:var(--hi-soft);border-color:var(--hi);color:var(--hi);font-weight:700}
+  .unknown-field input::placeholder{color:rgba(26,95,232,0.4)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .seg-btn{padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .seg-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #1A5FE8}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:56px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
+  .result-formula{font-size:13px;color:rgba(255,255,255,0.35);font-family:monospace;margin-bottom:4px}
+  .empty-state{font-size:16px;color:rgba(255,255,255,0.3)}
+  .examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .ex-chip{padding:6px 12px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-size:12px;font-weight:500;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .ex-chip:hover{border-color:var(--hi);color:var(--hi)}
+  .hint{font-size:12px;color:var(--ink-faint);margin-top:8px;line-height:1.5}
+  .faq-section{max-width:520px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the rule of three?","acceptedAnswer":{"@type":"Answer","text":"The rule of three is a method for solving proportion problems. Given three values (A, B, C), it finds the fourth (X) such that A/B = C/X (direct) or A×B = C×X (inverse)."}},{"@type":"Question","name":"What is the difference between direct and inverse proportion?","acceptedAnswer":{"@type":"Answer","text":"In direct proportion, when one value increases the other increases proportionally (e.g., more items = more cost). In inverse proportion, when one increases the other decreases (e.g., more workers = less time to finish)."}},{"@type":"Question","name":"When do I use inverse proportion?","acceptedAnswer":{"@type":"Answer","text":"Use inverse proportion when two quantities move in opposite directions. Examples: speed vs. travel time, workers vs. days to complete a task, gear ratio vs. rotation speed."}}]}
+</script>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+<div class="page">
+  <h1 class="page-title">Rule of Three</h1>
+  <p class="page-sub">Solve direct and inverse proportion problems. Enter three values — the calculator finds the fourth instantly.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Proportion type</label>
+      <div class="seg">
+        <button class="seg-btn active" id="btn-direct" onclick="setType('direct')">Direct</button>
+        <button class="seg-btn" id="btn-inverse" onclick="setType('inverse')">Inverse</button>
+      </div>
+      <div class="hint" id="type-hint">If A is to B, then C is to X. (A/B = C/X)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="prop-grid">
+      <label style="margin-bottom:6px">A</label>
+      <span></span>
+      <label style="margin-bottom:6px">B</label>
+
+      <input type="number" id="val-a" placeholder="3" oninput="calculate()">
+      <div class="prop-eq">=</div>
+      <input type="number" id="val-b" placeholder="6" oninput="calculate()">
+
+      <div class="prop-divider"></div>
+
+      <label style="margin-bottom:6px;margin-top:6px">C</label>
+      <span></span>
+      <label style="margin-bottom:6px;margin-top:6px">X (unknown)</label>
+
+      <input type="number" id="val-c" placeholder="9" oninput="calculate()">
+      <div class="prop-eq">=</div>
+      <input type="number" id="val-x" placeholder="?" readonly style="background:var(--hi-soft);border-color:var(--hi);color:var(--hi);font-weight:700;cursor:default">
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Result (X)</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Enter values A, B and C</span></div>
+    <div id="result-formula" class="result-formula" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <label>Quick examples</label>
+    <div class="examples">
+      <button class="ex-chip" onclick="loadExample(3,6,9,'direct')">3 is to 6 as 9 is to ?</button>
+      <button class="ex-chip" onclick="loadExample(1,1.06,50,'direct')">$1 = 1.06 CAD → $50 = ?</button>
+      <button class="ex-chip" onclick="loadExample(100,8,150,'direct')">100 miles in 8 gal → 150 mi = ?</button>
+      <button class="ex-chip" onclick="loadExample(4,6,2,'inverse')">4 workers × 6 days → 2 workers = ?</button>
+      <button class="ex-chip" onclick="loadExample(60,2,80,'inverse')">60 mph × 2 h → 80 mph = ?</button>
+    </div>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-heading">What is the rule of three?</div>
+  <div class="faq-a" style="padding:0 0 18px">
+    <p style="margin-bottom:12px">The <strong>rule of three</strong> is one of the most useful tools in everyday math. Given any three values in a proportion, it instantly finds the fourth.</p>
+    <p style="margin-bottom:12px"><strong>Direct proportion</strong> (A/B = C/X → X = B×C/A): used when values move in the same direction. If 1 gallon costs $4, how much do 3 gallons cost? Answer: 3×4/1 = <strong>$12</strong>.</p>
+    <p><strong>Inverse proportion</strong> (A×B = C×X → X = A×B/C): used when values move in opposite directions. If 4 workers finish a job in 6 days, how long do 2 workers take? Answer: 4×6/2 = <strong>12 days</strong>.</p>
+  </div>
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>What is the rule of three?</summary>
+    <div class="faq-a">The rule of three is a method for solving proportion problems. Given three known values (A, B, C), it finds the fourth (X) so that the proportion holds: A/B = C/X for direct proportion, or A×B = C×X for inverse proportion.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>What is the difference between direct and inverse proportion?</summary>
+    <div class="faq-a">In <strong>direct proportion</strong>, when one quantity increases, the other increases proportionally (e.g., more items = more cost). In <strong>inverse proportion</strong>, when one increases the other decreases (e.g., more workers = fewer days to finish a job).</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>When do I use inverse proportion?</summary>
+    <div class="faq-a">Use inverse proportion when two quantities move in opposite directions. Classic examples: speed vs. travel time, number of workers vs. days to complete a project, gear ratio vs. rotation speed.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Can I use this for currency conversion?</summary>
+    <div class="faq-a">Yes! Set A = 1, B = exchange rate, C = the amount you want to convert. The result X is the converted amount. For example: 1 USD = 1.06 CAD, so 50 USD = (1.06 × 50) / 1 = 53 CAD.</div>
+  </details>
+</div>
+<script>
+  var propType = 'direct';
+
+  function setType(t) {
+    propType = t;
+    document.getElementById('btn-direct').classList.toggle('active', t === 'direct');
+    document.getElementById('btn-inverse').classList.toggle('active', t === 'inverse');
+    document.getElementById('type-hint').textContent = t === 'direct'
+      ? 'If A is to B, then C is to X. (A/B = C/X)'
+      : 'A×B = C×X — quantities move in opposite directions.';
+    calculate();
+  }
+
+  function calculate() {
+    var a = parseFloat(document.getElementById('val-a').value);
+    var b = parseFloat(document.getElementById('val-b').value);
+    var c = parseFloat(document.getElementById('val-c').value);
+    var mainEl   = document.getElementById('result-main');
+    var formulaEl= document.getElementById('result-formula');
+    var xEl      = document.getElementById('val-x');
+
+    if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+      mainEl.innerHTML = '<span class="empty-state">Enter values A, B and C</span>';
+      formulaEl.style.display = 'none';
+      xEl.value = '';
+      return;
+    }
+
+    var x;
+    var formulaStr;
+    if (propType === 'direct') {
+      x = (b * c) / a;
+      formulaStr = 'X = B × C / A = ' + b + ' × ' + c + ' / ' + a;
+    } else {
+      x = (a * b) / c;
+      formulaStr = 'X = A × B / C = ' + a + ' × ' + b + ' / ' + c;
+    }
+
+    var formatted = Number.isInteger(x) ? x.toLocaleString('en-US') : x.toLocaleString('en-US', {maximumFractionDigits:4});
+    mainEl.textContent = formatted;
+    xEl.value = Number.isInteger(x) ? x : x.toFixed(4);
+    formulaEl.textContent = formulaStr;
+    formulaEl.style.display = 'block';
+  }
+
+  function loadExample(a, b, c, type) {
+    setType(type);
+    document.getElementById('val-a').value = a;
+    document.getElementById('val-b').value = b;
+    document.getElementById('val-c').value = c;
+    calculate();
+  }
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

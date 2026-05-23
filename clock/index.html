@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Clock — Real-Time Digital Clock | calculate.website</title>
+<meta name="description" content="Free online digital clock with date, timezone, full-screen mode and day-of-year stats. Real-time, no sign-up required.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/clock/">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px;--dark:#0C1528}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .page{max-width:560px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .clock-card{background:var(--dark);border-radius:var(--radius);padding:40px 24px 32px;margin-bottom:16px;text-align:center;position:relative}
+  .clock-time{font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:700;color:white;letter-spacing:-0.02em;line-height:1;margin-bottom:6px}
+  @media(max-width:400px){.clock-time{font-size:52px}}
+  .clock-date{font-family:'JetBrains Mono',monospace;font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:16px}
+  .clock-tz{font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:24px}
+  .clock-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .clock-btn{padding:8px 16px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.6);cursor:pointer;transition:all .15s}
+  .clock-btn:hover{border-color:rgba(255,255,255,0.4);color:white}
+  .clock-btn.active{background:var(--hi);border-color:var(--hi);color:white}
+  .fs-btn{position:absolute;top:16px;right:16px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:1.5px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;color:rgba(255,255,255,0.4);transition:all .15s}
+  .fs-btn:hover{border-color:rgba(255,255,255,0.4);color:white}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border);text-align:center}
+  .stat-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px}
+  .stat-value{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:var(--ink);line-height:1}
+  .stat-sub{font-size:11px;color:var(--ink-faint);margin-top:2px}
+  .tz-card{background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:16px;border:1px solid var(--border)}
+  .tz-card label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none;cursor:pointer}
+  select:focus{border-color:var(--hi)}
+  /* Fullscreen clock overlay */
+  #fs-overlay{display:none;position:fixed;inset:0;background:#0C1528;z-index:9999;align-items:center;justify-content:center;flex-direction:column;cursor:pointer}
+  #fs-overlay.show{display:flex}
+  #fs-time{font-family:'JetBrains Mono',monospace;font-size:15vw;font-weight:700;color:white;letter-spacing:-0.02em;line-height:1}
+  #fs-date{font-family:'JetBrains Mono',monospace;font-size:3vw;color:rgba(255,255,255,0.4);margin-top:12px}
+  #fs-hint{font-size:13px;color:rgba(255,255,255,0.2);margin-top:40px}
+  .faq-section{max-width:560px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+
+<div id="fs-overlay" onclick="exitFullscreen()">
+  <div id="fs-time">00:00:00</div>
+  <div id="fs-date"></div>
+  <div id="fs-hint">Click anywhere or press Esc to exit</div>
+</div>
+
+<div class="page">
+  <h1 class="page-title">Digital Clock</h1>
+  <p class="page-sub">Real-time digital clock with date, timezone selector and full-screen mode.</p>
+
+  <div class="clock-card">
+    <button class="fs-btn" onclick="enterFullscreen()" title="Full screen">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="clock-time" id="clock-time">00:00:00</div>
+    <div class="clock-date" id="clock-date">Loading…</div>
+    <div class="clock-tz" id="clock-tz"></div>
+    <div class="clock-actions">
+      <button class="clock-btn active" id="btn-24" onclick="setFormat(24)">24h</button>
+      <button class="clock-btn" id="btn-12" onclick="setFormat(12)">12h</button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Day of year</div>
+      <div class="stat-value" id="stat-doy">—</div>
+      <div class="stat-sub" id="stat-doy-sub">of 365</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Week of year</div>
+      <div class="stat-value" id="stat-woy">—</div>
+      <div class="stat-sub">ISO 8601</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Days left in year</div>
+      <div class="stat-value" id="stat-dly">—</div>
+      <div class="stat-sub">until Dec 31</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unix timestamp</div>
+      <div class="stat-value" id="stat-unix" style="font-size:16px">—</div>
+      <div class="stat-sub">seconds since 1970</div>
+    </div>
+  </div>
+
+  <div class="tz-card">
+    <label>Timezone</label>
+    <select id="tz-select" onchange="setTimezone(this.value)">
+      <option value="local">Local time (auto-detect)</option>
+      <optgroup label="Americas">
+        <option value="America/New_York">New York (ET)</option>
+        <option value="America/Chicago">Chicago (CT)</option>
+        <option value="America/Denver">Denver (MT)</option>
+        <option value="America/Los_Angeles">Los Angeles (PT)</option>
+        <option value="America/Anchorage">Anchorage (AKT)</option>
+        <option value="Pacific/Honolulu">Honolulu (HT)</option>
+        <option value="America/Toronto">Toronto (ET)</option>
+        <option value="America/Vancouver">Vancouver (PT)</option>
+        <option value="America/Sao_Paulo">São Paulo (BRT)</option>
+        <option value="America/Argentina/Buenos_Aires">Buenos Aires (ART)</option>
+        <option value="America/Mexico_City">Mexico City (CST)</option>
+        <option value="America/Bogota">Bogotá (COT)</option>
+        <option value="America/Lima">Lima (PET)</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="Europe/London">London (GMT/BST)</option>
+        <option value="Europe/Paris">Paris (CET)</option>
+        <option value="Europe/Berlin">Berlin (CET)</option>
+        <option value="Europe/Madrid">Madrid (CET)</option>
+        <option value="Europe/Rome">Rome (CET)</option>
+        <option value="Europe/Amsterdam">Amsterdam (CET)</option>
+        <option value="Europe/Zurich">Zurich (CET)</option>
+        <option value="Europe/Stockholm">Stockholm (CET)</option>
+        <option value="Europe/Moscow">Moscow (MSK)</option>
+        <option value="Europe/Istanbul">Istanbul (TRT)</option>
+        <option value="Europe/Warsaw">Warsaw (CET)</option>
+      </optgroup>
+      <optgroup label="Asia & Pacific">
+        <option value="Asia/Dubai">Dubai (GST)</option>
+        <option value="Asia/Kolkata">Mumbai / Delhi (IST)</option>
+        <option value="Asia/Bangkok">Bangkok (ICT)</option>
+        <option value="Asia/Singapore">Singapore (SGT)</option>
+        <option value="Asia/Shanghai">Beijing / Shanghai (CST)</option>
+        <option value="Asia/Tokyo">Tokyo (JST)</option>
+        <option value="Asia/Seoul">Seoul (KST)</option>
+        <option value="Asia/Hong_Kong">Hong Kong (HKT)</option>
+        <option value="Australia/Sydney">Sydney (AEST)</option>
+        <option value="Pacific/Auckland">Auckland (NZST)</option>
+      </optgroup>
+      <optgroup label="Africa">
+        <option value="Africa/Cairo">Cairo (EET)</option>
+        <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
+        <option value="Africa/Lagos">Lagos (WAT)</option>
+        <option value="Africa/Nairobi">Nairobi (EAT)</option>
+      </optgroup>
+    </select>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>How accurate is this clock?</summary>
+    <div class="faq-a">This clock reads the time directly from your device and updates every second. Accuracy depends on your device's system clock, which modern computers synchronize via NTP (Network Time Protocol) to within a few milliseconds.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>What is a Unix timestamp?</summary>
+    <div class="faq-a">A Unix timestamp is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It is the standard way computers represent moments in time internally, independent of timezone or calendar system.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>What is ISO 8601 week number?</summary>
+    <div class="faq-a">The ISO 8601 standard defines that week 1 is the week containing the first Thursday of the year. Weeks run Monday–Sunday. This is the most widely used week-numbering system internationally.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>How do I use full-screen mode?</summary>
+    <div class="faq-a">Click the expand icon in the top-right corner of the clock. The clock will fill your entire screen — great for presentations, studios or just checking the time from across the room. Click anywhere or press Esc to exit.</div>
+  </details>
+</div>
+<script>
+  var hourFormat = 24;
+  var timezone   = 'local';
+  var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function setFormat(f) {
+    hourFormat = f;
+    document.getElementById('btn-24').classList.toggle('active', f === 24);
+    document.getElementById('btn-12').classList.toggle('active', f === 12);
+  }
+
+  function setTimezone(tz) {
+    timezone = tz;
+  }
+
+  function getNow() {
+    var now = new Date();
+    if (timezone !== 'local') {
+      try {
+        var str = now.toLocaleString('en-US', { timeZone: timezone });
+        return new Date(str);
+      } catch(e) {}
+    }
+    return now;
+  }
+
+  function getTZLabel() {
+    if (timezone === 'local') {
+      var offset = -(new Date().getTimezoneOffset());
+      var h = Math.floor(Math.abs(offset) / 60);
+      var m = Math.abs(offset) % 60;
+      return 'Local time (UTC' + (offset >= 0 ? '+' : '') + (offset < 0 ? '-' : '') + h + (m ? ':' + String(m).padStart(2,'0') : '') + ')';
+    }
+    return timezone.replace('_', ' ');
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function getDayOfYear(d) {
+    var start = new Date(d.getFullYear(), 0, 0);
+    var diff  = d - start;
+    return Math.floor(diff / 86400000);
+  }
+
+  function getWeekOfYear(d) {
+    var date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    var day  = date.getUTCDay() || 7;
+    date.setUTCDate(date.getUTCDate() + 4 - day);
+    var yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+    return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+  }
+
+  function isLeapYear(y) {
+    return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  }
+
+  function tick() {
+    var now = getNow();
+    var H   = now.getHours();
+    var M   = now.getMinutes();
+    var S   = now.getSeconds();
+
+    var timeStr;
+    if (hourFormat === 24) {
+      timeStr = pad(H) + ':' + pad(M) + ':' + pad(S);
+    } else {
+      var ampm = H >= 12 ? 'PM' : 'AM';
+      var h12  = H % 12 || 12;
+      timeStr  = pad(h12) + ':' + pad(M) + ':' + pad(S) + ' ' + ampm;
+    }
+
+    var dayName   = DAYS[now.getDay()];
+    var monthName = MONTHS[now.getMonth()];
+    var dateStr   = dayName + ', ' + monthName + ' ' + now.getDate() + ', ' + now.getFullYear();
+
+    document.getElementById('clock-time').textContent = timeStr;
+    document.getElementById('clock-date').textContent = dateStr;
+    document.getElementById('clock-tz').textContent   = getTZLabel();
+
+    // Full screen
+    document.getElementById('fs-time').textContent = timeStr;
+    document.getElementById('fs-date').textContent = dateStr;
+
+    // Stats
+    var doy      = getDayOfYear(now);
+    var woy      = getWeekOfYear(now);
+    var daysInYear = isLeapYear(now.getFullYear()) ? 366 : 365;
+    var dly      = daysInYear - doy;
+    var unix     = Math.floor(Date.now() / 1000);
+
+    document.getElementById('stat-doy').textContent     = doy;
+    document.getElementById('stat-doy-sub').textContent  = 'of ' + daysInYear;
+    document.getElementById('stat-woy').textContent     = woy;
+    document.getElementById('stat-dly').textContent     = dly;
+    document.getElementById('stat-unix').textContent    = unix.toLocaleString('en-US');
+  }
+
+  function enterFullscreen() {
+    document.getElementById('fs-overlay').classList.add('show');
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+  }
+
+  function exitFullscreen() {
+    document.getElementById('fs-overlay').classList.remove('show');
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') exitFullscreen();
+  });
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

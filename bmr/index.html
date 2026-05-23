@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Calorías Diarias (BMR/TDEE) — Calculadora.live</title>
-<meta name="description" content="Calculá cuántas calorías necesitás por día según tu peso, altura, edad y nivel de actividad física. Fórmula Mifflin-St Jeor.">
+<title>Daily Calories Calculator (BMR / TDEE) | calculate.website</title>
+<meta name="description" content="Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) using the Mifflin-St Jeor formula. Find out exactly how many calories you need per day.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://calculadora.live/bmr/">
+<link rel="canonical" href="https://calculate.website/bmr/">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
@@ -16,7 +15,6 @@
   body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
   .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
-  .back-link{font-size:13px;color:var(--ink-light);text-decoration:none}.back-link:hover{color:var(--hi)}
   .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
   .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
   .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
@@ -31,23 +29,28 @@
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .seg-btn{padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
   .seg-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
-  select{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--surface);outline:none;cursor:pointer;transition:border-color .15s}
-  select:focus{border-color:var(--hi)}
-  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .unit-toggle{display:flex;gap:8px;margin-bottom:16px}
+  .unit-btn{padding:7px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .unit-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .activity-grid{display:flex;flex-direction:column;gap:6px}
+  .act-btn{padding:10px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:left;display:flex;justify-content:space-between;align-items:center}
+  .act-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--ink)}
+  .act-label{font-weight:600}
+  .act-sub{font-size:11px;opacity:.7}
+  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #1A5FE8}
   .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
-  .result-main{font-size:48px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
-  .result-unit{font-size:18px;font-weight:400;opacity:0.5;margin-left:4px}
-  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
-  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:8px}
-  .result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px}
-  .result-row.highlight{background:rgba(255,255,255,0.08)}
-  .result-row-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
-  .result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85)}
-  .result-divider{height:1px;background:rgba(255,255,255,0.08);margin:4px 0}
-  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
-  .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
-  .info-box strong{color:var(--ink)}
-  /* ── FAQ ─────────────────────────────────────────────────── */
+  .result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-sub{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:20px}
+  .empty-state{font-size:16px;color:rgba(255,255,255,0.3)}
+  .tdee-grid{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+  .tdee-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;font-size:13px}
+  .tdee-row.hl{background:rgba(255,255,255,0.08)}
+  .tdee-lbl{color:rgba(255,255,255,0.6)}
+  .tdee-val{font-weight:700;color:white;font-size:16px}
+  .tdee-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle}
+  .tag-lose{background:rgba(59,130,246,.25);color:#93C5FD}
+  .tag-m{background:rgba(34,197,94,.25);color:#86EFAC}
+  .tag-gain{background:rgba(245,158,11,.25);color:#FCD34D}
   .faq-section{max-width:520px;margin:0 auto;padding:0 20px 40px}
   .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
   .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -60,135 +63,212 @@
   .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué es el metabolismo basal (BMR)?","acceptedAnswer":{"@type":"Answer","text":"El BMR es la cantidad de calorías que tu cuerpo necesita en reposo absoluto para mantener sus funciones vitales: respirar, circular sangre, regular temperatura y mantener los órganos. Representa el 60–75% del gasto energético total."}},{"@type":"Question","name":"¿Qué es el TDEE?","acceptedAnswer":{"@type":"Answer","text":"El TDEE (Total Daily Energy Expenditure) es la cantidad total de calorías que gastás en un día incluyendo actividad física. Se calcula multiplicando el BMR por un factor de actividad: sedentario (×1.2), leve (×1.375), moderado (×1.55), intenso (×1.725)."}},{"@type":"Question","name":"¿Cuántas calorías debo comer para bajar de peso?","acceptedAnswer":{"@type":"Answer","text":"Se recomienda un déficit de 300–500 calorías por debajo del TDEE. Eso genera una pérdida de 0.3–0.5 kg por semana. Déficits mayores a 700 kcal pueden causar pérdida de masa muscular."}},{"@type":"Question","name":"¿Cuántas calorías debo comer para ganar músculo?","acceptedAnswer":{"@type":"Answer","text":"Un superávit moderado de 200–400 calorías sobre el TDEE es suficiente para ganar músculo con mínima acumulación de grasa. Superávits más altos aceleran la ganancia pero también aumentan el porcentaje de grasa."}},{"@type":"Question","name":"¿Qué tan precisa es la calculadora de calorías?","acceptedAnswer":{"@type":"Answer","text":"Usamos la fórmula Mifflin-St Jeor, la más precisa disponible, con un margen de error de ±10–15%. Los valores individuales varían según genética y composición corporal. Usalos como punto de partida y ajustá según tu respuesta real."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is BMR?","acceptedAnswer":{"@type":"Answer","text":"BMR (Basal Metabolic Rate) is the number of calories your body burns at complete rest to maintain vital functions like breathing, circulation and temperature regulation."}},{"@type":"Question","name":"What is TDEE?","acceptedAnswer":{"@type":"Answer","text":"TDEE (Total Daily Energy Expenditure) is the total calories you burn per day, including physical activity. It equals your BMR multiplied by an activity factor."}},{"@type":"Question","name":"How do I use my TDEE to lose weight?","acceptedAnswer":{"@type":"Answer","text":"To lose weight, consume fewer calories than your TDEE. Eating 500 kcal/day less than your TDEE produces roughly 1 lb of fat loss per week."}},{"@type":"Question","name":"Which formula does this calculator use?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses the Mifflin-St Jeor formula: BMR (male) = 10×weight(kg) + 6.25×height(cm) − 5×age + 5; BMR (female) = same − 161."}}]}
 </script>
 </head>
 <body>
 <header>
-  <a class="logo" href="/">Calculadora<span>.live</span></a></header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
 <div class="page">
-  <h1 class="page-title">Calorías Diarias</h1>
-  <p class="page-sub">¿Cuántas calorías necesitás por día? BMR y TDEE con fórmula Mifflin-St Jeor.</p>
+  <h1 class="page-title">Daily Calories (BMR / TDEE)</h1>
+  <p class="page-sub">How many calories do you need per day? Calculate your Basal Metabolic Rate and Total Daily Energy Expenditure.</p>
 
   <div class="card">
     <div class="field">
-      <label>Sexo</label>
+      <label>Sex</label>
       <div class="seg">
-        <button class="seg-btn active" id="btn-m" onclick="setSexo('m')">♂ Masculino</button>
-        <button class="seg-btn" id="btn-f" onclick="setSexo('f')">♀ Femenino</button>
+        <button class="seg-btn active" id="btn-m" onclick="setSex('m')">Male</button>
+        <button class="seg-btn" id="btn-f" onclick="setSex('f')">Female</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Unit system</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btn-imperial" onclick="setUnits('imperial')">Imperial (lb / in)</button>
+        <button class="unit-btn" id="btn-metric" onclick="setUnits('metric')">Metric (kg / cm)</button>
       </div>
     </div>
     <div class="two-col">
       <div class="field">
-        <label>Peso</label>
+        <label>Weight</label>
         <div class="input-wrap">
-          <input type="number" id="peso" placeholder="70" min="30" max="300" oninput="calcular()">
-          <span class="input-suffix">kg</span>
+          <input type="number" id="weight" placeholder="165" min="44" max="660" oninput="calculate()">
+          <span class="input-suffix" id="suffix-weight">lb</span>
         </div>
       </div>
       <div class="field">
-        <label>Altura</label>
+        <label id="lbl-height">Height (inches)</label>
         <div class="input-wrap">
-          <input type="number" id="altura" placeholder="170" min="100" max="250" oninput="calcular()">
-          <span class="input-suffix">cm</span>
+          <input type="number" id="height" placeholder="68" min="39" max="98" oninput="calculate()">
+          <span class="input-suffix" id="suffix-height">in</span>
         </div>
       </div>
     </div>
     <div class="field">
-      <label>Edad</label>
-      <div class="input-wrap">
-        <input type="number" id="edad" placeholder="30" min="10" max="100" oninput="calcular()">
-        <span class="input-suffix">años</span>
+      <label>Age</label>
+      <div class="input-wrap" style="max-width:140px">
+        <input type="number" id="age" placeholder="30" min="15" max="100" oninput="calculate()" style="padding-right:14px">
       </div>
     </div>
-    <div class="field">
-      <label>Nivel de actividad</label>
-      <select id="actividad" onchange="calcular()">
-        <option value="1.2">Sedentario (sin ejercicio)</option>
-        <option value="1.375">Ligero (1-3 días/semana)</option>
-        <option value="1.55" selected>Moderado (3-5 días/semana)</option>
-        <option value="1.725">Activo (6-7 días/semana)</option>
-        <option value="1.9">Muy activo (2 veces por día)</option>
-      </select>
+    <div class="field" style="margin-bottom:0">
+      <label>Activity level</label>
+      <div class="activity-grid">
+        <button class="act-btn" id="act-1" onclick="setActivity(1.2)">
+          <span class="act-label">Sedentary</span>
+          <span class="act-sub">Little or no exercise</span>
+        </button>
+        <button class="act-btn" id="act-2" onclick="setActivity(1.375)">
+          <span class="act-label">Lightly active</span>
+          <span class="act-sub">1–3 days/week</span>
+        </button>
+        <button class="act-btn active" id="act-3" onclick="setActivity(1.55)">
+          <span class="act-label">Moderately active</span>
+          <span class="act-sub">3–5 days/week</span>
+        </button>
+        <button class="act-btn" id="act-4" onclick="setActivity(1.725)">
+          <span class="act-label">Very active</span>
+          <span class="act-sub">6–7 days/week</span>
+        </button>
+        <button class="act-btn" id="act-5" onclick="setActivity(1.9)">
+          <span class="act-label">Extra active</span>
+          <span class="act-sub">Physical job or 2× training/day</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="result-card">
-    <div class="result-eyebrow">Calorías para mantener tu peso</div>
-    <div id="result-main" class="result-main"><span class="empty-state">Completá los datos</span></div>
-    <div id="result-sub" class="result-sub"></div>
-    <div id="result-rows" class="result-rows" style="display:none">
-      <div class="result-row">
-        <span class="result-row-lbl">BMR (metabolismo basal)</span>
-        <span class="result-row-val" id="r-bmr">—</span>
+    <div class="result-eyebrow">Basal Metabolic Rate (BMR)</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Enter your data above</span></div>
+    <div id="result-sub" class="result-sub" style="display:none">calories/day at rest (Mifflin-St Jeor)</div>
+    <div class="tdee-grid" id="tdee-grid" style="display:none">
+      <div class="tdee-row">
+        <span class="tdee-lbl">Lose weight <span class="tdee-tag tag-lose">−500 kcal</span></span>
+        <span class="tdee-val" id="val-lose">—</span>
       </div>
-      <div class="result-divider"></div>
-      <div class="result-row highlight">
-        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Para bajar de peso</span>
-        <span class="result-row-val" id="r-bajar" style="color:#86EFAC">—</span>
+      <div class="tdee-row hl">
+        <span class="tdee-lbl">Maintain weight <span class="tdee-tag tag-m">TDEE</span></span>
+        <span class="tdee-val" id="val-maintain">—</span>
       </div>
-      <div class="result-row highlight">
-        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Para mantener peso</span>
-        <span class="result-row-val" id="r-mantener" style="color:white">—</span>
-      </div>
-      <div class="result-row highlight">
-        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Para subir de peso</span>
-        <span class="result-row-val" id="r-subir" style="color:#FCA5A5">—</span>
+      <div class="tdee-row">
+        <span class="tdee-lbl">Gain weight <span class="tdee-tag tag-gain">+500 kcal</span></span>
+        <span class="tdee-val" id="val-gain">—</span>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="info-box">
-    <strong>¿Qué es el BMR?</strong><br>
-    El BMR (Basal Metabolic Rate) es la energía que tu cuerpo usa en reposo total. El TDEE (Total Daily Energy Expenditure) multiplica el BMR por tu nivel de actividad para estimar cuántas calorías quemás por día.
+<div class="faq-section">
+  <div class="faq-heading">How BMR and TDEE work</div>
+  <div class="faq-a" style="padding:0 0 18px">
+    <p style="margin-bottom:12px"><strong>BMR (Basal Metabolic Rate)</strong> is the number of calories your body needs just to stay alive — breathing, pumping blood, regulating temperature. It accounts for roughly 60–75% of total daily calorie burn.</p>
+    <p style="margin-bottom:12px">This calculator uses the <strong>Mifflin-St Jeor formula</strong>, the most accurate for the general population: Male BMR = 10×weight(kg) + 6.25×height(cm) − 5×age + 5. Female BMR = same − 161. Multiply by your activity factor to get TDEE.</p>
+    <p>To <strong>lose weight</strong>, eat 300–500 kcal below your TDEE. To <strong>gain muscle</strong>, eat 250–500 kcal above. Adjust based on real-world results over 2–3 weeks.</p>
   </div>
+  <div class="faq-heading">Frequently asked questions</div>
+  <details class="faq-item" open>
+    <summary>What is BMR?</summary>
+    <div class="faq-a"><strong>BMR (Basal Metabolic Rate)</strong> is the number of calories your body burns at complete rest to maintain vital functions like breathing, blood circulation and temperature regulation. It's the minimum calories needed to survive.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>What is TDEE?</summary>
+    <div class="faq-a"><strong>TDEE (Total Daily Energy Expenditure)</strong> is the total calories you burn per day, including physical activity. It is calculated by multiplying your BMR by an activity factor ranging from 1.2 (sedentary) to 1.9 (extra active). This is your maintenance calorie level.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Which BMR formula is most accurate?</summary>
+    <div class="faq-a">The <strong>Mifflin-St Jeor formula</strong> (used here) is considered the most accurate for most people. The older Harris-Benedict formula tends to slightly overestimate calories, especially for sedentary individuals.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>How do I use TDEE to lose or gain weight?</summary>
+    <div class="faq-a">To <strong>lose weight</strong>, eat fewer calories than your TDEE. A deficit of 500 kcal/day produces roughly 1 lb of fat loss per week. To <strong>gain weight</strong>, eat more — a surplus of 500 kcal/day adds about 1 lb per week. Track for 2–3 weeks and adjust.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Does BMR change with age?</summary>
+    <div class="faq-a">Yes. BMR typically decreases with age as muscle mass naturally declines. Strength training helps preserve muscle and maintain a higher BMR. Each decade after 30 sees roughly a 2–3% drop in BMR without countermeasures.</div>
+  </details>
 </div>
 <script>
-  let sexo='m';
-  function setSexo(s){sexo=s;document.getElementById('btn-m').classList.toggle('active',s==='m');document.getElementById('btn-f').classList.toggle('active',s==='f');calcular()}
-  function calcular(){
-    const peso=parseFloat(document.getElementById('peso').value)||0;
-    const altura=parseFloat(document.getElementById('altura').value)||0;
-    const edad=parseFloat(document.getElementById('edad').value)||0;
-    const act=parseFloat(document.getElementById('actividad').value)||1.55;
-    const mainEl=document.getElementById('result-main');
-    const subEl=document.getElementById('result-sub');
-    const rowsEl=document.getElementById('result-rows');
-    if(!peso||!altura||!edad){mainEl.innerHTML='<span class="empty-state">Completá los datos</span>';subEl.textContent='';rowsEl.style.display='none';return}
-    const bmr=sexo==='m'?(10*peso+6.25*altura-5*edad+5):(10*peso+6.25*altura-5*edad-161);
-    const tdee=Math.round(bmr*act);
-    mainEl.innerHTML=`${tdee}<span class="result-unit">kcal/día</span>`;
-    subEl.textContent='para mantener tu peso actual';
-    rowsEl.style.display='flex';
-    document.getElementById('r-bmr').textContent=Math.round(bmr)+' kcal';
-    document.getElementById('r-bajar').textContent=(tdee-500)+' kcal/día';
-    document.getElementById('r-mantener').textContent=tdee+' kcal/día';
-    document.getElementById('r-subir').textContent=(tdee+500)+' kcal/día';
+  var sex = 'm';
+  var units = 'imperial';
+  var actFactor = 1.55;
+  var actIds    = ['act-1','act-2','act-3','act-4','act-5'];
+  var actVals   = [1.2, 1.375, 1.55, 1.725, 1.9];
+
+  function setSex(s) {
+    sex = s;
+    document.getElementById('btn-m').classList.toggle('active', s === 'm');
+    document.getElementById('btn-f').classList.toggle('active', s === 'f');
+    calculate();
+  }
+
+  function setUnits(u) {
+    units = u;
+    document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+    document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+    var wEl = document.getElementById('weight');
+    var hEl = document.getElementById('height');
+    if (u === 'metric') {
+      document.getElementById('suffix-weight').textContent = 'kg';
+      document.getElementById('suffix-height').textContent = 'cm';
+      document.getElementById('lbl-height').textContent = 'Height';
+      wEl.placeholder = '75'; hEl.placeholder = '175';
+      wEl.min = 20; wEl.max = 300;
+      hEl.min = 100; hEl.max = 250;
+    } else {
+      document.getElementById('suffix-weight').textContent = 'lb';
+      document.getElementById('suffix-height').textContent = 'in';
+      document.getElementById('lbl-height').textContent = 'Height (total inches)';
+      wEl.placeholder = '165'; hEl.placeholder = '68';
+      wEl.min = 44; wEl.max = 660;
+      hEl.min = 39; hEl.max = 98;
+    }
+    wEl.value = '';
+    hEl.value = '';
+    calculate();
+  }
+
+  function setActivity(f) {
+    actFactor = f;
+    actIds.forEach(function(id, i) {
+      document.getElementById(id).classList.toggle('active', actVals[i] === f);
+    });
+    calculate();
+  }
+
+  function calculate() {
+    var wRaw = parseFloat(document.getElementById('weight').value) || 0;
+    var hRaw = parseFloat(document.getElementById('height').value) || 0;
+    var age  = parseFloat(document.getElementById('age').value) || 0;
+    var mainEl = document.getElementById('result-main');
+    var subEl  = document.getElementById('result-sub');
+    var gridEl = document.getElementById('tdee-grid');
+
+    if (!wRaw || !hRaw || !age) {
+      mainEl.innerHTML = '<span class="empty-state">Enter your data above</span>';
+      subEl.style.display = 'none';
+      gridEl.style.display = 'none';
+      return;
+    }
+
+    var weightKg = units === 'metric' ? wRaw : wRaw * 0.453592;
+    var heightCm = units === 'metric' ? hRaw : hRaw * 2.54;
+
+    var bmr = sex === 'm'
+      ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+      : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+
+    var tdee = bmr * actFactor;
+
+    mainEl.textContent = Math.round(bmr).toLocaleString('en-US') + ' kcal';
+    subEl.style.display = 'block';
+    gridEl.style.display = 'flex';
+
+    document.getElementById('val-lose').textContent     = Math.round(tdee - 500).toLocaleString('en-US') + ' kcal';
+    document.getElementById('val-maintain').textContent = Math.round(tdee).toLocaleString('en-US') + ' kcal';
+    document.getElementById('val-gain').textContent     = Math.round(tdee + 500).toLocaleString('en-US') + ' kcal';
   }
 </script>
-<div class="faq-section">
-  <div class="faq-heading">Preguntas frecuentes</div>
-  <details class="faq-item" open>
-    <summary>¿Qué es el metabolismo basal (BMR)?</summary>
-    <div class="faq-a">El <strong>BMR (Basal Metabolic Rate)</strong> es la cantidad de calorías que tu cuerpo necesita en reposo absoluto para mantener sus funciones vitales: respirar, circular sangre, regular temperatura y mantener los órganos. Representa entre el 60–75% del gasto energético total.</div>
-  </details>
-  <details class="faq-item" open>
-    <summary>¿Qué es el TDEE?</summary>
-    <div class="faq-a">El <strong>TDEE (Total Daily Energy Expenditure)</strong> es la cantidad total de calorías que gastás en un día, incluyendo la actividad física. Se calcula multiplicando el BMR por un factor de actividad: sedentario (×1.2), leve (×1.375), moderada (×1.55), intensa (×1.725) o muy intensa (×1.9).</div>
-  </details>
-  <details class="faq-item" open>
-    <summary>¿Cuántas calorías debo comer para bajar de peso?</summary>
-    <div class="faq-a">Se recomienda un <strong>déficit de 300–500 calorías</strong> por debajo de tu TDEE. Eso genera una pérdida de aproximadamente 0.3–0.5 kg por semana. Déficits mayores a 700 kcal pueden causar pérdida de masa muscular y efecto rebote.</div>
-  </details>
-  <details class="faq-item" open>
-    <summary>¿Cuántas calorías debo comer para ganar músculo?</summary>
-    <div class="faq-a">Un <strong>superávit moderado de 200–400 calorías</strong> sobre tu TDEE es suficiente para ganar músculo con mínima acumulación de grasa. Superávits más altos aceleran la ganancia pero también aumentan el porcentaje de grasa corporal.</div>
-  </details>
-  <details class="faq-item" open>
-    <summary>¿Qué tan precisa es la calculadora de calorías?</summary>
-    <div class="faq-a">Usamos la <strong>fórmula Mifflin-St Jeor</strong>, la más precisa disponible para estimaciones poblacionales, con un margen de error de ±10–15%. Los valores individuales varían según genética y composición corporal. Usalos como punto de partida y ajustá según tu respuesta real.</div>
-  </details>
-</div>
 <script src="/nav.js"></script>
 </body>
 </html>
