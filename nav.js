@@ -11,7 +11,7 @@
        badge= true → shows "new"
   ─────────────────────────────────────────────────────────────────────────── */
   var CALCS = [
-    { cat: '💪 Health & Fitness', slug: 'health', label: 'Health', desc: 'BMI, calories, protein, hydration, weight loss and more.', items: [
+    { cat: '💪 Health & Fitness', title: 'Health & Fitness', slug: 'health', label: 'Health', desc: 'BMI, calories, protein, hydration, weight loss and more.', items: [
       { n: 'BMI Calculator',           u: '/bmi/',           icon:'⚖️', d: 'Body Mass Index — WHO ranges',                hd:'Calculate your BMI and find out if you\'re at a healthy weight according to WHO guidelines.' },
       { n: 'Daily Calories (BMR)',     u: '/bmr/',           icon:'🔥', d: 'Basal metabolic rate and TDEE',               hd:'How many calories do you need per day? Calculate your BMR and TDEE based on activity level.' },
       { n: '1RM Calculator',           u: '/1rm/',           icon:'🏋️', d: 'One-rep max by formula',                    hd:'Estimate your one-repetition maximum for any exercise using proven formulas.' },
@@ -19,33 +19,33 @@
       { n: 'Daily Hydration',          u: '/hydration/',     icon:'💧', badge:true, d: 'How much water do you need?',     hd:'Calculate your daily water intake based on your weight, activity and climate.' },
       { n: 'Daily Protein',            u: '/protein/',       icon:'🥩', badge:true, d: 'Grams per day by goal and activity', hd:'How much protein do you need per day? Calculate based on your goal and training level.' },
     ]},
-    { cat: '💰 Finance & Money', slug: 'finance', label: 'Finance', desc: 'Compound interest, loans, savings, margins and more.', items: [
+    { cat: '💰 Finance & Money', title: 'Finance & Money', slug: 'finance', label: 'Finance', desc: 'Compound interest, loans, savings, margins and more.', items: [
       { n: 'Compound Interest',        u: '/compound-interest/', icon:'📈', d: 'Grow savings and investments',           hd:'Project your savings growth with compound interest. See how money multiplies over time.' },
       { n: 'Loan Calculator',          u: '/loan/',              icon:'🏦', d: 'Monthly payment and total interest',     hd:'Calculate your monthly payment, total interest and full cost for any loan.' },
       { n: 'Savings Calculator',       u: '/savings/',           icon:'💰', badge:true, d: 'When do you reach your goal?', hd:'Calculate how long to reach your savings goal with monthly contributions and interest.' },
       { n: 'Profit Margin',            u: '/margin/',            icon:'📊', badge:true, d: 'Selling price, margin and markup', hd:'Calculate profit margin, markup and selling price for your products.' },
       { n: 'Tip Calculator',           u: '/tip/',               icon:'💳', badge:true, d: 'Split bills and calculate tips',   hd:'Calculate tips and split restaurant bills between any number of people.' },
     ]},
-    { cat: '🔢 Math & Numbers', slug: 'math', label: 'Math', desc: 'Percentages, proportions, unit conversions and more.', items: [
+    { cat: '🔢 Math & Numbers', title: 'Math & Numbers', slug: 'math', label: 'Math', desc: 'Percentages, proportions, unit conversions and more.', items: [
       { n: 'Percentage Calculator',    u: '/percentage/',    icon:'%',  badge:true, d: 'X% of Y, changes, increases, discounts', hd:'X% of Y, what % is X of Y, percentage change, increases and discounts — all in one.' },
       { n: 'Rule of Three',            u: '/rule-of-three/', icon:'📐', badge:true, d: 'Direct and inverse proportion',          hd:'Direct and inverse proportion. Enter three values and the fourth appears instantly.' },
       { n: 'Unit Converter',           u: '/unit-converter/', icon:'🔄', badge:true, d: 'Length, weight, temperature, speed and more', hd:'Convert length, weight, temperature, speed, area, volume, time and digital units.' },
     ]},
-    { cat: '📅 Dates & Time', slug: 'dates', label: 'Dates', desc: 'Age, days between dates, clock, calendar and more.', items: [
+    { cat: '📅 Dates & Time', title: 'Dates & Time', slug: 'dates', label: 'Dates', desc: 'Age, days between dates, clock, calendar and more.', items: [
       { n: 'Age Calculator',           u: '/age/',            icon:'🎂', d: 'Exact age in years, months and days',     hd:'Calculate exact age in years, months and days from any birth date.' },
       { n: 'Days Between Dates',       u: '/days/',           icon:'🗓️', d: 'Calendar or working days between dates', hd:'How many days between two dates? Also calculates working days.' },
       { n: 'Day of the Week',          u: '/day-of-week/',    icon:'📆', d: 'What day was any date?',                  hd:'Enter any date and find out what day of the week it was or will be.' },
       { n: 'Clock',                    u: '/clock/',          icon:'🕐', d: 'Real-time clock, full-screen mode',       hd:'Digital real-time clock with date, timezone and full-screen mode.' },
       { n: 'Life in Numbers',          u: '/life/',           icon:'🤯', badge:true, d: 'Heartbeats, steps, blinks — live counters', hd:'Heartbeats, blinks, steps and more — live counters of your life since birth.' },
     ]},
-    { cat: '🎮 Games & Tests', slug: 'games', label: 'Games', desc: 'Reaction time, CPS test, keyboard tester and more.', items: [
+    { cat: '🎮 Games & Tests', title: 'Games & Tests', slug: 'games', label: 'Games', desc: 'Reaction time, CPS test, keyboard tester and more.', items: [
       { n: 'Reaction Time Test',       u: '/reaction-time/', icon:'⚡', badge:true, d: 'How fast are your reflexes?',        hd:'Measure your reaction time in milliseconds. Do you have cat reflexes?' },
       { n: 'CPS Test',                 u: '/cps/',           icon:'🖱️', badge:true, d: 'Clicks per second in 5, 10 or 30 sec', hd:'How many clicks per second can you do? Choose the time and find out.' },
       { n: 'Keyboard Tester',          u: '/keyboard/',      icon:'⌨️', badge:true, d: 'Check that every key works',        hd:'Press each key and check that your keyboard responds correctly.' },
       { n: 'Random Generator',         u: '/random/',        icon:'🎰', badge:true, d: 'Numbers, letters or custom lists',   hd:'Generate random numbers, letters or items from your own list. With or without repetition.' },
       { n: 'Zodiac Sign',              u: '/zodiac/',        icon:'♈', d: 'Your full zodiac sign',                      hd:'Enter your birth date and discover your zodiac sign with a complete description.' },
     ]},
-    { cat: '⚽ World Cup 2026', slug: 'world-cup', label: 'World Cup', desc: 'Everything about the 2026 FIFA World Cup.', items: [
+    { cat: '⚽ World Cup 2026', title: 'World Cup 2026', slug: 'world-cup', label: 'World Cup', desc: 'Everything about the 2026 FIFA World Cup.', items: [
       { n: 'World Cup 2026 Countdown', u: '/world-cup/',     icon:'🏆', badge:true, d: 'Live countdown to June 11, 2026',   hd:'Real-time countdown to the opening match of the 2026 FIFA World Cup in Mexico City.' },
     ]},
   ];
@@ -478,6 +478,54 @@
     'html[data-theme="dark"] .sf-logo{color:#E2E4F0;}',
     'html[data-theme="dark"] .sf-links a:hover{color:#E2E4F0;}',
 
+    /* ── CATEGORY PAGE GRID ─────────────────────────────────────────── */
+    '.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}',
+    '.calc-card{background:var(--surface,#fff);border:1.5px solid var(--line,#E4E7EE);border-radius:14px;',
+    'padding:22px;display:flex;align-items:flex-start;gap:14px;text-decoration:none;',
+    'color:var(--ink,#0A0E1A);transition:all .18s;cursor:pointer;}',
+    '.calc-card:hover{border-color:#4F6BFF;transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,107,255,.1);}',
+    'html[data-theme="dark"] .calc-card{background:#141929 !important;border-color:#1F2438 !important;}',
+    'html[data-theme="dark"] .calc-card:hover{border-color:#4F6BFF !important;}',
+    '.calc-icon{font-size:26px;flex-shrink:0;width:46px;height:46px;display:flex;align-items:center;',
+    'justify-content:center;background:rgba(79,107,255,.08);border-radius:10px;border:1px solid rgba(79,107,255,.12);}',
+    '.calc-info{flex:1;min-width:0;}',
+    '.calc-name{font-size:15px;font-weight:700;margin-bottom:5px;letter-spacing:-.012em;',
+    'color:var(--ink,#0A0E1A);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}',
+    'html[data-theme="dark"] .calc-name{color:#E2E4F0 !important;}',
+    '.calc-desc{font-size:13px;color:var(--ink-3,#858AA0);line-height:1.5;}',
+    '.badge-new{font-size:9px;font-weight:700;padding:2px 6px;',
+    'background:rgba(34,197,94,.12);color:#16a34a;border-radius:4px;',
+    'text-transform:uppercase;letter-spacing:.05em;font-family:"JetBrains Mono",monospace;white-space:nowrap;}',
+    '@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}',
+    '@media(max-width:520px){.grid{grid-template-columns:1fr}.calc-card{padding:16px;}}',
+
+    /* ── LANGUAGE SELECTOR ──────────────────────────────────────────── */
+    '#lang-sel{position:relative;display:flex;align-items:center;margin-left:4px;}',
+    '#lang-btn{display:flex;align-items:center;gap:5px;padding:5px 9px;background:none;',
+    'border:1.5px solid rgba(255,255,255,.18);border-radius:7px;font-size:12px;font-weight:600;',
+    'color:rgba(255,255,255,.75);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1;}',
+    '#lang-btn:hover{border-color:rgba(255,255,255,.4);color:#fff;}',
+    'html:not([data-theme="dark"]) #lang-btn{border-color:rgba(10,14,26,.18);color:rgba(10,14,26,.6);}',
+    'html:not([data-theme="dark"]) #lang-btn:hover{border-color:#4F6BFF;color:#4F6BFF;}',
+    '#lang-drop{position:absolute;top:calc(100% + 8px);right:0;background:#0E1525;',
+    'border:1px solid #1F2438;border-radius:12px;padding:6px;min-width:168px;',
+    'box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:10000;display:none;flex-direction:column;gap:2px;}',
+    '#lang-drop.ld-open{display:flex;}',
+    'html:not([data-theme="dark"]) #lang-drop{background:#fff;border-color:#E4E7EE;box-shadow:0 8px 32px rgba(10,14,26,.12);}',
+    '.lang-opt{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;',
+    'border-radius:7px;font-size:13px;font-weight:500;color:rgba(255,255,255,.8);',
+    'text-decoration:none;transition:background .12s;gap:6px;}',
+    'html:not([data-theme="dark"]) .lang-opt{color:#363B4F;}',
+    '.lang-opt:hover{background:rgba(255,255,255,.07);}',
+    'html:not([data-theme="dark"]) .lang-opt:hover{background:#F0F2F7;}',
+    '.lang-opt.lo-active{color:#4F6BFF;font-weight:700;}',
+    '.lang-opt.lo-active:hover{background:rgba(79,107,255,.08);}',
+    'html:not([data-theme="dark"]) .lang-opt.lo-active:hover{background:rgba(79,107,255,.06);}',
+    '.lang-opt.lo-soon{opacity:.45;cursor:default;pointer-events:none;}',
+    '.lo-soon-tag{font-size:9px;font-weight:700;padding:2px 6px;background:rgba(79,107,255,.15);',
+    'color:#4F6BFF;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;',
+    'font-family:"JetBrains Mono",monospace;}',
+
   ].join('');
 
   var st = document.createElement('style');
@@ -545,6 +593,31 @@
   var saved = localStorage.getItem('cw-theme');
   var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(saved || (sysDark ? 'dark' : 'light'), false);
+
+  /* ── LANGUAGE SELECTOR ─────────────────────────────────── */
+  var langSel = document.createElement('div');
+  langSel.id = 'lang-sel';
+  var chevronSVG = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:.7"><polyline points="6 9 12 15 18 9"/></svg>';
+  langSel.innerHTML = '<button id="lang-btn" aria-label="Language / Idioma">EN ' + chevronSVG + '</button>'
+    + '<div id="lang-drop">'
+    + '<a class="lang-opt lo-active" href="/" tabindex="0">🇺🇸&nbsp; English</a>'
+    + '<a class="lang-opt" href="https://calculadora.live/" tabindex="0">🇪🇸&nbsp; Español</a>'
+    + '<span class="lang-opt lo-soon">🇧🇷&nbsp; Português <span class="lo-soon-tag">soon</span></span>'
+    + '<span class="lang-opt lo-soon">🇫🇷&nbsp; Français <span class="lo-soon-tag">soon</span></span>'
+    + '</div>';
+  if (hdr) hdr.appendChild(langSel);
+
+  (function() {
+    var lb = document.getElementById('lang-btn');
+    var ld = document.getElementById('lang-drop');
+    if (!lb || !ld) return;
+    lb.addEventListener('click', function(e) {
+      e.stopPropagation();
+      ld.classList.toggle('ld-open');
+    });
+    document.addEventListener('click', function() { ld.classList.remove('ld-open'); });
+    ld.addEventListener('click', function(e) { e.stopPropagation(); });
+  })();
 
   if (hdr) hdr.appendChild(themeBtn);
 
@@ -987,7 +1060,7 @@
 
   /* ── FEEDBACK WIDGET ─────────────────────────────────────── */
   (function () {
-    var FORMSPREE_ID = 'mlgvdorr';
+    var FORMSPREE_ID = 'xjgzrnvp';
     var path = window.location.pathname.replace(/\/+$/, '') || '/';
     var skipPaths = [
       '/', '/health', '/finance', '/math', '/dates', '/games', '/world-cup',
@@ -996,6 +1069,68 @@
     if (skipPaths.indexOf(path) !== -1) return;
     if (document.querySelector('.fb-section')) return;
 
+    /* ── i18n strings ── */
+    var lang = (window.__LANG || 'en').toLowerCase().substring(0, 2);
+    var FB_I18N = {
+      en: {
+        title: 'How can we improve?',
+        sub: 'Leave a quick reaction or write a comment — we read every message.',
+        placeholder: 'Tell us more (optional)…',
+        send: 'Send feedback',
+        thanks: 'Thanks for your feedback! 🙏',
+        reactions: [
+          { e: '✅', l: 'Works great' },
+          { e: '🐛', l: 'Found a bug' },
+          { e: '💡', l: 'Suggestion' },
+          { e: '🌍', l: "My country isn't supported" },
+          { e: '🙋', l: 'Missing a calculator' },
+        ]
+      },
+      es: {
+        title: '¿Cómo podemos mejorar?',
+        sub: 'Dejá una reacción rápida o escribí un comentario — leemos cada mensaje.',
+        placeholder: 'Contanos más (opcional)…',
+        send: 'Enviar comentario',
+        thanks: '¡Gracias por tu feedback! 🙏',
+        reactions: [
+          { e: '✅', l: 'Funciona bien' },
+          { e: '🐛', l: 'Encontré un error' },
+          { e: '💡', l: 'Sugerencia' },
+          { e: '🌍', l: 'Mi país no está disponible' },
+          { e: '🙋', l: 'Falta una calculadora' },
+        ]
+      },
+      pt: {
+        title: 'Como podemos melhorar?',
+        sub: 'Deixe uma reação rápida ou escreva um comentário — lemos cada mensagem.',
+        placeholder: 'Conte-nos mais (opcional)…',
+        send: 'Enviar feedback',
+        thanks: 'Obrigado pelo seu feedback! 🙏',
+        reactions: [
+          { e: '✅', l: 'Funciona bem' },
+          { e: '🐛', l: 'Encontrei um erro' },
+          { e: '💡', l: 'Sugestão' },
+          { e: '🌍', l: 'Meu país não está disponível' },
+          { e: '🙋', l: 'Falta uma calculadora' },
+        ]
+      },
+      fr: {
+        title: 'Comment pouvons-nous améliorer ?',
+        sub: 'Laissez une réaction rapide ou écrivez un commentaire — nous lisons chaque message.',
+        placeholder: 'Dites-nous en plus (facultatif)…',
+        send: 'Envoyer le commentaire',
+        thanks: 'Merci pour votre avis ! 🙏',
+        reactions: [
+          { e: '✅', l: 'Ça fonctionne bien' },
+          { e: '🐛', l: "J'ai trouvé un bug" },
+          { e: '💡', l: 'Suggestion' },
+          { e: '🌍', l: 'Mon pays n\'est pas disponible' },
+          { e: '🙋', l: 'Calculatrice manquante' },
+        ]
+      }
+    };
+    var t = FB_I18N[lang] || FB_I18N['en'];
+
     function inject() {
       if (document.querySelector('.fb-section')) return;
 
@@ -1003,54 +1138,52 @@
       s.textContent = [
         '.fb-section{font-family:Inter,sans-serif;max-width:860px;margin:0 auto;padding:0 24px 24px;}',
         '.fb-box{background:var(--surface,#fff);border:1.5px solid var(--line,#E4E7EE);border-radius:16px;padding:22px 24px;}',
-        'html[data-theme="dark"] .fb-box{background:var(--surface,#0F1220) !important;border-color:var(--line,#1F2438) !important;}',
+        'html[data-theme="dark"] .fb-box{background:#141929 !important;border-color:#1F2438 !important;}',
         '.fb-title{font-size:14px;font-weight:700;color:var(--ink,#0A0E1A);margin-bottom:3px;letter-spacing:-0.01em;}',
-        'html[data-theme="dark"] .fb-title{color:var(--ink,#E2E4F0);}',
+        'html[data-theme="dark"] .fb-title{color:#E2E4F0;}',
         '.fb-sub{font-size:13px;color:var(--ink-3,#858AA0);margin-bottom:14px;line-height:1.5;}',
         '.fb-reactions{display:flex;gap:8px;flex-wrap:wrap;}',
-        '.fb-r{border:1.5px solid var(--line,#E4E7EE);background:transparent;border-radius:99px;padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;color:var(--ink-2,#363B4F);transition:all .15s;font-family:inherit;line-height:1;}',
-        'html[data-theme="dark"] .fb-r{border-color:var(--line,#1F2438);color:var(--ink-2,#9CA3C0);}',
+        '.fb-r{border:1.5px solid var(--line,#E4E7EE);background:transparent;border-radius:99px;',
+        'padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;',
+        'color:var(--ink-2,#363B4F);transition:all .15s;font-family:inherit;line-height:1;}',
+        'html[data-theme="dark"] .fb-r{border-color:#1F2438;color:#9BA0B8;}',
         '.fb-r:hover{border-color:rgba(79,107,255,.6);color:#4F6BFF;}',
         '.fb-r.fbactive{border-color:#4F6BFF;background:#EEF1FF;color:#4F6BFF;font-weight:600;}',
         'html[data-theme="dark"] .fb-r.fbactive{background:rgba(79,107,255,.15);}',
         '.fb-ta-wrap{margin-top:12px;}',
-        '.fb-ta{width:100%;padding:11px 14px;border:1.5px solid var(--line,#E4E7EE);border-radius:10px;font-family:inherit;font-size:14px;color:var(--ink,#0A0E1A);background:var(--surface,#fff);resize:vertical;min-height:76px;outline:none;transition:border-color .15s;box-sizing:border-box;}',
-        'html[data-theme="dark"] .fb-ta{background:var(--dark-2,#141929) !important;border-color:var(--dark-line,#1F2438) !important;color:var(--ink,#E2E4F0) !important;}',
+        '.fb-ta{width:100%;padding:11px 14px;border:1.5px solid var(--line,#E4E7EE);',
+        'border-radius:10px;font-family:inherit;font-size:14px;color:var(--ink,#0A0E1A);',
+        'background:var(--surface,#fff);resize:vertical;min-height:76px;outline:none;',
+        'transition:border-color .15s;box-sizing:border-box;}',
+        'html[data-theme="dark"] .fb-ta{background:#141929 !important;border-color:#1F2438 !important;color:#E2E4F0 !important;}',
         '.fb-ta:focus{border-color:#4F6BFF;}',
-        '.fb-send{margin-top:10px;padding:9px 20px;background:#4F6BFF;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;}',
+        '.fb-send{margin-top:10px;padding:9px 20px;background:#4F6BFF;color:#fff;border:none;',
+        'border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;}',
         '.fb-send:hover{background:#3d5ae8;}',
         '.fb-thanks{font-size:13px;color:#16a34a;font-weight:600;margin-top:10px;display:none;}',
       ].join('');
       document.head.appendChild(s);
 
-      var reactions = [
-        { e: '✅', l: 'Works great' },
-        { e: '🐛', l: 'Found a bug' },
-        { e: '💡', l: 'Suggestion' },
-        { e: '🌍', l: 'My country isn\'t supported' },
-        { e: '🙋', l: 'Missing a calculator' },
-      ];
-
       var html = '<div class="fb-section"><div class="fb-box">'
-        + '<div class="fb-title">How can we improve?</div>'
-        + '<div class="fb-sub">Leave a quick reaction or write a comment — we read every message.</div>'
+        + '<div class="fb-title">' + t.title + '</div>'
+        + '<div class="fb-sub">' + t.sub + '</div>'
         + '<div class="fb-reactions" id="fb-reactions">';
-      reactions.forEach(function(r, i) {
+      t.reactions.forEach(function(r, i) {
         html += '<button class="fb-r" data-i="' + i + '" onclick="fbReact(this)">' + r.e + ' ' + r.l + '</button>';
       });
       html += '</div>'
         + '<form id="fb-form" style="display:none" onsubmit="fbSend(event)">'
-        + '<div class="fb-ta-wrap"><textarea class="fb-ta" id="fb-ta" placeholder="Tell us more (optional)…"></textarea></div>'
-        + '<button type="submit" class="fb-send">Send feedback</button>'
+        + '<div class="fb-ta-wrap"><textarea class="fb-ta" id="fb-ta" placeholder="' + t.placeholder + '"></textarea></div>'
+        + '<button type="submit" class="fb-send">' + t.send + '</button>'
         + '</form>'
-        + '<div class="fb-thanks" id="fb-thanks">Thanks for your feedback! 🙏</div>'
+        + '<div class="fb-thanks" id="fb-thanks">' + t.thanks + '</div>'
         + '</div></div>';
 
       var footer = document.querySelector('footer');
       if (footer) { footer.insertAdjacentHTML('beforebegin', html); }
       else { document.body.insertAdjacentHTML('beforeend', html); }
 
-      window._fbReactions = reactions;
+      window._fbReactions = t.reactions;
       window._fbSelected = null;
 
       window.fbReact = function(btn) {
@@ -1068,7 +1201,7 @@
         fetch('https://formspree.io/f/' + FORMSPREE_ID, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ reaction: r ? r.e + ' ' + r.l : '?', message: msg || '(none)', page: page })
+          body: JSON.stringify({ reaction: r ? r.e + ' ' + r.l : '?', message: msg || '(none)', page: page, lang: lang })
         }).catch(function(){});
         document.getElementById('fb-form').style.display = 'none';
         document.getElementById('fb-reactions').style.display = 'none';

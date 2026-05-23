@@ -232,7 +232,7 @@
   <div class="hero">
     <div>
       <div class="hero-eyebrow"><span class="he-pulse"></span>&nbsp;<span>Calculators · free · no sign-up</span></div>
-      <h1><span class="acc">Calculators</span><br><span class="muted">for everything.</span></h1>
+      <h1><span class="muted">Here you can</span><br><span class="acc">calculate everything.</span></h1>
       <p class="hero-lead">Precise tools for your everyday needs. Health, finance, math, dates and more. No friction, no waiting.</p>
       <div class="hero-actions">
         <a href="#calculators" class="btn-primary">Explore calculators →</a>
@@ -336,7 +336,7 @@
       + '<div class="cat-block-head">'
       + '<div class="cat-title-wrap">'
       + '<span class="cat-num">0' + (ci + 1) + '</span>'
-      + '<h2 class="cat-title">' + cat.cat + '</h2>'
+      + '<h2 class="cat-title">' + (cat.title || cat.cat) + '</h2>'
       + '<span class="cat-count">' + cat.items.length + '</span>'
       + '</div>'
       + '<a class="cat-link" href="/' + cat.slug + '/">See all →</a>'
@@ -345,7 +345,7 @@
     cat.items.forEach(function (item) {
       var desc = item.hd || item.d;
       html += '<a class="card" href="' + item.u + '">'
-        + '<span class="card-tag">' + (item.icon || '🔢') + ' ' + cat.label + '</span>'
+        + '<span class="card-tag">' + cat.label + '</span>'
         + '<div class="card-title">' + item.n + '</div>'
         + '<div class="card-desc">' + desc + '</div>'
         + '<span class="card-cta">Open →</span>'
