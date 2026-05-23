@@ -8,6 +8,11 @@
 <meta name="description" content="Free, simple and always up-to-date calculators. BMI, percentage, age, days, compound interest, loan, unit converter, reaction time and more. No sign-up required.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calculate.website/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/">
 <meta property="og:title" content="calculate.website — Free Online Calculators for Everything">
 <meta property="og:description" content="Free, simple and always up-to-date calculators. BMI, percentage, compound interest, loan, unit converter and more. No sign-up.">
 <meta property="og:url" content="https://calculate.website/">
@@ -307,7 +312,6 @@
 <script src="/nav.js"></script>
 <script>
 (function () {
-  /* ── HOME GRID ── */
   var calcs = window.__CALCS || [];
 
   /* Hero category grid */
@@ -326,34 +330,51 @@
     });
   }
 
-  /* Main calculator grid */
+  /* Main calculator grid (with country filter support) */
   var root = document.getElementById('home-grid-root');
   if (!root || !calcs.length) return;
 
-  var html = '';
-  calcs.forEach(function (cat, ci) {
-    html += '<div class="cat-block">'
-      + '<div class="cat-block-head">'
-      + '<div class="cat-title-wrap">'
-      + '<span class="cat-num">0' + (ci + 1) + '</span>'
-      + '<h2 class="cat-title">' + (cat.title || cat.cat) + '</h2>'
-      + '<span class="cat-count">' + cat.items.length + '</span>'
-      + '</div>'
-      + '<a class="cat-link" href="/' + cat.slug + '/">See all →</a>'
-      + '</div>'
-      + '<div class="cards">';
-    cat.items.forEach(function (item) {
-      var desc = item.hd || item.d;
-      html += '<a class="card" href="' + item.u + '">'
-        + '<span class="card-tag">' + cat.label + '</span>'
-        + '<div class="card-title">' + item.n + '</div>'
-        + '<div class="card-desc">' + desc + '</div>'
-        + '<span class="card-cta">Open →</span>'
-        + '</a>';
+  function buildHomeGrid(country) {
+    country = country || (typeof cwGetCountry === 'function' ? cwGetCountry() : 'global');
+    var html = '';
+    var catIdx = 0;
+    calcs.forEach(function (cat) {
+      /* filter items by country */
+      var items = cat.items.filter(function(item) {
+        if (!item.countries || item.countries.length === 0) return true;
+        if (country === 'global') return true;
+        return item.countries.indexOf('global') !== -1 || item.countries.indexOf(country) !== -1;
+      });
+      if (items.length === 0) return;
+      catIdx++;
+      html += '<div class="cat-block">'
+        + '<div class="cat-block-head">'
+        + '<div class="cat-title-wrap">'
+        + '<span class="cat-num">0' + catIdx + '</span>'
+        + '<h2 class="cat-title">' + (cat.title || cat.cat) + '</h2>'
+        + '<span class="cat-count">' + items.length + '</span>'
+        + '</div>'
+        + '<a class="cat-link" href="/' + cat.slug + '/">See all →</a>'
+        + '</div>'
+        + '<div class="cards">';
+      items.forEach(function (item) {
+        var desc = item.hd || item.d;
+        html += '<a class="card" href="' + item.u + '">'
+          + '<span class="card-tag">' + cat.label + '</span>'
+          + '<div class="card-title">' + item.n + '</div>'
+          + '<div class="card-desc">' + desc + '</div>'
+          + '<span class="card-cta">Open →</span>'
+          + '</a>';
+      });
+      html += '</div></div>';
     });
-    html += '</div></div>';
-  });
-  root.innerHTML = html;
+    root.innerHTML = html || '<div style="padding:48px;text-align:center;color:#858AA0">No calculators for this country yet.</div>';
+  }
+
+  buildHomeGrid();
+
+  /* Register rebuild hook for nav.js country picker */
+  window.__cwRebuildHome = buildHomeGrid;
 })();
 </script>
 </body>

@@ -200,6 +200,59 @@
     ],
   };
 
+  /* ── LANGUAGE DETECTION (from URL path) ────────────────────────────────── */
+  var CW_LANG = (function(){
+    var p = window.location.pathname.split('/');
+    if (p[1] === 'es') return 'es';
+    if (p[1] === 'pt') return 'pt';
+    if (p[1] === 'fr') return 'fr';
+    return 'en';
+  })();
+  if (!window.__LANG) window.__LANG = CW_LANG;
+
+  /* Helper: switch language while preserving the rest of the path */
+  function cwLangUrl(target) {
+    var path = window.location.pathname;
+    path = path.replace(/^\/(es|pt|fr)(\/|$)/, '$2') || '/';
+    if (!path.startsWith('/')) path = '/' + path;
+    return target === 'en' ? (path || '/') : '/' + target + (path === '/' ? '/' : path);
+  }
+
+  /* ── COUNTRY LIST ────────────────────────────────────────────────────────── */
+  var CW_COUNTRY_LIST = [
+    {code:'global',flag:'🌍',name:'Global'},
+    {code:'US',flag:'🇺🇸',name:'USA'},          {code:'GB',flag:'🇬🇧',name:'UK'},
+    {code:'CA',flag:'🇨🇦',name:'Canada'},       {code:'AU',flag:'🇦🇺',name:'Australia'},
+    {code:'IE',flag:'🇮🇪',name:'Ireland'},      {code:'NZ',flag:'🇳🇿',name:'New Zealand'},
+    {code:'SG',flag:'🇸🇬',name:'Singapore'},    {code:'AE',flag:'🇦🇪',name:'UAE'},
+    {code:'AR',flag:'🇦🇷',name:'Argentina'},    {code:'MX',flag:'🇲🇽',name:'México'},
+    {code:'CL',flag:'🇨🇱',name:'Chile'},        {code:'CO',flag:'🇨🇴',name:'Colombia'},
+    {code:'PE',flag:'🇵🇪',name:'Perú'},         {code:'UY',flag:'🇺🇾',name:'Uruguay'},
+    {code:'VE',flag:'🇻🇪',name:'Venezuela'},    {code:'EC',flag:'🇪🇨',name:'Ecuador'},
+    {code:'BO',flag:'🇧🇴',name:'Bolivia'},      {code:'PY',flag:'🇵🇾',name:'Paraguay'},
+    {code:'CR',flag:'🇨🇷',name:'Costa Rica'},   {code:'PA',flag:'🇵🇦',name:'Panamá'},
+    {code:'DO',flag:'🇩🇴',name:'Rep. Dominicana'},{code:'PR',flag:'🇵🇷',name:'Puerto Rico'},
+    {code:'GT',flag:'🇬🇹',name:'Guatemala'},    {code:'SV',flag:'🇸🇻',name:'El Salvador'},
+    {code:'HN',flag:'🇭🇳',name:'Honduras'},     {code:'NI',flag:'🇳🇮',name:'Nicaragua'},
+    {code:'CU',flag:'🇨🇺',name:'Cuba'},         {code:'ES',flag:'🇪🇸',name:'España'},
+    {code:'BR',flag:'🇧🇷',name:'Brasil'},       {code:'PT',flag:'🇵🇹',name:'Portugal'},
+    {code:'FR',flag:'🇫🇷',name:'France'},       {code:'BE',flag:'🇧🇪',name:'Belgique'},
+    {code:'CH',flag:'🇨🇭',name:'Schweiz'},      {code:'DE',flag:'🇩🇪',name:'Deutschland'},
+    {code:'AT',flag:'🇦🇹',name:'Österreich'},   {code:'SE',flag:'🇸🇪',name:'Sverige'},
+    {code:'NO',flag:'🇳🇴',name:'Norge'},        {code:'DK',flag:'🇩🇰',name:'Danmark'},
+    {code:'FI',flag:'🇫🇮',name:'Finland'},      {code:'NL',flag:'🇳🇱',name:'Nederland'},
+    {code:'IT',flag:'🇮🇹',name:'Italia'},       {code:'GR',flag:'🇬🇷',name:'Ελλάδα'},
+  ];
+  var CW_FLAG_MAP = {};
+  CW_COUNTRY_LIST.forEach(function(c){ CW_FLAG_MAP[c.code] = c.flag; });
+
+  function cwGetCountry() {
+    try { return localStorage.getItem('cw-country') || 'global'; } catch(e){ return 'global'; }
+  }
+  function cwSetCountry(code) {
+    try { localStorage.setItem('cw-country', code); } catch(e){}
+  }
+
   /* ── STYLES ───────────────────────────────────────────────────────────────── */
   var css = [
     /* Hamburger button */
@@ -499,32 +552,55 @@
     '@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}',
     '@media(max-width:520px){.grid{grid-template-columns:1fr}.calc-card{padding:16px;}}',
 
-    /* ── LANGUAGE SELECTOR ──────────────────────────────────────────── */
-    '#lang-sel{position:relative;display:flex;align-items:center;margin-left:4px;}',
-    '#lang-btn{display:flex;align-items:center;gap:5px;padding:5px 9px;background:none;',
-    'border:1.5px solid rgba(255,255,255,.18);border-radius:7px;font-size:12px;font-weight:600;',
-    'color:rgba(255,255,255,.75);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1;}',
-    '#lang-btn:hover{border-color:rgba(255,255,255,.4);color:#fff;}',
-    'html:not([data-theme="dark"]) #lang-btn{border-color:rgba(10,14,26,.18);color:rgba(10,14,26,.6);}',
-    'html:not([data-theme="dark"]) #lang-btn:hover{border-color:#4F6BFF;color:#4F6BFF;}',
-    '#lang-drop{position:absolute;top:calc(100% + 8px);right:0;background:#0E1525;',
-    'border:1px solid #1F2438;border-radius:12px;padding:6px;min-width:168px;',
-    'box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:10000;display:none;flex-direction:column;gap:2px;}',
-    '#lang-drop.ld-open{display:flex;}',
-    'html:not([data-theme="dark"]) #lang-drop{background:#fff;border-color:#E4E7EE;box-shadow:0 8px 32px rgba(10,14,26,.12);}',
-    '.lang-opt{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;',
-    'border-radius:7px;font-size:13px;font-weight:500;color:rgba(255,255,255,.8);',
-    'text-decoration:none;transition:background .12s;gap:6px;}',
-    'html:not([data-theme="dark"]) .lang-opt{color:#363B4F;}',
-    '.lang-opt:hover{background:rgba(255,255,255,.07);}',
-    'html:not([data-theme="dark"]) .lang-opt:hover{background:#F0F2F7;}',
-    '.lang-opt.lo-active{color:#4F6BFF;font-weight:700;}',
-    '.lang-opt.lo-active:hover{background:rgba(79,107,255,.08);}',
-    'html:not([data-theme="dark"]) .lang-opt.lo-active:hover{background:rgba(79,107,255,.06);}',
-    '.lang-opt.lo-soon{opacity:.45;cursor:default;pointer-events:none;}',
-    '.lo-soon-tag{font-size:9px;font-weight:700;padding:2px 6px;background:rgba(79,107,255,.15);',
-    'color:#4F6BFF;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;',
-    'font-family:"JetBrains Mono",monospace;}',
+    /* ── LANGUAGE SELECTOR (pills) ──────────────────────────────────── */
+    '.lang-seg{display:flex;align-items:center;background:rgba(255,255,255,.06);',
+    'border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:2px;gap:1px;margin-left:4px;}',
+    'html:not([data-theme="dark"]) .lang-seg{background:rgba(10,14,26,.04);border-color:rgba(10,14,26,.1);}',
+    '.lang-btn{background:transparent;border:none;padding:4px 8px;border-radius:6px;',
+    'font-size:11px;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.5);',
+    'cursor:pointer;font-family:inherit;transition:all .15s;line-height:1;}',
+    'html:not([data-theme="dark"]) .lang-btn{color:rgba(10,14,26,.4);}',
+    '.lang-btn:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.08);}',
+    'html:not([data-theme="dark"]) .lang-btn:hover{color:rgba(10,14,26,.7);background:rgba(10,14,26,.05);}',
+    '.lang-btn.active{background:rgba(255,255,255,.14);color:#fff;}',
+    'html:not([data-theme="dark"]) .lang-btn.active{background:rgba(10,14,26,.09);color:#0A0E1A;}',
+
+    /* ── COUNTRY BUTTON + PICKER MODAL ───────────────────────────────── */
+    '.cw-country-btn{background:none;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;',
+    'width:32px;height:32px;display:flex;align-items:center;justify-content:center;',
+    'cursor:pointer;font-size:16px;line-height:1;transition:all .15s;flex-shrink:0;margin-left:4px;}',
+    'html:not([data-theme="dark"]) .cw-country-btn{border-color:rgba(10,14,26,.15);}',
+    '.cw-country-btn:hover{border-color:rgba(79,107,255,.5);transform:scale(1.08);}',
+    '.cw-cpicker-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10001;',
+    'display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(2px);}',
+    '.cw-cpicker-modal{background:#0E1525;border:1px solid #1F2438;border-radius:20px;',
+    'width:100%;max-width:460px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;',
+    'box-shadow:0 24px 64px rgba(0,0,0,.5);}',
+    'html:not([data-theme="dark"]) .cw-cpicker-modal{background:#fff;border-color:#E4E7EE;box-shadow:0 12px 40px rgba(10,14,26,.15);}',
+    '.cw-cpicker-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 10px;}',
+    '.cw-cpicker-title{font-size:16px;font-weight:700;color:#E2E4F0;letter-spacing:-.02em;}',
+    'html:not([data-theme="dark"]) .cw-cpicker-title{color:#0A0E1A;}',
+    '.cw-cpicker-close{background:none;border:none;cursor:pointer;font-size:18px;color:rgba(255,255,255,.4);',
+    'padding:4px;border-radius:6px;transition:color .15s;line-height:1;}',
+    '.cw-cpicker-close:hover{color:#fff;}',
+    'html:not([data-theme="dark"]) .cw-cpicker-close{color:rgba(10,14,26,.35);}',
+    'html:not([data-theme="dark"]) .cw-cpicker-close:hover{color:#0A0E1A;}',
+    '.cw-cpicker-search{margin:0 12px 10px;padding:10px 14px;background:#141929;',
+    'border:1px solid #1F2438;border-radius:10px;font-family:inherit;font-size:14px;',
+    'color:#E2E4F0;outline:none;transition:border-color .15s;width:calc(100% - 24px);box-sizing:border-box;}',
+    '.cw-cpicker-search:focus{border-color:#4F6BFF;}',
+    'html:not([data-theme="dark"]) .cw-cpicker-search{background:#F0F2F7;border-color:#D4D8E6;color:#0A0E1A;}',
+    '.cw-cpicker-grid{overflow-y:auto;padding:4px 12px 16px;',
+    'display:grid;grid-template-columns:1fr 1fr;gap:4px;}',
+    '.cw-cpicker-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;',
+    'border:1.5px solid transparent;background:transparent;font-family:inherit;font-size:13px;',
+    'font-weight:500;color:rgba(255,255,255,.7);cursor:pointer;transition:all .15s;text-align:left;width:100%;}',
+    'html:not([data-theme="dark"]) .cw-cpicker-item{color:#363B4F;}',
+    '.cw-cpicker-item:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);}',
+    'html:not([data-theme="dark"]) .cw-cpicker-item:hover{background:#F0F2F7;border-color:#D4D8E6;}',
+    '.cw-cpicker-item.selected{border-color:#4F6BFF !important;background:rgba(79,107,255,.12) !important;',
+    'color:#4F6BFF !important;font-weight:700;}',
+    '.cw-cpicker-flag{font-size:20px;flex-shrink:0;}',
 
   ].join('');
 
@@ -594,32 +670,122 @@
   var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(saved || (sysDark ? 'dark' : 'light'), false);
 
-  /* ── LANGUAGE SELECTOR ─────────────────────────────────── */
-  var langSel = document.createElement('div');
-  langSel.id = 'lang-sel';
-  var chevronSVG = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:.7"><polyline points="6 9 12 15 18 9"/></svg>';
-  langSel.innerHTML = '<button id="lang-btn" aria-label="Language / Idioma">EN ' + chevronSVG + '</button>'
-    + '<div id="lang-drop">'
-    + '<a class="lang-opt lo-active" href="/" tabindex="0">🇺🇸&nbsp; English</a>'
-    + '<a class="lang-opt" href="https://calculadora.live/" tabindex="0">🇪🇸&nbsp; Español</a>'
-    + '<span class="lang-opt lo-soon">🇧🇷&nbsp; Português <span class="lo-soon-tag">soon</span></span>'
-    + '<span class="lang-opt lo-soon">🇫🇷&nbsp; Français <span class="lo-soon-tag">soon</span></span>'
-    + '</div>';
-  if (hdr) hdr.appendChild(langSel);
+  /* ── LANGUAGE SELECTOR (pills) ─────────────────────────── */
+  var langSeg = document.createElement('div');
+  langSeg.className = 'lang-seg';
+  langSeg.setAttribute('role', 'group');
+  langSeg.setAttribute('aria-label', 'Language');
+  ['en', 'es', 'pt', 'fr'].forEach(function(l) {
+    var lb = document.createElement('button');
+    lb.className = 'lang-btn' + (l === CW_LANG ? ' active' : '');
+    lb.textContent = l.toUpperCase();
+    lb.addEventListener('click', function() { window.location.href = cwLangUrl(l); });
+    langSeg.appendChild(lb);
+  });
+  if (hdr) hdr.appendChild(langSeg);
 
-  (function() {
-    var lb = document.getElementById('lang-btn');
-    var ld = document.getElementById('lang-drop');
-    if (!lb || !ld) return;
-    lb.addEventListener('click', function(e) {
-      e.stopPropagation();
-      ld.classList.toggle('ld-open');
-    });
-    document.addEventListener('click', function() { ld.classList.remove('ld-open'); });
-    ld.addEventListener('click', function(e) { e.stopPropagation(); });
-  })();
+  /* ── COUNTRY PICKER BUTTON ──────────────────────────────── */
+  var cwCountryBtn = document.createElement('button');
+  cwCountryBtn.className = 'cw-country-btn';
+  cwCountryBtn.id = 'cw-country-btn';
+  cwCountryBtn.setAttribute('aria-label', 'Select country');
+  cwCountryBtn.title = 'Select country';
+  cwCountryBtn.textContent = CW_FLAG_MAP[cwGetCountry()] || '🌍';
+  if (hdr) hdr.appendChild(cwCountryBtn);
 
   if (hdr) hdr.appendChild(themeBtn);
+
+  /* ── COUNTRY PICKER MODAL ───────────────────────────────── */
+  function openCountryPicker() {
+    var overlay = document.createElement('div');
+    overlay.className = 'cw-cpicker-overlay';
+    var saved = cwGetCountry();
+    overlay.innerHTML =
+      '<div class="cw-cpicker-modal">'
+      + '<div class="cw-cpicker-head">'
+      +   '<div class="cw-cpicker-title">Select your country</div>'
+      +   '<button class="cw-cpicker-close" aria-label="Close">✕</button>'
+      + '</div>'
+      + '<input class="cw-cpicker-search" id="cw-cpicker-q" type="text" placeholder="Search…" autocomplete="off" spellcheck="false">'
+      + '<div class="cw-cpicker-grid" id="cw-cpicker-items"></div>'
+      + '</div>';
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    var grid = document.getElementById('cw-cpicker-items');
+
+    function renderItems(filter) {
+      grid.innerHTML = CW_COUNTRY_LIST.filter(function(c) {
+        if (!filter) return true;
+        return c.name.toLowerCase().indexOf(filter) >= 0 || c.code.toLowerCase().indexOf(filter) >= 0;
+      }).map(function(c) {
+        return '<button class="cw-cpicker-item' + (c.code === saved ? ' selected' : '') + '" data-code="' + c.code + '">'
+          + '<span class="cw-cpicker-flag">' + c.flag + '</span>' + c.name + '</button>';
+      }).join('');
+      grid.querySelectorAll('.cw-cpicker-item').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var code = btn.dataset.code;
+          cwSetCountry(code);
+          cwCountryBtn.textContent = CW_FLAG_MAP[code] || '🌍';
+          document.body.removeChild(overlay);
+          document.body.style.overflow = '';
+          cwRebuildGrids();
+        });
+      });
+    }
+
+    renderItems('');
+    var searchEl = document.getElementById('cw-cpicker-q');
+    if (searchEl) {
+      searchEl.addEventListener('input', function() { renderItems(this.value.toLowerCase()); });
+      setTimeout(function() { searchEl.focus(); }, 80);
+    }
+    overlay.querySelector('.cw-cpicker-close').addEventListener('click', function() {
+      document.body.removeChild(overlay);
+      document.body.style.overflow = '';
+    });
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) { document.body.removeChild(overlay); document.body.style.overflow = ''; }
+    });
+  }
+
+  cwCountryBtn.addEventListener('click', openCountryPicker);
+
+  /* ── GRID BUILDER (shared by category pages + homepage) ─── */
+  function cwBuildGrid(items, country) {
+    var filtered = items.filter(function(item) {
+      if (!item.countries || item.countries.length === 0) return true; // no filter = global
+      if (country === 'global') return true;
+      return item.countries.indexOf('global') !== -1 || item.countries.indexOf(country) !== -1;
+    });
+    if (filtered.length === 0) {
+      return '<div style="padding:32px;text-align:center;color:var(--ink-3,#858AA0);font-size:14px;">No calculators available for this country yet. <button onclick="cwSetCountry(\'global\');cwRebuildGrids();" style="background:none;border:none;cursor:pointer;color:#4F6BFF;font-size:14px;font-family:inherit;text-decoration:underline;">Show all</button></div>';
+    }
+    var html = '<div class="grid">';
+    filtered.forEach(function(item) {
+      var badge = item.badge ? '<span class="badge-new">new</span>' : '';
+      var desc = item.hd || item.d;
+      html += '<a class="calc-card" href="' + item.u + '">'
+            + '<div class="calc-icon">' + (item.icon || '🔢') + '</div>'
+            + '<div class="calc-info">'
+            + '<div class="calc-name">' + item.n + badge + '</div>'
+            + '<div class="calc-desc">' + desc + '</div>'
+            + '</div></a>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function cwRebuildGrids() {
+    var country = cwGetCountry();
+    /* Category page grids */
+    var catRoot = document.getElementById('cat-grid-root');
+    if (catRoot && catRoot._cwCat) {
+      catRoot.innerHTML = cwBuildGrid(catRoot._cwCat.items, country);
+    }
+    /* Homepage grids — expose a hook that index.html can call */
+    if (typeof window.__cwRebuildHome === 'function') window.__cwRebuildHome(country);
+  }
 
   /* ── PANEL ──────────────────────────────────────────────── */
   var cur = window.location.pathname.replace(/\/$/, '') || '/';
@@ -974,27 +1140,18 @@
 
   /* ── CATEGORY PAGES ──────────────────────────────────────── */
   (function(){
-    var path = window.location.pathname.replace(/\/$/, '') || '/';
+    var path = window.location.pathname.replace(/\/+$/, '') || '/';
+    /* Strip language prefix so /es/health matches slug 'health' */
+    var strippedPath = path.replace(/^\/(es|pt|fr)/, '');
     var catMatch = null;
     CALCS.forEach(function(cat){
-      if('/' + cat.slug === path) catMatch = cat;
+      if('/' + cat.slug === strippedPath || '/' + cat.slug === path) catMatch = cat;
     });
     if(!catMatch) return;
     var root = document.getElementById('cat-grid-root');
     if(!root) return;
-    var html = '<div class="grid">';
-    catMatch.items.forEach(function(item){
-      var badge = item.badge ? '<span class="badge-new">new</span>' : '';
-      var desc = item.hd || item.d;
-      html += '<a class="calc-card" href="' + item.u + '">'
-            + '<div class="calc-icon">' + (item.icon || '🔢') + '</div>'
-            + '<div class="calc-info">'
-            + '<div class="calc-name">' + item.n + badge + '</div>'
-            + '<div class="calc-desc">' + desc + '</div>'
-            + '</div></a>';
-    });
-    html += '</div>';
-    root.innerHTML = html;
+    root._cwCat = catMatch; /* store ref for country filter rebuild */
+    root.innerHTML = cwBuildGrid(catMatch.items, cwGetCountry());
   })();
 
   /* ── EXPOSE CALCS ────────────────────────────────────────── */

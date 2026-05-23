@@ -9,6 +9,26 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Language homepages -->
+  <url>
+    <loc>https://calculate.website/es/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- All calculators -->
   <url>
     <loc>https://calculate.website/all/</loc>
