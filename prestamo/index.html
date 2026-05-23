@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Préstamo — Calculadora.live</title>
+<meta name="description" content="Calculá la cuota mensual de tu préstamo, el total a pagar y los intereses. Sistema francés (cuota fija). Ingresá monto, tasa y plazo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculadora.live/prestamo/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .back-link{font-size:13px;color:var(--ink-light);text-decoration:none}.back-link:hover{color:var(--hi)}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number].with-prefix{padding-left:30px}
+  input[type=number]:focus{border-color:var(--hi)}
+  .plazo-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .plazo-chip{padding:8px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .plazo-chip.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:46px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-currency{font-size:22px;font-weight:400;opacity:0.5;margin-right:2px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+  .result-row{display:flex;justify-content:space-between;align-items:center}
+  .result-row-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85)}
+  .result-row-val.warn{color:#FCA5A5}
+  .result-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0}
+  .bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+  .bar-label-row{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px}
+  .bar-track{height:8px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;display:flex}
+  .bar-capital{background:rgba(255,255,255,0.35);border-radius:99px 0 0 99px;transition:width .4s}
+  .bar-intereses{background:#FCA5A5;border-radius:0 99px 99px 0;transition:width .4s}
+  .bar-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
+  .info-box strong{color:var(--ink)}
+  .table-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);transition:all .15s;margin-bottom:16px}
+  .table-toggle:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}
+  .table-toggle .chevron{margin-left:auto;transition:transform .25s}
+  .table-toggle.open .chevron{transform:rotate(180deg)}
+  .amort-card{background:var(--surface);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;border:1px solid var(--border)}
+  .amort-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+  .amort-table-wrap{overflow-x:auto;max-height:320px;overflow-y:auto;border-radius:var(--radius-sm);border:1px solid var(--border)}
+  .amort-table{width:100%;border-collapse:collapse;font-size:12px}
+  .amort-table th{position:sticky;top:0;background:var(--bg);padding:8px 10px;text-align:right;font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}
+  .amort-table th:first-child{text-align:center}
+  .amort-table td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--border);color:var(--ink)}
+  .amort-table td:first-child{text-align:center;color:var(--ink-light);font-weight:600}
+  .amort-table tr:last-child td{border-bottom:none;font-weight:700;background:var(--hi-soft)}
+  .amort-table .int-col{color:#EF4444}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">Calculadora<span>.live</span></a></header>
+<div class="page">
+  <h1 class="page-title">Calculadora de Préstamo</h1>
+  <p class="page-sub">Calculá tu cuota mensual, el total a pagar y cuánto pagás de intereses. Sistema de cuota fija (francés).</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Monto del préstamo</label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="monto" class="with-prefix" placeholder="500.000" min="0" step="1000" oninput="calcular()">
+      </div>
+    </div>
+    <div class="field">
+      <label>TNA (Tasa nominal anual)</label>
+      <div class="input-wrap">
+        <input type="number" id="tna" placeholder="60" min="0" step="0.5" oninput="calcular()">
+        <span class="input-suffix">%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Plazo</label>
+      <div class="plazo-chips" id="plazo-chips">
+        <button class="plazo-chip" onclick="setPlazo(6)">6m</button>
+        <button class="plazo-chip active" onclick="setPlazo(12)">12m</button>
+        <button class="plazo-chip" onclick="setPlazo(18)">18m</button>
+        <button class="plazo-chip" onclick="setPlazo(24)">24m</button>
+        <button class="plazo-chip" onclick="setPlazo(36)">36m</button>
+        <button class="plazo-chip" onclick="setPlazo(48)">48m</button>
+        <button class="plazo-chip" onclick="setPlazo(60)">60m</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Cuota mensual</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Completá los datos</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Capital prestado</span>
+        <span class="result-row-val" id="r-capital">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Total de intereses</span>
+        <span class="result-row-val warn" id="r-intereses">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Total a devolver</span>
+        <span class="result-row-val" id="r-total">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Costo financiero total (CFT)</span>
+        <span class="result-row-val warn" id="r-cft">—</span>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">Composición del total a devolver</div>
+        <div class="bar-track">
+          <div class="bar-capital" id="bar-cap"></div>
+          <div class="bar-intereses" id="bar-int"></div>
+        </div>
+        <div class="bar-labels">
+          <span id="lbl-cap">Capital</span>
+          <span id="lbl-int">Intereses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="table-toggle" id="table-toggle" onclick="toggleTabla()" style="display:none">
+    📋 Ver tabla de amortización mes a mes
+    <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="amort-card" id="amort-card" style="display:none">
+    <div class="amort-title">Tabla de amortización</div>
+    <div class="amort-table-wrap">
+      <table class="amort-table" id="amort-table">
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Cuota</th>
+            <th>Capital</th>
+            <th>Intereses</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody id="amort-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>¿Qué es el sistema francés?</strong><br>
+    La cuota es siempre la misma. Al principio pagás más intereses y menos capital; con el tiempo la proporción se invierte. Es el sistema más común en Argentina para préstamos personales.
+  </div>
+</div>
+<script>
+  let plazoMeses = 12;
+  let pendingAmortRows = null;
+  let tablaBuilt = false;
+
+  function setPlazo(m){
+    plazoMeses=m;
+    document.querySelectorAll('.plazo-chip').forEach(b=>b.classList.remove('active'));
+    event.target.classList.add('active');
+    calcular();
+  }
+  function fmt(n){return '$\u00A0'+Math.round(n).toLocaleString('es-AR')}
+
+  function buildAmortTable(monto, r, n, cuota){
+    let saldo=monto;
+    let rows='';
+    let totalPagado=0, totalCapital=0, totalIntereses=0;
+    for(let i=1;i<=n;i++){
+      const interes=saldo*r;
+      const capital=cuota-interes;
+      saldo-=capital;
+      if(saldo<0.01) saldo=0;
+      totalPagado+=cuota;
+      totalCapital+=capital;
+      totalIntereses+=interes;
+      rows+=`<tr>
+        <td>${i}</td>
+        <td>${fmt(cuota)}</td>
+        <td>${fmt(capital)}</td>
+        <td class="int-col">${fmt(interes)}</td>
+        <td>${fmt(Math.max(0,saldo))}</td>
+      </tr>`;
+    }
+    rows+=`<tr>
+      <td>Total</td>
+      <td>${fmt(totalPagado)}</td>
+      <td>${fmt(totalCapital)}</td>
+      <td class="int-col">${fmt(totalIntereses)}</td>
+      <td>—</td>
+    </tr>`;
+    return rows;
+  }
+
+  function toggleTabla(){
+    const card=document.getElementById('amort-card');
+    const btn=document.getElementById('table-toggle');
+    const open=card.style.display==='none';
+    if(open && pendingAmortRows !== null){
+      document.getElementById('amort-tbody').innerHTML=pendingAmortRows;
+      pendingAmortRows=null;
+    }
+    card.style.display=open?'block':'none';
+    btn.classList.toggle('open',open);
+  }
+
+  function calcular(){
+    const monto=parseFloat(document.getElementById('monto').value)||0;
+    const tna=parseFloat(document.getElementById('tna').value)||0;
+    const mainEl=document.getElementById('result-main');
+    const subEl=document.getElementById('result-sub');
+    const rowsEl=document.getElementById('result-rows');
+    const toggleBtn=document.getElementById('table-toggle');
+    const amortCard=document.getElementById('amort-card');
+    if(!monto||!tna){
+      mainEl.innerHTML='<span class="empty-state">Completá los datos</span>';
+      subEl.textContent='';
+      rowsEl.style.display='none';
+      toggleBtn.style.display='none';
+      amortCard.style.display='none';
+      toggleBtn.classList.remove('open');
+      pendingAmortRows=null;
+      return;
+    }
+    const r=tna/100/12;
+    const n=plazoMeses;
+    const cuota=monto*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+    const total=cuota*n;
+    const intereses=total-monto;
+    const cft=((Math.pow(cuota*n/monto,12/n))-1)*100;
+    const capPct=Math.round((monto/total)*100);
+    const intPct=100-capPct;
+    mainEl.innerHTML=`<span class="result-currency">$</span>${Math.round(cuota).toLocaleString('es-AR')}`;
+    subEl.textContent=`por mes durante ${n} meses · TNA ${tna}%`;
+    rowsEl.style.display='flex';
+    document.getElementById('r-capital').textContent=fmt(monto);
+    document.getElementById('r-intereses').textContent='+ '+fmt(intereses);
+    document.getElementById('r-total').textContent=fmt(total);
+    document.getElementById('r-cft').textContent=(cft).toFixed(1)+'% anual';
+    document.getElementById('bar-cap').style.width=capPct+'%';
+    document.getElementById('bar-int').style.width=intPct+'%';
+    document.getElementById('lbl-cap').textContent=`Capital ${capPct}%`;
+    document.getElementById('lbl-int').textContent=`Intereses ${intPct}%`;
+    // Build amort table (lazy inject)
+    const newRows=buildAmortTable(monto,r,n,cuota);
+    if(amortCard.style.display!=='none'){
+      // Table is visible — update immediately
+      document.getElementById('amort-tbody').innerHTML=newRows;
+      pendingAmortRows=null;
+    } else {
+      pendingAmortRows=newRows;
+    }
+    toggleBtn.style.display='flex';
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Cómo se calcula la cuota de un préstamo?","acceptedAnswer":{"@type":"Answer","text":"La cuota se calcula con el sistema francés (el más común): cuota fija mensual que incluye capital amortizado más intereses. Al principio se paga más intereses y menos capital; al final, al revés."}},
+{"@type":"Question","name":"¿Qué es el sistema francés y el alemán?","acceptedAnswer":{"@type":"Answer","text":"En el sistema francés la cuota es fija durante todo el préstamo. En el alemán la amortización es constante, por lo que las cuotas son decrecientes (más altas al principio, más bajas al final). La mayoría de los préstamos bancarios en Argentina usan el sistema francés."}},
+{"@type":"Question","name":"¿Conviene adelantar cuotas de un préstamo?","acceptedAnswer":{"@type":"Answer","text":"Sí, en general conviene. Al amortizar capital por adelantado reducís los intereses totales a pagar. Verificá con tu banco si hay penalidades por cancelación anticipada — muchos préstamos personales no las tienen."}},
+{"@type":"Question","name":"¿Qué diferencia hay entre tasa nominal y tasa efectiva?","acceptedAnswer":{"@type":"Answer","text":"La tasa nominal (TNA) es la tasa base anual sin capitalización. La tasa efectiva (TEA) incluye el efecto de capitalizar los intereses mensualmente y refleja el costo real del dinero en el año."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Preguntas frecuentes</div>
+  <details class="faq-item" open>
+    <summary>¿Cómo se calcula la cuota de un préstamo?</summary>
+    <div class="faq-a">La cuota se calcula con el <strong>sistema francés</strong> (el más común): cuota fija mensual que incluye capital amortizado más intereses. Al principio se paga más intereses y menos capital; al final, al revés.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Qué es el sistema francés y el alemán?</summary>
+    <div class="faq-a">En el <strong>sistema francés</strong> la cuota es fija durante todo el préstamo. En el <strong>alemán</strong> la amortización es constante, por lo que las cuotas son decrecientes. La mayoría de los préstamos bancarios en Argentina usan el sistema francés.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Conviene adelantar cuotas de un préstamo?</summary>
+    <div class="faq-a">Sí, en general conviene. Al amortizar capital por adelantado <strong>reducís los intereses totales</strong> a pagar. Verificá con tu banco si hay penalidades por cancelación anticipada — muchos préstamos personales no las tienen.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Qué diferencia hay entre tasa nominal y tasa efectiva?</summary>
+    <div class="faq-a">La <strong>tasa nominal (TNA)</strong> es la tasa base anual sin capitalización. La <strong>tasa efectiva (TEA)</strong> incluye el efecto de capitalizar los intereses mensualmente y refleja el costo real del dinero en el año.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

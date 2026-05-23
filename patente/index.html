@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Patente Automotor — Calculadora.live</title>
+<meta name="description" content="Calculá el impuesto automotor (patente) según tu provincia y el valor fiscal del auto. Estimación por cuotas, siempre actualizada. Rápido y sin registro.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculadora.live/patente/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .back-link{font-size:13px;color:var(--ink-light);text-decoration:none}.back-link:hover{color:var(--hi)}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500;z-index:1}
+  input[type=number],input[type=text]{width:100%;padding:13px 14px 13px 34px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number]:focus,input[type=text]:focus{border-color:var(--hi)}
+  select{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--surface);outline:none;cursor:pointer;transition:border-color .15s}
+  select:focus{border-color:var(--hi)}
+  /* Resultado: diseño oscuro (default / dark mode) */
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:6px}
+  .result-main{font-size:46px;font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-currency{font-size:22px;font-weight:400;opacity:0.8;margin-right:2px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.15);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat-box{background:rgba(255,255,255,0.08);border-radius:10px;padding:14px}
+  .stat-val{font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.02em}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,0.65);margin-top:3px}
+  .empty-state{color:rgba(255,255,255,0.4);font-size:15px}
+
+  /* Resultado: diseño claro (light mode) */
+  html:not([data-theme="dark"]) .result-card{background:var(--hi-soft);border-top-color:var(--hi)}
+  html:not([data-theme="dark"]) .result-eyebrow{color:var(--hi) !important}
+  html:not([data-theme="dark"]) .result-main{color:var(--ink) !important}
+  html:not([data-theme="dark"]) .result-currency{opacity:1;color:var(--hi)}
+  html:not([data-theme="dark"]) .result-sub{color:var(--ink-light) !important}
+  html:not([data-theme="dark"]) .result-rows{border-top-color:rgba(26,95,232,0.15) !important}
+  html:not([data-theme="dark"]) .stat-box{background:rgba(26,95,232,0.06) !important}
+  html:not([data-theme="dark"]) .stat-val{color:var(--ink) !important}
+  html:not([data-theme="dark"]) .stat-lbl{color:var(--ink-light) !important}
+  html:not([data-theme="dark"]) .empty-state{color:var(--ink-faint) !important}
+  .warn-box{background:#FEF3C7;border:1px solid #FCD34D;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:#78350F;line-height:1.5;margin-bottom:16px}
+  .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
+  .info-box strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">Calculadora<span>.live</span></a></header>
+<div class="page">
+  <h1 class="page-title">Calculadora de Patente</h1>
+  <p class="page-sub">Estimá cuánto pagás de patente según la provincia y el valor fiscal de tu vehículo.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Provincia</label>
+      <select id="provincia" onchange="calcular()">
+        <option value="bsas">Buenos Aires (Provincia)</option>
+        <option value="caba">Ciudad Autónoma de Bs. As.</option>
+        <option value="cordoba">Córdoba</option>
+        <option value="santafe">Santa Fe</option>
+        <option value="mendoza">Mendoza</option>
+        <option value="tucuman">Tucumán</option>
+        <option value="neuquen">Neuquén</option>
+        <option value="salta">Salta</option>
+        <option value="otras">Otras provincias</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>¿Es pick-up o SUV grande?</label>
+      <select id="pickup" onchange="calcular()">
+        <option value="no" selected>No (auto / SUV mediano)</option>
+        <option value="si">Sí (pick-up o SUV grande)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Tipo de motorización</label>
+      <select id="motor" onchange="calcular()">
+        <option value="combustion" selected>Combustión (nafta, diésel, GNC)</option>
+        <option value="hibrido">Híbrido (HEV / PHEV / MHEV)</option>
+        <option value="electrico">100% Eléctrico</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Año de fabricación</label>
+      <select id="anio-fab" onchange="calcular()">
+        <!-- JS populated -->
+      </select>
+    </div>
+    <div class="field">
+      <label>Valor fiscal / valuación del vehículo</label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="valor" placeholder="Ej: 5.000.000" min="0" step="100000" oninput="calcular()">
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Patente anual estimada</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Completá los datos</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="stat-box">
+        <div class="stat-val" id="r-cuota">—</div>
+        <div class="stat-lbl">Por cuota (bimestral)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-tasa">—</div>
+        <div class="stat-lbl">Tasa aplicada</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-antiguedad">—</div>
+        <div class="stat-lbl">Antigüedad</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-descuento">—</div>
+        <div class="stat-lbl">Desc. por antigüedad</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>Estimación orientativa.</strong> Las tasas varían según el año del vehículo, modelo y actualizaciones de cada municipio. Siempre verificá el monto exacto en ARBA, AGIP o el organismo de tu provincia.
+  </div>
+
+  <div class="info-box">
+    <strong>¿Cómo funciona la patente?</strong><br>
+    La patente (Impuesto a los Automotores) es un tributo provincial/municipal. Se paga en 6 cuotas bimestrales y se calcula sobre el valor fiscal que fija cada provincia para cada modelo y año de vehículo.
+  </div>
+</div>
+<script>
+  // Tasas aproximadas por provincia (% anual sobre valor fiscal)
+  const tasas = {
+    bsas:    { tasa: 0.0472, nombre: 'Bs. As. Provincia' },
+    caba:    { tasa: 0.0350, nombre: 'CABA' },
+    cordoba: { tasa: 0.0380, nombre: 'Córdoba' },
+    santafe: { tasa: 0.0300, nombre: 'Santa Fe' },
+    mendoza: { tasa: 0.0350, nombre: 'Mendoza' },
+    tucuman: { tasa: 0.0320, nombre: 'Tucumán' },
+    neuquen: { tasa: 0.0280, nombre: 'Neuquén' },
+    salta:   { tasa: 0.0350, nombre: 'Salta' },
+    otras:   { tasa: 0.0360, nombre: 'Otras' },
+  };
+
+  const CURRENT_YEAR = new Date().getFullYear();
+
+  // Populate año de fabricación select (año actual down to 1990)
+  (function(){
+    const sel = document.getElementById('anio-fab');
+    for(let y = CURRENT_YEAR; y >= 1990; y--){
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      if(y === 2022) opt.selected = true;
+      sel.appendChild(opt);
+    }
+  })();
+
+  function getMultiplier(antiguedad){
+    if(antiguedad <= 2)  return { mult: 1.00, pct: 0  };
+    if(antiguedad <= 5)  return { mult: 0.90, pct: 10 };
+    if(antiguedad <= 10) return { mult: 0.75, pct: 25 };
+    if(antiguedad <= 15) return { mult: 0.55, pct: 45 };
+    if(antiguedad <= 20) return { mult: 0.35, pct: 65 };
+    return                      { mult: 0.20, pct: 80 };
+  }
+
+  function fmt(n){return '$\u00A0'+Math.round(n).toLocaleString('es-AR')}
+
+  const motorMultipliers = { combustion: 1.0, hibrido: 0.75, electrico: 0.50 };
+  const motorLabels      = { combustion: 'combustión', hibrido: 'híbrido', electrico: 'eléctrico' };
+
+  function calcular(){
+    const prov = document.getElementById('provincia').value;
+    const anioFab = parseInt(document.getElementById('anio-fab').value)||CURRENT_YEAR;
+    const valor = parseFloat(document.getElementById('valor').value)||0;
+    const pickup = document.getElementById('pickup').value;
+    const motor  = document.getElementById('motor').value;
+    const mainEl = document.getElementById('result-main');
+    const subEl  = document.getElementById('result-sub');
+    const rowsEl = document.getElementById('result-rows');
+
+    if(!valor){
+      mainEl.innerHTML='<span class="empty-state">Completá los datos</span>';
+      subEl.textContent='';rowsEl.style.display='none';return;
+    }
+
+    const {tasa, nombre} = tasas[prov];
+    const antiguedad = CURRENT_YEAR - anioFab;
+    const {mult, pct} = getMultiplier(antiguedad);
+    const motorMult  = motorMultipliers[motor];
+    const pickupMult = pickup === 'si' ? 1.15 : 1.0;
+
+    let base = valor * tasa;
+    base = base * mult;
+    base = base * motorMult;
+    base = base * pickupMult;
+    const anual = base;
+    const cuota = anual / 6;
+
+    mainEl.innerHTML=`<span class="result-currency">$</span>${Math.round(anual).toLocaleString('es-AR')}`;
+    const descuentoTexto = pct > 0 ? ` · antigüedad: ${antiguedad} año${antiguedad!==1?'s':''} (descuento ${pct}%)` : ` · antigüedad: ${antiguedad} año${antiguedad!==1?'s':''}`;
+    const pickupTexto = pickup === 'si' ? ' · pick-up (+15%)' : '';
+    subEl.textContent=`estimado para ${nombre} · ${(tasa*100).toFixed(2)}% anual${descuentoTexto} · ${motorLabels[motor]}${pickupTexto}`;
+    rowsEl.style.display='grid';
+    document.getElementById('r-cuota').textContent=fmt(cuota);
+    document.getElementById('r-tasa').textContent=(tasa*100).toFixed(2)+'% anual';
+    document.getElementById('r-antiguedad').textContent=antiguedad+' año'+(antiguedad!==1?'s':'');
+    document.getElementById('r-descuento').textContent=pct > 0 ? pct+'%' : 'No aplica';
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Cómo se calcula la patente del auto en Argentina?","acceptedAnswer":{"@type":"Answer","text":"La patente (Impuesto a los Automotores) se calcula aplicando un porcentaje sobre la valuación fiscal del vehículo, fijada anualmente por cada provincia. La alícuota varía entre el 1% y el 3% según el valor del auto. Los vehículos más antiguos tienen valuaciones menores y pagan menos."}},
+{"@type":"Question","name":"¿La patente se paga una o varias veces al año?","acceptedAnswer":{"@type":"Answer","text":"Se paga en cuotas anuales, generalmente entre 5 y 6 según la provincia. Esta calculadora muestra el total anual estimado."}},
+{"@type":"Question","name":"¿Los autos más viejos pagan menos patente?","acceptedAnswer":{"@type":"Answer","text":"Sí. La valuación fiscal disminuye con los años. A partir de cierta antigüedad los autos pueden tener descuentos significativos o quedar exentos según la provincia."}},
+{"@type":"Question","name":"¿Las pick-up pagan más patente?","acceptedAnswer":{"@type":"Answer","text":"Sí. Las pick-up tienen una alícuota adicional del 15% por considerarse vehículos de uso comercial potencial."}},
+{"@type":"Question","name":"¿El monto varía según la provincia?","acceptedAnswer":{"@type":"Answer","text":"Sí. Cada provincia fija su propia valuación fiscal y alícuota. Consultá con ARBA (Buenos Aires), Rentas Córdoba o el organismo de tu jurisdicción para el valor oficial."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Preguntas frecuentes</div>
+  <details class="faq-item" open>
+    <summary>¿Cómo se calcula la patente del auto?</summary>
+    <div class="faq-a">La patente (Impuesto a los Automotores) se calcula aplicando un porcentaje sobre la <strong>valuación fiscal del vehículo</strong>, fijada anualmente por cada provincia. La alícuota varía entre el 1% y el 3% según el valor del auto. Los vehículos más antiguos pagan menos.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿La patente se paga una o varias veces al año?</summary>
+    <div class="faq-a">Se paga en <strong>cuotas anuales</strong>, generalmente entre 5 y 6 según la provincia. Esta calculadora muestra el total anual estimado, que podés dividir entre las cuotas de tu jurisdicción.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Los autos más viejos pagan menos?</summary>
+    <div class="faq-a">Sí. La valuación fiscal del vehículo disminuye con los años. A partir de cierta antigüedad los autos pueden tener <strong>descuentos significativos</strong> o quedar exentos del pago de patente según la provincia.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Las pick-up pagan más patente que un auto?</summary>
+    <div class="faq-a">Sí. Las pick-up tienen una <strong>alícuota adicional del 15%</strong> por considerarse vehículos con uso comercial potencial. Esta calculadora lo aplica automáticamente cuando seleccionás el tipo de vehículo.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿El monto varía según la provincia?</summary>
+    <div class="faq-a">Sí. Cada provincia fija su propia valuación fiscal y alícuota. Consultá con <strong>ARBA</strong> (Buenos Aires), <strong>Rentas Córdoba</strong> o el organismo de tu jurisdicción para el valor exacto.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

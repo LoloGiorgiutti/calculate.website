@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Vida en Números | Calculadora.live</title>
+<meta name="description" content="Ingresá tu fecha de nacimiento y descubrí cuántos latidos llevás, cuántas veces pestañeaste, cuántos pasos caminaste y más contadores en vivo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculadora.live/vida/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .back-link{font-size:13px;color:var(--ink-light);text-decoration:none}.back-link:hover{color:var(--hi)}
+  .page{max-width:560px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+  input[type=date]:focus{border-color:var(--hi)}
+  .time-row{display:flex;align-items:center;gap:6px}
+  .time-sel{flex:1;padding:13px 8px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer;text-align:center;appearance:none;-webkit-appearance:none}
+  .time-sel:focus{border-color:var(--hi)}
+  .time-sel option[value=""]{color:var(--ink-faint)}
+  .time-colon{font-size:18px;font-weight:700;color:var(--ink-faint);flex-shrink:0}
+
+  /* Link button */
+  .link-btn{display:flex;align-items:center;gap:8px;width:100%;padding:12px 16px;background:var(--hi-soft);border:1.5px solid #BFDBFE;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--hi);cursor:pointer;transition:all .2s;margin-top:14px}
+  .link-btn:hover{background:var(--hi);color:#fff;border-color:var(--hi)}
+  .link-btn.copied{background:#D1FAE5;border-color:#6EE7B7;color:#065F46}
+
+  /* URL bar indicator */
+  .url-hint{display:none;margin-top:10px;padding:9px 12px;background:#F0FFF4;border:1px solid #A7F3D0;border-radius:8px;font-size:11px;color:#065F46;align-items:center;gap:6px}
+  .url-hint.visible{display:flex}
+
+  /* Summary bar */
+  .summary-bar{background:#0C1528;border-radius:var(--radius);padding:22px 24px;margin-bottom:8px;border-top:3px solid var(--hi);display:none}
+  .summary-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px}
+  .summary-age{font-size:26px;font-weight:700;color:white;letter-spacing:-0.02em;line-height:1.2}
+
+  /* Section labels */
+  .section-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:20px 0 10px}
+  .section-lbl:first-child{margin-top:8px}
+
+  /* Stats grid */
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:420px){.stats-grid{grid-template-columns:1fr}}
+
+  /* Stat card */
+  .stat-card{background:#0C1528;border-radius:16px;padding:20px 18px;border:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden}
+  .stat-emoji{font-size:24px;margin-bottom:10px}
+  .stat-val{font-size:28px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1.1;margin-bottom:5px;word-break:break-word}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4}
+  .stat-sub{font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4}
+
+  /* Accent colors */
+  .accent-red{border-top:3px solid #EF4444}
+  .accent-purple{border-top:3px solid #8B5CF6}
+  .accent-amber{border-top:3px solid #F59E0B}
+  .accent-green{border-top:3px solid #10B981}
+  .accent-blue{border-top:3px solid #1A5FE8}
+
+  /* Live badge */
+  .live-badge{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;color:#EF4444;letter-spacing:0.05em;display:flex;align-items:center;gap:3px}
+  .live-dot{width:5px;height:5px;background:#EF4444;border-radius:50%;animation:pulse-dot 1.4s ease-in-out infinite}
+  @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+
+  @keyframes num-pop{0%{transform:scale(1)}30%{transform:scale(1.06)}100%{transform:scale(1)}}
+  .stat-val.popped{animation:num-pop 0.22s ease-out}
+
+  /* Empty state */
+  .empty-card{background:#0C1528;border-radius:var(--radius);padding:36px 24px;text-align:center;border-top:3px solid var(--hi)}
+  .empty-card p{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.6}
+
+  /* Footer */
+  .info-box{background:var(--surface);border-radius:var(--radius-sm);padding:14px 18px;border:1px solid var(--border);margin-top:20px}
+  .info-box p{font-size:12px;color:var(--ink-light);line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">Calculadora<span>.live</span></a></header>
+
+<div class="page">
+  <h1 class="page-title">Tu vida en números</h1>
+  <p class="page-sub">Ingresá tu fecha de nacimiento y descubrí en cuántos números se puede expresar tu vida.</p>
+
+  <!-- Input card -->
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="field">
+        <label>Fecha de nacimiento</label>
+        <input type="date" id="nacimiento" onchange="calcular()">
+      </div>
+      <div class="field">
+        <label>Hora <span style="font-weight:400;font-size:10px;opacity:.6;text-transform:none;letter-spacing:0">(opcional)</span></label>
+        <div class="time-row">
+          <select id="hora-h" class="time-sel" onchange="calcular()">
+            <option value="" disabled selected>hh</option>
+          </select>
+          <span class="time-colon">:</span>
+          <select id="hora-m" class="time-sel" onchange="calcular()">
+            <option value="" disabled selected>mm</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary bar -->
+  <div class="summary-bar" id="summary-bar">
+    <div class="summary-eyebrow">Tu edad exacta</div>
+    <div class="summary-age" id="summary-age"></div>
+  </div>
+
+  <!-- Empty / results -->
+  <div id="results-wrap">
+    <div class="empty-card" id="empty-card">
+      <p>Ingresá tu fecha de nacimiento arriba para descubrir tu vida en números 👆</p>
+    </div>
+
+    <div id="stats-section" style="display:none">
+
+      <!-- ⚡ EN VIVO -->
+      <div class="section-lbl">⚡ En vivo ahora</div>
+      <div class="stats-grid">
+
+        <div class="stat-card accent-red">
+          <div class="live-badge"><span class="live-dot"></span>en vivo</div>
+          <div class="stat-emoji">❤️</div>
+          <div class="stat-val" id="s-latidos">—</div>
+          <div class="stat-lbl">latidos del corazón</div>
+          <div class="stat-sub">70 latidos/min promedio</div>
+        </div>
+
+        <div class="stat-card accent-red">
+          <div class="live-badge"><span class="live-dot"></span>en vivo</div>
+          <div class="stat-emoji">⏱️</div>
+          <div class="stat-val" id="s-segundos">—</div>
+          <div class="stat-lbl">segundos vividos</div>
+        </div>
+
+        <div class="stat-card accent-red">
+          <div class="live-badge"><span class="live-dot"></span>en vivo</div>
+          <div class="stat-emoji">👁️</div>
+          <div class="stat-val" id="s-pestaneos">—</div>
+          <div class="stat-lbl">veces que pestañeaste</div>
+          <div class="stat-sub">15 pestañeos/min promedio</div>
+        </div>
+
+        <!-- Semanas vividas — cambia cada 7 días, acá queda bien en el grupo "vivo" -->
+        <div class="stat-card accent-blue">
+          <div class="stat-emoji">📅</div>
+          <div class="stat-val" id="s-semanas">—</div>
+          <div class="stat-lbl">semanas que viviste</div>
+          <div class="stat-sub" id="s-semanas-dias"></div>
+        </div>
+
+      </div>
+
+      <!-- 📊 TOTALES -->
+      <div class="section-lbl">📊 Totales acumulados</div>
+      <div class="stats-grid">
+
+        <div class="stat-card accent-purple">
+          <div class="stat-emoji">😴</div>
+          <div class="stat-val" id="s-sueno">—</div>
+          <div class="stat-lbl">durmiendo (1/3 de tu vida)</div>
+        </div>
+
+        <div class="stat-card accent-purple">
+          <div class="stat-emoji">🚶</div>
+          <div class="stat-val" id="s-pasos">—</div>
+          <div class="stat-lbl">pasos caminados</div>
+          <div class="stat-sub">prom. 4.000 pasos/día</div>
+        </div>
+
+        <div class="stat-card accent-blue">
+          <div class="stat-emoji">💧</div>
+          <div class="stat-val" id="s-agua">—</div>
+          <div class="stat-lbl">litros de agua que tomaste</div>
+          <div class="stat-sub">prom. 2L/día</div>
+        </div>
+
+        <div class="stat-card accent-amber">
+          <div class="stat-emoji">💬</div>
+          <div class="stat-val" id="s-palabras">—</div>
+          <div class="stat-lbl">palabras que dijiste</div>
+          <div class="stat-sub" id="s-libros"></div>
+        </div>
+
+        <div class="stat-card accent-green">
+          <div class="stat-emoji">🗺️</div>
+          <div class="stat-val" id="s-km">—</div>
+          <div class="stat-lbl">kilómetros caminados</div>
+          <div class="stat-sub">prom. 3,25 km/día</div>
+        </div>
+
+        <div class="stat-card accent-green">
+          <div class="stat-emoji">💇</div>
+          <div class="stat-val" id="s-pelo">—</div>
+          <div class="stat-lbl">cm de pelo que creciste</div>
+          <div class="stat-sub" id="s-pelo-m"></div>
+        </div>
+
+      </div>
+    </div><!-- /stats-section -->
+  </div><!-- /results-wrap -->
+
+  <!-- Botón compartir -->
+  <div id="share-row" style="display:none; text-align:right; margin-top:4px; margin-bottom:4px;">
+    <button id="btn-share" onclick="compartirResultado()"
+      style="padding:9px 18px; background:transparent; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; color:var(--ink-light); cursor:pointer; transition:all 0.18s; display:inline-flex; align-items:center; gap:7px;"
+      onmouseover="this.style.borderColor='var(--hi)';this.style.color='var(--hi)'"
+      onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink-light)'">
+      <span>↑</span> Compartir resultados
+    </button>
+  </div>
+
+  <div class="info-box" id="info-box" style="display:none">
+    <p>Estimaciones basadas en promedios. Los contadores en vivo se actualizan a su ritmo natural: los latidos cada ~857 ms, los pestañeos cada ~6 s. Si ingresás la hora exacta de nacimiento, los números son más precisos.</p>
+  </div>
+
+</div>
+
+<script>
+  const hoy = new Date();
+  document.getElementById('nacimiento').setAttribute('max', hoy.toISOString().split('T')[0]);
+
+  // Poblar selects de hora
+  (function(){
+    const selH = document.getElementById('hora-h');
+    const selM = document.getElementById('hora-m');
+    for(let i=0;i<24;i++){
+      const o=document.createElement('option');
+      o.value=i; o.textContent=String(i).padStart(2,'0');
+      selH.appendChild(o);
+    }
+    for(let i=0;i<60;i++){
+      const o=document.createElement('option');
+      o.value=i; o.textContent=String(i).padStart(2,'0');
+      selM.appendChild(o);
+    }
+  })();
+
+  let birthDate = null;
+  let liveIntervals = [];
+
+  // ---- Formato ----
+  function fmt(n){ return Math.floor(n).toLocaleString('es-AR'); }
+
+  function ageSeconds(){ return (Date.now() - birthDate.getTime()) / 1000; }
+  function ageDays()   { return ageSeconds() / 86400; }
+  function ageYears()  { return ageDays() / 365.25; }
+
+  function popEl(el){
+    el.classList.remove('popped');
+    void el.offsetWidth;
+    el.classList.add('popped');
+  }
+
+  function exactAgeStr(ref){
+    let a = ref.getFullYear() - birthDate.getFullYear();
+    let m = ref.getMonth()   - birthDate.getMonth();
+    let d = ref.getDate()    - birthDate.getDate();
+    if(d<0){ m--; d += new Date(ref.getFullYear(), ref.getMonth(), 0).getDate(); }
+    if(m<0){ a--; m+=12; }
+    return `Tenés ${a} año${a!==1?'s':''}, ${m} mes${m!==1?'es':''} y ${d} día${d!==1?'s':''}`;
+  }
+
+  function sleepStr(){
+    const y = ageYears() / 3;
+    if(y >= 2){
+      const yy=Math.floor(y), mm=Math.floor((y-yy)*12);
+      return `${yy} año${yy!==1?'s':''}<br><span style="font-size:14px;opacity:.55">${mm} mes${mm!==1?'es':''}</span>`;
+    }
+    return y.toFixed(2) + ' años';
+  }
+
+  // ---- Estáticos ----
+  function updateStatics(){
+    const days  = ageDays();
+    const semas = days / 7;
+    const libros= Math.round(days * 16000 / 90000);
+
+    const peloCm = days * (15 / 365);
+    const peloM  = peloCm / 100;
+
+    document.getElementById('s-semanas').textContent     = fmt(semas);
+    document.getElementById('s-semanas-dias').textContent= fmt(days) + ' días en total';
+    document.getElementById('s-sueno').innerHTML         = sleepStr();
+    document.getElementById('s-pasos').textContent       = fmt(days * 4000);
+    document.getElementById('s-agua').textContent        = fmt(days * 2);
+    document.getElementById('s-palabras').textContent    = fmt(days * 16000);
+    document.getElementById('s-libros').textContent      = `≈ ${libros.toLocaleString('es-AR')} libro${libros!==1?'s':''} de 90.000 palabras`;
+    document.getElementById('s-km').textContent          = fmt(days * 3.25);
+    document.getElementById('s-pelo').textContent        = fmt(peloCm);
+    document.getElementById('s-pelo-m').textContent      = `≈ ${peloM.toFixed(1).replace('.',',')} metros en total`;
+  }
+
+  // ---- Live tickers (ritmo propio) ----
+  function tickEl(id, getValue){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.textContent = fmt(getValue());
+    popEl(el);
+  }
+
+  function stopLive(){ liveIntervals.forEach(clearInterval); liveIntervals = []; }
+
+  function startLive(){
+    stopLive();
+    // Segundos: cada 1000ms — también refresca edad
+    liveIntervals.push(setInterval(function(){
+      tickEl('s-segundos', ageSeconds);
+      document.getElementById('summary-age').textContent = exactAgeStr(new Date());
+    }, 1000));
+    // Latidos: cada 857ms (~70 bpm)
+    liveIntervals.push(setInterval(function(){
+      tickEl('s-latidos', function(){ return ageSeconds()*(70/60); });
+    }, 857));
+    // Pestañeos: cada 6000ms (~15/min × 16h despierto / 24h)
+    liveIntervals.push(setInterval(function(){
+      tickEl('s-pestaneos', function(){ return ageSeconds()*(15/60)*(16/24); });
+    }, 6000));
+  }
+
+  // ---- URL en tiempo real ----
+  function updateURL(fecha, hora){
+    const url = new URL(location.origin + location.pathname);
+    url.searchParams.set('f', fecha);
+    if(hora) url.searchParams.set('h', hora);
+    history.replaceState(null, '', url.toString());
+  }
+
+  function clearURL(){
+    history.replaceState(null, '', location.pathname);
+  }
+
+  // ---- Compartir resultados ----
+  async function compartirResultado(){
+    if(!birthDate) return;
+    const edad  = exactAgeStr(new Date());
+    const secs  = fmt(ageSeconds());
+    const lats  = fmt(ageSeconds()*(70/60));
+    const pasos = fmt(ageDays()*4000);
+    const url   = location.href;
+    const texto = `🤯 Mi vida en números\n${edad}\n❤️ ${lats} latidos del corazón\n⏱️ ${secs} segundos vividos\n🚶 ${pasos} pasos caminados\n\n${url}`;
+
+    const btn  = document.getElementById('btn-share');
+    const orig = btn.innerHTML;
+
+    if(navigator.share){
+      try { await navigator.share({ title: 'Mi vida en números', text: texto }); return; }
+      catch(e){ if(e.name==='AbortError') return; }
+    }
+    try { await navigator.clipboard.writeText(texto); }
+    catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = texto; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    }
+    btn.innerHTML = '<span>✓</span> ¡Copiado!';
+    btn.style.borderColor = 'var(--hi)'; btn.style.color = 'var(--hi)';
+    setTimeout(function(){ btn.innerHTML=orig; btn.style.borderColor=''; btn.style.color=''; }, 2200);
+  }
+
+  // ---- Main ----
+  function calcular(){
+    const val = document.getElementById('nacimiento').value;
+    if(!val){ showEmpty(); return; }
+
+    const [y,m,d] = val.split('-').map(Number);
+    const selH = document.getElementById('hora-h').value;
+    const selM = document.getElementById('hora-m').value;
+    const bh   = selH !== '' ? parseInt(selH)  : 0;
+    const bmin = selM !== '' ? parseInt(selM)  : 0;
+    const horaVal = selH !== '' ? (String(bh).padStart(2,'0')+':'+String(bmin).padStart(2,'0')) : '';
+
+    const parsed = new Date(y, m-1, d, bh, bmin, 0);
+    if(isNaN(parsed.getTime()) || parsed > hoy){ showEmpty(); return; }
+
+    birthDate = parsed;
+
+    document.getElementById('empty-card').style.display   = 'none';
+    document.getElementById('summary-bar').style.display  = 'block';
+    document.getElementById('stats-section').style.display= 'block';
+    document.getElementById('share-row').style.display    = '';
+    document.getElementById('info-box').style.display     = 'block';
+
+    document.getElementById('summary-age').textContent = exactAgeStr(hoy);
+
+    updateURL(val, horaVal);
+
+    updateStatics();
+    tickEl('s-segundos',  ageSeconds);
+    tickEl('s-latidos',   function(){ return ageSeconds()*(70/60); });
+    tickEl('s-pestaneos', function(){ return ageSeconds()*(15/60)*(16/24); });
+
+    startLive();
+  }
+
+  function showEmpty(){
+    birthDate = null;
+    stopLive();
+    document.getElementById('empty-card').style.display   = 'block';
+    document.getElementById('summary-bar').style.display  = 'none';
+    document.getElementById('stats-section').style.display= 'none';
+    document.getElementById('share-row').style.display    = 'none';
+    document.getElementById('info-box').style.display     = 'none';
+    clearURL();
+  }
+
+  // ---- Leer parámetros de URL al cargar ----
+  (function(){
+    const p = new URLSearchParams(location.search);
+    const f = p.get('f'), h = p.get('h');
+    if(f){
+      document.getElementById('nacimiento').value = f;
+      if(h){
+        const parts = h.split(':');
+        const hh = parseInt(parts[0]), mm = parseInt(parts[1]||0);
+        if(!isNaN(hh) && hh>=0 && hh<=23) document.getElementById('hora-h').value = hh;
+        if(!isNaN(mm) && mm>=0 && mm<=59) document.getElementById('hora-m').value = mm;
+      }
+      calcular();
+    }
+  })();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

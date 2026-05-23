@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Edad Exacta — Calculadora.live</title>
+<meta name="description" content="Calculá tu edad exacta en años, meses, días y horas. Cuántos días y semanas viviste, cuánto falta para tu próximo cumpleaños. Gratis e instantáneo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculadora.live/edad/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+  .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+  .back-link{font-size:13px;color:var(--ink-light);text-decoration:none}.back-link:hover{color:var(--hi)}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+  input[type=date]:focus{border-color:var(--hi)}
+  input[type=number]{padding:13px 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]:focus{border-color:var(--hi)}
+
+  /* Time selects (same as /vida) */
+  .time-row{display:flex;align-items:center;gap:6px}
+  .time-sel{flex:1;padding:13px 8px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer;text-align:center;appearance:none;-webkit-appearance:none}
+  .time-sel:focus{border-color:var(--hi)}
+  .time-colon{font-size:18px;font-weight:700;color:var(--ink-faint);flex-shrink:0}
+
+  /* Toggle button for birth time */
+  .toggle-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--hi);cursor:pointer;padding:0;margin-top:4px;transition:opacity .15s}
+  .toggle-btn:hover{opacity:.75}
+  .toggle-arrow{display:inline-block;transition:transform .2s;font-size:10px}
+  .toggle-arrow.open{transform:rotate(90deg)}
+
+  /* Ref row: date + años */
+  .ref-row{display:flex;align-items:center;gap:8px}
+  .ref-row input[type=date]{flex:1}
+  .ref-sep{font-size:12px;color:var(--ink-faint);flex-shrink:0;white-space:nowrap}
+  .ref-anios-wrap{display:flex;align-items:center;gap:5px;flex-shrink:0}
+  .ref-anios-wrap input{width:70px}
+  .ref-anios-wrap span{font-size:13px;color:var(--ink-light);white-space:nowrap}
+
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-unit{font-size:20px;font-weight:400;opacity:0.5;margin-left:6px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat-box{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px}
+  .stat-val{font-size:20px;font-weight:700;color:white;letter-spacing:-0.02em}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+  .birthday-box{margin-top:14px;padding:14px;background:rgba(255,255,255,0.05);border-radius:10px;display:flex;align-items:center;gap:10px}
+  .birthday-icon{font-size:22px}
+  .birthday-text{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.4}
+  .birthday-text strong{color:white}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">Calculadora<span>.live</span></a></header>
+<div class="page">
+  <h1 class="page-title">Calculadora de Edad</h1>
+  <p class="page-sub">Calculá tu edad exacta y cuánto falta para tu próximo cumpleaños.</p>
+
+  <div class="card">
+    <!-- Fecha de nacimiento -->
+    <div class="field">
+      <label>Fecha de nacimiento</label>
+      <input type="date" id="nacimiento" oninput="onNacimientoChange()">
+    </div>
+
+    <!-- Hora de nacimiento (collapsible) -->
+    <div class="field" style="margin-bottom:18px">
+      <button class="toggle-btn" id="toggle-hora-btn" onclick="toggleHora()">
+        <span class="toggle-arrow" id="toggle-arrow">▶</span> Agregar hora de nacimiento
+      </button>
+      <div id="hora-section" style="display:none;margin-top:12px">
+        <label>Hora de nacimiento <span style="font-weight:400;font-size:10px;opacity:.6;text-transform:none;letter-spacing:0">(opcional)</span></label>
+        <div class="time-row">
+          <select id="hora-h" class="time-sel" onchange="calcular()">
+            <option value="" disabled selected>hh</option>
+          </select>
+          <span class="time-colon">:</span>
+          <select id="hora-m" class="time-sel" onchange="calcular()">
+            <option value="" disabled selected>mm</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calcular al (fecha ↔ años) -->
+    <div class="field">
+      <label>Calcular al</label>
+      <div class="ref-row">
+        <input type="date" id="referencia" oninput="onRefDateChange()">
+        <span class="ref-sep">ó en</span>
+        <div class="ref-anios-wrap">
+          <input type="number" id="ref-anios" min="0" max="500" placeholder="70" oninput="onRefAniosChange()">
+          <span>años</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Tu edad</div>
+    <div id="result-main" class="result-main"><span class="empty-state" style="font-size:16px">Ingresá tu fecha de nacimiento</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="stat-box">
+        <div class="stat-val" id="r-meses">—</div>
+        <div class="stat-lbl">Meses vividos</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-dias">—</div>
+        <div class="stat-lbl">Días vividos</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-semanas">—</div>
+        <div class="stat-lbl">Semanas vividas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-horas">—</div>
+        <div class="stat-lbl" id="r-horas-lbl">Horas aprox.</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-gen" style="font-size:15px">—</div>
+        <div class="stat-lbl">Generación</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-dia-nac" style="font-size:15px">—</div>
+        <div class="stat-lbl">Nació un</div>
+      </div>
+    </div>
+    <div id="birthday-box" class="birthday-box" style="display:none">
+      <span class="birthday-icon">🎉</span>
+      <div class="birthday-text" id="birthday-text"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  function parseLocalDate(s){
+    // Avoid UTC parsing bug: "1987-12-08" → UTC midnight → local Dec 7 in UTC-3
+    var p = s.split('-');
+    return new Date(+p[0], +p[1]-1, +p[2]);
+  }
+
+  function dateToInputVal(d){
+    var y = d.getFullYear();
+    var m = String(d.getMonth()+1).padStart(2,'0');
+    var dd = String(d.getDate()).padStart(2,'0');
+    return y+'-'+m+'-'+dd;
+  }
+
+  function fmt(n){ return Math.round(n).toLocaleString('es-AR'); }
+
+  // ── Poblar selects de hora ───────────────────────────────────────────────
+  (function(){
+    var selH = document.getElementById('hora-h');
+    var selM = document.getElementById('hora-m');
+    for(var i=0;i<24;i++){
+      var o=document.createElement('option');
+      o.value=i; o.textContent=String(i).padStart(2,'0');
+      selH.appendChild(o);
+    }
+    for(var i=0;i<60;i++){
+      var o=document.createElement('option');
+      o.value=i; o.textContent=String(i).padStart(2,'0');
+      selM.appendChild(o);
+    }
+  })();
+
+  // ── Valores iniciales ────────────────────────────────────────────────────
+  var hoy = new Date();
+  document.getElementById('referencia').value = dateToInputVal(hoy);
+
+  // ── Toggle hora ──────────────────────────────────────────────────────────
+  var horaVisible = false;
+  function toggleHora(){
+    horaVisible = !horaVisible;
+    document.getElementById('hora-section').style.display = horaVisible ? 'block' : 'none';
+    var arrow = document.getElementById('toggle-arrow');
+    arrow.classList.toggle('open', horaVisible);
+    if(!horaVisible){
+      // Reset hora selects
+      document.getElementById('hora-h').value = '';
+      document.getElementById('hora-m').value = '';
+      calcular();
+    }
+  }
+
+  // ── Leer fecha de nacimiento y hora ──────────────────────────────────────
+  function getNacimiento(){
+    var val = document.getElementById('nacimiento').value;
+    if(!val) return null;
+    var p = val.split('-');
+    var selH = document.getElementById('hora-h').value;
+    var selM = document.getElementById('hora-m').value;
+    var hh = selH !== '' ? parseInt(selH) : 0;
+    var mm = selM !== '' ? parseInt(selM) : 0;
+    return new Date(+p[0], +p[1]-1, +p[2], hh, mm, 0);
+  }
+
+  function getRef(){
+    var val = document.getElementById('referencia').value;
+    if(!val) return null;
+    return parseLocalDate(val);
+  }
+
+  function hasBirthTime(){
+    return document.getElementById('hora-h').value !== '';
+  }
+
+  // ── Evento: nació (actualiza años si hay referencia) ────────────────────
+  function onNacimientoChange(){
+    var nac = document.getElementById('nacimiento').value;
+    var ref = document.getElementById('referencia').value;
+    if(nac && ref){
+      var nacD = parseLocalDate(nac);
+      var refD = parseLocalDate(ref);
+      if(refD >= nacD){
+        document.getElementById('ref-anios').value = calcAnios(nacD, refD);
+      }
+    }
+    calcular();
+  }
+
+  // ── Evento: cambió la fecha de referencia ────────────────────────────────
+  function onRefDateChange(){
+    var nac = document.getElementById('nacimiento').value;
+    var ref = document.getElementById('referencia').value;
+    if(nac && ref){
+      var nacD = parseLocalDate(nac);
+      var refD = parseLocalDate(ref);
+      if(refD >= nacD){
+        document.getElementById('ref-anios').value = calcAnios(nacD, refD);
+      } else {
+        document.getElementById('ref-anios').value = '';
+      }
+    } else {
+      document.getElementById('ref-anios').value = '';
+    }
+    calcular();
+  }
+
+  // ── Evento: cambió el input de años ─────────────────────────────────────
+  function onRefAniosChange(){
+    var nac = document.getElementById('nacimiento').value;
+    var aniosVal = document.getElementById('ref-anios').value;
+    if(!nac || aniosVal === '') { calcular(); return; }
+    var anios = parseInt(aniosVal);
+    if(isNaN(anios) || anios < 0) { calcular(); return; }
+    var p = nac.split('-');
+    var nacY = +p[0], nacM = +p[1]-1, nacD = +p[2];
+    var refDate = new Date(nacY + anios, nacM, nacD);
+    document.getElementById('referencia').value = dateToInputVal(refDate);
+    calcular();
+  }
+
+  // ── Calcular años completos entre dos fechas locales ────────────────────
+  function calcAnios(nacD, refD){
+    var a = refD.getFullYear() - nacD.getFullYear();
+    var m = refD.getMonth() - nacD.getMonth();
+    var d = refD.getDate() - nacD.getDate();
+    if(d < 0) m--;
+    if(m < 0) a--;
+    return a;
+  }
+
+  // ── Cálculo principal ────────────────────────────────────────────────────
+  function calcular(){
+    var nacVal = document.getElementById('nacimiento').value;
+    var refVal = document.getElementById('referencia').value;
+    var mainEl  = document.getElementById('result-main');
+    var subEl   = document.getElementById('result-sub');
+    var rowsEl  = document.getElementById('result-rows');
+    var bdBox   = document.getElementById('birthday-box');
+
+    if(!nacVal || !refVal){
+      mainEl.innerHTML='<span class="empty-state" style="font-size:16px">Ingresá tu fecha de nacimiento</span>';
+      subEl.textContent=''; rowsEl.style.display='none'; bdBox.style.display='none';
+      return;
+    }
+
+    var nac = getNacimiento();   // with time if provided
+    var ref = getRef();          // date only (local)
+    var nacSoloFecha = parseLocalDate(nacVal); // for age calculation (date-only)
+
+    if(isNaN(nac) || isNaN(ref) || nacSoloFecha > ref){
+      mainEl.innerHTML='<span class="empty-state" style="font-size:16px">Ingresá tu fecha de nacimiento</span>';
+      subEl.textContent=''; rowsEl.style.display='none'; bdBox.style.display='none';
+      return;
+    }
+
+    // Age in years/months/days (date-only, no time offset)
+    var anos      = ref.getFullYear() - nacSoloFecha.getFullYear();
+    var mesesExtra = ref.getMonth()   - nacSoloFecha.getMonth();
+    var diasExtra  = ref.getDate()    - nacSoloFecha.getDate();
+    if(diasExtra < 0){ mesesExtra--; var prevMonth = new Date(ref.getFullYear(), ref.getMonth(), 0); diasExtra += prevMonth.getDate(); }
+    if(mesesExtra < 0){ anos--; mesesExtra += 12; }
+
+    var totalDias   = Math.floor((ref - nacSoloFecha) / (1000*60*60*24));
+    var totalMeses  = anos*12 + mesesExtra;
+    var totalSemanas= Math.floor(totalDias / 7);
+
+    // Horas: exact if time provided, approximate otherwise
+    var conHora = hasBirthTime();
+    var totalHoras;
+    if(conHora){
+      // ref is start of day, nac includes birth time
+      var refMs = ref.getTime(); // midnight of ref date
+      totalHoras = Math.floor((refMs - nac.getTime()) / (1000*60*60));
+    } else {
+      totalHoras = totalDias * 24;
+    }
+
+    mainEl.innerHTML = anos + '<span class="result-unit">año' + (anos!==1?'s':'') + '</span>';
+    subEl.textContent = mesesExtra + ' mes' + (mesesExtra!==1?'es':'') + ' y ' + diasExtra + ' día' + (diasExtra!==1?'s':'') + ' más';
+    rowsEl.style.display='grid';
+
+    document.getElementById('r-meses').textContent   = totalMeses.toLocaleString('es-AR');
+    document.getElementById('r-dias').textContent    = totalDias.toLocaleString('es-AR');
+    document.getElementById('r-semanas').textContent = totalSemanas.toLocaleString('es-AR');
+    document.getElementById('r-horas').textContent   = totalHoras.toLocaleString('es-AR');
+    document.getElementById('r-horas-lbl').textContent = conHora ? 'Horas exactas' : 'Horas aprox.';
+
+    // Próximo cumpleaños (usando nacSoloFecha para evitar bug de hora)
+    var nacM = nacSoloFecha.getMonth();
+    var nacD = nacSoloFecha.getDate();
+    var proxCump = new Date(ref.getFullYear(), nacM, nacD);
+    if(proxCump < ref) proxCump.setFullYear(ref.getFullYear()+1);
+    var diasHastaCump = Math.round((proxCump - ref) / (1000*60*60*24));
+
+    bdBox.style.display='flex';
+    if(diasHastaCump === 0){
+      document.getElementById('birthday-text').innerHTML = '<strong>¡Hoy es tu cumpleaños!</strong> 🎂';
+    } else {
+      document.getElementById('birthday-text').innerHTML =
+        'Faltan <strong>' + diasHastaCump + ' día' + (diasHastaCump!==1?'s':'') + '</strong> para tu próximo cumpleaños';
+    }
+
+    // Generación (basada en año de nacimiento, no en la edad calculada)
+    var nacYear = nacSoloFecha.getFullYear();
+    var gen = nacYear >= 2013 ? 'Generación Alpha'
+            : nacYear >= 1997 ? 'Generación Z'
+            : nacYear >= 1981 ? 'Millennial'
+            : nacYear >= 1965 ? 'Generación X'
+            : nacYear >= 1946 ? 'Baby Boomer'
+            : 'Silent Generation';
+    document.getElementById('r-gen').textContent = gen;
+
+    // Día de la semana de nacimiento
+    var DIAS_SEMANA = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    document.getElementById('r-dia-nac').textContent = DIAS_SEMANA[nacSoloFecha.getDay()];
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Cómo se calcula la edad exacta?","acceptedAnswer":{"@type":"Answer","text":"La edad exacta se calcula comparando la fecha de nacimiento con la fecha actual, contando años completos transcurridos. La diferencia en meses y días se obtiene del período entre el último cumpleaños y hoy."}},
+{"@type":"Question","name":"¿Qué es la edad en días?","acceptedAnswer":{"@type":"Answer","text":"Es la cantidad total de días vividos desde el nacimiento hasta hoy, incluyendo los años bisiestos. Por ejemplo, una persona de 30 años tiene aproximadamente 10.950 días de vida."}},
+{"@type":"Question","name":"¿Para qué sirve saber la edad exacta?","acceptedAnswer":{"@type":"Answer","text":"Tiene usos legales (jubilación, contratos, mayoría de edad), médicos (dosis de medicación, etapas del desarrollo) y personales. En Argentina la mayoría de edad es a los 18 años."}},
+{"@type":"Question","name":"¿Cómo afectan los años bisiestos al cálculo?","acceptedAnswer":{"@type":"Answer","text":"Los años bisiestos tienen 366 días en vez de 365, lo que puede alterar el cálculo de días exactos. La calculadora los contempla automáticamente."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Preguntas frecuentes</div>
+  <details class="faq-item" open>
+    <summary>¿Cómo se calcula la edad exacta?</summary>
+    <div class="faq-a">La edad exacta se calcula comparando la fecha de nacimiento con la fecha actual, contando <strong>años completos transcurridos</strong>. La diferencia en meses y días se obtiene del período entre el último cumpleaños y hoy.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Qué es la edad en días?</summary>
+    <div class="faq-a">Es la cantidad total de días vividos desde el nacimiento hasta hoy, incluyendo los años bisiestos. Por ejemplo, una persona de 30 años tiene aproximadamente <strong>10.950 días</strong> de vida.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Para qué sirve saber la edad exacta?</summary>
+    <div class="faq-a">Tiene usos <strong>legales</strong> (jubilación, contratos, mayoría de edad), <strong>médicos</strong> (dosis de medicación, etapas del desarrollo) y personales. En Argentina la mayoría de edad es a los 18 años.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Cómo afectan los años bisiestos al cálculo?</summary>
+    <div class="faq-a">Los años bisiestos tienen <strong>366 días</strong> en vez de 365, lo que puede alterar el cálculo de días exactos. La calculadora los contempla automáticamente.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

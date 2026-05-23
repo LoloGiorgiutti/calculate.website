@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Sueldo Neto Argentina — Calculadora.live</title>
+<meta name="description" content="Calculá tu sueldo neto en Argentina. Ingresá tu salario bruto y obtené el neto con todos los descuentos: jubilación, obra social, PAMI y ganancias.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculadora.live/sueldo-neto/">
+<meta property="og:title" content="Calculadora de Sueldo Neto Argentina">
+<meta property="og:description" content="¿Cuánto te depositan? Calculá tu sueldo neto con todos los descuentos de ley.">
+<meta property="og:url" content="https://calculadora.live/sueldo-neto/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculadora.live/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora de Sueldo Neto Argentina",
+  "url": "https://calculadora.live/sueldo-neto",
+  "description": "Calculá tu sueldo neto con descuentos de jubilación, obra social, PAMI y ganancias.",
+  "applicationCategory": "UtilityApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ARS" },
+  "inLanguage": "es-AR"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F0F2F7; --surface: #FFFFFF; --ink: #080A12; --ink-light: #60647A;
+    --ink-faint: #B4B8CC; --hi: #1A5FE8; --hi-soft: #EEF3FD;
+    --border: #D4D8E6; --radius: 16px; --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo { font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+  .logo span { color: var(--hi); }
+  .back-link { font-size: 13px; color: var(--ink-light); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .back-link:hover { color: var(--hi); }
+
+  .page { max-width: 520px; margin: 0 auto; padding: 36px 20px 60px; }
+  .page-header { margin-bottom: 28px; }
+  .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 6px; }
+  .page-sub { font-size: 14px; color: var(--ink-light); line-height: 1.5; }
+
+  .card { background: var(--surface); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); }
+
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
+
+  .input-wrap { position: relative; }
+  .input-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--ink-light); font-size: 15px; pointer-events: none; }
+  input[type="number"] {
+    width: 100%; padding: 13px 14px 13px 30px;
+    border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500;
+    color: var(--ink); background: var(--surface); outline: none; transition: border-color 0.15s;
+  }
+  input[type="number"]:focus { border-color: var(--hi); }
+
+  .dir-tabs{display:flex;gap:8px;margin-bottom:20px;}
+  .dir-tab{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center;}
+  .dir-tab.active{background:var(--hi);border-color:var(--hi);color:#fff;}
+
+  /* Toggle switch */
+  .toggle-row { display: flex; justify-content: space-between; align-items: center; }
+  .toggle-lbl { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .toggle-desc { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute; inset: 0; background: var(--border);
+    border-radius: 99px; cursor: pointer; transition: background 0.2s;
+  }
+  .toggle input:checked + .toggle-track { background: var(--hi); }
+  .toggle-track::after {
+    content: ''; position: absolute; left: 3px; top: 3px;
+    width: 18px; height: 18px; border-radius: 50%; background: white;
+    transition: transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .toggle input:checked + .toggle-track::after { transform: translateX(20px); }
+
+  .ganancias-input { margin-top: 14px; display: none; }
+
+  /* Resultado */
+  .result-card {
+    background: #0C1528; border-radius: var(--radius); padding: 28px;
+    margin-bottom: 16px; border-top: 3px solid var(--hi);
+  }
+  .result-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+  .result-main { font-size: 42px; font-weight: 700; color: white; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; }
+  .result-main .currency { font-size: 24px; font-weight: 500; opacity: 0.6; margin-right: 2px; }
+  .result-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+  .result-rows { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .result-row { display: flex; justify-content: space-between; align-items: center; }
+  .result-row-lbl { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .result-row-val { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  .result-row-val.neg { color: #FCA5A5; }
+  .result-row-val.pos { color: #86EFAC; }
+  .result-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 2px 0; }
+  .empty-state { color: rgba(255,255,255,0.3); font-size: 15px; }
+
+  /* Barra proporcional */
+  .pct-bar { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .pct-bar-track { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.1); overflow: hidden; margin: 8px 0 6px; display: flex; }
+  .pct-bar-neto { background: #86EFAC; border-radius: 99px 0 0 99px; transition: width 0.4s; }
+  .pct-bar-desc { background: #FCA5A5; border-radius: 0 99px 99px 0; transition: width 0.4s; }
+  .pct-labels { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  .info-box { background: var(--hi-soft); border: 1px solid #BFDBFE; border-radius: var(--radius-sm); padding: 14px 16px; font-size: 13px; color: var(--ink-light); line-height: 1.5; }
+  .info-box strong { color: var(--ink); }
+  /* ── FAQ ─────────────────────────────────────────────────── */
+  .faq-section{max-width:600px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto se descuenta de jubilación del sueldo?","acceptedAnswer":{"@type":"Answer","text":"El empleado aporta el 11% del salario bruto al sistema previsional (ANSES). El empleador también hace aportes patronales adicionales, pero esos no se descuentan del sueldo del empleado."}},{"@type":"Question","name":"¿Cuánto se descuenta de obra social?","acceptedAnswer":{"@type":"Answer","text":"El empleado aporta el 3% del salario bruto. El empleador aporta un 6% adicional. En total el 9% va a la obra social, pero solo el 3% figura como descuento en tu recibo."}},{"@type":"Question","name":"¿Qué es el aporte de PAMI?","acceptedAnswer":{"@type":"Answer","text":"PAMI es la obra social para jubilados. Los empleados activos aportan el 3% del salario bruto como contribución al sistema. Figura como 'Ley 19.032' en el recibo de sueldo."}},{"@type":"Question","name":"¿Cuándo se paga el impuesto a las ganancias?","acceptedAnswer":{"@type":"Answer","text":"Cuando el salario bruto supera el mínimo no imponible establecido por ARCA (ex-AFIP). Este valor se actualiza periódicamente. La calculadora aplica siempre los valores vigentes."}},{"@type":"Question","name":"¿Cuál es la diferencia entre sueldo bruto y neto?","acceptedAnswer":{"@type":"Answer","text":"El sueldo bruto es el salario acordado antes de descuentos. El neto es lo que se acredita en tu cuenta, restados jubilación (11%), obra social (3%), PAMI (3%) y ganancias si aplica. Sin ganancias, el neto ronda el 83% del bruto."}}]}
+</script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Calculadora<span>.live</span></a></header>
+
+<div class="page">
+
+  <div class="page-header">
+    <h1 class="page-title">Calculadora de Sueldo Neto</h1>
+    <p class="page-sub">¿Cuánto te depositan? Calculá tu salario neto con todos los descuentos en Argentina</p>
+  </div>
+
+  <div class="dir-tabs">
+    <button class="dir-tab active" id="tab-normal" onclick="setDir('normal')">💼 Bruto → Neto</button>
+    <button class="dir-tab" id="tab-inverso" onclick="setDir('inverso')">🔄 Neto → Bruto</button>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label><span id="lbl-input">Salario bruto mensual</span></label>
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="number" id="bruto" placeholder="0" min="0" step="1000" oninput="calcular()">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-lbl">¿Pagás impuesto a las ganancias?</div>
+          <div class="toggle-desc">Aplica si tu sueldo bruto supera ~$2.300.000/mes</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-ganancias" onchange="toggleGanancias()">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <div class="ganancias-input" id="ganancias-wrap">
+        <label style="margin-top:14px">Retención de ganancias mensual</label>
+        <div class="input-wrap">
+          <span class="input-prefix">$</span>
+          <input type="number" id="ganancias" placeholder="0" min="0" step="1000" oninput="calcular()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultado -->
+  <div class="result-card">
+    <div class="result-eyebrow" id="result-eyebrow">Tu sueldo neto estimado</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Ingresá tu sueldo bruto</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Sueldo bruto</span>
+        <span class="result-row-val" id="r-bruto">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl">Jubilación (11%)</span>
+        <span class="result-row-val neg" id="r-jub">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Obra social (3%)</span>
+        <span class="result-row-val neg" id="r-os">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">PAMI (3%)</span>
+        <span class="result-row-val neg" id="r-pami">—</span>
+      </div>
+      <div id="r-ganancias-row" class="result-row" style="display:none">
+        <span class="result-row-lbl">Ganancias</span>
+        <span class="result-row-val neg" id="r-ganancias">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Sueldo neto (lo que cobrás)</span>
+        <span class="result-row-val pos" id="r-neto">—</span>
+      </div>
+
+      <div class="pct-bar" id="pct-bar">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4)">Proporción del bruto</div>
+        <div class="pct-bar-track">
+          <div class="pct-bar-neto" id="bar-neto"></div>
+          <div class="pct-bar-desc" id="bar-desc"></div>
+        </div>
+        <div class="pct-labels">
+          <span id="lbl-neto-pct">Neto</span>
+          <span id="lbl-desc-pct">Descuentos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Descuentos obligatorios en Argentina</strong><br>
+    Todo trabajador en relación de dependencia descuenta: <strong>11% jubilación</strong>, <strong>3% obra social</strong> y <strong>3% PAMI</strong> (total: 17%). Ganancias aplica según el nivel salarial y varía según cargas de familia.
+  </div>
+
+</div>
+
+<script>
+  function toggleGanancias() {
+    const on = document.getElementById('toggle-ganancias').checked;
+    document.getElementById('ganancias-wrap').style.display = on ? 'block' : 'none';
+    document.getElementById('r-ganancias-row').style.display = on ? 'flex' : 'none';
+    calcular();
+  }
+
+  function fmt(n) { return '$\u00A0' + Math.round(n).toLocaleString('es-AR'); }
+
+  var currentDir = 'normal';
+
+  function setDir(dir) {
+    currentDir = dir;
+    document.getElementById('tab-normal').classList.toggle('active', dir === 'normal');
+    document.getElementById('tab-inverso').classList.toggle('active', dir === 'inverso');
+
+    var lblInput = document.getElementById('lbl-input');
+    var inputBruto = document.getElementById('bruto');
+    var eyebrow = document.getElementById('result-eyebrow');
+
+    if(dir === 'normal') {
+      lblInput.textContent = 'Salario bruto mensual';
+      inputBruto.placeholder = '0';
+      eyebrow.textContent = 'Tu sueldo neto estimado';
+      document.getElementById('result-main').innerHTML = '<span class="empty-state">Ingresá tu sueldo bruto</span>';
+    } else {
+      lblInput.textContent = 'Sueldo neto deseado';
+      inputBruto.placeholder = '0';
+      eyebrow.textContent = 'Bruto necesario';
+      document.getElementById('result-main').innerHTML = '<span class="empty-state">Ingresá el neto que querés cobrar</span>';
+    }
+    document.getElementById('result-rows').style.display = 'none';
+    document.getElementById('result-sub').textContent = '';
+    document.getElementById('bruto').value = '';
+  }
+
+  function calcular() {
+    const inputVal = parseFloat(document.getElementById('bruto').value) || 0;
+    const conGanancias = document.getElementById('toggle-ganancias').checked;
+    const ganancias = conGanancias ? (parseFloat(document.getElementById('ganancias').value) || 0) : 0;
+
+    const mainEl = document.getElementById('result-main');
+    const subEl  = document.getElementById('result-sub');
+    const rowsEl = document.getElementById('result-rows');
+
+    if (!inputVal) {
+      mainEl.innerHTML = currentDir === 'normal'
+        ? '<span class="empty-state">Ingresá tu sueldo bruto</span>'
+        : '<span class="empty-state">Ingresá el neto que querés cobrar</span>';
+      subEl.textContent = '';
+      rowsEl.style.display = 'none';
+      return;
+    }
+
+    var bruto, neto;
+    if(currentDir === 'normal') {
+      bruto = inputVal;
+      const jub  = bruto * 0.11;
+      const os   = bruto * 0.03;
+      const pami = bruto * 0.03;
+      const totalDesc = jub + os + pami + ganancias;
+      neto = bruto - totalDesc;
+      const netoPct = Math.round((neto / bruto) * 100);
+      const descPct = 100 - netoPct;
+      mainEl.innerHTML = `<span class="currency">$</span>${Math.round(neto).toLocaleString('es-AR')}`;
+      subEl.textContent = `Te descuentan ${descPct}% del bruto`;
+      rowsEl.style.display = 'flex';
+      document.getElementById('r-bruto').textContent    = fmt(bruto);
+      document.getElementById('r-jub').textContent      = '− ' + fmt(jub);
+      document.getElementById('r-os').textContent       = '− ' + fmt(os);
+      document.getElementById('r-pami').textContent     = '− ' + fmt(pami);
+      document.getElementById('r-neto').textContent     = fmt(neto);
+      if (conGanancias) document.getElementById('r-ganancias').textContent = '− ' + fmt(ganancias);
+      document.getElementById('bar-neto').style.width = netoPct + '%';
+      document.getElementById('bar-desc').style.width = descPct + '%';
+      document.getElementById('lbl-neto-pct').textContent = `Neto ${netoPct}%`;
+      document.getElementById('lbl-desc-pct').textContent = `Descuentos ${descPct}%`;
+    } else {
+      // Modo inverso: input es el neto deseado
+      neto = inputVal;
+      bruto = (neto + ganancias) / 0.83;
+      const jub  = bruto * 0.11;
+      const os   = bruto * 0.03;
+      const pami = bruto * 0.03;
+      const totalDesc = jub + os + pami + ganancias;
+      const netoPct = Math.round((neto / bruto) * 100);
+      const descPct = 100 - netoPct;
+      mainEl.innerHTML = `<span class="currency">$</span>${Math.round(bruto).toLocaleString('es-AR')}`;
+      subEl.textContent = `Necesitás negociar un bruto ${descPct}% mayor`;
+      rowsEl.style.display = 'flex';
+      document.getElementById('r-bruto').textContent    = fmt(bruto);
+      document.getElementById('r-jub').textContent      = '− ' + fmt(jub);
+      document.getElementById('r-os').textContent       = '− ' + fmt(os);
+      document.getElementById('r-pami').textContent     = '− ' + fmt(pami);
+      document.getElementById('r-neto').textContent     = fmt(neto);
+      if (conGanancias) document.getElementById('r-ganancias').textContent = '− ' + fmt(ganancias);
+      document.getElementById('bar-neto').style.width = netoPct + '%';
+      document.getElementById('bar-desc').style.width = descPct + '%';
+      document.getElementById('lbl-neto-pct').textContent = `Neto ${netoPct}%`;
+      document.getElementById('lbl-desc-pct').textContent = `Descuentos ${descPct}%`;
+    }
+  }
+</script>
+<div class="faq-section">
+  <div class="faq-heading">¿Cómo se calcula el sueldo neto en Argentina?</div>
+  <div class="faq-a" style="padding:0 0 18px">
+    <p style="margin-bottom:12px">El sueldo neto es el monto que efectivamente se acredita en tu cuenta bancaria, una vez aplicados los descuentos de ley sobre el salario bruto. En Argentina, los descuentos obligatorios son tres: jubilación (11%), obra social (3%) y PAMI (3%). Eso representa un total del <strong>17% de descuento base</strong> para todos los empleados en relación de dependencia.</p>
+    <p style="margin-bottom:12px">Si tu salario bruto supera el mínimo no imponible del impuesto a las Ganancias (4ª categoría), se aplica un descuento adicional progresivo. Este valor lo actualiza periódicamente ARCA (ex-AFIP) por decreto y la calculadora siempre lo refleja en tiempo real.</p>
+    <p>La fórmula básica es: <strong>Neto = Bruto − Jubilación − Obra Social − PAMI − Ganancias (si aplica)</strong>. Sin Ganancias, el neto típico ronda el <strong>83% del bruto</strong>. Con Ganancias, el porcentaje varía según el tramo de la escala progresiva.</p>
+  </div>
+  <div class="faq-heading">Preguntas frecuentes</div>
+  <details class="faq-item" open>
+    <summary>¿Cuánto se descuenta de jubilación del sueldo?</summary>
+    <div class="faq-a">El empleado aporta el <strong>11% del salario bruto</strong> al sistema previsional (ANSES). El empleador también hace aportes patronales adicionales, pero esos no se descuentan del sueldo del empleado.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>¿Cuánto se descuenta de obra social?</summary>
+    <div class="faq-a">El empleado aporta el <strong>3% del salario bruto</strong>. El empleador aporta un 6% adicional. En total, el 9% del sueldo bruto va a la obra social, pero solo el 3% figura como descuento en tu recibo.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>¿Qué es el aporte de PAMI?</summary>
+    <div class="faq-a">PAMI es la obra social para jubilados y pensionados. Los empleados activos aportan el <strong>3% del salario bruto</strong> como contribución al sistema. Figura como "Ley 19.032" en el recibo de sueldo.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>¿Cuándo se paga el impuesto a las ganancias?</summary>
+    <div class="faq-a">Cuando el salario bruto supera el mínimo no imponible establecido por ARCA (ex-AFIP). Este valor se actualiza periódicamente por decreto. La calculadora aplica siempre los valores vigentes con las escalas de alícuotas progresivas.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>¿Cuál es la diferencia entre sueldo bruto y neto?</summary>
+    <div class="faq-a">El <strong>sueldo bruto</strong> es el salario acordado antes de cualquier descuento. El <strong>sueldo neto</strong> es lo que efectivamente se acredita en tu cuenta, restados jubilación (11%), obra social (3%), PAMI (3%) y ganancias si aplica. Sin ganancias, el neto ronda el <strong>83% del bruto</strong>.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>
