@@ -247,10 +247,142 @@
   CW_COUNTRY_LIST.forEach(function(c){ CW_FLAG_MAP[c.code] = c.flag; });
 
   function cwGetCountry() {
-    try { return localStorage.getItem('cw-country') || 'global'; } catch(e){ return 'global'; }
+    try { return localStorage.getItem('cw-country') || null; } catch(e){ return null; }
   }
   function cwSetCountry(code) {
     try { localStorage.setItem('cw-country', code); } catch(e){}
+  }
+
+  /* ── COUNTRY → PRIMARY LANGUAGE ─────────────────────────────────────────── */
+  var COUNTRY_LANG = {
+    /* English */
+    'US':'en','GB':'en','CA':'en','AU':'en','IE':'en','NZ':'en','SG':'en','AE':'en',
+    /* Spanish */
+    'AR':'es','MX':'es','CL':'es','CO':'es','PE':'es','UY':'es','VE':'es',
+    'EC':'es','BO':'es','PY':'es','CR':'es','PA':'es','DO':'es','PR':'es',
+    'GT':'es','SV':'es','HN':'es','NI':'es','CU':'es','ES':'es',
+    /* Portuguese */
+    'BR':'pt','PT':'pt',
+    /* French */
+    'FR':'fr','BE':'fr',
+    /* All others → English (closest available) */
+  };
+
+  function cwGetLangForCountry(code) {
+    return COUNTRY_LANG[code] || 'en';
+  }
+
+  /* ── TIMEZONE → COUNTRY (for auto-detection) ─────────────────────────────── */
+  var TZ_COUNTRY = {
+    /* USA */
+    'America/New_York':'US','America/Chicago':'US','America/Denver':'US',
+    'America/Los_Angeles':'US','America/Anchorage':'US','Pacific/Honolulu':'US',
+    'America/Phoenix':'US','America/Detroit':'US','America/Indiana/Indianapolis':'US',
+    'America/Kentucky/Louisville':'US','America/Boise':'US',
+    /* UK */
+    'Europe/London':'GB',
+    /* Canada */
+    'America/Toronto':'CA','America/Vancouver':'CA','America/Edmonton':'CA',
+    'America/Winnipeg':'CA','America/Halifax':'CA','America/St_Johns':'CA',
+    'America/Regina':'CA','America/Whitehorse':'CA',
+    /* Australia */
+    'Australia/Sydney':'AU','Australia/Melbourne':'AU','Australia/Brisbane':'AU',
+    'Australia/Perth':'AU','Australia/Adelaide':'AU','Australia/Darwin':'AU',
+    'Australia/Hobart':'AU',
+    /* Ireland */
+    'Europe/Dublin':'IE',
+    /* New Zealand */
+    'Pacific/Auckland':'NZ','Pacific/Chatham':'NZ',
+    /* Singapore */
+    'Asia/Singapore':'SG',
+    /* UAE */
+    'Asia/Dubai':'AE',
+    /* Argentina */
+    'America/Argentina/Buenos_Aires':'AR','America/Argentina/Cordoba':'AR',
+    'America/Argentina/Mendoza':'AR','America/Argentina/Tucuman':'AR',
+    'America/Argentina/Salta':'AR','America/Argentina/Jujuy':'AR',
+    'America/Argentina/San_Luis':'AR','America/Argentina/La_Rioja':'AR',
+    'America/Argentina/Catamarca':'AR','America/Argentina/Rio_Gallegos':'AR',
+    'America/Argentina/Ushuaia':'AR',
+    /* Mexico */
+    'America/Mexico_City':'MX','America/Monterrey':'MX','America/Tijuana':'MX',
+    'America/Cancun':'MX','America/Merida':'MX','America/Chihuahua':'MX',
+    'America/Hermosillo':'MX','America/Mazatlan':'MX',
+    /* Chile */
+    'America/Santiago':'CL','Pacific/Easter':'CL',
+    /* Colombia */
+    'America/Bogota':'CO',
+    /* Peru */
+    'America/Lima':'PE',
+    /* Uruguay */
+    'America/Montevideo':'UY',
+    /* Venezuela */
+    'America/Caracas':'VE',
+    /* Ecuador */
+    'America/Guayaquil':'EC','Pacific/Galapagos':'EC',
+    /* Bolivia */
+    'America/La_Paz':'BO',
+    /* Paraguay */
+    'America/Asuncion':'PY',
+    /* Costa Rica */
+    'America/Costa_Rica':'CR',
+    /* Panama */
+    'America/Panama':'PA',
+    /* Dominican Republic */
+    'America/Santo_Domingo':'DO',
+    /* Puerto Rico */
+    'America/Puerto_Rico':'PR',
+    /* Guatemala */
+    'America/Guatemala':'GT',
+    /* El Salvador */
+    'America/El_Salvador':'SV',
+    /* Honduras */
+    'America/Tegucigalpa':'HN',
+    /* Nicaragua */
+    'America/Managua':'NI',
+    /* Cuba */
+    'America/Havana':'CU',
+    /* Spain */
+    'Europe/Madrid':'ES','Africa/Ceuta':'ES','Atlantic/Canary':'ES',
+    /* Brazil */
+    'America/Sao_Paulo':'BR','America/Manaus':'BR','America/Belem':'BR',
+    'America/Fortaleza':'BR','America/Recife':'BR','America/Maceio':'BR',
+    'America/Bahia':'BR','America/Cuiaba':'BR','America/Porto_Velho':'BR',
+    'America/Rio_Branco':'BR','America/Noronha':'BR','America/Santarem':'BR',
+    'America/Boa_Vista':'BR','America/Araguaina':'BR',
+    /* Portugal */
+    'Europe/Lisbon':'PT','Atlantic/Madeira':'PT','Atlantic/Azores':'PT',
+    /* France */
+    'Europe/Paris':'FR',
+    /* Belgium */
+    'Europe/Brussels':'BE',
+    /* Switzerland */
+    'Europe/Zurich':'CH',
+    /* Germany */
+    'Europe/Berlin':'DE',
+    /* Austria */
+    'Europe/Vienna':'AT',
+    /* Sweden */
+    'Europe/Stockholm':'SE',
+    /* Norway */
+    'Europe/Oslo':'NO',
+    /* Denmark */
+    'Europe/Copenhagen':'DK',
+    /* Finland */
+    'Europe/Helsinki':'FI',
+    /* Netherlands */
+    'Europe/Amsterdam':'NL',
+    /* Italy */
+    'Europe/Rome':'IT',
+    /* Greece */
+    'Europe/Athens':'GR',
+  };
+
+  function cwDetectCountryFromTZ() {
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return TZ_COUNTRY[tz] || null;
+    } catch(e) { return null; }
   }
 
   /* ── STYLES ───────────────────────────────────────────────────────────────── */
@@ -695,6 +827,21 @@
 
   if (hdr) hdr.appendChild(themeBtn);
 
+  /* ── AUTO-DETECT COUNTRY + LANGUAGE ON FIRST VISIT ─────── */
+  (function() {
+    if (cwGetCountry() !== null) return; // already set by user, skip
+    var detected = cwDetectCountryFromTZ();
+    var code = detected || 'global';
+    cwSetCountry(code);
+    cwCountryBtn.textContent = CW_FLAG_MAP[code] || '🌍';
+    if (detected) {
+      var targetLang = cwGetLangForCountry(detected);
+      if (targetLang !== CW_LANG) {
+        window.location.replace(cwLangUrl(targetLang));
+      }
+    }
+  })();
+
   /* ── COUNTRY PICKER MODAL ───────────────────────────────── */
   function openCountryPicker() {
     var overlay = document.createElement('div');
@@ -729,6 +876,12 @@
           cwCountryBtn.textContent = CW_FLAG_MAP[code] || '🌍';
           document.body.removeChild(overlay);
           document.body.style.overflow = '';
+          /* Auto-switch language when country implies a different language */
+          var targetLang = cwGetLangForCountry(code);
+          if (targetLang !== CW_LANG) {
+            window.location.href = cwLangUrl(targetLang);
+            return;
+          }
           cwRebuildGrids();
         });
       });
@@ -753,6 +906,7 @@
 
   /* ── GRID BUILDER (shared by category pages + homepage) ─── */
   function cwBuildGrid(items, country) {
+    country = country || 'global'; // null means first visit → show all
     var filtered = items.filter(function(item) {
       if (!item.countries || item.countries.length === 0) return true; // no filter = global
       if (country === 'global') return true;
