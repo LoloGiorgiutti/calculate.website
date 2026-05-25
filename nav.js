@@ -73,6 +73,39 @@
     { cat: '⚽ World Cup 2026', title: 'World Cup 2026', slug: 'world-cup', label: 'World Cup', desc: 'Everything about the 2026 FIFA World Cup.', items: [
       { n: 'World Cup 2026 Countdown', u: '/world-cup/',      icon:'🏆', badge:true, d: 'Live countdown to June 11, 2026', hd:'Real-time countdown to the opening match of the 2026 FIFA World Cup in Mexico City.' },
     ]},
+    { cat: '🪙 Crypto', title: 'Crypto', slug: 'crypto', label: 'Crypto', desc: 'DCA, P&L, portfolio and more crypto calculators.', items: [
+      { n: 'Crypto DCA Calculator',    u: '/crypto-dca/',     icon:'📉', badge:true, d: 'Dollar-cost average price',        hd:'Calculate your average purchase price when dollar-cost averaging into any cryptocurrency.', countries:['AR','global'] },
+      { n: 'Crypto P&L Calculator',    u: '/crypto-pl/',      icon:'💹', badge:true, d: 'Profit and loss on trades',        hd:'Calculate your profit or loss on any crypto trade including fees and taxes.', countries:['AR','global'] },
+    ]},
+    { cat: '🛍️ eCommerce', title: 'eCommerce', slug: 'ecommerce', label: 'eCommerce', desc: 'Margin, ROAS, projections and more for online sellers.', items: [
+      { n: 'eCommerce Margin',         u: '/ecommerce/margen/', icon:'📦', badge:true, d: 'ML, Tienda Nube, Shopify margin', hd:'Calculate your net margin on Mercado Libre, Tienda Nube, Shopify and other platforms.', countries:['AR','MX','CL','CO','BR'] },
+      { n: 'eCommerce KPIs',           u: '/ecommerce/kpis/',   icon:'📊', badge:true, d: 'ROAS, CAC, LTV, conversion rate', hd:'Calculate key eCommerce metrics: ROAS, CAC, LTV, conversion rate and more.', countries:['AR','global'] },
+      { n: 'Business Projection',      u: '/ecommerce/proyeccion/', icon:'🚀', badge:true, d: 'Revenue and profit forecast',  hd:'Project your eCommerce revenue, costs and profit over 12 months.', countries:['AR','global'] },
+      { n: 'China Shipping Cost',      u: '/ecommerce/envio-china/', icon:'🚢', badge:true, d: 'Air and sea freight from China', hd:'Estimate the cost of importing products from China by air or sea freight.', countries:['AR','global'] },
+    ]},
+    { cat: '🚗 Cars & Fuel', title: 'Cars & Fuel', slug: 'autos', label: 'Cars', desc: 'Fuel cost, vehicle tax, service and more.', items: [
+      { n: 'Fuel Cost Calculator',     u: '/fuel/',           icon:'⛽', badge:true, d: 'Trip cost by distance and consumption', hd:'Calculate the total fuel cost for any trip based on distance, consumption and fuel price.' },
+      { n: 'Nafta Calculator (AR)',    u: '/nafta/',          icon:'🚗', badge:true, d: 'Argentine fuel cost with car models',   hd:'Calculá el costo de tu viaje en Argentina con precios actualizados y tu modelo de auto.', countries:['AR'] },
+      { n: 'Vehicle Tax (AR)',         u: '/patente/',        icon:'📋', badge:true, d: 'Argentine annual vehicle tax',          hd:'Calculá el valor de la patente de tu auto en Argentina según provincia y año.', countries:['AR'] },
+      { n: 'Car Service (AR)',         u: '/service/',        icon:'🔧', badge:true, d: 'Oil, filters and service estimate',      hd:'Estimá el costo del service de tu auto en Argentina con precios de mano de obra y repuestos.', countries:['AR'] },
+    ]},
+    { cat: '🏠 Home & Property', title: 'Home & Property', slug: 'hogar', label: 'Home', desc: 'Rent, expenses, home improvements and more.', items: [
+      { n: 'Home Renovation (AR)',     u: '/reforma/',        icon:'🏗️', badge:true, d: 'Materials and labor estimate',          hd:'Estimá el costo de una reforma del hogar en Argentina con precios actuales de mano de obra y materiales.', countries:['AR'] },
+      { n: 'HOA Fees (AR)',            u: '/expensas/',       icon:'🏢', badge:true, d: 'Monthly building expenses',             hd:'Calculá las expensas de tu edificio o consorcio en Argentina.', countries:['AR'] },
+    ]},
+    { cat: '⚖️ Legal & Labor', title: 'Legal & Labor', slug: 'legal', label: 'Legal', desc: 'Severance, payroll, taxes and more labor calculators.', items: [
+      { n: 'Severance Pay (AR)',       u: '/indemnizacion/',  icon:'⚖️', badge:true, d: 'Argentine labor law severance',         hd:'Calculá la indemnización por despido sin causa en Argentina según la Ley de Contrato de Trabajo.', countries:['AR'] },
+      { n: 'Monotributo (AR)',         u: '/monotributo/',    icon:'🧾', badge:true, d: 'Category and monthly fee',              hd:'Calculá tu categoría de Monotributo y cuota mensual según la facturación anual en Argentina.', countries:['AR'] },
+      { n: 'Payroll Settlement (AR)',  u: '/liquidacion/',    icon:'📋', badge:true, d: 'Full payroll liquidation',              hd:'Calculá la liquidación de haberes completa en Argentina incluyendo SAC y vacaciones.', countries:['AR'] },
+      { n: 'AFIP Withholdings (AR)',   u: '/retenciones/',    icon:'🏦', badge:true, d: 'AFIP/ARCA retention calculator',        hd:'Calculá las retenciones de AFIP/ARCA sobre pagos y facturas en Argentina.', countries:['AR'] },
+      { n: 'Card Installments (AR)',   u: '/cuotas/',         icon:'💳', badge:true, d: 'Cost of paying in installments',        hd:'Calculá el costo real de pagar en cuotas con tarjeta de crédito en Argentina.', countries:['AR'] },
+    ]},
+    { cat: '💱 Finance (AR)', title: 'Finance (Argentina)', slug: 'finanzas', label: 'Finanzas AR', desc: 'Argentine-specific financial calculators.', items: [
+      { n: 'Fixed-Term Deposit (AR)',  u: '/plazo-fijo/',     icon:'💰', badge:true, d: 'Savings return with Argentine rates',   hd:'Simulá el rendimiento de un plazo fijo en Argentina con tasas actualizadas de los principales bancos.', countries:['AR'] },
+      { n: 'Currency Converter (AR)',  u: '/divisas/',        icon:'💵', badge:true, d: 'Blue dollar, MEP and official rates',   hd:'Convertí entre pesos y dólares con el tipo de cambio oficial, blue, MEP y CCL actualizados.', countries:['AR'] },
+      { n: 'Purchasing Power (AR)',    u: '/poder-adquisitivo/', icon:'📉', badge:true, d: 'How inflation erodes your savings', hd:'Calculá cómo la inflación argentina erosionó el poder adquisitivo de tu dinero.', countries:['AR'] },
+      { n: 'Mercado Pago (AR)',        u: '/mercado-pago/',   icon:'💙', badge:true, d: 'MP fees and returns',                   hd:'Calculá las comisiones de Mercado Pago y el rendimiento de tu dinero en la plataforma.', countries:['AR'] },
+    ]},
   ];
 
   /* ── FAQs ─────────────────────────────────────────────────────────────────
@@ -891,6 +924,38 @@
     '.cw-cpicker-item.selected{border-color:#4F6BFF !important;background:rgba(79,107,255,.12) !important;',
     'color:#4F6BFF !important;font-weight:700;}',
     '.cw-cpicker-flag{font-size:20px;flex-shrink:0;}',
+
+    /* ── GLOBAL INPUT NORMALIZATION ───────────────────────────────────────────
+       Ensures all calculator inputs use the site design system regardless of
+       whether the page uses the old (DM Sans / --hi) or new (Inter / --accent)
+       CSS variables. color-scheme:light prevents macOS/browser dark-mode from
+       injecting dark backgrounds into native form elements.                   */
+    'body{color-scheme:light;}',
+    'input[type=number],input[type=text],input[type=email],input[type=date],',
+    'input[type=time],input[type=search],input[type=url],select,textarea{',
+    'font-family:"Inter",sans-serif!important;',
+    'font-size:15px!important;',
+    'border-radius:10px!important;',
+    'border:1.5px solid #E4E7EE!important;',
+    'background:#F7F8FA!important;',
+    'color:#0A0E1A!important;',
+    'padding:12px 14px!important;',
+    'outline:none!important;',
+    '-moz-appearance:textfield!important;',
+    'transition:border-color .15s!important;',
+    '}',
+    'input[type=number]::-webkit-outer-spin-button,',
+    'input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none!important;}',
+    'input:focus,select:focus,textarea:focus{border-color:#4F6BFF!important;background:#fff!important;}',
+    'input::placeholder,textarea::placeholder{color:#858AA0!important;}',
+    /* Segment / toggle buttons normalisation (old .seg-btn, .unit-btn, .act-btn) */
+    '.seg-btn,.unit-btn,.act-btn{font-family:"Inter",sans-serif!important;border-radius:10px!important;}',
+    '.seg-btn.active,.unit-btn.active,.act-btn.active{background:#EEF1FF!important;border-color:#4F6BFF!important;color:#4F6BFF!important;}',
+    /* select arrow fix after background override */
+    'select{appearance:none!important;-webkit-appearance:none!important;',
+    'background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'8\' viewBox=\'0 0 12 8\'%3E%3Cpath d=\'M1 1l5 5 5-5\' stroke=\'%23858AA0\' stroke-width=\'1.5\' fill=\'none\' stroke-linecap=\'round\'/%3E%3C/svg%3E")!important;',
+    'background-repeat:no-repeat!important;background-position:right 14px center!important;',
+    'padding-right:36px!important;cursor:pointer!important;}',
 
   ].join('');
 

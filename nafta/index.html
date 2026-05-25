@@ -13,7 +13,7 @@
 <meta name="keywords" content="calculadora nafta, precio nafta argentina, cuanto cuesta el viaje en auto, calculadora combustible, precio litro nafta hoy, cuanto gasto en nafta, calculadora consumo nafta, nafta YPF precio, precio nafta hoy, calculadora viaje auto argentina, costo viaje auto, precio combustible argentina, nafta premium precio, GNC precio argentina, calculadora nafta gratis">
 <meta name="author" content="Calculadora de Nafta">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<link rel="canonical" href="https://calculadora.live/nafta/">
+<link rel="canonical" href="https://calculate.website/nafta/">
 <meta name="language" content="Spanish">
 <meta name="geo.region" content="AR">
 <meta name="geo.placename" content="Argentina">
@@ -22,10 +22,10 @@
      OPEN GRAPH (WhatsApp, Facebook, LinkedIn)
 ════════════════════════════════════════════════════ -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://calculadora.live/nafta/">
+<meta property="og:url" content="https://calculate.website/nafta/">
 <meta property="og:title" content="Calculadora de Nafta Argentina | ¿Cuánto me cuesta el viaje?">
 <meta property="og:description" content="Calculá cuánto te cuesta viajar en auto en Argentina. Ingresá los kilómetros y el precio actual de nafta Regular, Premium, Diesel o GNC.">
-<meta property="og:image" content="https://calculadora.live/nafta/og-image.png">
+<meta property="og:image" content="https://calculate.website/nafta/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Calculadora de Nafta Argentina — ¿Cuánto te cuesta el viaje?">
@@ -36,10 +36,10 @@
      TWITTER / X CARD
 ════════════════════════════════════════════════════ -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://calculadora.live/nafta/">
+<meta name="twitter:url" content="https://calculate.website/nafta/">
 <meta name="twitter:title" content="Calculadora de Nafta Argentina | ¿Cuánto te cuesta el viaje?">
 <meta name="twitter:description" content="¿Cuánto te cuesta el viaje en auto? Calculá el costo exacto con precios actualizados de nafta y GNC para Argentina.">
-<meta name="twitter:image" content="https://calculadora.live/nafta/og-image.png">
+<meta name="twitter:image" content="https://calculate.website/nafta/og-image.png">
 <meta name="twitter:image:alt" content="Calculadora de Nafta Argentina">
 
 <!-- ═══════════════════════════════════════════════════
@@ -51,9 +51,9 @@
   "@graph": [
     {
       "@type": "WebApplication",
-      "@id": "https://calculadora.live/nafta/#app",
+      "@id": "https://calculate.website/nafta/#app",
       "name": "Calculadora de Nafta Argentina",
-      "url": "https://calculadora.live/nafta/",
+      "url": "https://calculate.website/nafta/",
       "description": "Herramienta gratuita para calcular el costo de viajes en auto en Argentina. Incluye precios actualizados de nafta Regular, Premium, Diesel y GNC.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "Web",
@@ -77,20 +77,20 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://calculadora.live/nafta/#website",
-      "url": "https://calculadora.live/nafta/",
+      "@id": "https://calculate.website/nafta/#website",
+      "url": "https://calculate.website/nafta/",
       "name": "Calculadora de Nafta Argentina",
       "description": "Calculá cuánto te cuesta el viaje en auto en Argentina",
       "inLanguage": "es-AR",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://calculadora.live/nafta/",
+        "target": "https://calculate.website/nafta/",
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@type": "FAQPage",
-      "@id": "https://calculadora.live/nafta/#faq",
+      "@id": "https://calculate.website/nafta/#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -141,7 +141,7 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Inicio",
-          "item": "https://calculadora.live/nafta/"
+          "item": "https://calculate.website/nafta/"
         }
       ]
     }
@@ -2588,7 +2588,7 @@ async function compartirResultado() {
   const nafta  = appData.combustibles[currentCountry][parseInt(nftIdx)];
 
   const params   = new URLSearchParams({ marca, modelo, v: vIdx, km: Math.round(km), road: roadPct, nft: nafta.tipo });
-  const shareUrl = `https://calculadora.live/nafta/?${params}`;
+  const shareUrl = `https://calculate.website/nafta/?${params}`;
   const { peajes, costoNafta } = lastResult;
   const lineaCosto = peajes > 0
     ? `💰 ${currency} ${fmt(costo)} en total (${currency} ${fmt(costoNafta)} nafta + ${currency} ${fmt(peajes)} peajes)`
