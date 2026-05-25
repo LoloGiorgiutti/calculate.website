@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Sommeil — Meilleure Heure de Coucher et de Réveil | calculate.website</title>
+<meta name="description" content="Trouvez le meilleur moment pour vous lever ou vous coucher selon les cycles de sommeil de 90 minutes. Calculateur de sommeil gratuit.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/sleep/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/sleep/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/sleep/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/sleep/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/sleep/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/sleep/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.mode-row{display:flex;gap:8px;margin-bottom:22px}.mode-btn{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--ink-3);font-family:inherit;transition:all .15s;text-align:center}
+.mode-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.field{margin-bottom:4px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="time"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:22px;font-family:'JetBrains Mono',monospace;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s}
+input[type="time"]:focus{border-color:var(--accent)}
+.now-btn{margin-top:8px;padding:6px 14px;background:var(--accent-soft);color:var(--accent);border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}.now-btn:hover{background:var(--accent);color:#fff}
+.hint{font-size:12px;color:var(--ink-3);margin-top:10px;font-style:italic}
+.times-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.time-chip{background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;text-align:center}
+.time-chip.best{border-color:var(--accent);background:var(--accent-soft)}
+.tc-cycles{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}.time-chip.best .tc-cycles{color:var(--accent)}
+.tc-time{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--ink);letter-spacing:-0.02em}.time-chip.best .tc-time{color:var(--accent)}
+.tc-hrs{font-size:11px;color:var(--ink-3);margin-top:2px}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+@media(max-width:400px){.times-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/fr/">Accueil</a><span>›</span><a href="/fr/health/">Santé</a><span>›</span>Calculateur de Sommeil</div>
+  <h1>😴 Calculateur de Sommeil</h1>
+  <p class="sub">Trouvez la meilleure heure pour vous lever ou vous coucher selon les cycles de 90 minutes.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="mode-row">
+      <button class="mode-btn active" id="btn-wake" onclick="setMode('wake')">Je veux me lever à…</button>
+      <button class="mode-btn" id="btn-sleep" onclick="setMode('sleep')">Je vais me coucher à…</button>
+    </div>
+    <div class="field">
+      <label id="time-lbl">Heure de réveil</label>
+      <input type="time" id="tval">
+      <button class="now-btn" onclick="setNow()">Utiliser l'heure actuelle</button>
+    </div>
+    <p class="hint">Chaque cycle de sommeil ≈ 90 minutes. On ajoute ~15 min pour s'endormir.</p>
+    <div id="result"><div class="empty">Choisissez une heure ci-dessus</div></div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+var mode='wake';var tval=document.getElementById('tval');
+function setMode(m){mode=m;document.getElementById('btn-wake').classList.toggle('active',m==='wake');document.getElementById('btn-sleep').classList.toggle('active',m==='sleep');document.getElementById('time-lbl').textContent=m==='wake'?'Heure de réveil':'Heure de coucher';calc();}
+function setNow(){var n=new Date();tval.value=(n.getHours()<10?'0':'')+n.getHours()+':'+(n.getMinutes()<10?'0':'')+n.getMinutes();calc();}
+function fmtT(m){var h=Math.floor(m/60)%24,min=m%60;var hh=h<0?h+24:h;return (hh<10?'0':'')+hh+'h'+(min<10?'0':'')+min;}
+function calc(){
+  var v=tval.value;if(!v){document.getElementById('result').innerHTML='<div class="empty">Choisissez une heure ci-dessus</div>';return;}
+  var parts=v.split(':'),baseMin=parseInt(parts[0])*60+parseInt(parts[1]);
+  var cycles=[6,5,4,3];var html='<div class="times-grid">';
+  cycles.forEach(function(c){
+    var totalMin=c*90+15,t;
+    if(mode==='wake'){t=baseMin-totalMin;if(t<0)t+=1440;}else{t=baseMin+totalMin;if(t>=1440)t-=1440;}
+    var hrs=(c*90/60).toFixed(1).replace('.',',');var best=c===5||c===6?'best':'';
+    html+='<div class="time-chip '+best+'"><div class="tc-cycles">'+c+' cycles · '+hrs+'h</div><div class="tc-time">'+fmtT(t)+'</div><div class="tc-hrs">'+(mode==='wake'?'Couchez-vous à':'Réveillez-vous à')+' '+fmtT(t)+'</div></div>';
+  });
+  html+='</div>';document.getElementById('result').innerHTML=html;
+}
+tval.addEventListener('change',calc);
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calories Burned Calculator — Exercise & Activity | calculate.website</title>
+<meta name="description" content="Calculate calories burned during exercise and daily activities. Based on MET values for 30+ activities. Free calorie burn calculator.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/calories-burned/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/calories-burned/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/calories-burned/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/calories-burned/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/calories-burned/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/calories-burned/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.field{margin-bottom:18px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="number"],select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}
+input:focus,select:focus{border-color:var(--accent)}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:56px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}.rrv{font-size:18px;font-weight:700;color:var(--ink)}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/">Home</a><span>›</span><a href="/health/">Health</a><span>›</span>Calories Burned</div>
+  <h1>🏃 Calories Burned Calculator</h1>
+  <p class="sub">Calculate calories burned for any activity based on your weight, duration and MET values.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="field">
+      <label>Activity</label>
+      <select id="activity" onchange="calc()">
+        <optgroup label="Cardio">
+          <option value="8">Running (8 km/h)</option>
+          <option value="11">Running (12 km/h)</option>
+          <option value="14">Running (16 km/h)</option>
+          <option value="3.5">Walking (5 km/h)</option>
+          <option value="4.5">Walking (6 km/h)</option>
+          <option value="7">Cycling (moderate)</option>
+          <option value="10">Cycling (fast)</option>
+          <option value="7">Swimming (moderate)</option>
+          <option value="10">Swimming (vigorous)</option>
+          <option value="7.5">Jump rope</option>
+        </optgroup>
+        <optgroup label="Sports">
+          <option value="7">Soccer</option>
+          <option value="8">Basketball</option>
+          <option value="7">Tennis</option>
+          <option value="9">Rowing (vigorous)</option>
+          <option value="8">Hiking</option>
+        </optgroup>
+        <optgroup label="Gym">
+          <option value="5">Weight training (moderate)</option>
+          <option value="6">Weight training (vigorous)</option>
+          <option value="7">CrossFit / HIIT</option>
+          <option value="4.5">Yoga</option>
+          <option value="3">Stretching</option>
+        </optgroup>
+        <optgroup label="Daily life">
+          <option value="1.5">Sleeping</option>
+          <option value="1.8">Sitting (office work)</option>
+          <option value="2.3">Standing</option>
+          <option value="2.5">Cooking</option>
+          <option value="3">Cleaning</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="field">
+      <label>Your weight (kg)</label>
+      <input type="number" id="weight" min="30" max="300" placeholder="e.g. 75" oninput="calc()">
+    </div>
+    <div class="field">
+      <label>Duration (minutes)</label>
+      <input type="number" id="duration" min="1" max="600" placeholder="e.g. 30" oninput="calc()">
+    </div>
+    <div id="result"><div class="empty">Enter your weight and duration</div></div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+function calc(){
+  var met=parseFloat(document.getElementById('activity').value);
+  var w=parseFloat(document.getElementById('weight').value);
+  var d=parseFloat(document.getElementById('duration').value);
+  if(isNaN(w)||isNaN(d)||w<=0||d<=0){document.getElementById('result').innerHTML='<div class="empty">Enter your weight and duration</div>';return;}
+  var cal=met*w*d/60;
+  var perHour=met*w;
+  document.getElementById('result').innerHTML='<div class="result-card"><div class="result-lbl">Calories burned</div><div class="result-big">'+Math.round(cal)+' kcal</div>'
+    +'<div class="result-rows">'
+    +'<div class="result-row"><div class="rrl">Per hour</div><div class="rrv">'+Math.round(perHour)+' kcal</div></div>'
+    +'<div class="result-row"><div class="rrl">Duration</div><div class="rrv">'+d+' min</div></div>'
+    +'<div class="result-row"><div class="rrl">MET value</div><div class="rrv">'+met+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Body weight</div><div class="rrv">'+w+' kg</div></div>'
+    +'</div></div>';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Triángulos — Área, Perímetro y Ángulos | calculate.website</title>
+<meta name="description" content="Calcula el área, perímetro y ángulos de un triángulo desde los lados o la base y la altura. Calculadora de triángulos gratis.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/es/triangle/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/triangle/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/triangle/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/triangle/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/triangle/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/triangle/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.mode-row{display:flex;gap:8px;margin-bottom:22px}
+.mode-btn{flex:1;padding:9px;border:1.5px solid var(--line);border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--ink-3);font-family:inherit;transition:all .15s;text-align:center}
+.mode-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.field{margin-bottom:16px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="number"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}input:focus{border-color:var(--accent)}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:48px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}.rrv{font-size:18px;font-weight:700;color:var(--ink)}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/es/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/es/">Inicio</a><span>›</span><a href="/es/math/">Matemática</a><span>›</span>Calculadora de Triángulos</div>
+  <h1>📐 Calculadora de Triángulos</h1>
+  <p class="sub">Calcula el área, perímetro y ángulos de un triángulo desde los lados, base y altura, o dos lados y el ángulo.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="mode-row">
+      <button class="mode-btn active" id="btn-bh" onclick="setMode('bh')">Base y Altura</button>
+      <button class="mode-btn" id="btn-sss" onclick="setMode('sss')">Tres lados (LLL)</button>
+      <button class="mode-btn" id="btn-sas" onclick="setMode('sas')">Dos lados y ángulo</button>
+    </div>
+    <div id="ui-bh">
+      <div class="field"><label>Base</label><input type="number" id="base" min="0" placeholder="ej. 6" oninput="calc()"></div>
+      <div class="field"><label>Altura</label><input type="number" id="height" min="0" placeholder="ej. 4" oninput="calc()"></div>
+      <div class="field"><label>Lado a (opcional)</label><input type="number" id="sa" min="0" placeholder="para el perímetro" oninput="calc()"></div>
+      <div class="field"><label>Lado b (opcional)</label><input type="number" id="sb" min="0" placeholder="para el perímetro" oninput="calc()"></div>
+    </div>
+    <div id="ui-sss" style="display:none">
+      <div class="field"><label>Lado a</label><input type="number" id="s1" min="0" placeholder="ej. 3" oninput="calc()"></div>
+      <div class="field"><label>Lado b</label><input type="number" id="s2" min="0" placeholder="ej. 4" oninput="calc()"></div>
+      <div class="field"><label>Lado c</label><input type="number" id="s3" min="0" placeholder="ej. 5" oninput="calc()"></div>
+    </div>
+    <div id="ui-sas" style="display:none">
+      <div class="field"><label>Lado a</label><input type="number" id="sa1" min="0" placeholder="ej. 5" oninput="calc()"></div>
+      <div class="field"><label>Lado b</label><input type="number" id="sb1" min="0" placeholder="ej. 7" oninput="calc()"></div>
+      <div class="field"><label>Ángulo C entre ellos (grados)</label><input type="number" id="angleC" min="0" max="180" placeholder="ej. 60" oninput="calc()"></div>
+    </div>
+    <div id="result"><div class="empty">Ingresá las medidas arriba</div></div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+var mode='bh';
+function setMode(m){mode=m;['bh','sss','sas'].forEach(function(x){document.getElementById('btn-'+x).classList.toggle('active',x===m);document.getElementById('ui-'+x).style.display=x===m?'':'none';});calc();}
+function fmt(n){return parseFloat(n.toFixed(4)).toString().replace('.',',');}
+function calcSSS(a,b,c){
+  if(a+b<=c||a+c<=b||b+c<=a)return null;
+  var s=(a+b+c)/2,area=Math.sqrt(s*(s-a)*(s-b)*(s-c));
+  var A=Math.acos((b*b+c*c-a*a)/(2*b*c))*180/Math.PI;
+  var B=Math.acos((a*a+c*c-b*b)/(2*a*c))*180/Math.PI;
+  var C=180-A-B;
+  return{area:area,perimeter:a+b+c,A:A,B:B,C:C};
+}
+function calc(){
+  var res=document.getElementById('result'),html;
+  if(mode==='bh'){
+    var b=parseFloat(document.getElementById('base').value),h=parseFloat(document.getElementById('height').value);
+    if(isNaN(b)||isNaN(h)||b<=0||h<=0){res.innerHTML='<div class="empty">Ingresá las medidas arriba</div>';return;}
+    var area=0.5*b*h;
+    var sa=parseFloat(document.getElementById('sa').value)||null,sb=parseFloat(document.getElementById('sb').value)||null;
+    var perim=sa&&sb?b+sa+sb:null;
+    html='<div class="result-card"><div class="result-lbl">Área</div><div class="result-big">'+fmt(area)+'</div><div class="result-rows"><div class="result-row"><div class="rrl">Base</div><div class="rrv">'+b+'</div></div><div class="result-row"><div class="rrl">Altura</div><div class="rrv">'+h+'</div></div>'+(perim?'<div class="result-row"><div class="rrl">Perímetro</div><div class="rrv">'+fmt(perim)+'</div></div>':'')+'</div></div>';
+  } else if(mode==='sss'){
+    var a=parseFloat(document.getElementById('s1').value),b2=parseFloat(document.getElementById('s2').value),c=parseFloat(document.getElementById('s3').value);
+    if(isNaN(a)||isNaN(b2)||isNaN(c)||a<=0||b2<=0||c<=0){res.innerHTML='<div class="empty">Ingresá los tres lados</div>';return;}
+    var r=calcSSS(a,b2,c);
+    if(!r){res.innerHTML='<div class="empty">Estos lados no forman un triángulo válido</div>';return;}
+    html='<div class="result-card"><div class="result-lbl">Área</div><div class="result-big">'+fmt(r.area)+'</div><div class="result-rows"><div class="result-row"><div class="rrl">Perímetro</div><div class="rrv">'+fmt(r.perimeter)+'</div></div><div class="result-row"><div class="rrl">Ángulo A</div><div class="rrv">'+fmt(r.A)+'°</div></div><div class="result-row"><div class="rrl">Ángulo B</div><div class="rrv">'+fmt(r.B)+'°</div></div><div class="result-row"><div class="rrl">Ángulo C</div><div class="rrv">'+fmt(r.C)+'°</div></div></div></div>';
+  } else {
+    var sa2=parseFloat(document.getElementById('sa1').value),sb2=parseFloat(document.getElementById('sb1').value),ang=parseFloat(document.getElementById('angleC').value);
+    if(isNaN(sa2)||isNaN(sb2)||isNaN(ang)||sa2<=0||sb2<=0||ang<=0||ang>=180){res.innerHTML='<div class="empty">Ingresá dos lados y el ángulo entre ellos</div>';return;}
+    var angR=ang*Math.PI/180,area2=0.5*sa2*sb2*Math.sin(angR);
+    var c2=Math.sqrt(sa2*sa2+sb2*sb2-2*sa2*sb2*Math.cos(angR));
+    var A2=Math.asin(sa2*Math.sin(angR)/c2)*180/Math.PI,B2=180-ang-A2;
+    html='<div class="result-card"><div class="result-lbl">Área</div><div class="result-big">'+fmt(area2)+'</div><div class="result-rows"><div class="result-row"><div class="rrl">Perímetro</div><div class="rrv">'+fmt(sa2+sb2+c2)+'</div></div><div class="result-row"><div class="rrl">Lado c</div><div class="rrv">'+fmt(c2)+'</div></div><div class="result-row"><div class="rrl">Ángulo A</div><div class="rrv">'+fmt(A2)+'°</div></div><div class="result-row"><div class="rrl">Ángulo B</div><div class="rrv">'+fmt(B2)+'°</div></div></div></div>';
+  }
+  res.innerHTML=html;
+}
+</script>
+</body>
+</html>

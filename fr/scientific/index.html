@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculatrice Scientifique en Ligne | calculate.website</title>
+<meta name="description" content="Calculatrice scientifique gratuite avec trigonométrie, logarithmes, exposants, factorielles et plus. Fonctionne sur mobile et ordinateur.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/scientific/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/scientific/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/scientific/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/scientific/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/scientific/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/scientific/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.display{background:#0A0E1A;border-radius:12px;padding:16px 20px;margin-bottom:16px}
+.display .expr{font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(255,255,255,.4);min-height:18px;text-align:right;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.display .val{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:#fff;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.02em}
+.btn-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.btn{padding:13px 4px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .12s;text-align:center}
+.btn:active{transform:scale(.95)}
+.btn-num{background:var(--bg);color:var(--ink);border:1.5px solid var(--line)}.btn-num:hover{border-color:var(--ink-3)}
+.btn-op{background:var(--accent-soft);color:var(--accent)}.btn-op:hover{background:var(--accent);color:#fff}
+.btn-fn{background:#f0f0f8;color:var(--ink-2);font-size:12px}.btn-fn:hover{background:#e0e0f0}
+.btn-eq{background:var(--accent);color:#fff;grid-column:span 2}.btn-eq:hover{background:#3d56e0}
+.btn-clr{background:#ff475720;color:#ef4444}.btn-clr:hover{background:#ef4444;color:#fff}
+.btn-zero{grid-column:span 2}
+</style>
+</head>
+<body>
+<header><a href="/fr/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/fr/">Accueil</a><span>›</span><a href="/fr/math/">Mathématiques</a><span>›</span>Calculatrice Scientifique</div>
+  <h1>🔬 Calculatrice Scientifique</h1>
+  <p class="sub">Calculatrice scientifique complète avec fonctions trigonométriques, logarithmes, puissances et plus encore.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="display">
+      <div class="expr" id="expr"></div>
+      <div class="val" id="val">0</div>
+    </div>
+    <div class="btn-grid">
+      <button class="btn btn-fn" onclick="fn('sin')">sin</button>
+      <button class="btn btn-fn" onclick="fn('cos')">cos</button>
+      <button class="btn btn-fn" onclick="fn('tan')">tan</button>
+      <button class="btn btn-fn" onclick="fn('log')">log</button>
+      <button class="btn btn-fn" onclick="fn('ln')">ln</button>
+      <button class="btn btn-fn" onclick="fn('sqrt')">√</button>
+      <button class="btn btn-fn" onclick="fn('cbrt')">∛</button>
+      <button class="btn btn-fn" onclick="pushOp('^')">xʸ</button>
+      <button class="btn btn-fn" onclick="fn('fact')">n!</button>
+      <button class="btn btn-fn" onclick="pushConst('pi')">π</button>
+      <button class="btn btn-fn" onclick="pushOp('%')">%</button>
+      <button class="btn btn-fn" onclick="pushConst('e')">e</button>
+      <button class="btn btn-fn" onclick="toggleSign()">±</button>
+      <button class="btn btn-clr" onclick="delLast()">⌫</button>
+      <button class="btn btn-clr" onclick="clearAll()">C</button>
+      <button class="btn btn-num" onclick="push('7')">7</button>
+      <button class="btn btn-num" onclick="push('8')">8</button>
+      <button class="btn btn-num" onclick="push('9')">9</button>
+      <button class="btn btn-op" onclick="pushOp('/')">÷</button>
+      <button class="btn btn-op" onclick="pushOp('(')">(</button>
+      <button class="btn btn-num" onclick="push('4')">4</button>
+      <button class="btn btn-num" onclick="push('5')">5</button>
+      <button class="btn btn-num" onclick="push('6')">6</button>
+      <button class="btn btn-op" onclick="pushOp('*')">×</button>
+      <button class="btn btn-op" onclick="pushOp(')')">)</button>
+      <button class="btn btn-num" onclick="push('1')">1</button>
+      <button class="btn btn-num" onclick="push('2')">2</button>
+      <button class="btn btn-num" onclick="push('3')">3</button>
+      <button class="btn btn-op" onclick="pushOp('-')">−</button>
+      <button class="btn btn-op" onclick="pushOp('+')">+</button>
+      <button class="btn btn-num btn-zero" onclick="push('0')">0</button>
+      <button class="btn btn-num" onclick="push('.')">.</button>
+      <button class="btn btn-eq" onclick="calculate()">=</button>
+    </div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+var expr='',lastResult='';
+function updateDisplay(){
+  document.getElementById('expr').textContent=expr||'';
+  var preview='';
+  if(expr){try{preview=safeEval(expr);}catch(e){preview='';}}
+  document.getElementById('val').textContent=preview!==''?fmtN(preview):(lastResult||'0');
+}
+function fmtN(n){if(isNaN(n)||!isFinite(n))return 'Erreur';return parseFloat(n.toPrecision(12)).toString();}
+function push(c){expr+=c;updateDisplay();}
+function pushOp(op){expr+=op;updateDisplay();}
+function pushConst(c){if(c==='pi')expr+=Math.PI.toString();else expr+=Math.E.toString();updateDisplay();}
+function fn(name){
+  var s=prompt(name+'(x) — saisissez la valeur de x :');
+  if(s===null)return;var x=parseFloat(s.replace(',','.'));if(isNaN(x))return;
+  var r;var deg=Math.PI/180;
+  if(name==='sin')r=Math.sin(x*deg);else if(name==='cos')r=Math.cos(x*deg);
+  else if(name==='tan')r=Math.tan(x*deg);else if(name==='log')r=Math.log10(x);
+  else if(name==='ln')r=Math.log(x);else if(name==='sqrt')r=Math.sqrt(x);
+  else if(name==='cbrt')r=Math.cbrt(x);
+  else if(name==='fact'){r=1;for(var i=2;i<=Math.round(x);i++)r*=i;}
+  expr+=fmtN(r);updateDisplay();
+}
+function toggleSign(){if(expr&&!isNaN(expr)){expr=(parseFloat(expr)*-1).toString();updateDisplay();}}
+function delLast(){expr=expr.slice(0,-1);updateDisplay();}
+function clearAll(){expr='';lastResult='';document.getElementById('val').textContent='0';document.getElementById('expr').textContent='';}
+function safeEval(s){s=s.replace(/\^/g,'**');return Function('"use strict";return ('+s+')')();}
+function calculate(){
+  if(!expr)return;
+  try{var r=safeEval(expr);document.getElementById('expr').textContent=expr+' =';lastResult=fmtN(r);document.getElementById('val').textContent=lastResult;expr='';}
+  catch(e){document.getElementById('val').textContent='Erreur';expr='';}
+}
+document.addEventListener('keydown',function(e){
+  if(e.key>='0'&&e.key<='9')push(e.key);
+  else if(e.key==='.')push(e.key);
+  else if(e.key==='+')push(e.key);
+  else if(e.key==='-'||e.key==='*'||e.key==='/')pushOp(e.key);
+  else if(e.key==='('||e.key===')')pushOp(e.key);
+  else if(e.key==='Enter'||e.key==='=')calculate();
+  else if(e.key==='Backspace')delLast();
+  else if(e.key==='Escape')clearAll();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Horas Trabalhadas | calculate.website</title>
+<meta name="description" content="Calcule as horas trabalhadas entre dois horários. Inclui pausas e ganhos diários. Calculadora de horas de trabalho grátis.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/pt/work-hours/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/work-hours/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/work-hours/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/work-hours/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/work-hours/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/work-hours/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.time-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.field{margin-bottom:18px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="time"],input[type="number"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s}
+input[type="number"]{-moz-appearance:textfield}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}
+input:focus{border-color:var(--accent)}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:48px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px;font-family:'JetBrains Mono',monospace}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}.rrv{font-size:18px;font-weight:700;color:var(--ink)}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/pt/">Início</a><span>›</span><a href="/pt/dates/">Datas</a><span>›</span>Horas Trabalhadas</div>
+  <h1>📋 Calculadora de Horas Trabalhadas</h1>
+  <p class="sub">Calcule as horas trabalhadas entre entrada e saída, incluindo pausas e ganhos.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="time-row">
+      <div class="field"><label>Hora de entrada</label><input type="time" id="start" value="09:00" oninput="calc()"></div>
+      <div class="field"><label>Hora de saída</label><input type="time" id="end" value="18:00" oninput="calc()"></div>
+    </div>
+    <div class="field"><label>Pausa (minutos)</label><input type="number" id="brk" min="0" max="480" value="60" oninput="calc()"></div>
+    <div class="field"><label>Valor por hora (opcional, R$)</label><input type="number" id="rate" min="0" step="0.01" placeholder="ex. 25" oninput="calc()"></div>
+    <div id="result"><div class="empty">Informe os horários de entrada e saída</div></div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+function calc(){
+  var s=document.getElementById('start').value,e=document.getElementById('end').value;
+  if(!s||!e){document.getElementById('result').innerHTML='<div class="empty">Informe os horários de entrada e saída</div>';return;}
+  var sp=s.split(':'),ep=e.split(':');
+  var startMin=parseInt(sp[0])*60+parseInt(sp[1]),endMin=parseInt(ep[0])*60+parseInt(ep[1]);
+  if(endMin<=startMin)endMin+=1440;
+  var brk=parseFloat(document.getElementById('brk').value)||0;
+  var worked=endMin-startMin-brk;
+  if(worked<=0){document.getElementById('result').innerHTML='<div class="empty">A saída deve ser após a entrada</div>';return;}
+  var h=Math.floor(worked/60),m=worked%60;
+  var rate=parseFloat(document.getElementById('rate').value);
+  var earning=isNaN(rate)||rate<=0?null:rate*(worked/60);
+  document.getElementById('result').innerHTML='<div class="result-card"><div class="result-lbl">Horas trabalhadas</div><div class="result-big">'+(h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+'</div>'
+    +'<div class="result-rows">'
+    +'<div class="result-row"><div class="rrl">Total em minutos</div><div class="rrv">'+worked+' min</div></div>'
+    +'<div class="result-row"><div class="rrl">Pausa</div><div class="rrv">'+brk+' min</div></div>'
+    +(earning!==null?'<div class="result-row"><div class="rrl">Ganhos</div><div class="rrv">R$ '+earning.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div><div class="result-row"><div class="rrl">Valor/hora</div><div class="rrv">R$ '+rate.toFixed(2).replace('.',',')+'/h</div></div>':'')
+    +'</div></div>';
+}
+calc();
+</script>
+</body>
+</html>

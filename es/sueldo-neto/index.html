@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Sueldo Neto Argentina — De Bruto a Neto | calculate.website</title>
+<meta name="description" content="Calculá tu sueldo neto en Argentina. Convertí salario bruto a neto descontando jubilación, PAMI, obra social y sindicato. Gratis y actualizado.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/es/sueldo-neto/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/sueldo-neto/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/es/sueldo-neto/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--neg:#ef4444;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.field{margin-bottom:18px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="number"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}input:focus{border-color:var(--accent)}
+.toggle-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:12px 14px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;cursor:pointer;transition:border-color .15s}
+.toggle-row:hover{border-color:var(--accent)}
+.toggle-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.toggle-label{font-size:14px;font-weight:500;color:var(--ink-2);flex:1}
+.toggle-sub{font-size:12px;color:var(--ink-3)}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.preset{padding:4px 10px;background:var(--accent-soft);color:var(--accent);border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}.preset:hover{background:var(--accent);color:#fff}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:42px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}.rrv{font-size:18px;font-weight:700;color:var(--ink)}
+.rrv.neg{color:var(--neg)}
+.desc-table{width:100%;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15);font-size:13px}
+.desc-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(79,107,255,.08)}
+.desc-row:last-child{border-bottom:none;font-weight:700;padding-top:8px}
+.desc-row .neg{color:var(--neg)}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+.info-box{background:#F0F4FF;border:1px solid #D4DBFF;border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.info-box strong{color:var(--accent)}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/es/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/es/">Inicio</a><span>›</span><a href="/es/finance/">Finanzas</a><span>›</span>Sueldo Neto</div>
+  <h1>💼 Calculadora de Sueldo Neto</h1>
+  <p class="sub">Convertí tu salario bruto en neto descontando jubilación, PAMI, obra social y cuota sindical. Argentina.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="field">
+      <label>Sueldo bruto mensual ($)</label>
+      <input type="number" id="bruto" min="0" step="10000" placeholder="ej. 500000" oninput="calc()">
+      <div class="presets">
+        <button class="preset" onclick="setV(300000)">$300k</button>
+        <button class="preset" onclick="setV(500000)">$500k</button>
+        <button class="preset" onclick="setV(800000)">$800k</button>
+        <button class="preset" onclick="setV(1200000)">$1.2M</button>
+        <button class="preset" onclick="setV(2000000)">$2M</button>
+      </div>
+    </div>
+
+    <label style="font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:10px;display:block">Descuentos aplicables</label>
+
+    <label class="toggle-row">
+      <input type="checkbox" id="chk-jub" checked onchange="calc()">
+      <div>
+        <div class="toggle-label">Jubilación (SIPA) — 11%</div>
+        <div class="toggle-sub">Sistema Integrado Previsional Argentino</div>
+      </div>
+    </label>
+    <label class="toggle-row">
+      <input type="checkbox" id="chk-pami" checked onchange="calc()">
+      <div>
+        <div class="toggle-label">PAMI (INSSJP) — 3%</div>
+        <div class="toggle-sub">Instituto Nacional de Servicios Sociales</div>
+      </div>
+    </label>
+    <label class="toggle-row">
+      <input type="checkbox" id="chk-os" checked onchange="calc()">
+      <div>
+        <div class="toggle-label">Obra Social — 3%</div>
+        <div class="toggle-sub">Aporte personal a la obra social</div>
+      </div>
+    </label>
+    <label class="toggle-row" style="margin-bottom:0">
+      <input type="checkbox" id="chk-sind" onchange="calc()">
+      <div style="flex:1">
+        <div class="toggle-label">Cuota sindical — <span id="sind-pct-lbl">2%</span></div>
+        <div class="toggle-sub">Opcional · modificá el porcentaje si es distinto</div>
+      </div>
+      <input type="number" id="sind-pct" value="2" min="0" max="10" step="0.5" style="width:70px;margin-left:10px" oninput="document.getElementById('sind-pct-lbl').textContent=this.value+'%';calc()" onclick="event.stopPropagation()">
+    </label>
+
+    <div id="result" style="margin-top:18px"><div class="empty">Ingresá tu sueldo bruto arriba</div></div>
+
+    <div class="info-box">
+      <strong>Nota:</strong> Esta calculadora aplica los descuentos del empleado en relación de dependencia. No incluye Impuesto a las Ganancias (Cuarta Categoría), que depende de deducciones personales, cargas de familia y otros factores.
+    </div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-AR');}
+function fmtPct(n){return n.toLocaleString('es-AR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';}
+function setV(v){document.getElementById('bruto').value=v;calc();}
+function calc(){
+  var bruto=parseFloat(document.getElementById('bruto').value);
+  if(isNaN(bruto)||bruto<=0){document.getElementById('result').innerHTML='<div class="empty">Ingresá tu sueldo bruto arriba</div>';return;}
+
+  var useJub=document.getElementById('chk-jub').checked;
+  var usePami=document.getElementById('chk-pami').checked;
+  var useOs=document.getElementById('chk-os').checked;
+  var useSind=document.getElementById('chk-sind').checked;
+  var sindPct=parseFloat(document.getElementById('sind-pct').value)||0;
+
+  var jubAmt=useJub?bruto*0.11:0;
+  var pamiAmt=usePami?bruto*0.03:0;
+  var osAmt=useOs?bruto*0.03:0;
+  var sindAmt=useSind?bruto*(sindPct/100):0;
+  var totalDesc=jubAmt+pamiAmt+osAmt+sindAmt;
+  var neto=bruto-totalDesc;
+  var pctDesc=(totalDesc/bruto*100);
+
+  var rows='';
+  if(useJub) rows+='<div class="desc-row"><span>Jubilación SIPA (11%)</span><span class="neg">−'+fmt(jubAmt)+'</span></div>';
+  if(usePami) rows+='<div class="desc-row"><span>PAMI / INSSJP (3%)</span><span class="neg">−'+fmt(pamiAmt)+'</span></div>';
+  if(useOs) rows+='<div class="desc-row"><span>Obra Social (3%)</span><span class="neg">−'+fmt(osAmt)+'</span></div>';
+  if(useSind&&sindAmt>0) rows+='<div class="desc-row"><span>Cuota sindical ('+fmtPct(sindPct)+')</span><span class="neg">−'+fmt(sindAmt)+'</span></div>';
+  rows+='<div class="desc-row"><span>Total descuentos</span><span class="neg">−'+fmt(totalDesc)+'</span></div>';
+
+  document.getElementById('result').innerHTML='<div class="result-card">'
+    +'<div class="result-lbl">Sueldo Neto</div>'
+    +'<div class="result-big">'+fmt(neto)+'</div>'
+    +'<div class="result-rows">'
+    +'<div class="result-row"><div class="rrl">Sueldo Bruto</div><div class="rrv">'+fmt(bruto)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Total descuentos</div><div class="rrv neg">−'+fmt(totalDesc)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">% descontado</div><div class="rrv">'+fmtPct(pctDesc)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">% de bolsillo</div><div class="rrv">'+fmtPct(100-pctDesc)+'</div></div>'
+    +'</div>'
+    +'<div class="desc-table">'+rows+'</div>'
+    +'</div>';
+}
+</script>
+</body>
+</html>

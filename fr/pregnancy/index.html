@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Date d'Accouchement | calculate.website</title>
+<meta name="description" content="Calculez votre date d'accouchement à partir des dernières règles ou de la date de conception. Voir les semaines et trimestres. Calculateur de grossesse gratuit.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/pregnancy/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/pregnancy/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/pregnancy/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/pregnancy/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/pregnancy/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/pregnancy/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.mode-row{display:flex;gap:8px;margin-bottom:22px}
+.mode-btn{flex:1;padding:9px;border:1.5px solid var(--line);border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--ink-3);font-family:inherit;transition:all .15s;text-align:center}
+.mode-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.field{margin-bottom:18px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="date"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s}
+input:focus{border-color:var(--accent)}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:32px;font-weight:800;letter-spacing:-0.03em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}.rrv{font-size:16px;font-weight:700;color:var(--ink)}
+.trimesters{margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.tri{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(79,107,255,.08);font-size:13px}
+.tri-name{font-weight:600;color:var(--ink-3)}.tri-dates{color:var(--ink)}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+.note{font-size:12px;color:var(--ink-3);margin-top:12px;font-style:italic}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/fr/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/fr/">Accueil</a><span>›</span><a href="/fr/health/">Santé</a><span>›</span>Date d'Accouchement</div>
+  <h1>🤰 Calculateur de Date d'Accouchement</h1>
+  <p class="sub">Calculez votre date d'accouchement, la semaine actuelle et les dates de trimestres à partir de vos dernières règles ou de la date de conception.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="mode-row">
+      <button class="mode-btn active" id="btn-lmp" onclick="setMode('lmp')">Dernières règles</button>
+      <button class="mode-btn" id="btn-con" onclick="setMode('conception')">Conception</button>
+      <button class="mode-btn" id="btn-due" onclick="setMode('due')">Date connue</button>
+    </div>
+    <div class="field">
+      <label id="date-lbl">Premier jour des dernières règles</label>
+      <input type="date" id="date-input" onchange="calc()">
+    </div>
+    <div id="result"><div class="empty">Saisissez une date ci-dessus</div></div>
+    <p class="note">* Basé sur la règle de Naegele (40 semaines = 280 jours depuis les dernières règles). Consultez votre médecin pour tout conseil médical.</p>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+var mode='lmp';
+function setMode(m){mode=m;document.getElementById('btn-lmp').classList.toggle('active',m==='lmp');document.getElementById('btn-con').classList.toggle('active',m==='conception');document.getElementById('btn-due').classList.toggle('active',m==='due');var labels={lmp:'Premier jour des dernières règles',conception:'Date de conception (approx.)',due:'Date d\'accouchement prévue'};document.getElementById('date-lbl').textContent=labels[m];calc();}
+function addDays(d,n){var r=new Date(d);r.setDate(r.getDate()+n);return r;}
+function fmtDate(d){return d.toLocaleDateString('fr-FR',{month:'long',day:'numeric',year:'numeric'});}
+function calc(){
+  var v=document.getElementById('date-input').value;
+  if(!v){document.getElementById('result').innerHTML='<div class="empty">Saisissez une date ci-dessus</div>';return;}
+  var inputDate=new Date(v+'T12:00:00');
+  var lmp,dueDate;
+  if(mode==='lmp'){lmp=inputDate;dueDate=addDays(lmp,280);}
+  else if(mode==='conception'){lmp=addDays(inputDate,-14);dueDate=addDays(lmp,280);}
+  else{dueDate=inputDate;lmp=addDays(dueDate,-280);}
+  var now=new Date();
+  var daysSinceLMP=Math.floor((now-lmp)/86400000);
+  var weeksPregnant=Math.floor(daysSinceLMP/7);
+  var daysExtra=daysSinceLMP%7;
+  var daysLeft=Math.max(0,Math.floor((dueDate-now)/86400000));
+  var t1end=addDays(lmp,97),t2start=addDays(lmp,98),t2end=addDays(lmp,195),t3start=addDays(lmp,196);
+  var trimester=daysSinceLMP<98?'1er trimestre':daysSinceLMP<196?'2e trimestre':'3e trimestre';
+  var html='<div class="result-card"><div class="result-lbl">Date d\'accouchement prévue</div><div class="result-big">'+fmtDate(dueDate)+'</div>'
+    +'<div class="result-rows">'
+    +'<div class="result-row"><div class="rrl">Semaine actuelle</div><div class="rrv">'+(daysSinceLMP>0?'Semaine '+weeksPregnant+'+'+daysExtra:'—')+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Trimestre</div><div class="rrv">'+(daysSinceLMP>0?trimester:'—')+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Jours restants</div><div class="rrv">'+daysLeft+' jours</div></div>'
+    +'<div class="result-row"><div class="rrl">Date DDR</div><div class="rrv">'+fmtDate(lmp)+'</div></div>'
+    +'</div>'
+    +'<div class="trimesters">'
+    +'<div class="tri"><span class="tri-name">1er Trimestre</span><span class="tri-dates">'+fmtDate(lmp)+' – '+fmtDate(t1end)+'</span></div>'
+    +'<div class="tri"><span class="tri-name">2e Trimestre</span><span class="tri-dates">'+fmtDate(t2start)+' – '+fmtDate(t2end)+'</span></div>'
+    +'<div class="tri"><span class="tri-name">3e Trimestre</span><span class="tri-dates">'+fmtDate(t3start)+' – '+fmtDate(dueDate)+'</span></div>'
+    +'</div></div>';
+  document.getElementById('result').innerHTML=html;
+}
+</script>
+</body>
+</html>

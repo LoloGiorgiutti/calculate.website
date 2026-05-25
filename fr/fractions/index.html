@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Fractions — Additionner, Soustraire, Multiplier, Diviser | calculate.website</title>
+<meta name="description" content="Calculez avec des fractions en ligne. Additionnez, soustrayez, multipliez et divisez des fractions étape par étape. Simplification automatique. Gratuit.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/fractions/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/fractions/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/fractions/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/fractions/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/fractions/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/fractions/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.op-row{display:flex;gap:8px;margin-bottom:24px}
+.op-btn{flex:1;padding:9px 4px;border:1.5px solid var(--line);border-radius:9px;font-size:18px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--ink-3);font-family:inherit;transition:all .15s;text-align:center}
+.op-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.fraction-row{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.fraction-inputs{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.frac-sep{height:2px;background:var(--ink-2);border-radius:1px;width:100%}
+.fraction-inputs input{width:100%;padding:10px 8px;border:1.5px solid var(--line);border-radius:10px;font-size:22px;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink);background:var(--bg);outline:none;text-align:center;-moz-appearance:textfield}
+.fraction-inputs input::-webkit-outer-spin-button,.fraction-inputs input::-webkit-inner-spin-button{-webkit-appearance:none}
+.fraction-inputs input:focus{border-color:var(--accent)}
+.op-symbol{font-size:28px;font-weight:800;color:var(--ink-3);min-width:24px;text-align:center}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px;text-align:center}
+.result-frac{display:inline-flex;flex-direction:column;align-items:center;gap:4px}
+.result-frac .num,.result-frac .den{font-size:40px;font-weight:800;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.result-frac .sep{height:3px;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);border-radius:2px;width:100%}
+.result-decimal{font-size:18px;color:var(--ink-3);margin-top:8px}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+</style>
+</head>
+<body>
+<header><a href="/fr/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/fr/">Accueil</a><span>›</span><a href="/fr/math/">Mathématiques</a><span>›</span>Calculateur de Fractions</div>
+  <h1>½ Calculateur de Fractions</h1>
+  <p class="sub">Additionnez, soustrayez, multipliez et divisez des fractions. Les résultats sont automatiquement simplifiés.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="op-row">
+      <button class="op-btn active" id="op-add" onclick="setOp('add')">+</button>
+      <button class="op-btn" id="op-sub" onclick="setOp('sub')">−</button>
+      <button class="op-btn" id="op-mul" onclick="setOp('mul')">×</button>
+      <button class="op-btn" id="op-div" onclick="setOp('div')">÷</button>
+    </div>
+    <div class="fraction-row">
+      <div class="fraction-inputs">
+        <input type="number" id="n1" placeholder="1" oninput="calc()">
+        <div class="frac-sep"></div>
+        <input type="number" id="d1" placeholder="2" oninput="calc()">
+      </div>
+      <div class="op-symbol" id="op-display">+</div>
+      <div class="fraction-inputs">
+        <input type="number" id="n2" placeholder="1" oninput="calc()">
+        <div class="frac-sep"></div>
+        <input type="number" id="d2" placeholder="3" oninput="calc()">
+      </div>
+    </div>
+    <div id="result"><div class="empty">Saisissez les fractions ci-dessus</div></div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+var op='add';var opSymbols={add:'+',sub:'−',mul:'×',div:'÷'};
+function setOp(o){op=o;['add','sub','mul','div'].forEach(function(x){document.getElementById('op-'+x).classList.toggle('active',x===o);});document.getElementById('op-display').textContent=opSymbols[o];calc();}
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=b;b=a%b;a=t;}return a;}
+function simplify(n,d){if(d===0)return[NaN,NaN];var g=gcd(Math.abs(n),Math.abs(d));var sign=d<0?-1:1;return[sign*n/g,sign*d/g];}
+function calc(){
+  var n1=parseInt(document.getElementById('n1').value),d1=parseInt(document.getElementById('d1').value);
+  var n2=parseInt(document.getElementById('n2').value),d2=parseInt(document.getElementById('d2').value);
+  if(isNaN(n1)||isNaN(d1)||isNaN(n2)||isNaN(d2)||d1===0||d2===0){document.getElementById('result').innerHTML='<div class="empty">Saisissez les fractions ci-dessus</div>';return;}
+  var rn,rd;
+  if(op==='add'){rn=n1*d2+n2*d1;rd=d1*d2;}
+  else if(op==='sub'){rn=n1*d2-n2*d1;rd=d1*d2;}
+  else if(op==='mul'){rn=n1*n2;rd=d1*d2;}
+  else{rn=n1*d2;rd=d1*n2;}
+  var s=simplify(rn,rd);
+  if(isNaN(s[0])){document.getElementById('result').innerHTML='<div class="empty">Division par zéro impossible</div>';return;}
+  var decimal=(s[0]/s[1]);
+  var decStr=Number.isInteger(decimal)?decimal.toString():decimal.toFixed(6).replace(/\.?0+$/,'').replace('.',',');
+  var html='<div class="result-card">';
+  if(s[1]===1){html+='<div style="font-size:48px;font-weight:800;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent">'+s[0]+'</div>';}
+  else{html+='<div class="result-frac"><div class="num">'+s[0]+'</div><div class="sep"></div><div class="den">'+s[1]+'</div></div>';}
+  html+='<div class="result-decimal">= '+decStr+'</div></div>';
+  document.getElementById('result').innerHTML=html;
+}
+</script>
+</body>
+</html>

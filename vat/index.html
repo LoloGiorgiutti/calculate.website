@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAT Calculator — Add or Remove VAT | calculate.website</title>
+<meta name="description" content="Add or remove VAT (IVA) from any price. Adjust the tax rate to match your country. Free VAT calculator — Argentina 21%, Spain 21%, Mexico 16%, France 20%.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/vat/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/vat/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/vat/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/vat/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/vat/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/vat/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
+.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.mode-row{display:flex;gap:8px;margin-bottom:22px}
+.mode-btn{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--ink-3);font-family:inherit;transition:all .15s;text-align:center}
+.mode-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.field{margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="number"]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}
+input:focus{border-color:var(--accent)}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.preset{padding:4px 10px;background:var(--accent-soft);color:var(--accent);border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+.preset:hover{background:var(--accent);color:#fff}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:42px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}
+.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.rrv{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.02em}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/">Home</a><span>›</span><a href="/finance/">Finance</a><span>›</span>VAT Calculator</div>
+  <h1>🧾 VAT Calculator</h1>
+  <p class="sub">Add or remove VAT from any price. Works with any tax rate and currency.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="mode-row">
+      <button class="mode-btn active" id="btn-add" onclick="setMode('add')">Add VAT to price</button>
+      <button class="mode-btn" id="btn-rem" onclick="setMode('remove')">Remove VAT from price</button>
+    </div>
+    <div class="field">
+      <label for="price" id="price-lbl">Price (excl. VAT)</label>
+      <input type="number" id="price" min="0" step="0.01" placeholder="e.g. 100">
+    </div>
+    <div class="field">
+      <label for="rate">VAT rate (%)</label>
+      <input type="number" id="rate" min="0" max="100" step="0.1" value="21">
+      <div class="presets">
+        <button class="preset" onclick="setRate(21)">AR/ES 21%</button>
+        <button class="preset" onclick="setRate(16)">MX 16%</button>
+        <button class="preset" onclick="setRate(20)">FR/UK 20%</button>
+        <button class="preset" onclick="setRate(19)">DE 19%</button>
+        <button class="preset" onclick="setRate(10.5)">AR reduced 10.5%</button>
+        <button class="preset" onclick="setRate(0)">0% (exempt)</button>
+      </div>
+    </div>
+    <div id="result"><div class="empty">Enter a price above</div></div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+var mode='add';
+var priceEl=document.getElementById('price'),rateEl=document.getElementById('rate'),resEl=document.getElementById('result'),plbl=document.getElementById('price-lbl');
+function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function setRate(v){rateEl.value=v;calc();}
+function setMode(m){mode=m;document.getElementById('btn-add').classList.toggle('active',m==='add');document.getElementById('btn-rem').classList.toggle('active',m==='remove');plbl.textContent=m==='add'?'Price (excl. VAT)':'Price (incl. VAT)';calc();}
+function calc(){
+  var p=parseFloat(priceEl.value),r=parseFloat(rateEl.value);
+  if(isNaN(p)||p<=0){resEl.innerHTML='<div class="empty">Enter a price above</div>';return;}
+  var rate=isNaN(r)?0:r;
+  var net,vat,gross;
+  if(mode==='add'){net=p;vat=p*rate/100;gross=p+vat;}
+  else{gross=p;net=p/(1+rate/100);vat=gross-net;}
+  resEl.innerHTML='<div class="result-card">'
+    +'<div class="result-lbl">'+(mode==='add'?'Price with VAT':'Price without VAT')+'</div>'
+    +'<div class="result-big">'+(mode==='add'?fmt(gross):fmt(net))+'</div>'
+    +'<div class="result-rows">'
+    +'<div class="result-row"><div class="rrl">Excl. VAT</div><div class="rrv">'+fmt(net)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">VAT ('+rate+'%)</div><div class="rrv">'+fmt(vat)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Incl. VAT</div><div class="rrv">'+fmt(gross)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">VAT rate</div><div class="rrv">'+rate+'%</div></div>'
+    +'</div></div>';
+}
+priceEl.addEventListener('input',calc);rateEl.addEventListener('input',calc);
+</script>
+</body>
+</html>

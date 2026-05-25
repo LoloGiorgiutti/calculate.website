@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Aguinaldo (SAC) Argentina | calculate.website</title>
+<meta name="description" content="Calculá tu aguinaldo (SAC) en Argentina. Sueldo Anual Complementario por semestre según la mejor remuneración del período. Gratis y sin registro.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/es/aguinaldo/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/aguinaldo/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/es/aguinaldo/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+header{background:#0A0E1A;border-bottom:1px solid #1F2438;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:58px;padding:0 20px}
+.logo{font-size:16px;font-weight:700;letter-spacing:-0.03em;color:#fff}.logo span{color:var(--accent)}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto}
+main{max-width:520px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.field{margin-bottom:18px}label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+input[type="number"],select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}input:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23858AA0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.hint{font-size:12px;color:var(--ink-3);margin-top:6px}
+.result-card{background:linear-gradient(135deg,#EEF1FF,#E8EEFF);border:1px solid rgba(79,107,255,.2);border-radius:12px;padding:20px 24px;margin-top:4px}
+.result-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(10,14,26,.4);margin-bottom:4px}
+.result-big{font-size:42px;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,#4F6BFF,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px}
+.result-rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(79,107,255,.15)}
+.result-row{display:flex;flex-direction:column;gap:3px}.rrl{font-size:11px;color:rgba(10,14,26,.4);font-weight:600;text-transform:uppercase;letter-spacing:.05em}.rrv{font-size:18px;font-weight:700;color:var(--ink)}
+.empty{color:var(--ink-3);font-size:14px;text-align:center;padding:16px 0}
+.info-box{background:#F0F4FF;border:1px solid #D4DBFF;border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.info-box strong{color:var(--accent)}
+@media(max-width:480px){.result-rows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a href="/es/" class="logo">calculate<span>.website</span></a></header>
+<div class="hero">
+  <div class="bc"><a href="/es/">Inicio</a><span>›</span><a href="/es/finance/">Finanzas</a><span>›</span>Calculadora de Aguinaldo</div>
+  <h1>🎄 Calculadora de Aguinaldo</h1>
+  <p class="sub">Calculá tu SAC (Sueldo Anual Complementario) según la mejor remuneración del semestre y los días trabajados.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="field">
+      <label>Mejor remuneración bruta mensual del semestre ($)</label>
+      <input type="number" id="sueldo" min="0" step="1000" placeholder="ej. 500000" oninput="calc()">
+      <div class="hint">Ingresá el salario bruto más alto que percibiste en el semestre</div>
+    </div>
+    <div class="field">
+      <label>Días trabajados en el semestre</label>
+      <input type="number" id="dias" min="1" max="184" step="1" placeholder="ej. 184" oninput="calc()">
+      <div class="hint">Semestre completo: 1er sem. = 181 días · 2do sem. = 184 días</div>
+    </div>
+    <div class="field">
+      <label>Semestre</label>
+      <select id="semestre" onchange="calc()">
+        <option value="184">2.º semestre (julio–diciembre) — 184 días</option>
+        <option value="181">1.º semestre (enero–junio) — 181 días</option>
+      </select>
+    </div>
+    <div id="result"><div class="empty">Completá los campos arriba</div></div>
+    <div class="info-box">
+      <strong>¿Cómo se calcula?</strong><br>
+      SAC = Mejor remuneración ÷ 2 × (Días trabajados ÷ Días del semestre)<br><br>
+      El aguinaldo se paga en dos cuotas: antes del <strong>30 de junio</strong> y antes del <strong>31 de diciembre</strong>.
+    </div>
+  </div>
+</main>
+<script src="/nav.js"></script>
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-AR');}
+function calc(){
+  var sueldo=parseFloat(document.getElementById('sueldo').value);
+  var dias=parseFloat(document.getElementById('dias').value);
+  var semDias=parseInt(document.getElementById('semestre').value);
+  if(isNaN(sueldo)||isNaN(dias)||sueldo<=0||dias<=0){document.getElementById('result').innerHTML='<div class="empty">Completá los campos arriba</div>';return;}
+  if(dias>semDias)dias=semDias;
+  var sacBruto=sueldo/2*(dias/semDias);
+  // Descuentos sobre el SAC (mismos que el sueldo: 17%)
+  var jubilacion=sacBruto*0.11;
+  var pami=sacBruto*0.03;
+  var obraSocial=sacBruto*0.03;
+  var totalDesc=jubilacion+pami+obraSocial;
+  var sacNeto=sacBruto-totalDesc;
+  var pct=((dias/semDias)*100).toFixed(1);
+  document.getElementById('result').innerHTML='<div class="result-card">'
+    +'<div class="result-lbl">SAC Bruto</div>'
+    +'<div class="result-big">'+fmt(sacBruto)+'</div>'
+    +'<div class="result-rows">'
+    +'<div class="result-row"><div class="rrl">SAC Neto (aprox.)</div><div class="rrv">'+fmt(sacNeto)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Período trabajado</div><div class="rrv">'+dias+' / '+semDias+' días ('+pct+'%)</div></div>'
+    +'<div class="result-row"><div class="rrl">Jubilación (11%)</div><div class="rrv">'+fmt(jubilacion)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">PAMI (3%)</div><div class="rrv">'+fmt(pami)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Obra Social (3%)</div><div class="rrv">'+fmt(obraSocial)+'</div></div>'
+    +'<div class="result-row"><div class="rrl">Total descuentos</div><div class="rrv">'+fmt(totalDesc)+'</div></div>'
+    +'</div></div>';
+}
+</script>
+</body>
+</html>
