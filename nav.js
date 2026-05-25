@@ -956,6 +956,10 @@
     'background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'8\' viewBox=\'0 0 12 8\'%3E%3Cpath d=\'M1 1l5 5 5-5\' stroke=\'%23858AA0\' stroke-width=\'1.5\' fill=\'none\' stroke-linecap=\'round\'/%3E%3C/svg%3E")!important;',
     'background-repeat:no-repeat!important;background-position:right 14px center!important;',
     'padding-right:36px!important;cursor:pointer!important;}',
+    /* Currency / unit prefix inputs — restore left padding so the $, €, % symbol
+       does not overlap the typed value. Classes used across pages:
+       .with-prefix (loan), .has-prefix (compound-interest, savings, tip, AR pages) */
+    'input.with-prefix,input.has-prefix,input.input-field.has-prefix{padding-left:30px!important;}',
 
   ].join('');
 
