@@ -54,9 +54,11 @@ Reach **$1,000/month** in revenue by end of 2026 (minimum: at least one month hi
 - No paid advertising planned
 
 ### Analytics
-- Only **Google Search Console (GSC)** is currently used for traffic metrics
-- No GA4 or Cloudflare Analytics installed
-- When adding analytics: prefer lightweight, privacy-friendly options
+- **Google Analytics 4** installed — Measurement ID: `G-F7TMYTM75E`
+  - Injected via nav.js (top of file) → applies to every page automatically
+  - Tracks: page views, scroll depth, outbound clicks, and more (Enhanced Measurement enabled)
+- **Google Search Console (GSC)** also active for search performance metrics
+- Do NOT add a second GA4 tag to individual pages — nav.js already covers all of them
 
 ### Future languages
 - Additional languages (Italian, German, Arabic, etc.) will be added **based on traffic data**
