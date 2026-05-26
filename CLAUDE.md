@@ -247,7 +247,11 @@ Classes recognised by nav.js for prefix inputs: `has-prefix`, `with-prefix`, `in
   <style>/* design system variables + calculator-specific styles */</style>
 </head>
 <body>
-  <header><a href="/[lang/]" class="logo">calculate<span>.website</span></a></header>
+  <!-- HEADER: nav.js COMPLETELY REPLACES the header content at runtime.     -->
+  <!-- Just put an empty <header> tag. nav.js builds: left(hamburger+logo)  -->
+  <!-- + right(lang-pills+country+theme). Logo href is set from CW_LANG.    -->
+  <!-- DO NOT put logo or any nav elements inside <header> — nav.js owns it. -->
+  <header></header>
   <div class="hero">
     <div class="bc"><!-- breadcrumb: Home > Category > Calculator Name --></div>
     <h1><!-- emoji + calculator name --></h1>
@@ -260,8 +264,14 @@ Classes recognised by nav.js for prefix inputs: `has-prefix`, `with-prefix`, `in
 </html>
 ```
 
-Header `href` per language:
-- EN: `href="/"` | ES: `href="/es/"` | PT: `href="/pt/"` | FR: `href="/fr/"`
+### Header — nav.js owns it entirely
+nav.js replaces `<header>` content with a definitive two-group layout:
+- **Left** (`.hdr-left`): hamburger button + logo link
+- **Right** (`.hdr-right`): language pills (EN/ES/PT/FR) + country picker + theme toggle
+- **Height**: 64px | **Horizontal padding**: 24px each side (Apple/MercadoLibre style)
+- Logo `href` is set automatically based on `CW_LANG` (no need to set it manually)
+- Language switcher `cwLangUrl(lang)` strips existing prefix and adds the target one
+- Auto-detect saves country for AR-specific calculator filtering — does NOT auto-redirect language
 
 ---
 

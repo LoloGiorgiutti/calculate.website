@@ -803,27 +803,37 @@
 
     'html[data-theme="dark"] body{background:#0E1525;color:#E2E4F0;}',
 
-    'header:not(.nf-hero),#site-header{height:58px !important;box-sizing:border-box !important;}',
-    '.logo{font-size:16px !important;font-weight:700 !important;letter-spacing:-0.03em !important;flex-shrink:0 !important;text-decoration:none !important;white-space:nowrap !important;}',
+    /* ── DEFINITIVE HEADER ────────────────────────────────────────────────── */
+    /* nav.js fully controls the <header>. Left group: hamburger + logo.      */
+    /* Right group: language selector + country picker + theme toggle.        */
+    /* Horizontal padding: 24px on each side (like Apple / MercadoLibre).    */
+    'header:not(.nf-hero),#site-header{',
+    'display:flex !important;align-items:center !important;',
+    'justify-content:space-between !important;',
+    'padding:0 24px !important;height:64px !important;',
+    'position:sticky !important;top:0 !important;z-index:100 !important;',
+    'box-sizing:border-box !important;',
+    '}',
+    /* Left group: hamburger + logo */
+    '.hdr-left{display:flex;align-items:center;gap:12px;flex-shrink:0;}',
+    /* Right group: lang pills + country + theme */
+    '.hdr-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}',
+    /* Logo */
+    '.logo{font-size:16px !important;font-weight:700 !important;letter-spacing:-0.03em !important;',
+    'flex-shrink:0 !important;text-decoration:none !important;white-space:nowrap !important;',
+    'display:flex !important;align-items:center !important;}',
 
-    'html:not([data-theme="dark"]) header{background:#FFFFFF !important;border-bottom-color:#E4E7EE !important;}',
-    'html:not([data-theme="dark"]) #site-header{background:#FFFFFF !important;border-bottom-color:#E4E7EE !important;}',
-    'html:not([data-theme="dark"]) .header-nav a{color:rgba(10,14,26,.55) !important;}',
-    'html:not([data-theme="dark"]) .header-nav a:hover{background:#F0F2F7 !important;color:#0A0E1A !important;}',
-    'html:not([data-theme="dark"]) .search-pill{background:#F0F2F7 !important;border-color:#E4E7EE !important;color:rgba(10,14,26,.4) !important;}',
-    'html:not([data-theme="dark"]) .search-pill::before{filter:invert(1) opacity(0.45) !important;}',
-    'html:not([data-theme="dark"]) .search-pill kbd{background:rgba(10,14,26,.04) !important;border-color:#D8DCE8 !important;color:rgba(10,14,26,.3) !important;}',
+    /* Light mode header */
+    'html:not([data-theme="dark"]) header{background:#FFFFFF !important;border-bottom:1px solid #E4E7EE !important;}',
+    'html:not([data-theme="dark"]) #site-header{background:#FFFFFF !important;border-bottom:1px solid #E4E7EE !important;}',
     'html:not([data-theme="dark"]) #nav-toggle .nb{background:rgba(10,14,26,.65) !important;}',
     'html:not([data-theme="dark"]) #nav-toggle:hover{background:rgba(10,14,26,.06) !important;}',
     'html:not([data-theme="dark"]) #theme-toggle{color:rgba(10,14,26,.55) !important;}',
     'html:not([data-theme="dark"]) #theme-toggle:hover{background:rgba(10,14,26,.06) !important;}',
 
     'html:not([data-theme="dark"]) .logo{color:#0A0E1A !important;}',
-    'html:not([data-theme="dark"]) .logo .name{color:#0A0E1A !important;}',
-    'html:not([data-theme="dark"]) .logo .dot{color:#4F6BFF !important;}',
     'html:not([data-theme="dark"]) .logo span{color:#4F6BFF !important;}',
     'html:not([data-theme="dark"]) header a{color:#0A0E1A !important;}',
-    'html:not([data-theme="dark"]) header a span.dot{color:#4F6BFF !important;}',
 
     'html[data-theme="dark"] header{background:#0A0E1A !important;border-bottom-color:#1F2438 !important;}',
     'html[data-theme="dark"] #site-header{background:#0A0E1A !important;border-bottom-color:#1F2438 !important;}',
@@ -902,17 +912,17 @@
     '@media(max-width:520px){.grid{grid-template-columns:1fr}.calc-card{padding:16px;}}',
 
     /* ── LANGUAGE SELECTOR (pills) ──────────────────────────────────── */
-    '.lang-seg{display:flex;align-items:center;background:rgba(255,255,255,.06);',
-    'border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:2px;gap:1px;margin-left:4px;}',
+    '.lang-seg{display:flex;align-items:center;background:rgba(255,255,255,.07);',
+    'border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:3px;gap:1px;}',
     'html:not([data-theme="dark"]) .lang-seg{background:rgba(10,14,26,.04);border-color:rgba(10,14,26,.1);}',
-    '.lang-btn{background:transparent;border:none;padding:4px 8px;border-radius:6px;',
-    'font-size:11px;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.5);',
+    '.lang-btn{background:transparent;border:none;padding:5px 10px;border-radius:7px;',
+    'font-size:12px;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.5);',
     'cursor:pointer;font-family:inherit;transition:all .15s;line-height:1;}',
     'html:not([data-theme="dark"]) .lang-btn{color:rgba(10,14,26,.4);}',
-    '.lang-btn:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.08);}',
-    'html:not([data-theme="dark"]) .lang-btn:hover{color:rgba(10,14,26,.7);background:rgba(10,14,26,.05);}',
-    '.lang-btn.active{background:rgba(255,255,255,.14);color:#fff;}',
-    'html:not([data-theme="dark"]) .lang-btn.active{background:rgba(10,14,26,.09);color:#0A0E1A;}',
+    '.lang-btn:hover{color:rgba(255,255,255,.9);background:rgba(255,255,255,.1);}',
+    'html:not([data-theme="dark"]) .lang-btn:hover{color:rgba(10,14,26,.75);background:rgba(10,14,26,.06);}',
+    '.lang-btn.active{background:rgba(255,255,255,.16);color:#fff;font-weight:800;}',
+    'html:not([data-theme="dark"]) .lang-btn.active{background:#4F6BFF;color:#fff;}',
 
     /* ── COUNTRY BUTTON + PICKER MODAL ───────────────────────────────── */
     '.cw-country-btn{background:none;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;',
@@ -1015,19 +1025,6 @@
     document.head.appendChild(ogLocale);
   }
 
-  /* ── HAMBURGER BUTTON ───────────────────────────────────── */
-  var btn = document.createElement('button');
-  btn.id = 'nav-toggle';
-  btn.setAttribute('aria-label', 'Open menu');
-  btn.innerHTML = '<span class="nb"></span><span class="nb"></span><span class="nb"></span>';
-
-  var hdr = document.querySelector('#site-header') || document.querySelector('header');
-  if (hdr) {
-    var pl = parseInt(window.getComputedStyle(hdr).paddingLeft) || 24;
-    if (pl > 12) hdr.style.paddingLeft = '12px';
-    hdr.insertBefore(btn, hdr.firstChild);
-  }
-
   /* ── THEME TOGGLE ───────────────────────────────────────── */
   var MOON_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   var SUN_SVG  = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
@@ -1035,9 +1032,6 @@
   var themeBtn = document.createElement('button');
   themeBtn.id = 'theme-toggle';
   themeBtn.setAttribute('aria-label', 'Toggle theme');
-
-  var hasDarkHeader = !!document.querySelector('.header-inner') || !!document.querySelector('#site-header');
-  if (hasDarkHeader) themeBtn.classList.add('on-dark');
 
   function applyTheme(theme, save) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -1067,7 +1061,6 @@
     lb.addEventListener('click', function() { window.location.href = cwLangUrl(l); });
     langSeg.appendChild(lb);
   });
-  if (hdr) hdr.appendChild(langSeg);
 
   /* ── COUNTRY PICKER BUTTON ──────────────────────────────── */
   var cwCountryBtn = document.createElement('button');
@@ -1076,23 +1069,58 @@
   cwCountryBtn.setAttribute('aria-label', 'Select country');
   cwCountryBtn.title = 'Select country';
   cwCountryBtn.textContent = CW_FLAG_MAP[cwGetCountry()] || '🌍';
-  if (hdr) hdr.appendChild(cwCountryBtn);
 
-  if (hdr) hdr.appendChild(themeBtn);
+  /* ── HAMBURGER BUTTON ───────────────────────────────────── */
+  var btn = document.createElement('button');
+  btn.id = 'nav-toggle';
+  btn.setAttribute('aria-label', 'Open menu');
+  btn.innerHTML = '<span class="nb"></span><span class="nb"></span><span class="nb"></span>';
 
-  /* ── AUTO-DETECT COUNTRY + LANGUAGE ON FIRST VISIT ─────── */
+  /* ── BUILD DEFINITIVE HEADER ────────────────────────────── */
+  /* nav.js completely rebuilds the <header>:                  */
+  /*   LEFT:  [hamburger] [logo]                               */
+  /*   RIGHT: [lang-pills] [country] [theme]                   */
+  var hdr = document.querySelector('#site-header') || document.querySelector('header');
+  if (hdr) {
+    /* Determine logo href from current language */
+    var logoHref = CW_LANG === 'es' ? '/es/' : CW_LANG === 'pt' ? '/pt/' : CW_LANG === 'fr' ? '/fr/' : '/';
+
+    /* Logo element */
+    var logoEl = document.createElement('a');
+    logoEl.className = 'logo';
+    logoEl.href = logoHref;
+    logoEl.innerHTML = 'calculate<span>.website</span>';
+
+    /* Left group: hamburger + logo */
+    var hdrLeft = document.createElement('div');
+    hdrLeft.className = 'hdr-left';
+    hdrLeft.appendChild(btn);
+    hdrLeft.appendChild(logoEl);
+
+    /* Right group: lang-seg + country + theme */
+    var hdrRight = document.createElement('div');
+    hdrRight.className = 'hdr-right';
+    hdrRight.appendChild(langSeg);
+    hdrRight.appendChild(cwCountryBtn);
+    hdrRight.appendChild(themeBtn);
+
+    /* Replace header content entirely */
+    hdr.innerHTML = '';
+    hdr.appendChild(hdrLeft);
+    hdr.appendChild(hdrRight);
+  }
+
+  /* ── AUTO-DETECT COUNTRY ON FIRST VISIT ─────────────────── */
+  /* Saves the user's country (for AR-specific calculators).   */
+  /* Does NOT auto-redirect language — users navigate manually  */
+  /* via the language pills to avoid confusing silent redirects.*/
   (function() {
-    if (cwGetCountry() !== null) return; // already set by user, skip
+    if (cwGetCountry() !== null) return; // already set, skip
     var detected = cwDetectCountryFromTZ();
     var code = detected || 'global';
     cwSetCountry(code);
     cwCountryBtn.textContent = CW_FLAG_MAP[code] || '🌍';
-    if (detected) {
-      var targetLang = cwGetLangForCountry(detected);
-      if (targetLang !== CW_LANG) {
-        window.location.replace(cwLangUrl(targetLang));
-      }
-    }
+    /* No language redirect — let users choose their language   */
   })();
 
   /* ── COUNTRY PICKER MODAL ───────────────────────────────── */
