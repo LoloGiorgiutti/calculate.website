@@ -195,16 +195,34 @@ a { color:inherit; text-decoration:none; }
 nav.js globally injects:
 - `color-scheme: light` — prevents macOS/browser dark mode from styling form elements
 - Normalized input/select/textarea styles: Inter font, 10px border-radius, #F7F8FA bg, #4F6BFF focus
-- `.has-prefix` / `.with-prefix`: `padding-left:30px` so currency symbols ($, €, %) don't overlap values
+- `.has-prefix` / `.with-prefix`: `padding-left:30px!important` so currency symbols ($, €, %) don't overlap values
+- Desktop responsive: `@media(min-width:768px)` expands `.page`, `.faq-section`, `.related-section`, `.share-wrap` from 520px to 720px
 
-### Input with currency/unit prefix
+### Input with currency/unit prefix — MANDATORY PATTERN
+⚠️ **CRITICAL RULE:** nav.js injects `padding:12px 14px!important` on ALL inputs. This resets padding-left to 14px,
+which causes the currency symbol to overlap the typed value. To fix this, **every** input that has a `$`, `€`, `%`
+or any prefix span MUST have the class `has-prefix` (or `with-prefix`). nav.js then applies `padding-left:30px!important`
+to restore the correct spacing.
+
+**NEVER** rely on base `input[type=number]{padding-left:30px}` — nav.js will override it.
+**ALWAYS** add `class="has-prefix"` (or include `has-prefix` in an existing class list) to any input with a left prefix span.
+
 ```html
+<!-- ✅ CORRECT — has-prefix class ensures padding-left:30px survives nav.js override -->
 <div style="position:relative">
   <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);
                color:var(--ink-3);font-size:15px;pointer-events:none">$</span>
   <input type="number" class="has-prefix" ...>
 </div>
+
+<!-- ❌ WRONG — nav.js will override padding-left and symbol will overlap the text -->
+<div style="position:relative">
+  <span style="position:absolute;left:14px;...">$</span>
+  <input type="number" style="padding-left:30px" ...>   <!-- no has-prefix class -->
+</div>
 ```
+
+Classes recognised by nav.js for prefix inputs: `has-prefix`, `with-prefix`, `input-field has-prefix`
 
 ---
 

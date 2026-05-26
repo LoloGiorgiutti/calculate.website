@@ -8,12 +8,12 @@
 <title>Calculadora de Sueldo Neto Argentina — Calculadora.live</title>
 <meta name="description" content="Calculá tu sueldo neto en Argentina. Ingresá tu salario bruto y obtené el neto con todos los descuentos: jubilación, obra social, PAMI y ganancias.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://calculadora.live/sueldo-neto/">
+<link rel="canonical" href="https://calculate.website/sueldo-neto/">
 <meta property="og:title" content="Calculadora de Sueldo Neto Argentina">
 <meta property="og:description" content="¿Cuánto te depositan? Calculá tu sueldo neto con todos los descuentos de ley.">
-<meta property="og:url" content="https://calculadora.live/sueldo-neto/">
+<meta property="og:url" content="https://calculate.website/sueldo-neto/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://calculadora.live/og-image.png">
+<meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_AR">
@@ -22,7 +22,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Calculadora de Sueldo Neto Argentina",
-  "url": "https://calculadora.live/sueldo-neto",
+  "url": "https://calculate.website/sueldo-neto",
   "description": "Calculá tu sueldo neto con descuentos de jubilación, obra social, PAMI y ganancias.",
   "applicationCategory": "UtilityApplication",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ARS" },
@@ -159,7 +159,7 @@
       <label><span id="lbl-input">Salario bruto mensual</span></label>
       <div class="input-wrap">
         <span class="input-prefix">$</span>
-        <input type="number" id="bruto" placeholder="0" min="0" step="1000" oninput="calcular()">
+        <input type="number" id="bruto" class="has-prefix" placeholder="0" min="0" step="1000" oninput="calcular()">
       </div>
     </div>
 
@@ -178,7 +178,7 @@
         <label style="margin-top:14px">Retención de ganancias mensual</label>
         <div class="input-wrap">
           <span class="input-prefix">$</span>
-          <input type="number" id="ganancias" placeholder="0" min="0" step="1000" oninput="calcular()">
+          <input type="number" id="ganancias" class="has-prefix" placeholder="0" min="0" step="1000" oninput="calcular()">
         </div>
       </div>
     </div>

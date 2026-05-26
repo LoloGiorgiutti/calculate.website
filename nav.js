@@ -707,6 +707,17 @@
     '.share-btn.nv-copied{border-color:#16a34a !important;color:#16a34a !important}',
     '.share-wrap{max-width:520px;margin:0 auto;padding:0 20px 24px}',
 
+    /* ── DESKTOP RESPONSIVE (≥768px) ──────────────────────────────────────── */
+    /* Expand calculator content from mobile 520px to desktop 720px.           */
+    /* .page is the main calculator container used on most pages.              */
+    /* nav.js sections (FAQ, related, share) expand to match.                 */
+    '@media(min-width:768px){',
+    '.page{max-width:720px!important;}',
+    '.faq-section{max-width:720px!important;}',
+    '.related-section{max-width:720px!important;}',
+    '.share-wrap{max-width:720px!important;}',
+    '}',
+
     /* ── THEME TOGGLE ─────────────────────────────────────────────────────── */
     '#theme-toggle{width:34px;height:34px;border:none;background:none;cursor:pointer;',
     'border-radius:8px;display:flex;align-items:center;justify-content:center;',
