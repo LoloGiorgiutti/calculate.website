@@ -810,14 +810,17 @@
     'header:not(.nf-hero),#site-header{',
     'display:flex !important;align-items:center !important;',
     'justify-content:space-between !important;',
-    'padding:0 24px !important;height:64px !important;',
+    /* 32px horizontal padding — enough to feel breathable at any width       */
+    'padding:0 32px !important;height:64px !important;',
     'position:sticky !important;top:0 !important;z-index:100 !important;',
     'box-sizing:border-box !important;',
     '}',
+    /* On narrower screens keep a minimum safe margin */
+    '@media(max-width:520px){header:not(.nf-hero),#site-header{padding:0 16px !important;}}',
     /* Left group: hamburger + logo */
-    '.hdr-left{display:flex;align-items:center;gap:12px;flex-shrink:0;}',
+    '.hdr-left{display:flex;align-items:center;gap:14px;flex-shrink:0;}',
     /* Right group: lang pills + country + theme */
-    '.hdr-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}',
+    '.hdr-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}',
     /* Logo */
     '.logo{font-size:16px !important;font-weight:700 !important;letter-spacing:-0.03em !important;',
     'flex-shrink:0 !important;text-decoration:none !important;white-space:nowrap !important;',

@@ -1,11 +1,14 @@
 # calculate.website — Cloudflare Pages redirects
 # ─────────────────────────────────────────────────────────────────────────────
-# Language fallback: if a translated version of a page does not yet exist,
-# redirect to the English (root) version.
-# Cloudflare Pages serves static files BEFORE checking these rules, so existing
-# /es/, /pt/ and /fr/ pages are always served correctly and are never redirected.
-# ─────────────────────────────────────────────────────────────────────────────
+# Language homepages: explicitly serve the translated homepage (200 = rewrite)
+# This must come BEFORE the wildcard 302 rules so that /es/, /pt/, /fr/
+# are served correctly instead of being caught by the /:splat fallback.
+/es/  /es/index.html  200
+/pt/  /pt/index.html  200
+/fr/  /fr/index.html  200
 
+# Language fallback: if a translated page does not yet exist, fall back to EN.
+# These only fire when NO static file matches the requested path.
 /es/*  /:splat  302
 /pt/*  /:splat  302
 /fr/*  /:splat  302
