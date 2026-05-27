@@ -1,14 +1,13 @@
 # calculate.website — Cloudflare Pages redirects
 # ─────────────────────────────────────────────────────────────────────────────
-# Language homepages: explicitly serve the translated homepage (200 = rewrite)
-# This must come BEFORE the wildcard 302 rules so that /es/, /pt/, /fr/
-# are served correctly instead of being caught by the /:splat fallback.
-/es/  /es/index.html  200
-/pt/  /pt/index.html  200
-/fr/  /fr/index.html  200
-
-# Language fallback: if a translated page does not yet exist, fall back to EN.
-# These only fire when NO static file matches the requested path.
-/es/*  /:splat  302
-/pt/*  /:splat  302
-/fr/*  /:splat  302
+# NOTE: Wildcard rules like /es/* were removed because Cloudflare evaluates
+# _redirects BEFORE checking static files, so /es/* was catching /es/ even
+# though /es/index.html exists — causing language switching to silently loop
+# back to the English homepage.
+#
+# Missing translated calculator pages now return 404 instead of silently
+# falling back to EN. This is the correct behavior: it avoids confusing users
+# into thinking they're reading a translated page when they're not.
+#
+# When a calculator page is translated, add it to the correct language folder.
+# No redirects needed once the file exists.
