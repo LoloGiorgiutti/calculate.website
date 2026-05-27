@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur d'Intérêts Composés — calculate.website</title>
+<meta name="description" content="Projetez la croissance de votre épargne ou de vos investissements avec les intérêts composés. Capital initial, taux annuel, fréquence de capitalisation et versements mensuels. Graphique inclus.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/compound-interest/">
+<link rel="alternate" hreflang="en"    href="https://calculate.website/compound-interest/">
+<link rel="alternate" hreflang="es"    href="https://calculate.website/es/compound-interest/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/compound-interest/">
+<link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/compound-interest/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/compound-interest/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--pos:#22C55E;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .hero{padding:32px 0 0}
+  .page{max-width:520px;margin:0 auto;padding:0 20px 60px}
+  .bc{font-size:12px;color:var(--ink-3);margin-bottom:16px}
+  .bc a:hover{color:var(--ink)}
+  h1{font-size:28px;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+  .sub{font-size:14px;color:var(--ink-3);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--line)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  .field-label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+  .req-star{color:var(--accent);margin-left:2px}
+  .opt-hint{font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-3);margin-left:4px}
+  .input-wrap{position:relative}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:13px;pointer-events:none}
+  .input-pm{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:14px;pointer-events:none;font-weight:600}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--accent)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:clamp(22px,6vw,38px);font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-range{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:4px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+  .result-row{display:flex;justify-content:space-between;align-items:center}
+  .result-row-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85)}
+  .result-row-val.pos{color:#86EFAC}
+  .result-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px;font-weight:400}
+  .bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+  .bar-track{height:8px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;margin:8px 0 6px;display:flex}
+  .bar-capital{background:rgba(255,255,255,0.3);border-radius:99px 0 0 99px;transition:width .4s}
+  .bar-int{background:#86EFAC;border-radius:0 99px 99px 0;transition:width .4s}
+  .bar-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4)}
+  .chart-card{background:var(--surface);border-radius:var(--radius);padding:20px 20px 14px;margin-bottom:16px;border:1px solid var(--line)}
+  .chart-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px}
+  .chart-sub{font-size:11px;color:var(--ink-3);margin-bottom:14px}
+  .chart-wrap{width:100%;overflow:hidden;position:relative}
+  .chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+  .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-3)}
+  .legend-dot{width:10px;height:3px;border-radius:2px;flex-shrink:0}
+  .info-box{background:var(--accent-soft);border:1px solid rgba(79,107,255,.2);border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-2);line-height:1.5}
+  .info-box strong{color:var(--ink)}
+  .req-note{font-size:11px;color:var(--ink-3);margin-bottom:16px}
+</style>
+</head>
+<body>
+<header></header>
+
+<div class="hero">
+  <div class="page">
+    <div class="bc"><a href="/fr/">Accueil</a> › <a href="/fr/finance/">Finances</a> › Intérêts Composés</div>
+    <h1>📈 Intérêts Composés</h1>
+    <p class="sub">Projetez la croissance de votre épargne ou de vos investissements dans le temps.</p>
+  </div>
+</div>
+
+<main class="page">
+
+  <div class="card">
+    <p class="req-note"><span class="req-star">*</span> Champs obligatoires</p>
+
+    <div class="field">
+      <label class="field-label">Investissement initial<span class="req-star">*</span></label>
+      <div class="input-wrap">
+        <input type="number" id="capital" placeholder="10000" min="0" oninput="calculate()">
+        <span class="input-suffix">€</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label class="field-label">Nombre d'années<span class="req-star">*</span></label>
+        <div class="input-wrap">
+          <input type="number" id="years" placeholder="10" min="1" max="50" oninput="calculate()">
+          <span class="input-suffix">ans</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Taux annuel<span class="req-star">*</span></label>
+        <div class="input-wrap">
+          <input type="number" id="rate" placeholder="7" min="0" step="0.5" oninput="calculate()">
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label class="field-label">Variation du taux <span class="opt-hint">optionnel</span></label>
+        <div class="input-wrap">
+          <span class="input-pm">±</span>
+          <input type="number" id="variance" class="has-pm" placeholder="0" min="0" max="50" step="0.5" oninput="calculate()">
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Capitalisation</label>
+        <select id="comp-freq" onchange="calculate()">
+          <option value="365">Quotidienne</option>
+          <option value="12" selected>Mensuelle</option>
+          <option value="4">Trimestrielle</option>
+          <option value="2">Semestrielle</option>
+          <option value="1">Annuelle</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Versement mensuel <span class="opt-hint">optionnel</span></label>
+      <div class="input-wrap">
+        <input type="number" id="contribution" placeholder="0" min="0" oninput="calculate()">
+        <span class="input-suffix">€</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Valeur future estimée</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Remplissez les champs</span></div>
+    <div id="result-range" class="result-range"></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Capital + versements investis</span>
+        <span class="result-row-val" id="r-invested">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Intérêts générés</span>
+        <span class="result-row-val pos" id="r-interest">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,0.85);font-weight:600">Valeur totale</span>
+        <span class="result-row-val pos" id="r-total">—</span>
+      </div>
+      <div id="r-range-row" class="result-row" style="display:none">
+        <span class="result-row-lbl">Plage estimée (±variation)</span>
+        <span class="result-row-val" id="r-range">—</span>
+      </div>
+      <div class="bar-wrap">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4)">Décomposition de la valeur future</div>
+        <div class="bar-track">
+          <div class="bar-capital" id="bar-cap"></div>
+          <div class="bar-int" id="bar-int"></div>
+        </div>
+        <div class="bar-labels">
+          <span id="lbl-cap">Capital</span>
+          <span id="lbl-int">Intérêts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card" id="chart-card" style="display:none">
+    <div class="chart-title">Projection de croissance</div>
+    <div class="chart-sub" id="chart-sub"></div>
+    <div class="chart-wrap" id="chart-wrap"></div>
+    <div class="chart-legend" id="chart-legend"></div>
+  </div>
+
+  <div class="info-box">
+    <strong>Qu'est-ce que l'intérêt composé ?</strong><br>
+    Les intérêts générés s'ajoutent au capital et génèrent eux-mêmes des intérêts au cours de la période suivante. La fréquence de capitalisation définit à quelle régularité cet effet est appliqué — plus elle est fréquente, plus le rendement final est élevé. Avec le temps, l'écart entre le capital investi et la valeur finale croît de façon exponentielle.
+  </div>
+
+</main>
+
+<script src="/nav.js"></script>
+<script>
+function fmt(n){
+  if(Math.abs(n)>=1e9) return (n/1e9).toFixed(2).replace('.',',')+' Md €';
+  if(Math.abs(n)>=1e6) return (n/1e6).toFixed(2).replace('.',',')+' M €';
+  return Math.round(n).toLocaleString('fr-FR')+' €';
+}
+
+function calcSeries(capital,annualRate,years,compFreq,monthlyContrib){
+  var effMonthly=Math.pow(1+annualRate/compFreq,compFreq/12)-1;
+  var balance=capital;var data=[capital];
+  for(var m=1;m<=years*12;m++){balance=balance*(1+effMonthly)+monthlyContrib;if(m%12===0)data.push(balance);}
+  return data;
+}
+
+function calculate(){
+  var capital=parseFloat(document.getElementById('capital').value)||0;
+  var years=parseInt(document.getElementById('years').value)||0;
+  var rate=parseFloat(document.getElementById('rate').value)||0;
+  var variance=parseFloat(document.getElementById('variance').value)||0;
+  var compFreq=parseInt(document.getElementById('comp-freq').value)||12;
+  var contribution=parseFloat(document.getElementById('contribution').value)||0;
+  var mainEl=document.getElementById('result-main');
+  var rangeEl=document.getElementById('result-range');
+  var subEl=document.getElementById('result-sub');
+  var rowsEl=document.getElementById('result-rows');
+  var chartCard=document.getElementById('chart-card');
+  if((!capital&&!contribution)||!rate||!years){
+    mainEl.innerHTML='<span class="empty-state">Remplissez les champs</span>';
+    rangeEl.textContent='';subEl.textContent='';rowsEl.style.display='none';chartCard.style.display='none';return;
+  }
+  var r=rate/100,rUp=(rate+variance)/100,rDn=Math.max(0,rate-variance)/100;
+  var seriesBase=calcSeries(capital,r,years,compFreq,contribution);
+  var seriesUp=variance>0?calcSeries(capital,rUp,years,compFreq,contribution):seriesBase;
+  var seriesDn=variance>0?calcSeries(capital,rDn,years,compFreq,contribution):seriesBase;
+  var total=seriesBase[seriesBase.length-1];
+  var invested=capital+contribution*years*12;
+  var interest=total-invested;
+  var freqNames={365:'quotidienne',12:'mensuelle',4:'trimestrielle',2:'semestrielle',1:'annuelle'};
+  mainEl.textContent=Math.round(total).toLocaleString('fr-FR')+' €';
+  subEl.textContent='en '+years+' an'+(years===1?'':'s')+' · '+rate+'% taux annuel · capitalisation '+(freqNames[compFreq]||'mensuelle');
+  if(variance>0){
+    rangeEl.textContent='Plage ±'+variance+'% : '+fmt(seriesDn[seriesDn.length-1])+' – '+fmt(seriesUp[seriesUp.length-1]);
+    document.getElementById('r-range-row').style.display='flex';
+    document.getElementById('r-range').textContent=fmt(seriesDn[seriesDn.length-1])+' – '+fmt(seriesUp[seriesUp.length-1]);
+  }else{rangeEl.textContent='';document.getElementById('r-range-row').style.display='none';}
+  rowsEl.style.display='flex';
+  document.getElementById('r-invested').textContent=fmt(invested);
+  document.getElementById('r-interest').textContent='+ '+fmt(interest);
+  document.getElementById('r-total').textContent=fmt(total);
+  var capPct=Math.round((invested/total)*100);var intPct=100-capPct;
+  document.getElementById('bar-cap').style.width=capPct+'%';document.getElementById('bar-int').style.width=intPct+'%';
+  document.getElementById('lbl-cap').textContent='Capital '+capPct+'%';document.getElementById('lbl-int').textContent='Intérêts '+intPct+'%';
+  var seriesContrib=[];for(var y=0;y<=years;y++)seriesContrib.push(capital+contribution*y*12);
+  renderChart(seriesBase,seriesUp,seriesDn,seriesContrib,variance>0,years);chartCard.style.display='block';
+}
+
+function renderChart(base,upper,lower,contrib,hasVariance,years){
+  var W=520,H=200,PL=72,PR=12,PT=12,PB=28;
+  var cW=W-PL-PR,cH=H-PT-PB,n=base.length;
+  var allVals=[].concat(base,upper,lower,contrib).filter(function(v){return isFinite(v);});
+  var minV=Math.min.apply(null,[0].concat(allVals));var maxV=Math.max.apply(null,allVals);var range=maxV-minV||1;
+  function xOf(i){return PL+(i/(n-1))*cW;}function yOf(v){return PT+cH-((v-minV)/range)*cH;}
+  function pts(arr){return arr.map(function(v,i){return xOf(i)+','+yOf(v);}).join(' ');}
+  var basePts=pts(base),upperPts=pts(upper),lowerPts=pts(lower),contribPts=pts(contrib);
+  var lastX=xOf(n-1),bottomY=PT+cH;
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block" xmlns="http://www.w3.org/2000/svg">';
+  svg+='<defs><linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4F6BFF" stop-opacity="0.18"/><stop offset="100%" stop-color="#4F6BFF" stop-opacity="0.02"/></linearGradient><linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#86EFAC" stop-opacity="0.15"/><stop offset="100%" stop-color="#86EFAC" stop-opacity="0.01"/></linearGradient></defs>';
+  for(var i=0;i<=4;i++){var v=minV+range*(i/4),y=yOf(v);svg+='<line x1="'+PL+'" y1="'+y+'" x2="'+(PL+cW)+'" y2="'+y+'" stroke="#E4E7EE" stroke-width="1"/><text x="'+(PL-4)+'" y="'+(y+3.5)+'" font-size="7.5" fill="#858AA0" text-anchor="end">'+fmt(v).replace(' €','€')+'</text>';}
+  if(hasVariance){var lrPts=[].concat(lower).reverse().map(function(v,i){return xOf(n-1-i)+','+yOf(v);}).join(' ');svg+='<polygon points="'+upperPts+' '+lrPts+'" fill="rgba(79,107,255,0.08)" stroke="none"/><polyline points="'+upperPts+'" fill="none" stroke="rgba(79,107,255,0.45)" stroke-width="1.3" stroke-dasharray="5,3"/><polyline points="'+lowerPts+'" fill="none" stroke="rgba(79,107,255,0.45)" stroke-width="1.3" stroke-dasharray="5,3"/>';}
+  svg+='<polygon points="'+xOf(0)+','+bottomY+' '+contribPts+' '+lastX+','+bottomY+'" fill="url(#gGreen)" stroke="none"/><polyline points="'+contribPts+'" fill="none" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="6,3"/><polygon points="'+xOf(0)+','+bottomY+' '+basePts+' '+lastX+','+bottomY+'" fill="url(#gBlue)" stroke="none"/><polyline points="'+basePts+'" fill="none" stroke="#4F6BFF" stroke-width="2" stroke-linejoin="round"/>';
+  for(var i=0;i<n;i++){var skip=n<=11?1:Math.ceil((n-1)/8);if(i%skip===0||i===n-1)svg+='<text x="'+xOf(i)+'" y="'+(H-5)+'" font-size="8.5" fill="#858AA0" text-anchor="middle">'+(i===0?'auj':i+'a')+'</text>';}
+  svg+='<line id="cv-line" x1="0" y1="'+PT+'" x2="0" y2="'+(PT+cH)+'" stroke="#4F6BFF" stroke-width="1" stroke-dasharray="4,2" opacity="0" pointer-events="none"/><circle id="cv-dot-base" r="4" fill="#4F6BFF" stroke="white" stroke-width="1.5" opacity="0" pointer-events="none"/><circle id="cv-dot-contrib" r="3.5" fill="#86EFAC" stroke="white" stroke-width="1.5" opacity="0" pointer-events="none"/><rect id="cv-overlay" x="'+PL+'" y="'+PT+'" width="'+cW+'" height="'+cH+'" fill="transparent" style="cursor:crosshair"/></svg>';
+  window._chartMeta={base:base,upper:upper,lower:lower,contrib:contrib,hasVariance:hasVariance,years:years,minV:minV,maxV:maxV,range:range,W:W,H:H,PL:PL,PR:PR,PT:PT,PB:PB,cW:cW,cH:cH};
+  var wrap=document.getElementById('chart-wrap');wrap.innerHTML=svg;
+  var tip=document.getElementById('cv-tip');
+  if(!tip){tip=document.createElement('div');tip.id='cv-tip';tip.style.cssText='position:absolute;top:8px;pointer-events:none;z-index:20;background:#0C1528;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:9px 13px;min-width:140px;box-shadow:0 6px 24px rgba(0,0,0,0.25);opacity:0;transition:opacity .1s;';wrap.appendChild(tip);}
+  wrap.onmousemove=chartHover;wrap.onmouseleave=chartLeave;
+  var legend='<div class="legend-item"><div class="legend-dot" style="background:#4F6BFF"></div>Valeur future</div><div class="legend-item"><div class="legend-dot" style="background:#86EFAC"></div>Total investi</div>';
+  if(hasVariance)legend+='<div class="legend-item"><div class="legend-dot" style="background:rgba(79,107,255,0.4)"></div>Plage de variation</div>';
+  document.getElementById('chart-legend').innerHTML=legend;
+  document.getElementById('chart-sub').textContent=hasVariance?'Projection centrale avec bande de variation ±'+document.getElementById('variance').value+'%':'La zone verte montre les versements — l\'écart bleu est la puissance des intérêts composés';
+}
+
+function chartHover(e){
+  var m=window._chartMeta;if(!m)return;
+  var wrap=document.getElementById('chart-wrap');var svgEl=wrap.querySelector('svg');if(!svgEl)return;
+  var rect=svgEl.getBoundingClientRect();var scale=m.W/rect.width;var svgX=(e.clientX-rect.left)*scale;
+  if(svgX<m.PL||svgX>m.PL+m.cW){chartLeave();return;}
+  var n=m.base.length;var idx=Math.max(0,Math.min(n-1,Math.round(((svgX-m.PL)/m.cW)*(n-1))));
+  function svgY(v){return m.PT+m.cH-((v-m.minV)/m.range)*m.cH;}
+  var lineX=m.PL+(idx/(n-1))*m.cW;
+  var cv=svgEl.getElementById('cv-line');var cd=svgEl.getElementById('cv-dot-base');var cdc=svgEl.getElementById('cv-dot-contrib');
+  if(cv){cv.setAttribute('x1',lineX);cv.setAttribute('x2',lineX);cv.setAttribute('opacity','0.6');}
+  if(cd){cd.setAttribute('cx',lineX);cd.setAttribute('cy',svgY(m.base[idx]));cd.setAttribute('opacity','1');}
+  if(cdc){cdc.setAttribute('cx',lineX);cdc.setAttribute('cy',svgY(m.contrib[idx]));cdc.setAttribute('opacity','1');}
+  var html='<div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px">'+(idx===0?"Aujourd'hui":'Année '+idx)+'</div>';
+  html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:8px;height:8px;border-radius:50%;background:#4F6BFF;flex-shrink:0"></div><span style="font-size:12px;color:white;font-weight:700">'+fmt(m.base[idx])+'</span></div>';
+  html+='<div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#86EFAC;flex-shrink:0"></div><span style="font-size:11px;color:rgba(255,255,255,.55)">Investi : '+fmt(m.contrib[idx])+'</span></div>';
+  if(m.hasVariance&&m.upper[idx]!==m.base[idx])html+='<div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:4px">Plage : '+fmt(m.lower[idx])+' – '+fmt(m.upper[idx])+'</div>';
+  var tip=document.getElementById('cv-tip');if(!tip)return;
+  tip.innerHTML=html;tip.style.opacity='1';
+  var wW=wrap.getBoundingClientRect().width;var mX=e.clientX-wrap.getBoundingClientRect().left;
+  if(mX+170>wW){tip.style.right=(wW-mX+10)+'px';tip.style.left='auto';}else{tip.style.left=(mX+10)+'px';tip.style.right='auto';}
+}
+function chartLeave(){
+  var tip=document.getElementById('cv-tip');if(tip)tip.style.opacity='0';
+  var svgEl=document.querySelector('#chart-wrap svg');if(!svgEl)return;
+  ['cv-line','cv-dot-base','cv-dot-contrib'].forEach(function(id){var el=svgEl.getElementById(id);if(el)el.setAttribute('opacity','0');});
+}
+</script>
+</body>
+</html>
