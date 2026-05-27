@@ -1111,6 +1111,39 @@
     hdr.innerHTML = '';
     hdr.appendChild(hdrLeft);
     hdr.appendChild(hdrRight);
+
+    /* Apply definitive header styles inline — inline styles override ANY
+       page CSS without needing !important battles.                        */
+    hdr.style.cssText = [
+      'display:flex',
+      'align-items:center',
+      'justify-content:space-between',
+      'padding:0 32px',
+      'height:64px',
+      'position:sticky',
+      'top:0',
+      'z-index:100',
+      'box-sizing:border-box',
+      'border-bottom:1px solid #E4E7EE',
+      'background:#ffffff'
+    ].join(';');
+    /* Dark mode: override bg/border via data-theme watcher */
+    var updateHdrTheme = function() {
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      hdr.style.background = dark ? '#0A0E1A' : '#ffffff';
+      hdr.style.borderBottomColor = dark ? '#1F2438' : '#E4E7EE';
+    };
+    updateHdrTheme();
+    /* Hook into theme toggle */
+    var _origApplyTheme = applyTheme;
+    applyTheme = function(theme, save) {
+      _origApplyTheme(theme, save);
+      updateHdrTheme();
+    };
+    /* Re-apply after initial theme load */
+    var savedTheme = localStorage.getItem('cw-theme');
+    var sysDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    updateHdrTheme();
   }
 
   /* ── AUTO-DETECT COUNTRY ON FIRST VISIT ─────────────────── */
