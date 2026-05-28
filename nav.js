@@ -914,7 +914,7 @@
     '@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}',
     '@media(max-width:520px){.grid{grid-template-columns:1fr}.calc-card{padding:16px;}}',
 
-    /* ── LANGUAGE SELECTOR (pills) ──────────────────────────────────── */
+    /* ── LANGUAGE SELECTOR (pills — desktop) ────────────────────────── */
     '.lang-seg{display:flex;align-items:center;background:rgba(255,255,255,.07);',
     'border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:3px;gap:1px;}',
     'html:not([data-theme="dark"]) .lang-seg{background:rgba(10,14,26,.04);border-color:rgba(10,14,26,.1);}',
@@ -926,6 +926,19 @@
     'html:not([data-theme="dark"]) .lang-btn:hover{color:rgba(10,14,26,.75);background:rgba(10,14,26,.06);}',
     '.lang-btn.active{background:rgba(255,255,255,.16);color:#fff;font-weight:800;}',
     'html:not([data-theme="dark"]) .lang-btn.active{background:#4F6BFF;color:#fff;}',
+    /* Mobile language select (replaces pills on small screens) */
+    '.lang-sel-mob{display:none;border:1.5px solid rgba(255,255,255,.18);border-radius:8px;',
+    'background:rgba(255,255,255,.07);font-family:inherit;font-size:12px;font-weight:700;',
+    'letter-spacing:.04em;color:rgba(255,255,255,.85);cursor:pointer;outline:none;',
+    'padding:5px 28px 5px 10px;-webkit-appearance:none;appearance:none;',
+    'background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'10\' height=\'6\' viewBox=\'0 0 10 6\'%3E%3Cpath d=\'M1 1l4 4 4-4\' stroke=\'rgba(255,255,255,.5)\' stroke-width=\'1.5\' fill=\'none\' stroke-linecap=\'round\'/%3E%3C/svg%3E");',
+    'background-repeat:no-repeat;background-position:right 8px center;flex-shrink:0;}',
+    'html:not([data-theme="dark"]) .lang-sel-mob{border-color:rgba(10,14,26,.15);background:rgba(10,14,26,.04);color:rgba(10,14,26,.7);',
+    'background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'10\' height=\'6\' viewBox=\'0 0 10 6\'%3E%3Cpath d=\'M1 1l4 4 4-4\' stroke=\'rgba(10,14,26,.4)\' stroke-width=\'1.5\' fill=\'none\' stroke-linecap=\'round\'/%3E%3C/svg%3E");',
+    'background-repeat:no-repeat;background-position:right 8px center;}',
+    '.lang-sel-mob option{background:#0A0E1A;color:#fff;}',
+    /* Show pills on desktop, dropdown on mobile */
+    '@media(max-width:519px){.lang-seg{display:none!important;}.lang-sel-mob{display:block!important;}}',
 
     /* ── COUNTRY BUTTON + PICKER MODAL ───────────────────────────────── */
     '.cw-country-btn{background:none;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;',
@@ -1052,7 +1065,7 @@
   var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(saved || (sysDark ? 'dark' : 'light'), false);
 
-  /* ── LANGUAGE SELECTOR (pills) ─────────────────────────── */
+  /* ── LANGUAGE SELECTOR (pills — desktop) ───────────────── */
   var langSeg = document.createElement('div');
   langSeg.className = 'lang-seg';
   langSeg.setAttribute('role', 'group');
@@ -1063,6 +1076,21 @@
     lb.textContent = l.toUpperCase();
     lb.addEventListener('click', function() { window.location.href = cwLangUrl(l); });
     langSeg.appendChild(lb);
+  });
+
+  /* ── LANGUAGE SELECTOR (dropdown — mobile) ──────────────── */
+  var langSelMob = document.createElement('select');
+  langSelMob.className = 'lang-sel-mob';
+  langSelMob.setAttribute('aria-label', 'Language');
+  ['en', 'es', 'pt', 'fr'].forEach(function(l) {
+    var opt = document.createElement('option');
+    opt.value = l;
+    opt.textContent = l.toUpperCase();
+    if (l === CW_LANG) opt.selected = true;
+    langSelMob.appendChild(opt);
+  });
+  langSelMob.addEventListener('change', function() {
+    window.location.href = cwLangUrl(this.value);
   });
 
   /* ── COUNTRY PICKER BUTTON ──────────────────────────────── */
@@ -1100,9 +1128,10 @@
     hdrLeft.appendChild(btn);
     hdrLeft.appendChild(logoEl);
 
-    /* Right group: lang-seg + country + theme */
+    /* Right group: lang-sel-mob (mobile) + lang-seg (desktop) + country + theme */
     var hdrRight = document.createElement('div');
     hdrRight.className = 'hdr-right';
+    hdrRight.appendChild(langSelMob);
     hdrRight.appendChild(langSeg);
     hdrRight.appendChild(cwCountryBtn);
     hdrRight.appendChild(themeBtn);

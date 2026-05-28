@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Días entre Fechas — Días, Semanas y Meses | calculate.website</title>
+<meta name="description" content="Calculá cuántos días, semanas o meses hay entre dos fechas. Incluye días hábiles y días calendario. Ideal para plazos, contratos y cuentas regresivas. Gratis e instantáneo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/es/days/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/days/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/days/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/days/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/days/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/days/">
+<meta property="og:title" content="Días entre Fechas — calculate.website">
+<meta property="og:description" content="Calculá días, semanas o meses entre dos fechas. Compatible con días hábiles.">
+<meta property="og:url" content="https://calculate.website/es/days/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="es_AR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+  input[type=date]:focus{border-color:var(--hi)}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-unit{font-size:20px;font-weight:400;opacity:0.5;margin-left:6px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat-box{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px}
+  .stat-val{font-size:22px;font-weight:700;color:white;letter-spacing:-0.02em}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .toggle-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+  .toggle-lbl{font-size:14px;font-weight:500;color:var(--ink)}
+  .toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+  .toggle input{opacity:0;width:0;height:0}
+  .toggle-track{position:absolute;inset:0;background:var(--border);border-radius:99px;cursor:pointer;transition:background .2s}
+  .toggle input:checked + .toggle-track{background:var(--hi)}
+  .toggle-track::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .toggle input:checked + .toggle-track::after{transform:translateX(20px)}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Días entre Fechas</h1>
+  <p class="page-sub">¿Cuántos días hay entre dos fechas? También se muestra en semanas y meses.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Fecha de inicio</label>
+      <input type="date" id="date1" oninput="calcular()">
+    </div>
+    <div class="field">
+      <label>Fecha de fin</label>
+      <input type="date" id="date2" oninput="calcular()">
+    </div>
+    <div class="field">
+      <div class="toggle-row">
+        <span class="toggle-lbl">Solo días hábiles (Lun–Vie)</span>
+        <label class="toggle">
+          <input type="checkbox" id="business" onchange="calcular()">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Diferencia</div>
+    <div id="result-main" class="result-main"><span class="empty-state" style="font-size:16px">Seleccioná las fechas</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="stat-box">
+        <div class="stat-val" id="r-weeks">—</div>
+        <div class="stat-lbl">Semanas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-months">—</div>
+        <div class="stat-lbl">Meses aprox.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var today=new Date();
+  var in30=new Date();in30.setDate(today.getDate()+30);
+  document.getElementById('date1').value=today.toISOString().split('T')[0];
+  document.getElementById('date2').value=in30.toISOString().split('T')[0];
+  calcular();
+
+  function calcular(){
+    var f1=new Date(document.getElementById('date1').value);
+    var f2=new Date(document.getElementById('date2').value);
+    var mainEl=document.getElementById('result-main');
+    var subEl=document.getElementById('result-sub');
+    var rowsEl=document.getElementById('result-rows');
+    if(isNaN(f1)||isNaN(f2)){
+      mainEl.innerHTML='<span class="empty-state" style="font-size:16px">Seleccioná las fechas</span>';
+      subEl.textContent='';rowsEl.style.display='none';return;
+    }
+    var businessOnly=document.getElementById('business').checked;
+    var start=f1<f2?f1:f2;
+    var end=f1<f2?f2:f1;
+    var sign=f1<=f2?1:-1;
+    var days=0;
+    if(businessOnly){
+      var d=new Date(start);
+      while(d<end){
+        var dow=d.getDay();
+        if(dow!==0&&dow!==6)days++;
+        d.setDate(d.getDate()+1);
+      }
+    } else {
+      days=Math.round(Math.abs(end-start)/(1000*60*60*24));
+    }
+    days*=sign<0?-1:1;
+    var weeks=(Math.abs(days)/7).toFixed(1);
+    var months=(Math.abs(days)/30.44).toFixed(1);
+    var absDays=Math.abs(days);
+    mainEl.innerHTML=absDays.toLocaleString('es-AR')+'<span class="result-unit">día'+(absDays!==1?'s':'')+'</span>';
+    if(days<0) subEl.textContent='La fecha de inicio es posterior a la fecha de fin';
+    else if(days===0) subEl.textContent='Las fechas son iguales';
+    else subEl.textContent=businessOnly?'días hábiles (Lun–Vie)':'días calendario';
+    rowsEl.style.display='grid';
+    document.getElementById('r-weeks').textContent=weeks;
+    document.getElementById('r-months').textContent=months;
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#4F6BFF)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Cómo calculo la cantidad de días entre dos fechas?","acceptedAnswer":{"@type":"Answer","text":"Restá la fecha de inicio a la fecha de fin para obtener el total de días. Esta calculadora lo hace automáticamente: ingresá ambas fechas y muestra al instante días, semanas y meses."}},
+{"@type":"Question","name":"¿Qué son los días hábiles?","acceptedAnswer":{"@type":"Answer","text":"Los días hábiles (también llamados días laborables) son de lunes a viernes, excluyendo fines de semana. Los feriados no se excluyen automáticamente ya que varían según el país."}},
+{"@type":"Question","name":"¿Cuántas semanas son 90 días?","acceptedAnswer":{"@type":"Answer","text":"90 días equivalen exactamente a 12,86 semanas (90 ÷ 7 = 12,857). En meses, 90 días es aproximadamente 2,96 meses (90 ÷ 30,44)."}},
+{"@type":"Question","name":"¿Cómo cuento los días para un plazo o contrato?","acceptedAnswer":{"@type":"Answer","text":"Ingresá la fecha de inicio del contrato como Fecha de inicio y el vencimiento como Fecha de fin. La calculadora mostrará el número exacto de días calendario, y también días hábiles si activás el interruptor."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Preguntas frecuentes</div>
+  <details class="faq-item" open>
+    <summary>¿Cómo calculo la cantidad de días entre dos fechas?</summary>
+    <div class="faq-a">Restá la fecha de inicio a la fecha de fin para obtener el total de días. Esta calculadora lo hace automáticamente: ingresá ambas fechas y muestra al instante <strong>días, semanas y meses</strong>.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Qué son los días hábiles?</summary>
+    <div class="faq-a">Los días hábiles (también llamados días laborables) son <strong>de lunes a viernes</strong>, excluyendo fines de semana. Los feriados no se excluyen automáticamente ya que varían según el país.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Cuántas semanas son 90 días?</summary>
+    <div class="faq-a">90 días equivalen exactamente a <strong>12,86 semanas</strong> (90 ÷ 7 = 12,857). En meses, 90 días es aproximadamente <strong>2,96 meses</strong> (90 ÷ 30,44).</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Cómo cuento los días para un plazo o contrato?</summary>
+    <div class="faq-a">Ingresá la fecha de inicio como <strong>Fecha de inicio</strong> y el vencimiento como <strong>Fecha de fin</strong>. La calculadora muestra el número exacto de días calendario, y días hábiles si activás el interruptor.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

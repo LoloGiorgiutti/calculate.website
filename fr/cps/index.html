@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test CPS — Clics Par Seconde | calculate.website</title>
+<meta name="description" content="Testez votre vitesse de clics par seconde. Choisissez la durée et cliquez aussi vite que possible.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/cps/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/cps/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/cps/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/cps/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/cps/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/cps/">
+<meta property="og:title" content="Test CPS — Clics Par Seconde | calculate.website">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://calculate.website/fr/cps/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .time-sel{display:flex;gap:8px;margin-bottom:16px}
+  .time-btn{flex:1;padding:10px 0;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .time-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .click-area{background:#0C1528;border-radius:var(--radius);padding:48px 24px;margin-bottom:16px;text-align:center;cursor:pointer;user-select:none;-webkit-user-select:none;position:relative;overflow:hidden;transition:background .15s}
+  .click-area:active{background:#111e3a}
+  .click-area.ready .area-cta{display:block}
+  .click-area.running .area-cta{display:none}
+  .click-area.done .area-cta{display:none}
+  .area-cta{font-size:20px;font-weight:700;color:rgba(255,255,255,0.5)}
+  .area-cps{font-family:'JetBrains Mono',monospace;font-size:80px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1}
+  .area-label{font-size:14px;color:rgba(255,255,255,0.4);margin-top:6px}
+  .area-timer{font-family:'JetBrains Mono',monospace;font-size:20px;color:rgba(255,255,255,0.5);margin-top:12px}
+  .area-clicks{font-size:14px;color:rgba(255,255,255,0.3);margin-top:4px}
+  .progress-bar{height:4px;border-radius:2px;background:rgba(255,255,255,0.1);margin-top:20px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--hi);width:0;transition:width .1s linear;border-radius:2px}
+  .result-card{border-radius:var(--radius);padding:20px;margin-bottom:16px;background:var(--surface);border:1px solid var(--border);display:none}
+  .result-card.show{display:block}
+  .result-header{display:flex;align-items:baseline;gap:8px;margin-bottom:12px}
+  .result-cps{font-size:48px;font-weight:700;letter-spacing:-0.03em;color:var(--ink)}
+  .result-label{font-size:14px;color:var(--ink-light)}
+  .result-rating{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:700;margin-bottom:12px}
+  .rating-beginner{background:#EEF2FF;color:#4338CA}
+  .rating-normal  {background:#ECFDF5;color:#065F46}
+  .rating-good    {background:#FFF7ED;color:#9A3412}
+  .rating-gamer   {background:#FFF1F2;color:#9F1239}
+  .rating-monster {background:#0C1528;color:#A5B4FC}
+  .result-details{font-size:13px;color:var(--ink-light)}
+  .history-card{background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:16px;border:1px solid var(--border)}
+  .history-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+  .history-list{display:flex;flex-direction:column;gap:6px}
+  .history-row{display:flex;align-items:center;gap:10px;font-size:13px}
+  .history-rank{width:20px;text-align:center;font-weight:700;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-size:11px}
+  .history-cps{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
+  .history-meta{color:var(--ink-faint)}
+  .history-empty{font-size:13px;color:var(--ink-faint)}
+  .btn-reset{display:block;width:100%;padding:13px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center;margin-bottom:16px}
+  .btn-reset:hover{border-color:var(--hi);color:var(--hi)}
+  .faq-section{max-width:520px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Test de CPS</h1>
+  <p class="page-sub">Combien de clics par seconde pouvez-vous faire ? Choisissez la durée et cliquez aussi vite que possible.</p>
+
+  <div class="time-sel">
+    <button class="time-btn active" id="t5"  onclick="setDuration(5)">5s</button>
+    <button class="time-btn"       id="t10" onclick="setDuration(10)">10s</button>
+    <button class="time-btn"       id="t15" onclick="setDuration(15)">15s</button>
+    <button class="time-btn"       id="t30" onclick="setDuration(30)">30s</button>
+  </div>
+
+  <div class="click-area ready" id="click-area" onclick="handleClick()">
+    <div class="area-cta">Cliquez ici pour commencer !</div>
+    <div class="area-cps" id="area-cps" style="display:none">0.00</div>
+    <div class="area-label" id="area-label" style="display:none">clics par seconde</div>
+    <div class="area-timer" id="area-timer" style="display:none">5.0s</div>
+    <div class="area-clicks" id="area-clicks" style="display:none">0 clic</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div class="result-header">
+      <div class="result-cps" id="result-cps">0.00</div>
+      <div class="result-label">clics par seconde</div>
+    </div>
+    <div class="result-rating" id="result-rating"></div>
+    <div class="result-details" id="result-details"></div>
+  </div>
+
+  <button class="btn-reset" id="btn-reset" onclick="resetTest()" style="display:none">Réessayer</button>
+
+  <div class="history-card">
+    <div class="history-title">Meilleurs résultats (cette session)</div>
+    <div class="history-list" id="history-list">
+      <div class="history-empty">Aucun résultat — lancez votre premier test !</div>
+    </div>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-heading">Questions fréquentes</div>
+  <details class="faq-item" open>
+    <summary>Quel est un bon score de CPS ?</summary>
+    <div class="faq-a">La moyenne est de <strong>6–8 clics par seconde</strong>. Les gamers expérimentés atteignent généralement 10–14 CPS. Au-dessus de 14 CPS c'est exceptionnel, et au-dessus de 16 CPS c'est considéré comme un niveau élite. Les records mondiaux dépassent 25 CPS avec des techniques comme le butterfly clicking.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Quelles techniques de clic améliorent le CPS ?</summary>
+    <div class="faq-a"><strong>Clic normal</strong> : 6–10 CPS. <strong>Jitter clicking</strong> : contracter le bras et la main pour faire vibrer le doigt, 10–14 CPS. <strong>Butterfly clicking</strong> : alterner deux doigts sur un bouton, peut dépasser 16 CPS. <strong>Drag clicking</strong> : glisser le doigt pour enregistrer plusieurs clics, non valable pour ce test.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Pourquoi mon score baisse-t-il lors de tests plus longs ?</summary>
+    <div class="faq-a">La fatigue des mains est le facteur principal. Les muscles et les tendons se fatiguent rapidement à vitesse maximale. Étirez vos mains avant un test long.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Le CPS est-il important pour jouer ?</summary>
+    <div class="faq-a">Dans certains jeux (combat PvP dans Minecraft) le CPS affecte directement les performances. Dans la plupart des FPS modernes, la vitesse brute de clic importe moins que la précision de visée et le temps de réaction. Un CPS constant de 7–10 est suffisant pour la plupart des jeux.</div>
+  </details>
+</div>
+<script>
+  var duration  = 5;
+  var state     = 'ready'; // ready | running | done
+  var clicks    = 0;
+  var startTime = 0;
+  var timer     = null;
+  var history   = [];
+
+  var RATINGS = [
+    { min: 16,  label: 'Monstre',    cls: 'rating-monster' },
+    { min: 12,  label: 'Gamer',      cls: 'rating-gamer'   },
+    { min: 9,   label: 'Bien',       cls: 'rating-good'    },
+    { min: 6,   label: 'Normal',     cls: 'rating-normal'  },
+    { min: 0,   label: 'Débutant',   cls: 'rating-beginner'},
+  ];
+
+  function setDuration(d) {
+    if (state === 'running') return;
+    duration = d;
+    ['5','10','15','30'].forEach(function(t) {
+      document.getElementById('t'+t).classList.toggle('active', parseInt(t) === d);
+    });
+    resetTest();
+  }
+
+  function handleClick() {
+    if (state === 'ready') {
+      startTest();
+      return;
+    }
+    if (state === 'running') {
+      clicks++;
+      var elapsed = (Date.now() - startTime) / 1000;
+      var cps     = elapsed > 0 ? (clicks / elapsed) : 0;
+      var remaining = Math.max(0, duration - elapsed);
+      var progress  = Math.min(100, (elapsed / duration) * 100);
+
+      document.getElementById('area-cps').textContent    = cps.toFixed(2);
+      document.getElementById('area-clicks').textContent = clicks + ' clic' + (clicks !== 1 ? 's' : '');
+      document.getElementById('area-timer').textContent  = remaining.toFixed(1) + 's';
+      document.getElementById('progress-fill').style.width = progress + '%';
+    }
+  }
+
+  function startTest() {
+    state     = 'running';
+    clicks    = 0;
+    startTime = Date.now();
+    var area  = document.getElementById('click-area');
+    area.classList.remove('ready','done');
+    area.classList.add('running');
+
+    document.getElementById('area-cta').style.display   = 'none';
+    document.getElementById('area-cps').style.display   = 'block';
+    document.getElementById('area-label').style.display = 'block';
+    document.getElementById('area-timer').style.display = 'block';
+    document.getElementById('area-clicks').style.display= 'block';
+    document.getElementById('result-card').classList.remove('show');
+    document.getElementById('btn-reset').style.display  = 'none';
+
+    timer = setTimeout(endTest, duration * 1000);
+  }
+
+  function endTest() {
+    if (state !== 'running') return;
+    state = 'done';
+    clearTimeout(timer);
+
+    var elapsed = Math.min((Date.now() - startTime) / 1000, duration);
+    var cps     = elapsed > 0 ? clicks / elapsed : 0;
+
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('area-cps').textContent     = cps.toFixed(2);
+    document.getElementById('area-timer').textContent   = '0.0s';
+
+    // Show result
+    var rating = RATINGS.find(function(r){ return cps >= r.min; }) || RATINGS[RATINGS.length-1];
+    document.getElementById('result-cps').textContent = cps.toFixed(2);
+    var ratingEl = document.getElementById('result-rating');
+    ratingEl.textContent  = rating.label;
+    ratingEl.className    = 'result-rating ' + rating.cls;
+    document.getElementById('result-details').textContent =
+      clicks + ' clics au total en ' + duration + ' secondes.';
+    document.getElementById('result-card').classList.add('show');
+    document.getElementById('btn-reset').style.display = 'block';
+
+    // Save to history (top 5 by CPS)
+    history.push({ cps: cps, clicks: clicks, duration: duration });
+    history.sort(function(a,b){ return b.cps - a.cps; });
+    if (history.length > 5) history.length = 5;
+    renderHistory();
+  }
+
+  function resetTest() {
+    state = 'ready';
+    clicks = 0;
+    clearTimeout(timer);
+    var area = document.getElementById('click-area');
+    area.classList.remove('running','done');
+    area.classList.add('ready');
+    document.getElementById('area-cta').style.display    = 'block';
+    document.getElementById('area-cps').style.display    = 'none';
+    document.getElementById('area-label').style.display  = 'none';
+    document.getElementById('area-timer').style.display  = 'none';
+    document.getElementById('area-clicks').style.display = 'none';
+    document.getElementById('progress-fill').style.width = '0';
+    document.getElementById('result-card').classList.remove('show');
+    document.getElementById('btn-reset').style.display   = 'none';
+  }
+
+  function renderHistory() {
+    var list = document.getElementById('history-list');
+    if (history.length === 0) {
+      list.innerHTML = '<div class="history-empty">Aucun résultat — lancez votre premier test !</div>';
+      return;
+    }
+    list.innerHTML = history.map(function(h, i) {
+      return '<div class="history-row">'
+        + '<span class="history-rank">#' + (i+1) + '</span>'
+        + '<span class="history-cps">' + h.cps.toFixed(2) + ' CPS</span>'
+        + '<span class="history-meta">' + h.clicks + ' clics · ' + h.duration + 's</span>'
+        + '</div>';
+    }).join('');
+  }
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

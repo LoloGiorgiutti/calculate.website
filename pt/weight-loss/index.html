@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Perda de Peso — Tempo para Atingir seu Peso Ideal | calculate.website</title>
+<meta name="description" content="Calcule quanto tempo levará para atingir seu peso ideal com base no déficit calórico diário. Estimativa em semanas e meses.">
+<link rel="canonical" href="https://calculate.website/pt/weight-loss/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/weight-loss/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/weight-loss/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/weight-loss/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/weight-loss/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/weight-loss/">
+<meta property="og:title" content="Calculadora de Perda de Peso — Tempo para Atingir seu Peso Ideal | calculate.website">
+<meta property="og:description" content="Calcule quanto tempo levará para atingir seu peso ideal com base no déficit calórico diário. Estimativa em semanas e meses.">
+<meta property="og:url" content="https://calculate.website/pt/weight-loss/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:480px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.unit-toggle{display:flex;gap:6px;margin-bottom:16px}
+.unit-btn{padding:8px 18px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+.unit-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+.input-wrap{position:relative}
+.input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--hi)}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-main{font-size:48px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.result-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.result-rows{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-box{background:rgba(255,255,255,.05);border-radius:10px;padding:14px}
+.stat-val{font-size:20px;font-weight:700;color:white;letter-spacing:-.02em}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+.empty-state{color:rgba(255,255,255,.3);font-size:15px}
+.info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
+.info-box strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Calculadora de Perda de Peso</h1>
+  <p class="sub">Estime quanto tempo levará para atingir seu peso ideal com base no déficit calórico.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Unidades</label>
+      <div class="unit-toggle">
+        <button class="unit-btn" onclick="setUnit('imperial',this)">lbs</button>
+        <button class="unit-btn active" onclick="setUnit('metric',this)">kg</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Peso atual</label>
+      <div class="input-wrap">
+        <input type="number" id="current-weight" placeholder="80" min="20" oninput="calculate()">
+        <span class="input-suffix" id="suffix-current">kg</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Peso objetivo</label>
+      <div class="input-wrap">
+        <input type="number" id="goal-weight" placeholder="70" min="20" oninput="calculate()">
+        <span class="input-suffix" id="suffix-goal">kg</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Déficit calórico diário</label>
+      <div class="input-wrap">
+        <input type="number" id="deficit" placeholder="500" min="100" max="1500" oninput="calculate()">
+        <span class="input-suffix">kcal/dia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Tempo para atingir a meta</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Preencha os campos</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="stat-box">
+        <div class="stat-val" id="r-weeks">—</div>
+        <div class="stat-lbl">Semanas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-months">—</div>
+        <div class="stat-lbl">Meses</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-loss">—</div>
+        <div class="stat-lbl" id="r-loss-lbl">Peso a perder</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-rate">—</div>
+        <div class="stat-lbl" id="r-rate-lbl">Por semana</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Como é calculado?</strong><br>
+    Um déficit de 3.500 kcal queima aproximadamente 0,45 kg (1 lb) de gordura. Portanto, um déficit diário de 500 kcal gera um déficit semanal de 3.500 kcal ≈ 0,45 kg/semana. Os resultados são estimativas — o metabolismo individual varia.
+  </div>
+</div>
+
+<script>
+var unit='metric';
+
+function setUnit(u,btn){
+  unit=u;
+  document.querySelectorAll('.unit-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var suf=unit==='metric'?'kg':'lbs';
+  document.getElementById('suffix-current').textContent=suf;
+  document.getElementById('suffix-goal').textContent=suf;
+  calculate();
+}
+
+function calculate(){
+  var cw=parseFloat(document.getElementById('current-weight').value)||0;
+  var gw=parseFloat(document.getElementById('goal-weight').value)||0;
+  var deficit=parseFloat(document.getElementById('deficit').value)||0;
+  var mainEl=document.getElementById('result-main');
+  var subEl=document.getElementById('result-sub');
+  var rowsEl=document.getElementById('result-rows');
+
+  if(!cw||!gw||!deficit||gw>=cw){
+    mainEl.innerHTML='<span class="empty-state">Preencha os campos</span>';
+    subEl.textContent='';rowsEl.style.display='none';return;
+  }
+
+  var lossLbs=unit==='metric'?(cw-gw)*2.20462:(cw-gw);
+  var totalKcal=lossLbs*3500;
+  var days=totalKcal/deficit;
+  var weeks=days/7;
+  var months=days/30.44;
+  var lossPerWeekLbs=deficit*7/3500;
+
+  var lossStr=unit==='metric'
+    ?(cw-gw).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg'
+    :(cw-gw).toFixed(1)+' lbs';
+  var rateStr2=unit==='metric'
+    ?(lossPerWeekLbs/2.205).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+' kg/semana'
+    :lossPerWeekLbs.toFixed(2)+' lbs/semana';
+
+  var wks=Math.ceil(weeks);
+  var mos=Math.round(months*10)/10;
+
+  mainEl.textContent=wks+' semana'+(wks!==1?'s':'');
+  subEl.textContent='para perder '+lossStr+' com déficit de '+deficit+' kcal/dia';
+  rowsEl.style.display='grid';
+  document.getElementById('r-weeks').textContent=wks;
+  document.getElementById('r-months').textContent=mos.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+  document.getElementById('r-loss').textContent=lossStr;
+  document.getElementById('r-rate').textContent=rateStr2;
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

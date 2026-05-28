@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora P&L Crypto — Ganho e Perda | calculate.website</title>
+<meta name="description" content="Calcule seu ganho ou perda em qualquer operação de Bitcoin, Ethereum ou outras criptomoedas. Inclui taxas e rendimento percentual.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/pt/crypto-pl/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/crypto-pl/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/crypto-pl/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/crypto-pl/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/crypto-pl/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/crypto-pl/">
+<meta property="og:title" content="Calculadora P&L Crypto — calculate.website">
+<meta property="og:description" content="Calcule seu ganho ou perda em operações crypto. Inclui taxas e rendimento.">
+<meta property="og:url" content="https://calculate.website/pt/crypto-pl/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFFFFF;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--dark:#0A0E1A;--dark-2:#141929;--dark-line:#1F2438;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.page-hero{background:var(--dark);padding:36px 0 72px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-40px;width:500px;height:500px;background:radial-gradient(circle,rgba(79,107,255,.1) 0%,transparent 60%);pointer-events:none}
+.hero-inner{max-width:680px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.bc{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:rgba(255,255,255,.7)}
+.hero-inner h1{font-size:34px;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:8px}
+.hero-inner p{font-size:15px;color:rgba(255,255,255,.55);line-height:1.6}
+main{max-width:680px;margin:-40px auto 0;padding:0 24px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;font-family:'JetBrains Mono',monospace}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.field{margin-bottom:14px}.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.input-wrap{position:relative}
+.input-suffix{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--ink-3);pointer-events:none}
+.field select,.field input[type=number]{width:100%;padding:11px 40px 11px 14px;border:1.5px solid var(--line);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+.field select:focus,.field input[type=number]:focus{border-color:var(--accent)}
+.result-card{background:var(--dark);border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--accent);transition:border-color .3s}
+.result-card.profit{border-top-color:#16A34A}
+.result-card.loss{border-top-color:#DC2626}
+.result-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-main{font-size:52px;font-weight:800;letter-spacing:-0.04em;line-height:1;margin-bottom:4px;color:#fff}
+.result-main.positive{color:#86EFAC}
+.result-main.negative{color:#FCA5A5}
+.result-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.stat-box{background:rgba(255,255,255,.05);border-radius:10px;padding:14px}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:#fff;letter-spacing:-0.02em}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+.verdict{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:8px 16px;border-radius:99px;margin-bottom:16px}
+.verdict.profit{background:rgba(22,163,74,.2);color:#86EFAC}
+.verdict.loss{background:rgba(220,38,38,.2);color:#FCA5A5}
+.verdict.neutral{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
+.breakeven{background:rgba(255,255,255,.05);border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13px;color:rgba(255,255,255,.5)}
+.breakeven strong{color:#fff}
+.info-box{background:var(--accent-soft);border:1.5px solid rgba(79,107,255,.2);border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-2);line-height:1.6}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}.result-main{font-size:38px}.hero-inner h1{font-size:28px}}
+</style>
+</head>
+<body>
+<header></header>
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="bc"><a href="/pt/">Início</a> / <a href="/pt/crypto/">Cripto</a> / P&amp;L</div>
+    <h1>📊 P&amp;L Crypto</h1>
+    <p>Calcule seu ganho ou perda em uma operação cripto. Preço de compra, venda, quantidade e taxas.</p>
+  </div>
+</section>
+<main>
+  <div class="card">
+    <div class="card-title">Dados da operação</div>
+    <div class="form-row">
+      <div class="field">
+        <label>Criptomoeda</label>
+        <select id="sel-crypto" onchange="calcular()">
+          <option>Bitcoin (BTC)</option>
+          <option>Ethereum (ETH)</option>
+          <option>USDT</option>
+          <option>BNB</option>
+          <option>Solana (SOL)</option>
+          <option>XRP</option>
+          <option>Outra</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Preço de compra (USD)</label>
+        <div class="input-wrap">
+          <input type="number" id="inp-compra" placeholder="95000" oninput="calcular()">
+          <span class="input-suffix">USD</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label>Preço de venda / atual (USD)</label>
+        <div class="input-wrap">
+          <input type="number" id="inp-venta" placeholder="102000" oninput="calcular()">
+          <span class="input-suffix">USD</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Quantidade de cripto</label>
+        <div class="input-wrap">
+          <input type="number" id="inp-cant" placeholder="0.05" step="0.00001" oninput="calcular()">
+          <span class="input-suffix">unidades</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label>Taxa de compra (%)</label>
+        <div class="input-wrap">
+          <input type="number" id="inp-fee1" placeholder="0.5" value="0.5" step="0.1" oninput="calcular()">
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Taxa de venda (%)</label>
+        <div class="input-wrap">
+          <input type="number" id="inp-fee2" placeholder="0.5" value="0.5" step="0.1" oninput="calcular()">
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div id="verdict-wrap"></div>
+    <div class="result-eyebrow">Ganho / Perda líquido</div>
+    <div class="result-main" id="r-ganancia">—</div>
+    <div class="result-sub" id="r-rend"></div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-val" id="r-inversion">—</div><div class="stat-lbl">Investimento total</div></div>
+      <div class="stat-box"><div class="stat-val" id="r-valor-venta">—</div><div class="stat-lbl">Valor de venda</div></div>
+      <div class="stat-box"><div class="stat-val" id="r-comisiones">—</div><div class="stat-lbl">Total de taxas</div></div>
+      <div class="stat-box"><div class="stat-val" id="r-multiplicador">—</div><div class="stat-lbl">Rendimento</div></div>
+    </div>
+    <div class="breakeven" id="r-breakeven"></div>
+  </div>
+
+  <div class="info-box">
+    <strong>Sem preços em tempo real.</strong> Esta calculadora usa os preços que você digita. Para calcular sua posição aberta, insira o preço atual de mercado como "preço de venda".
+  </div>
+</main>
+<script>
+function fmt(n,dec){dec=dec||0;return n.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});}
+function fmtUSD(n){return 'USD '+fmt(n,2);}
+function calcular(){
+  var compra=parseFloat(document.getElementById('inp-compra').value)||0;
+  var venta=parseFloat(document.getElementById('inp-venta').value)||0;
+  var cant=parseFloat(document.getElementById('inp-cant').value)||0;
+  var fee1=parseFloat(document.getElementById('inp-fee1').value)||0;
+  var fee2=parseFloat(document.getElementById('inp-fee2').value)||0;
+  if(!compra||!cant)return;
+  var inversion=compra*cant;
+  var comCompra=inversion*(fee1/100);
+  var valorVenta=venta*cant;
+  var comVenta=valorVenta*(fee2/100);
+  var ganancia=valorVenta-inversion-comCompra-comVenta;
+  var rendimento=(ganancia/(inversion+comCompra))*100;
+  var totalFees=comCompra+comVenta;
+  var breakeven=(inversion+comCompra)/cant/(1-fee2/100);
+  var card=document.getElementById('result-card');
+  var mainEl=document.getElementById('r-ganancia');
+  var verdictEl=document.getElementById('verdict-wrap');
+  var isProfit=ganancia>0.001;var isLoss=ganancia<-0.001;
+  card.className='result-card '+(isProfit?'profit':isLoss?'loss':'');
+  mainEl.className='result-main '+(isProfit?'positive':isLoss?'negative':'');
+  mainEl.textContent=(ganancia>=0?'+':'')+'USD '+fmt(ganancia,2);
+  document.getElementById('r-rend').textContent='Rendimento: '+(rendimento>=0?'+':'')+fmt(rendimento,2)+'%';
+  if(isProfit){verdictEl.innerHTML='<div class="verdict profit">🟢 Operação lucrativa</div>';}
+  else if(isLoss){verdictEl.innerHTML='<div class="verdict loss">🔴 Operação com perda</div>';}
+  else if(!venta){verdictEl.innerHTML='';}
+  else{verdictEl.innerHTML='<div class="verdict neutral">⚪ Sem variação</div>';}
+  document.getElementById('r-inversion').textContent=fmtUSD(inversion);
+  document.getElementById('r-valor-venta').textContent=venta?fmtUSD(valorVenta):'—';
+  document.getElementById('r-comisiones').textContent=fmtUSD(totalFees);
+  document.getElementById('r-multiplicador').textContent=venta?(rendimento>=0?'+':'')+fmt(rendimento,2)+'%':'—';
+  document.getElementById('r-breakeven').innerHTML=venta?'Break-even: preço mínimo de venda <strong>USD '+fmt(breakeven,2)+'</strong>':'';
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Signo do Zodíaco — Ocidental e Chinês | calculate.website</title>
+<meta name="description" content="Descubra seu signo do zodíaco ocidental e animal do zodíaco chinês pelo seu aniversário. Inclui traços de personalidade, elemento e compatibilidade. Gratuito e instantâneo.">
+<link rel="canonical" href="https://calculate.website/pt/zodiac/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/zodiac/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/zodiac/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/zodiac/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/zodiac/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/zodiac/">
+<meta property="og:title" content="Signo do Zodíaco — calculate.website">
+<meta property="og:description" content="Descubra seu signo ocidental e animal chinês pelo aniversário. Grátis e sem cadastro.">
+<meta property="og:url" content="https://calculate.website/pt/zodiac/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+.page-title{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+input[type=date]:focus{border-color:var(--hi)}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.sign-big{font-size:60px;line-height:1;text-align:center;margin-bottom:8px}
+.sign-name{font-size:32px;font-weight:700;color:white;letter-spacing:-.02em;text-align:center}
+.sign-dates{font-size:13px;color:rgba(255,255,255,.4);text-align:center;margin-bottom:20px}
+.sign-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.sign-attr{background:rgba(255,255,255,.05);border-radius:10px;padding:12px;text-align:center}
+.sign-attr-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px}
+.sign-attr-val{font-size:13px;font-weight:600;color:white}
+.traits{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.trait{padding:4px 12px;background:rgba(26,95,232,.25);border:1px solid rgba(26,95,232,.3);color:#93C5FD;border-radius:99px;font-size:12px;font-weight:600}
+.chinese-card{background:rgba(255,255,255,.05);border-radius:10px;padding:16px;margin-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.chinese-title{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px}
+.chinese-animal{font-size:20px;font-weight:700;color:white}
+.empty-state{color:rgba(255,255,255,.3);font-size:15px;text-align:center;padding:20px 0}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Signo do Zodíaco</h1>
+  <p class="page-sub">Descubra seu signo ocidental e seu animal do zodíaco chinês pelo seu aniversário.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Data de nascimento</label>
+      <input type="date" id="birthdate" oninput="calculate()">
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div id="result-content"><div class="empty-state">Digite sua data de nascimento</div></div>
+  </div>
+</div>
+<script>
+var SIGNS=[
+  {sym:'♑',name:'Capricórnio',  from:[12,22],to:[1,19],  element:'Terra',  quality:'Cardinal',ruler:'Saturno',   traits:['Ambicioso','Disciplinado','Paciente','Responsável']},
+  {sym:'♒',name:'Aquário',      from:[1,20], to:[2,18],  element:'Ar',     quality:'Fixo',    ruler:'Urano',     traits:['Independente','Visionário','Humanitário','Excêntrico']},
+  {sym:'♓',name:'Peixes',       from:[2,19], to:[3,20],  element:'Água',   quality:'Mutável', ruler:'Netuno',    traits:['Intuitivo','Empático','Artístico','Sonhador']},
+  {sym:'♈',name:'Áries',        from:[3,21], to:[4,19],  element:'Fogo',   quality:'Cardinal',ruler:'Marte',     traits:['Ousado','Energético','Corajoso','Impulsivo']},
+  {sym:'♉',name:'Touro',        from:[4,20], to:[5,20],  element:'Terra',  quality:'Fixo',    ruler:'Vênus',     traits:['Confiável','Paciente','Prático','Teimoso']},
+  {sym:'♊',name:'Gêmeos',       from:[5,21], to:[6,20],  element:'Ar',     quality:'Mutável', ruler:'Mercúrio',  traits:['Curioso','Adaptável','Espirituoso','Indeciso']},
+  {sym:'♋',name:'Câncer',       from:[6,21], to:[7,22],  element:'Água',   quality:'Cardinal',ruler:'Lua',       traits:['Carinhoso','Intuitivo','Emocional','Leal']},
+  {sym:'♌',name:'Leão',         from:[7,23], to:[8,22],  element:'Fogo',   quality:'Fixo',    ruler:'Sol',       traits:['Generoso','Criativo','Confiante','Dramático']},
+  {sym:'♍',name:'Virgem',       from:[8,23], to:[9,22],  element:'Terra',  quality:'Mutável', ruler:'Mercúrio',  traits:['Analítico','Prestativo','Diligente','Perfeccionista']},
+  {sym:'♎',name:'Libra',        from:[9,23], to:[10,22], element:'Ar',     quality:'Cardinal',ruler:'Vênus',     traits:['Diplomático','Justo','Sociável','Indeciso']},
+  {sym:'♏',name:'Escorpião',    from:[10,23],to:[11,21], element:'Água',   quality:'Fixo',    ruler:'Plutão',    traits:['Intenso','Determinado','Perspicaz','Reservado']},
+  {sym:'♐',name:'Sagitário',    from:[11,22],to:[12,21], element:'Fogo',   quality:'Mutável', ruler:'Júpiter',   traits:['Otimista','Aventureiro','Filosófico','Inquieto']},
+];
+var CHINESE_ANIMALS=[
+  {year:1900,name:'Rato',sym:'🐀'},{year:1901,name:'Boi',sym:'🐂'},{year:1902,name:'Tigre',sym:'🐅'},
+  {year:1903,name:'Coelho',sym:'🐇'},{year:1904,name:'Dragão',sym:'🐉'},{year:1905,name:'Serpente',sym:'🐍'},
+  {year:1906,name:'Cavalo',sym:'🐎'},{year:1907,name:'Cabra',sym:'🐐'},{year:1908,name:'Macaco',sym:'🐒'},
+  {year:1909,name:'Galo',sym:'🐓'},{year:1910,name:'Cão',sym:'🐕'},{year:1911,name:'Porco',sym:'🐷'},
+];
+var MONTHS_PT=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+function getSign(m,d){for(var i=0;i<SIGNS.length;i++){var s=SIGNS[i];if((m===s.from[0]&&d>=s.from[1])||(m===s.to[0]&&d<=s.to[1]))return s;}return SIGNS[0];}
+function getChineseSign(y){return CHINESE_ANIMALS[((y-1900)%12+12)%12];}
+function calculate(){
+  var val=document.getElementById('birthdate').value;
+  if(!val){document.getElementById('result-content').innerHTML='<div class="empty-state">Digite sua data de nascimento</div>';return;}
+  var p=val.split('-');var year=+p[0],month=+p[1],day=+p[2];
+  var sign=getSign(month,day);var chinese=getChineseSign(year);
+  var fromStr=MONTHS_PT[sign.from[0]-1]+' '+sign.from[1];
+  var toStr=MONTHS_PT[sign.to[0]-1]+' '+sign.to[1];
+  var traitsHTML=sign.traits.map(function(t){return '<span class="trait">'+t+'</span>';}).join('');
+  document.getElementById('result-content').innerHTML=
+    '<div class="result-eyebrow">Seu signo solar</div>'
+    +'<div class="sign-big">'+sign.sym+'</div>'
+    +'<div class="sign-name">'+sign.name+'</div>'
+    +'<div class="sign-dates">'+fromStr+' – '+toStr+'</div>'
+    +'<div class="sign-grid">'
+      +'<div class="sign-attr"><div class="sign-attr-lbl">Elemento</div><div class="sign-attr-val">'+sign.element+'</div></div>'
+      +'<div class="sign-attr"><div class="sign-attr-lbl">Qualidade</div><div class="sign-attr-val">'+sign.quality+'</div></div>'
+      +'<div class="sign-attr"><div class="sign-attr-lbl">Regente</div><div class="sign-attr-val">'+sign.ruler+'</div></div>'
+    +'</div>'
+    +'<div class="traits">'+traitsHTML+'</div>'
+    +'<div class="chinese-card">'
+      +'<div class="chinese-title">Zodíaco Chinês</div>'
+      +'<div class="chinese-animal">'+chinese.sym+' '+chinese.name+' ('+year+')</div>'
+    +'</div>';
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

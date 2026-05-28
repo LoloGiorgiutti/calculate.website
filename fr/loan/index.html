@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Prêt — Mensualité et Amortissement | calculate.website</title>
+<meta name="description" content="Calculez votre mensualité, les intérêts totaux et le tableau d'amortissement pour n'importe quel prêt. Méthode à taux fixe (amortissement français).">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/loan/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/loan/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/loan/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/loan/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/loan/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/loan/">
+<meta property="og:title" content="Calculateur de Prêt — calculate.website">
+<meta property="og:description" content="Calculez votre mensualité, les intérêts totaux et le tableau d'amortissement pour n'importe quel prêt.">
+<meta property="og:url" content="https://calculate.website/fr/loan/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]:focus{border-color:var(--hi)}
+  .term-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .term-chip{padding:8px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .term-chip.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:46px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-currency{font-size:22px;font-weight:400;opacity:0.5;margin-left:6px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+  .result-row{display:flex;justify-content:space-between;align-items:center}
+  .result-row-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85)}
+  .result-row-val.warn{color:#FCA5A5}
+  .result-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0}
+  .bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+  .bar-label-row{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px}
+  .bar-track{height:8px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;display:flex}
+  .bar-principal{background:rgba(255,255,255,0.35);border-radius:99px 0 0 99px;transition:width .4s}
+  .bar-interest{background:#FCA5A5;border-radius:0 99px 99px 0;transition:width .4s}
+  .bar-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
+  .info-box strong{color:var(--ink)}
+  .table-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);transition:all .15s;margin-bottom:16px}
+  .table-toggle:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}
+  .table-toggle .chevron{margin-left:auto;transition:transform .25s}
+  .table-toggle.open .chevron{transform:rotate(180deg)}
+  .amort-card{background:var(--surface);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;border:1px solid var(--border)}
+  .amort-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+  .amort-table-wrap{overflow-x:auto;max-height:320px;overflow-y:auto;border-radius:var(--radius-sm);border:1px solid var(--border)}
+  .amort-table{width:100%;border-collapse:collapse;font-size:12px}
+  .amort-table th{position:sticky;top:0;background:var(--bg);padding:8px 10px;text-align:right;font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}
+  .amort-table th:first-child{text-align:center}
+  .amort-table td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--border);color:var(--ink)}
+  .amort-table td:first-child{text-align:center;color:var(--ink-light);font-weight:600}
+  .amort-table tr:last-child td{border-bottom:none;font-weight:700;background:var(--hi-soft)}
+  .amort-table .int-col{color:#EF4444}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Calculateur de Prêt</h1>
+  <p class="page-sub">Calculez la mensualité, les intérêts totaux et le tableau d'amortissement complet.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Montant du prêt</label>
+      <div class="input-wrap">
+        <input type="number" id="amount" placeholder="20000" min="0" step="100" oninput="calculate()" style="padding-right:44px">
+        <span class="input-suffix">€</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Taux d'intérêt annuel (TAEG)</label>
+      <div class="input-wrap">
+        <input type="number" id="apr" placeholder="3.5" min="0" step="0.25" oninput="calculate()" style="padding-right:44px">
+        <span class="input-suffix">%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Durée du prêt</label>
+      <div class="term-chips" id="term-chips">
+        <button class="term-chip" onclick="setTerm(6)">6 mois</button>
+        <button class="term-chip active" onclick="setTerm(12)">1 an</button>
+        <button class="term-chip" onclick="setTerm(24)">2 ans</button>
+        <button class="term-chip" onclick="setTerm(36)">3 ans</button>
+        <button class="term-chip" onclick="setTerm(48)">4 ans</button>
+        <button class="term-chip" onclick="setTerm(60)">5 ans</button>
+        <button class="term-chip" onclick="setTerm(84)">7 ans</button>
+        <button class="term-chip" onclick="setTerm(120)">10 ans</button>
+        <button class="term-chip" onclick="setTerm(180)">15 ans</button>
+        <button class="term-chip" onclick="setTerm(360)">30 ans</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Mensualité</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Saisissez les détails du prêt</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Capital emprunté</span>
+        <span class="result-row-val" id="r-principal">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Intérêts totaux</span>
+        <span class="result-row-val warn" id="r-interest">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,0.8);font-weight:600">Total remboursé</span>
+        <span class="result-row-val" id="r-total">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Taux effectif annuel (TEG)</span>
+        <span class="result-row-val warn" id="r-ear">—</span>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">Répartition du total remboursé</div>
+        <div class="bar-track">
+          <div class="bar-principal" id="bar-pri"></div>
+          <div class="bar-interest" id="bar-int"></div>
+        </div>
+        <div class="bar-labels">
+          <span id="lbl-pri">Capital</span>
+          <span id="lbl-int">Intérêts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="table-toggle" id="table-toggle" onclick="toggleTable()" style="display:none">
+    📋 Voir le tableau d'amortissement mensuel
+    <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="amort-card" id="amort-card" style="display:none">
+    <div class="amort-title">Tableau d'amortissement</div>
+    <div class="amort-table-wrap">
+      <table class="amort-table" id="amort-table">
+        <thead>
+          <tr>
+            <th>Mois</th>
+            <th>Mensualité</th>
+            <th>Capital</th>
+            <th>Intérêts</th>
+            <th>Solde</th>
+          </tr>
+        </thead>
+        <tbody id="amort-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Comment est calculée la mensualité ?</strong><br>
+    Ce calculateur utilise la méthode d'<strong>amortissement français (mensualités constantes)</strong>. Chaque mensualité est identique. Les premières échéances comprennent surtout des intérêts ; les dernières, surtout du capital. C'est la méthode la plus courante pour les prêts personnels et immobiliers.
+  </div>
+</div>
+<script>
+  var termMonths=12;
+  var pendingAmortRows=null;
+
+  function setTerm(m){
+    termMonths=m;
+    document.querySelectorAll('.term-chip').forEach(function(b){b.classList.remove('active');});
+    event.target.classList.add('active');
+    calculate();
+  }
+
+  function fmtCur(n){return Math.round(n).toLocaleString('fr-FR')+' €';}
+
+  function buildAmortTable(amount,r,n,payment){
+    var balance=amount;
+    var rows='';
+    var totalPaid=0,totalPrincipal=0,totalInterest=0;
+    for(var i=1;i<=n;i++){
+      var interest=balance*r;
+      var principal=payment-interest;
+      balance-=principal;
+      if(balance<0.01) balance=0;
+      totalPaid+=payment;
+      totalPrincipal+=principal;
+      totalInterest+=interest;
+      rows+='<tr>'
+        +'<td>'+i+'</td>'
+        +'<td>'+fmtCur(payment)+'</td>'
+        +'<td>'+fmtCur(principal)+'</td>'
+        +'<td class="int-col">'+fmtCur(interest)+'</td>'
+        +'<td>'+fmtCur(Math.max(0,balance))+'</td>'
+        +'</tr>';
+    }
+    rows+='<tr>'
+      +'<td>Total</td>'
+      +'<td>'+fmtCur(totalPaid)+'</td>'
+      +'<td>'+fmtCur(totalPrincipal)+'</td>'
+      +'<td class="int-col">'+fmtCur(totalInterest)+'</td>'
+      +'<td>—</td>'
+      +'</tr>';
+    return rows;
+  }
+
+  function toggleTable(){
+    var card=document.getElementById('amort-card');
+    var btn=document.getElementById('table-toggle');
+    var open=card.style.display==='none';
+    if(open&&pendingAmortRows!==null){
+      document.getElementById('amort-tbody').innerHTML=pendingAmortRows;
+      pendingAmortRows=null;
+    }
+    card.style.display=open?'block':'none';
+    btn.classList.toggle('open',open);
+  }
+
+  function calculate(){
+    var amount=parseFloat(document.getElementById('amount').value)||0;
+    var apr=parseFloat(document.getElementById('apr').value)||0;
+    var mainEl=document.getElementById('result-main');
+    var subEl=document.getElementById('result-sub');
+    var rowsEl=document.getElementById('result-rows');
+    var toggleBtn=document.getElementById('table-toggle');
+    var amortCard=document.getElementById('amort-card');
+
+    if(!amount||!apr){
+      mainEl.innerHTML='<span class="empty-state">Saisissez les détails du prêt</span>';
+      subEl.textContent='';
+      rowsEl.style.display='none';
+      toggleBtn.style.display='none';
+      amortCard.style.display='none';
+      toggleBtn.classList.remove('open');
+      pendingAmortRows=null;
+      return;
+    }
+
+    var r=apr/100/12;
+    var n=termMonths;
+    var payment=amount*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+    var total=payment*n;
+    var interest=total-amount;
+    var ear=(Math.pow(payment*n/amount,12/n)-1)*100;
+    var priPct=Math.round((amount/total)*100);
+    var intPct=100-priPct;
+
+    var years=Math.floor(n/12);
+    var months=n%12;
+    var termStr='';
+    if(years>0) termStr+=years+(years>1?' ans':' an');
+    if(months>0) termStr+=(termStr?' ':'')+months+' mois';
+
+    mainEl.innerHTML=Math.round(payment).toLocaleString('fr-FR')+'<span class="result-currency">€</span>';
+    subEl.textContent='par mois pendant '+termStr+' · '+apr+'% TAEG';
+    rowsEl.style.display='flex';
+    document.getElementById('r-principal').textContent=fmtCur(amount);
+    document.getElementById('r-interest').textContent='+ '+fmtCur(interest);
+    document.getElementById('r-total').textContent=fmtCur(total);
+    document.getElementById('r-ear').textContent=ear.toFixed(2)+'% par an';
+    document.getElementById('bar-pri').style.width=priPct+'%';
+    document.getElementById('bar-int').style.width=intPct+'%';
+    document.getElementById('lbl-pri').textContent='Capital '+priPct+'%';
+    document.getElementById('lbl-int').textContent='Intérêts '+intPct+'%';
+
+    var newRows=buildAmortTable(amount,r,n,payment);
+    if(amortCard.style.display!=='none'){
+      document.getElementById('amort-tbody').innerHTML=newRows;
+      pendingAmortRows=null;
+    } else {
+      pendingAmortRows=newRows;
+    }
+    toggleBtn.style.display='flex';
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#4F6BFF)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<div class="faq-section">
+  <div class="faq-heading">Questions fréquentes</div>
+  <details class="faq-item" open>
+    <summary>Comment est calculée la mensualité ?</summary>
+    <div class="faq-a">La mensualité est calculée avec la formule d'amortissement standard : <strong>M = C × [r(1+r)^n] / [(1+r)^n − 1]</strong>, où C est le capital, r le taux mensuel (TAEG ÷ 12) et n le nombre de mois.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Qu'est-ce que le TAEG et le TEG ?</summary>
+    <div class="faq-a">Le <strong>TAEG</strong> (Taux Annuel Effectif Global) est le taux déclaré utilisé pour calculer les mensualités. Le <strong>TEG</strong> (Taux Effectif Global) tient compte de la capitalisation mensuelle et reflète le coût réel annuel du prêt — toujours légèrement supérieur au TAEG.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Vaut-il mieux rembourser son prêt par anticipation ?</summary>
+    <div class="faq-a">Rembourser par anticipation <strong>réduit considérablement les intérêts totaux</strong>, car en début de prêt la majorité de chaque mensualité est constituée d'intérêts. Vérifiez si votre contrat prévoit des <strong>indemnités de remboursement anticipé</strong>.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Qu'est-ce qu'un tableau d'amortissement ?</summary>
+    <div class="faq-a">Le tableau d'amortissement est un récapitulatif mois par mois montrant chaque mensualité décomposée en <strong>capital et intérêts</strong>, ainsi que le capital restant dû. Cliquez sur le bouton ci-dessus pour afficher le tableau complet.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

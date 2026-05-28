@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur Règle de Trois — Proportion Directe et Inverse | calculate.website</title>
+<meta name="description" content="Résolvez des problèmes de proportion directe et inverse instantanément. Entrez trois valeurs et trouvez la quatrième. Idéal pour les recettes, les cartes, les devises et plus.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/rule-of-three/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/rule-of-three/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/rule-of-three/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/rule-of-three/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/rule-of-three/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/rule-of-three/">
+<meta property="og:title" content="Règle de Trois — calculate.website">
+<meta property="og:description" content="Résolvez des proportions directes et inverses. Entrez trois valeurs et trouvez la quatrième.">
+<meta property="og:url" content="https://calculate.website/fr/rule-of-three/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=number]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number]:focus{border-color:var(--hi)}
+  .prop-grid{display:grid;grid-template-columns:1fr 32px 1fr;gap:10px;align-items:center}
+  .prop-eq{text-align:center;font-size:20px;color:var(--ink-faint);font-weight:300;padding-top:24px}
+  .prop-divider{height:1px;background:var(--border);margin:4px 0;grid-column:1/-1}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .seg-btn{padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .seg-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #4F6BFF}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:56px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
+  .result-formula{font-size:13px;color:rgba(255,255,255,0.35);font-family:monospace;margin-bottom:4px}
+  .empty-state{font-size:16px;color:rgba(255,255,255,0.3)}
+  .hint{font-size:12px;color:var(--ink-faint);margin-top:8px;line-height:1.5}
+  .examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .ex-chip{padding:6px 12px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-size:12px;font-weight:500;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .ex-chip:hover{border-color:var(--hi);color:var(--hi)}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Règle de Trois</h1>
+  <p class="page-sub">Résolvez des problèmes de proportion directe et inverse. Entrez trois valeurs — la calculatrice trouve la quatrième instantanément.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Type de proportion</label>
+      <div class="seg">
+        <button class="seg-btn active" id="btn-direct" onclick="setType('direct')">Directe</button>
+        <button class="seg-btn" id="btn-inverse" onclick="setType('inverse')">Inverse</button>
+      </div>
+      <div class="hint" id="type-hint">Si A est à B ce que C est à X. (A/B = C/X)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="prop-grid">
+      <label style="margin-bottom:6px">A</label>
+      <span></span>
+      <label style="margin-bottom:6px">B</label>
+      <input type="number" id="val-a" placeholder="3" oninput="calculate()">
+      <div class="prop-eq">=</div>
+      <input type="number" id="val-b" placeholder="6" oninput="calculate()">
+      <div class="prop-divider"></div>
+      <label style="margin-bottom:6px;margin-top:6px">C</label>
+      <span></span>
+      <label style="margin-bottom:6px;margin-top:6px">X (inconnue)</label>
+      <input type="number" id="val-c" placeholder="9" oninput="calculate()">
+      <div class="prop-eq">=</div>
+      <input type="number" id="val-x" placeholder="?" readonly style="background:var(--hi-soft);border-color:var(--hi);color:var(--hi);font-weight:700;cursor:default">
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Résultat (X)</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Entrez les valeurs A, B et C</span></div>
+    <div id="result-formula" class="result-formula" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <label>Exemples rapides</label>
+    <div class="examples">
+      <button class="ex-chip" onclick="loadExample(3,6,9,'direct')">3 est à 6 comme 9 est à ?</button>
+      <button class="ex-chip" onclick="loadExample(1,1.08,50,'direct')">1 $ = 1,08 € → 50 $ = ?</button>
+      <button class="ex-chip" onclick="loadExample(4,6,2,'inverse')">4 ouvriers × 6 jours → 2 = ?</button>
+      <button class="ex-chip" onclick="loadExample(60,2,80,'inverse')">60 km/h × 2 h → 80 km/h = ?</button>
+    </div>
+  </div>
+</div>
+<script>
+  var propType='direct';
+  function setType(t){
+    propType=t;
+    document.getElementById('btn-direct').classList.toggle('active',t==='direct');
+    document.getElementById('btn-inverse').classList.toggle('active',t==='inverse');
+    document.getElementById('type-hint').textContent=t==='direct'
+      ?'Si A est à B ce que C est à X. (A/B = C/X)'
+      :'A×B = C×X — les grandeurs varient en sens inverse.';
+    calculate();
+  }
+  function calculate(){
+    var a=parseFloat(document.getElementById('val-a').value);
+    var b=parseFloat(document.getElementById('val-b').value);
+    var c=parseFloat(document.getElementById('val-c').value);
+    var mainEl=document.getElementById('result-main');
+    var formulaEl=document.getElementById('result-formula');
+    var xEl=document.getElementById('val-x');
+    if(isNaN(a)||isNaN(b)||isNaN(c)||a===0){
+      mainEl.innerHTML='<span class="empty-state">Entrez les valeurs A, B et C</span>';
+      formulaEl.style.display='none';xEl.value='';return;
+    }
+    var x,formulaStr;
+    if(propType==='direct'){x=(b*c)/a;formulaStr='X = B × C / A = '+b+' × '+c+' / '+a;}
+    else{x=(a*b)/c;formulaStr='X = A × B / C = '+a+' × '+b+' / '+c;}
+    var formatted=Number.isInteger(x)?x.toLocaleString('fr-FR'):x.toLocaleString('fr-FR',{maximumFractionDigits:4});
+    mainEl.textContent=formatted;
+    xEl.value=Number.isInteger(x)?x:x.toFixed(4);
+    formulaEl.textContent=formulaStr;formulaEl.style.display='block';
+  }
+  function loadExample(a,b,c,type){
+    setType(type);
+    document.getElementById('val-a').value=a;
+    document.getElementById('val-b').value=b;
+    document.getElementById('val-c').value=c;
+    calculate();
+  }
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

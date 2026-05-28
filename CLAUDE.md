@@ -340,6 +340,13 @@ This is a temporary fallback — replace with a real translated page as soon as 
 - No hardcoded dynamic data (prices, rates, legal values) — use APIs, user input, or admin panel
 - No forgetting `git push origin main` after committing
 - No touching countdowns.site or calculadora.live files from this session
+- **NO "no ads tracking you"** anywhere on the site — monetization IS Google AdSense (ad tracking is the business model)
+- **NO hello@calculate.website email** anywhere — this address does not exist. Always direct users to the feedback widget instead.
+
+## Content rules
+- **Monetization**: Google AdSense display ads are the primary revenue source. Never claim the site is "ad-free" or "no tracking". The privacy policy already discloses AdSense use correctly.
+- **Contact**: Never reference hello@calculate.website. Always say "use the feedback button on any calculator page" instead.
+- **No email addresses** in any page content — not about, not terms, not privacy, not any calculator.
 
 ## Things to always do
 - All 4 language versions when creating any calculator

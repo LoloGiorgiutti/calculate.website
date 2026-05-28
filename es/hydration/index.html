@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Hidratación — ¿Cuánta Agua Necesitás Tomar? | calculate.website</title>
+<meta name="description" content="Calculá cuánta agua debés tomar por día según tu peso, actividad física y clima. Obtené tu objetivo de hidratación personalizado en ml y vasos.">
+<link rel="canonical" href="https://calculate.website/es/hydration/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/hydration/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/hydration/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/hydration/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/hydration/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/hydration/">
+<meta property="og:title" content="Calculadora de Hidratación — calculate.website">
+<meta property="og:url" content="https://calculate.website/es/hydration/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="es_AR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.unit-toggle{display:flex;gap:6px;margin-bottom:16px}
+.unit-btn{padding:8px 18px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+.unit-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+.input-wrap{position:relative}
+.input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--hi)}
+select{width:100%;padding:13px 40px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2360647A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+select:focus{border-color:var(--hi)}
+.result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi);background:#0C1528}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-main{font-size:56px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.result-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:24px}
+.empty-state{font-size:16px;color:rgba(255,255,255,.3);font-weight:400}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat-box{background:rgba(255,255,255,.05);border-radius:10px;padding:14px 16px}
+.stat-label{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.stat-value{font-size:20px;font-weight:700;color:white;letter-spacing:-.02em}
+.stat-unit{font-size:12px;font-weight:400;color:rgba(255,255,255,.4);margin-left:2px}
+.hydration-bar{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.hydration-bar-label{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.drops-row{display:flex;flex-wrap:wrap;gap:4px;line-height:1}
+.drop{font-size:20px}
+.drops-note{font-size:11px;color:rgba(255,255,255,.3);margin-top:8px}
+.info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5;margin-bottom:16px}
+.info-box strong{color:var(--ink)}
+.tips-card{background:var(--surface);border-radius:var(--radius);padding:24px;border:1px solid var(--border);margin-bottom:16px}
+.tips-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:-.01em}
+.tips-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.tips-list li{display:flex;gap:10px;font-size:13px;color:var(--ink-light);line-height:1.5}
+.tip-dot{width:20px;height:20px;border-radius:50%;background:var(--hi-soft);color:var(--hi);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánta agua debo tomar por día?","acceptedAnswer":{"@type":"Answer","text":"Un punto de partida común es alrededor de 35 ml por kg de peso corporal, ajustado según el nivel de actividad y el clima. Para una persona de 70 kg con actividad moderada, eso equivale a aproximadamente 2,5 litros por día."}},{"@type":"Question","name":"¿El café cuenta como hidratación?","acceptedAnswer":{"@type":"Answer","text":"Sí, las bebidas con cafeína como el café y el té contribuyen a la ingesta diaria de líquidos. Sin embargo, tienen un leve efecto diurético, por lo que el agua y las infusiones son opciones más eficientes para hidratarse."}},{"@type":"Question","name":"¿Cuáles son los signos de deshidratación?","acceptedAnswer":{"@type":"Answer","text":"Los signos más comunes incluyen orina de color amarillo oscuro, boca seca, fatiga, dolor de cabeza y dificultad para concentrarse. La sed es un indicador tardío: cuando sentís sed, ya podés estar ligeramente deshidratado."}},{"@type":"Question","name":"¿Debo tomar más agua al hacer ejercicio?","acceptedAnswer":{"@type":"Answer","text":"Sí. Agregá entre 500 y 750 ml por cada hora de ejercicio moderado, más en climas calurosos. Las bebidas con electrolitos ayudan en sesiones intensas de más de 60 minutos."}}]}
+</script>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Calculadora de Hidratación</h1>
+  <p class="sub">Calculá cuánta agua necesitás por día según tu peso, actividad y clima.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Unidades</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" onclick="setUnit('metric',this)">kg / L</button>
+        <button class="unit-btn" onclick="setUnit('imperial',this)">lbs / oz</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Peso corporal</label>
+      <div class="input-wrap">
+        <input type="number" id="weight" placeholder="70" min="20" max="300" oninput="calculate()">
+        <span class="input-suffix" id="weight-suffix">kg</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Nivel de actividad</label>
+      <select id="activity" onchange="calculate()">
+        <option value="1.0">Sedentario — poco o nada de ejercicio</option>
+        <option value="1.15">Moderado — ejercicio 3–4 veces por semana</option>
+        <option value="1.3">Activo — ejercicio diario o trabajo físico</option>
+        <option value="1.5">Muy activo — entrenamiento intenso o atleta</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Clima</label>
+      <select id="climate" onchange="calculate()">
+        <option value="1.0">Templado / suave</option>
+        <option value="1.1">Caluroso o húmedo</option>
+        <option value="1.2">Muy caluroso / calor extremo</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>¿Estás embarazada o en período de lactancia?</label>
+      <select id="pregnancy" onchange="calculate()">
+        <option value="0">No</option>
+        <option value="0.3">Embarazada</option>
+        <option value="0.7">En lactancia</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Ingesta diaria recomendada</div>
+    <div class="result-main" id="result-main"><span class="empty-state">Ingresá tu peso</span></div>
+    <div class="result-sub" id="result-sub" style="display:none"></div>
+    <div class="stats-grid" id="stats-grid" style="display:none">
+      <div class="stat-box">
+        <div class="stat-label">Mínimo</div>
+        <div class="stat-value" id="stat-min">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label" id="stat-cups-label">Vasos de 250 ml</div>
+        <div class="stat-value" id="stat-cups">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label" id="stat-bottles-label">Botellas de 500 ml</div>
+        <div class="stat-value" id="stat-bottles">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">De los alimentos</div>
+        <div class="stat-value">~20<span class="stat-unit">%</span></div>
+      </div>
+    </div>
+    <div class="hydration-bar" id="hydration-bar" style="display:none">
+      <div class="hydration-bar-label">Vasos por día</div>
+      <div class="drops-row" id="drops-row"></div>
+      <div class="drops-note" id="drops-note"></div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Alrededor del 20% de tu hidratación diaria</strong> proviene de los alimentos: frutas, verduras, sopas. El resto debe consumirse como agua y otras bebidas. Tu objetivo real de bebida es aproximadamente el <strong>80% del total mostrado arriba</strong>.
+  </div>
+
+  <div class="tips-card">
+    <div class="tips-title">Consejos de hidratación</div>
+    <ul class="tips-list">
+      <li><div class="tip-dot">1</div><span>Tomá un vaso de agua apenas te levantés — activa el metabolismo y compensa la pérdida de líquidos durante la noche.</span></li>
+      <li><div class="tip-dot">2</div><span>No esperes a tener sed. La sed aparece cuando ya estás levemente deshidratado. Tomá pequeñas cantidades de forma regular durante el día.</span></li>
+      <li><div class="tip-dot">3</div><span>En días calurosos o durante ejercicio intenso, aumentá tu ingesta en un 10–20% y considerá electrolitos en sesiones de más de 60 minutos.</span></li>
+      <li><div class="tip-dot">4</div><span>Mantené una botella de agua visible en tu escritorio — es uno de los recordatorios más efectivos para tomar más agua durante el día.</span></li>
+      <li><div class="tip-dot">5</div><span>El café y el té cuentan para la hidratación, pero el agua y las infusiones son más eficientes. Las bebidas azucaradas no son un buen sustituto.</span></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+var unit='metric';
+
+function setUnit(u,btn){
+  unit=u;
+  document.querySelectorAll('.unit-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var isImp=unit==='imperial';
+  document.getElementById('weight-suffix').textContent=isImp?'lbs':'kg';
+  document.getElementById('stat-cups-label').textContent=isImp?'Vasos de 8 oz':'Vasos de 250 ml';
+  document.getElementById('stat-bottles-label').textContent=isImp?'Botellas de 16.9 oz':'Botellas de 500 ml';
+  document.getElementById('weight').placeholder=isImp?'154':'70';
+  calculate();
+}
+
+function calculate(){
+  var w=parseFloat(document.getElementById('weight').value)||0;
+  var actMult=parseFloat(document.getElementById('activity').value);
+  var climMult=parseFloat(document.getElementById('climate').value);
+  var pregAdd=parseFloat(document.getElementById('pregnancy').value);
+
+  var mainEl=document.getElementById('result-main');
+  var subEl=document.getElementById('result-sub');
+  var statsEl=document.getElementById('stats-grid');
+  var barEl=document.getElementById('hydration-bar');
+
+  if(!w){
+    mainEl.innerHTML='<span class="empty-state">Ingresá tu peso</span>';
+    subEl.style.display='none';statsEl.style.display='none';barEl.style.display='none';return;
+  }
+
+  var kg=unit==='imperial'?w/2.20462:w;
+  var totalL=(kg*35*actMult*climMult/1000)+pregAdd;
+  var minL=kg*30/1000;
+
+  var isImp=unit==='imperial';
+
+  if(isImp){
+    var totalOz=totalL*33.814;
+    var minOz=minL*33.814;
+    var cups8=Math.round(totalOz/8);
+    var bottles=Math.round(totalOz/16.9*10)/10;
+    mainEl.textContent=Math.round(totalOz)+' oz';
+    subEl.textContent='≈ '+totalL.toFixed(1).toLocaleString('es-AR')+' L | '+cups8+' vasos';
+    document.getElementById('stat-min').innerHTML=Math.round(minOz)+'<span class="stat-unit">oz</span>';
+    document.getElementById('stat-cups').textContent=cups8;
+    document.getElementById('stat-bottles').innerHTML=bottles.toFixed(1)+'<span class="stat-unit">bot.</span>';
+    var drops=cups8;
+  } else {
+    var glasses250=Math.round(totalL/0.25);
+    var bottles500=(totalL/0.5).toFixed(1);
+    var totalMl=Math.round(totalL*1000);
+    mainEl.textContent=totalL.toFixed(1)+' L';
+    subEl.textContent=glasses250+' vasos de 250 ml · '+totalMl.toLocaleString('es-AR')+' ml';
+    document.getElementById('stat-min').innerHTML=minL.toFixed(1)+'<span class="stat-unit">L</span>';
+    document.getElementById('stat-cups').textContent=glasses250;
+    document.getElementById('stat-bottles').innerHTML=bottles500+'<span class="stat-unit">bot.</span>';
+    var drops=glasses250;
+  }
+
+  subEl.style.display='block';
+  statsEl.style.display='grid';
+  barEl.style.display='block';
+
+  var maxDrops=16;
+  var showDrops=Math.min(drops,maxDrops);
+  var html='';
+  for(var i=0;i<showDrops;i++) html+='<span class="drop">💧</span>';
+  document.getElementById('drops-row').innerHTML=html;
+  document.getElementById('drops-note').textContent=drops>maxDrops?'+ '+(drops-maxDrops)+' más (total '+drops+')':'';
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

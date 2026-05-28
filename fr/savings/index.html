@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur d'Épargne — Comment Votre Argent Va Croître | calculate.website</title>
+<meta name="description" content="Calculez comment votre épargne va croître avec des dépôts mensuels et les intérêts composés. Visualisez votre solde année par année.">
+<link rel="canonical" href="https://calculate.website/fr/savings/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/savings/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/savings/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/savings/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/savings/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/">
+<meta property="og:title" content="Calculateur d'Épargne — calculate.website">
+<meta property="og:url" content="https://calculate.website/fr/savings/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.input-wrap{position:relative}
+.input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--hi)}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-main{font-size:42px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.result-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.result-rows{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.result-row{display:flex;justify-content:space-between;align-items:center}
+.result-row-lbl{font-size:13px;color:rgba(255,255,255,.5)}
+.result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,.85)}
+.result-row-val.pos{color:#86EFAC}
+.result-divider{height:1px;background:rgba(255,255,255,.08);margin:2px 0}
+.empty-state{color:rgba(255,255,255,.3);font-size:15px}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Calculateur d'Épargne</h1>
+  <p class="sub">Voyez comment votre épargne croît avec des versements et les intérêts composés.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Épargne initiale</label>
+      <div class="input-wrap">
+        <input type="number" id="initial" placeholder="1000" min="0" oninput="calculate()">
+        <span class="input-suffix">€</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Versement mensuel</label>
+      <div class="input-wrap">
+        <input type="number" id="monthly" placeholder="200" min="0" oninput="calculate()">
+        <span class="input-suffix">€</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Taux d'intérêt annuel</label>
+      <div class="input-wrap">
+        <input type="number" id="rate" placeholder="5" min="0" step="0.25" oninput="calculate()">
+        <span class="input-suffix">%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Durée</label>
+      <div class="input-wrap">
+        <input type="number" id="years" placeholder="10" min="1" max="50" oninput="calculate()">
+        <span class="input-suffix">ans</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Solde final</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Remplissez les champs</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="result-row">
+        <span class="result-row-lbl">Total versé</span>
+        <span class="result-row-val" id="r-deposited">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-row-lbl">Intérêts gagnés</span>
+        <span class="result-row-val pos" id="r-interest">—</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Solde total</span>
+        <span class="result-row-val pos" id="r-total">—</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fmt(n){
+  if(Math.abs(n)>=1e6) return (n/1e6).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' M€';
+  return Math.round(n).toLocaleString('fr-FR')+' €';
+}
+
+function calculate(){
+  var initial=parseFloat(document.getElementById('initial').value)||0;
+  var monthly=parseFloat(document.getElementById('monthly').value)||0;
+  var rate=parseFloat(document.getElementById('rate').value)||0;
+  var years=parseInt(document.getElementById('years').value)||0;
+
+  var mainEl=document.getElementById('result-main');
+  var subEl=document.getElementById('result-sub');
+  var rowsEl=document.getElementById('result-rows');
+
+  if((!initial&&!monthly)||!years){
+    mainEl.innerHTML='<span class="empty-state">Remplissez les champs</span>';
+    subEl.textContent='';rowsEl.style.display='none';return;
+  }
+
+  var monthlyRate=(rate/100)/12;
+  var months=years*12;
+  var balance=initial;
+  for(var m=0;m<months;m++){
+    balance=balance*(1+monthlyRate)+monthly;
+  }
+
+  var totalDeposited=initial+monthly*months;
+  var interest=balance-totalDeposited;
+
+  mainEl.innerHTML=Math.round(balance).toLocaleString('fr-FR')+' €';
+  subEl.textContent='après '+years+' an'+(years===1?'':'s')+' à '+rate+'%';
+  rowsEl.style.display='flex';
+  document.getElementById('r-deposited').textContent=fmt(totalDeposited);
+  document.getElementById('r-interest').textContent='+ '+fmt(interest);
+  document.getElementById('r-total').textContent=fmt(balance);
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

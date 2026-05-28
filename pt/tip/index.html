@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Gorjeta — Dividir a Conta | calculate.website</title>
+<meta name="description" content="Calcule a gorjeta, o total e quanto cada pessoa deve pagar. Escolha a porcentagem ou insira um valor personalizado.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/pt/tip/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/tip/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/tip/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/tip/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/tip/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/tip/">
+<meta property="og:title" content="Calculadora de Gorjeta — calculate.website">
+<meta property="og:description" content="Calcule a gorjeta, o total e quanto cada pessoa paga.">
+<meta property="og:url" content="https://calculate.website/pt/tip/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="pt_BR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:480px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:20px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
+  input[type=number]{width:100%;padding:13px 14px 13px 44px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:20px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]:focus{border-color:var(--hi)}
+  input.no-prefix{padding-left:14px}
+  .tip-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .tip-chip{padding:9px 16px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .tip-chip.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .people-row{display:flex;align-items:center;gap:12px}
+  .people-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface);font-size:20px;font-weight:600;color:var(--ink-light);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+  .people-btn:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}
+  .people-count{font-size:28px;font-weight:700;color:var(--ink);min-width:40px;text-align:center}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:24px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .result-row:last-child{margin-bottom:0}
+  .result-lbl{font-size:13px;color:rgba(255,255,255,0.5)}
+  .result-val{font-size:18px;font-weight:700;color:white}
+  .result-main-row{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .result-main-lbl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px}
+  .result-main-val{font-size:48px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1}
+  .result-main-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Calculadora de Gorjeta</h1>
+  <p class="page-sub">Calcule a gorjeta, o total e quanto cada pessoa paga.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Valor da conta</label>
+      <div class="input-wrap">
+        <span class="input-prefix">R$</span>
+        <input type="number" id="bill" class="has-prefix" placeholder="0.00" min="0" step="0.01" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Porcentagem de gorjeta</label>
+      <div class="tip-chips" id="tip-chips">
+        <button class="tip-chip" onclick="setTip(10)">10%</button>
+        <button class="tip-chip" onclick="setTip(15)">15%</button>
+        <button class="tip-chip active" onclick="setTip(18)">18%</button>
+        <button class="tip-chip" onclick="setTip(20)">20%</button>
+        <button class="tip-chip" onclick="setTip(25)">25%</button>
+      </div>
+      <div class="input-wrap">
+        <input type="number" class="no-prefix" id="tip-pct" value="18" min="0" max="100" step="1" oninput="onCustomTip()">
+        <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none">%</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Número de pessoas</label>
+      <div class="people-row">
+        <button class="people-btn" onclick="changePeople(-1)">−</button>
+        <span class="people-count" id="people-count">1</span>
+        <button class="people-btn" onclick="changePeople(1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div class="result-main-row">
+      <div class="result-main-lbl">Por pessoa</div>
+      <div class="result-main-val" id="r-per-person"><span class="empty-state" style="font-size:16px">Informe o valor</span></div>
+      <div class="result-main-sub" id="r-per-sub"></div>
+    </div>
+    <div class="result-row">
+      <span class="result-lbl">Valor da gorjeta</span>
+      <span class="result-val" id="r-tip">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-lbl">Total (conta + gorjeta)</span>
+      <span class="result-val" id="r-total">—</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  var tipPct=18;
+  var numPeople=1;
+
+  function setTip(pct){
+    tipPct=pct;
+    document.getElementById('tip-pct').value=pct;
+    document.querySelectorAll('.tip-chip').forEach(function(b){b.classList.remove('active');});
+    event.target.classList.add('active');
+    calculate();
+  }
+
+  function onCustomTip(){
+    tipPct=parseFloat(document.getElementById('tip-pct').value)||0;
+    document.querySelectorAll('.tip-chip').forEach(function(b){b.classList.remove('active');});
+    calculate();
+  }
+
+  function changePeople(delta){
+    numPeople=Math.max(1,numPeople+delta);
+    document.getElementById('people-count').textContent=numPeople;
+    calculate();
+  }
+
+  function fmt(n){
+    return 'R$'+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function calculate(){
+    var bill=parseFloat(document.getElementById('bill').value)||0;
+    if(!bill){
+      document.getElementById('r-per-person').innerHTML='<span class="empty-state" style="font-size:16px">Informe o valor</span>';
+      document.getElementById('r-per-sub').textContent='';
+      document.getElementById('r-tip').textContent='—';
+      document.getElementById('r-total').textContent='—';
+      return;
+    }
+    var tip=bill*tipPct/100;
+    var total=bill+tip;
+    var perPerson=total/numPeople;
+    var tipPerPerson=tip/numPeople;
+    document.getElementById('r-per-person').textContent=fmt(perPerson);
+    document.getElementById('r-per-sub').textContent=
+      numPeople>1
+      ?'inclui R$'+tipPerPerson.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+' de gorjeta cada'
+      :'inclui R$'+tip.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+' de gorjeta';
+    document.getElementById('r-tip').textContent=fmt(tip);
+    document.getElementById('r-total').textContent=fmt(total);
+  }
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

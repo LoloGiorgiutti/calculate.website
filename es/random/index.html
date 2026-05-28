@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador Aleatorio — Números, Contraseñas y Dados | calculate.website</title>
+<meta name="description" content="Generá números aleatorios en cualquier rango, contraseñas seguras, tiradas de dados y más. Generador online gratuito.">
+<link rel="canonical" href="https://calculate.website/es/random/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/random/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/random/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/random/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/random/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/random/">
+<meta property="og:title" content="Generador Aleatorio — calculate.website">
+<meta property="og:url" content="https://calculate.website/es/random/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="es_AR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+.tab.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+.panel{display:none}.panel.active{display:block}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+input[type=number]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--hi)}
+.range-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.range-sep{text-align:center;color:var(--ink-faint);font-weight:600}
+.result-box{background:#0C1528;border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:16px;border-top:3px solid var(--hi)}
+.result-number{font-size:72px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;word-break:break-all}
+.result-label{font-size:12px;color:rgba(255,255,255,.4);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.result-password{font-size:22px;font-weight:600;color:white;font-family:monospace;word-break:break-all;line-height:1.4}
+.btn{width:100%;padding:14px;background:var(--hi);border:none;border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:white;cursor:pointer;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--ink-light);margin-top:10px}
+.btn-outline:hover{background:var(--surface);color:var(--ink)}
+.checkboxes{display:flex;flex-wrap:wrap;gap:10px}
+.cb-label{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer}
+.dice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.die{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:36px;cursor:pointer;transition:all .15s;user-select:none}
+.die:hover{border-color:var(--hi);background:var(--hi-soft)}
+.die.rolling{animation:shake .15s infinite}
+@keyframes shake{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Generador Aleatorio</h1>
+  <p class="sub">Números, contraseñas, dados y más.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('number',this)">🔢 Número</button>
+    <button class="tab" onclick="switchTab('password',this)">🔐 Contraseña</button>
+    <button class="tab" onclick="switchTab('dice',this)">🎲 Dado</button>
+    <button class="tab" onclick="switchTab('coin',this)">🪙 Moneda</button>
+  </div>
+
+  <!-- Número -->
+  <div class="panel active" id="panel-number">
+    <div class="card">
+      <div class="field">
+        <label>Rango</label>
+        <div class="range-row">
+          <input type="number" id="num-min" value="1" placeholder="Mín">
+          <span class="range-sep">a</span>
+          <input type="number" id="num-max" value="100" placeholder="Máx">
+        </div>
+      </div>
+      <div class="field">
+        <label>Cantidad</label>
+        <input type="number" id="num-count" value="1" min="1" max="20" placeholder="1">
+      </div>
+    </div>
+    <div class="result-box" id="num-result"><div class="result-number" id="num-out">?</div><div class="result-label">Número aleatorio</div></div>
+    <button class="btn" onclick="genNumber()">Generar número</button>
+  </div>
+
+  <!-- Contraseña -->
+  <div class="panel" id="panel-password">
+    <div class="card">
+      <div class="field">
+        <label>Longitud</label>
+        <input type="number" id="pwd-length" value="16" min="4" max="64">
+      </div>
+      <div class="field">
+        <label>Incluir</label>
+        <div class="checkboxes">
+          <label class="cb-label"><input type="checkbox" id="pwd-upper" checked> Mayúsculas</label>
+          <label class="cb-label"><input type="checkbox" id="pwd-lower" checked> Minúsculas</label>
+          <label class="cb-label"><input type="checkbox" id="pwd-digits" checked> Números</label>
+          <label class="cb-label"><input type="checkbox" id="pwd-symbols"> Símbolos</label>
+        </div>
+      </div>
+    </div>
+    <div class="result-box" id="pwd-result"><div class="result-password" id="pwd-out">—</div><div class="result-label">Hacé clic en generar</div></div>
+    <button class="btn" onclick="genPassword()">Generar contraseña</button>
+    <button class="btn btn-outline" onclick="copyPassword()">Copiar</button>
+  </div>
+
+  <!-- Dado -->
+  <div class="panel" id="panel-dice">
+    <div class="card">
+      <div class="field"><label>Hacé clic en un dado para tirarlo</label></div>
+      <div class="dice-grid">
+        <div class="die" id="d4"  onclick="rollDie('d4',4)">🎲<br><span style="font-size:11px;color:var(--ink-light)">d4</span></div>
+        <div class="die" id="d6"  onclick="rollDie('d6',6)">🎲<br><span style="font-size:11px;color:var(--ink-light)">d6</span></div>
+        <div class="die" id="d8"  onclick="rollDie('d8',8)">🎲<br><span style="font-size:11px;color:var(--ink-light)">d8</span></div>
+        <div class="die" id="d10" onclick="rollDie('d10',10)">🎲<br><span style="font-size:11px;color:var(--ink-light)">d10</span></div>
+        <div class="die" id="d12" onclick="rollDie('d12',12)">🎲<br><span style="font-size:11px;color:var(--ink-light)">d12</span></div>
+        <div class="die" id="d20" onclick="rollDie('d20',20)">🎲<br><span style="font-size:11px;color:var(--ink-light)">d20</span></div>
+      </div>
+    </div>
+    <div class="result-box"><div class="result-number" id="dice-out">?</div><div class="result-label" id="dice-label">Hacé clic en un dado para tirar</div></div>
+    <button class="btn" onclick="rollAllDice()">Lanzar todos</button>
+    <button class="btn btn-outline" style="margin-top:10px" onclick="rollAllDice()">Lanzar de nuevo</button>
+  </div>
+
+  <!-- Moneda -->
+  <div class="panel" id="panel-coin">
+    <div class="result-box"><div class="result-number" id="coin-out" style="font-size:80px">🪙</div><div class="result-label" id="coin-label">Hacé clic para lanzar</div></div>
+    <button class="btn" onclick="flipCoin()">Lanzar moneda</button>
+  </div>
+</div>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+function genNumber(){
+  var min=parseInt(document.getElementById('num-min').value)||1;
+  var max=parseInt(document.getElementById('num-max').value)||100;
+  var count=Math.max(1,Math.min(20,parseInt(document.getElementById('num-count').value)||1));
+  if(min>max){var t=min;min=max;max=t;}
+  var nums=[];
+  for(var i=0;i<count;i++) nums.push(Math.floor(Math.random()*(max-min+1))+min);
+  document.getElementById('num-out').textContent=nums.map(function(n){return n.toLocaleString('es-AR');}).join(', ');
+}
+
+function genPassword(){
+  var len=Math.max(4,Math.min(64,parseInt(document.getElementById('pwd-length').value)||16));
+  var chars='';
+  if(document.getElementById('pwd-upper').checked) chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('pwd-lower').checked) chars+='abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('pwd-digits').checked) chars+='0123456789';
+  if(document.getElementById('pwd-symbols').checked) chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';
+  if(!chars) chars='abcdefghijklmnopqrstuvwxyz';
+  var pwd='';
+  for(var i=0;i<len;i++) pwd+=chars[Math.floor(Math.random()*chars.length)];
+  document.getElementById('pwd-out').textContent=pwd;
+}
+
+function copyPassword(){
+  var pwd=document.getElementById('pwd-out').textContent;
+  if(pwd&&pwd!=='—') navigator.clipboard.writeText(pwd).then(function(){
+    var btn=event.target;btn.textContent='¡Copiado!';setTimeout(function(){btn.textContent='Copiar';},1500);
+  });
+}
+
+function rollDie(id,sides){
+  var el=document.getElementById(id);
+  var result=Math.floor(Math.random()*sides)+1;
+  el.classList.add('rolling');
+  setTimeout(function(){el.classList.remove('rolling');},300);
+  document.getElementById('dice-out').textContent=result;
+  document.getElementById('dice-label').textContent='d'+sides+' resultado';
+}
+
+function rollAllDice(){
+  var dice=[{id:'d4',s:4},{id:'d6',s:6},{id:'d8',s:8},{id:'d10',s:10},{id:'d12',s:12},{id:'d20',s:20}];
+  dice.forEach(function(d){rollDie(d.id,d.s);});
+}
+
+function flipCoin(){
+  var result=Math.random()<0.5;
+  document.getElementById('coin-out').textContent=result?'🦅':'🪙';
+  document.getElementById('coin-label').textContent=result?'¡Cara!':'¡Cruz!';
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

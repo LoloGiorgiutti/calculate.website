@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur 1RM — Maximum d'Une Répétition | calculate.website</title>
+<meta name="description" content="Calculez votre maximum d'une répétition avec les formules Epley, Brzycki et Lander. Entrez le poids et les répétitions pour obtenir votre 1RM instantanément.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/1rm/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/1rm/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/1rm/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/1rm/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/1rm/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/1rm/">
+<meta property="og:title" content="Calculateur 1RM — Maximum d'Une Répétition | calculate.website">
+<meta property="og:description" content="Calculez votre maximum d'une répétition avec les formules Epley, Brzycki et Lander. Entrez le poids et les répétitions pour obtenir votre 1RM instantanément.">
+<meta property="og:url" content="https://calculate.website/fr/1rm/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number]:focus{border-color:var(--hi)}
+  .unit-toggle{display:flex;gap:8px;margin-bottom:0}
+  .unit-btn{padding:7px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .unit-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #4F6BFF}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:56px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .empty-state{font-size:16px;color:rgba(255,255,255,0.3)}
+  .formula-grid{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+  .formula-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13px}
+  .formula-row.hl{background:rgba(255,255,255,0.08)}
+  .formula-lbl{color:rgba(255,255,255,0.55)}
+  .formula-val{font-weight:700;color:white}
+  .pct-table{margin-top:16px}
+  .pct-heading{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px}
+  .pct-row{display:grid;grid-template-columns:48px 1fr 1fr;gap:4px;padding:7px 12px;border-radius:6px;font-size:13px;align-items:center}
+  .pct-row:nth-child(odd){background:rgba(255,255,255,0.04)}
+  .pct-row.pct-head{color:rgba(255,255,255,0.35);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .pct-pct{color:rgba(255,255,255,0.5)}
+  .pct-weight{font-weight:600;color:white}
+  .pct-reps{color:rgba(255,255,255,0.5)}
+  .faq-section{max-width:520px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que le 1RM ?","acceptedAnswer":{"@type":"Answer","text":"Le 1RM (Maximum d'une Répétition) est le poids maximal que vous pouvez soulever en une seule répétition avec une technique correcte. C'est la mesure standard de la force dans des exercices comme le squat, le développé couché et le soulevé de terre."}},{"@type":"Question","name":"Quelle formule 1RM est la plus précise ?","acceptedAnswer":{"@type":"Answer","text":"Les formules Epley et Brzycki sont les plus utilisées et les mieux validées. Elles sont les plus précises pour des séries de 2 à 10 répétitions ; au-delà, la précision diminue."}},{"@type":"Question","name":"Faut-il tester son 1RM directement ?","acceptedAnswer":{"@type":"Answer","text":"Le test direct du 1RM comporte un risque de blessure, surtout pour les débutants. Utiliser un test sous-maximal avec une formule est plus sûr et plus pratique pour la plupart des gens."}},{"@type":"Question","name":"À quelle fréquence faut-il retester son 1RM ?","acceptedAnswer":{"@type":"Answer","text":"La plupart des athlètes retestent toutes les 4 à 8 semaines après un cycle d'entraînement pour suivre la progression et ajuster les charges."}}]}
+</script>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Calculateur 1RM</h1>
+  <p class="page-sub">Estimez votre maximum d'une répétition avec les formules Epley, Brzycki et Lander. Plus précis pour 2–10 répétitions.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Système d'unités</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btn-imperial" onclick="setUnits('imperial')">Impérial (lb)</button>
+        <button class="unit-btn" id="btn-metric" onclick="setUnits('metric')">Métrique (kg)</button>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field" style="margin-bottom:0">
+        <label>Poids soulevé</label>
+        <div class="input-wrap">
+          <input type="number" id="weight" placeholder="185" min="1" max="2000" oninput="calculate()">
+          <span class="input-suffix" id="suffix-weight">lb</span>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Répétitions effectuées</label>
+        <div class="input-wrap">
+          <input type="number" id="reps" placeholder="5" min="1" max="30" oninput="calculate()" style="padding-right:14px">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">1RM Estimé</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Entrez le poids et les répétitions</span></div>
+    <div id="result-sub" class="result-sub" style="display:none"></div>
+    <div class="formula-grid" id="formula-grid" style="display:none">
+      <div class="formula-row hl">
+        <span class="formula-lbl">Epley</span>
+        <span class="formula-val" id="val-epley">—</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-lbl">Brzycki</span>
+        <span class="formula-val" id="val-brzycki">—</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-lbl">Lander</span>
+        <span class="formula-val" id="val-lander">—</span>
+      </div>
+    </div>
+    <div class="pct-table" id="pct-table" style="display:none">
+      <div class="pct-heading">Zones d'entraînement (% du 1RM)</div>
+      <div class="pct-row pct-head">
+        <span>%</span><span>Poids</span><span>~Reps</span>
+      </div>
+      <div class="pct-row"><span class="pct-pct">100%</span><span class="pct-weight" id="p100">—</span><span class="pct-reps">1</span></div>
+      <div class="pct-row"><span class="pct-pct">95%</span><span class="pct-weight" id="p95">—</span><span class="pct-reps">2</span></div>
+      <div class="pct-row"><span class="pct-pct">90%</span><span class="pct-weight" id="p90">—</span><span class="pct-reps">3–4</span></div>
+      <div class="pct-row"><span class="pct-pct">85%</span><span class="pct-weight" id="p85">—</span><span class="pct-reps">5–6</span></div>
+      <div class="pct-row"><span class="pct-pct">80%</span><span class="pct-weight" id="p80">—</span><span class="pct-reps">7–8</span></div>
+      <div class="pct-row"><span class="pct-pct">75%</span><span class="pct-weight" id="p75">—</span><span class="pct-reps">9–10</span></div>
+      <div class="pct-row"><span class="pct-pct">70%</span><span class="pct-weight" id="p70">—</span><span class="pct-reps">11–12</span></div>
+      <div class="pct-row"><span class="pct-pct">65%</span><span class="pct-weight" id="p65">—</span><span class="pct-reps">13–15</span></div>
+      <div class="pct-row"><span class="pct-pct">60%</span><span class="pct-weight" id="p60">—</span><span class="pct-reps">16–20</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-heading">À propos du 1RM et des zones d'entraînement</div>
+  <div class="faq-a" style="padding:0 0 18px">
+    <p style="margin-bottom:12px"><strong>1RM (Maximum d'une Répétition)</strong> est le poids maximal que vous pouvez soulever en une seule répétition avec une technique correcte. C'est la référence universelle pour mesurer la force en powerlifting et dans les sports de force.</p>
+    <p style="margin-bottom:12px">Cette calculatrice fait la moyenne de trois formules validées — <strong>Epley</strong> (p × (1 + r/30)), <strong>Brzycki</strong> (p × 36/(37−r)) et <strong>Lander</strong> (100p / (101,3 − 2,67123×r)) — pour la meilleure estimation. Toutes sont plus précises pour <strong>2–10 répétitions</strong>.</p>
+    <p>Utilisez le tableau des zones pour définir les charges de votre programme : force (85–100 %), hypertrophie (65–80 %), endurance (&lt;65 %).</p>
+  </div>
+  <div class="faq-heading">Questions fréquentes</div>
+  <details class="faq-item" open>
+    <summary>Qu'est-ce que le 1RM ?</summary>
+    <div class="faq-a"><strong>1RM (Maximum d'une Répétition)</strong> est le poids maximal que vous pouvez soulever en une seule répétition avec une technique correcte. C'est la mesure standard de la force dans des exercices comme le squat, le développé couché et le soulevé de terre.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Quelle formule 1RM est la plus précise ?</summary>
+    <div class="faq-a">Les formules <strong>Epley</strong> et <strong>Brzycki</strong> sont les plus utilisées et les mieux validées. Elles sont les plus précises pour des séries de 2 à 10 répétitions. Au-delà, les estimations deviennent moins fiables. Faire la moyenne de plusieurs formules (comme le fait cette calculatrice) réduit l'erreur.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Faut-il tester son 1RM directement ?</summary>
+    <div class="faq-a">Le test direct du 1RM comporte un risque de blessure, surtout pour les débutants. Utiliser un test sous-maximal — combien de répétitions vous pouvez faire avec un poids donné — et appliquer une formule est plus sûr et plus pratique pour la plupart des gens.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>À quelle fréquence faut-il retester son 1RM ?</summary>
+    <div class="faq-a">La plupart des athlètes retestent toutes les 4 à 8 semaines après un bloc d'entraînement. Retester permet de suivre la progression et d'ajuster les charges en fonction du niveau de force actuel.</div>
+  </details>
+</div>
+<script>
+  var units = 'imperial';
+
+  function setUnits(u) {
+    units = u;
+    document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+    document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+    document.getElementById('suffix-weight').textContent = u === 'imperial' ? 'lb' : 'kg';
+    document.getElementById('weight').value = '';
+    calculate();
+  }
+
+  function fmt(val) {
+    return Math.round(val).toLocaleString('fr-FR') + ' ' + units;
+  }
+
+  function calculate() {
+    var w = parseFloat(document.getElementById('weight').value) || 0;
+    var r = parseFloat(document.getElementById('reps').value) || 0;
+    var mainEl    = document.getElementById('result-main');
+    var subEl     = document.getElementById('result-sub');
+    var fGrid     = document.getElementById('formula-grid');
+    var pctTable  = document.getElementById('pct-table');
+
+    if (!w || !r || r < 1) {
+      mainEl.innerHTML = '<span class="empty-state">Entrez le poids et les répétitions</span>';
+      subEl.style.display = 'none';
+      fGrid.style.display = 'none';
+      pctTable.style.display = 'none';
+      return;
+    }
+
+    if (r === 1) {
+      var direct = w;
+      mainEl.textContent = fmt(direct);
+      subEl.textContent = 'test direct — aucune formule nécessaire';
+      subEl.style.display = 'block';
+      document.getElementById('val-epley').textContent   = fmt(direct);
+      document.getElementById('val-brzycki').textContent = fmt(direct);
+      document.getElementById('val-lander').textContent  = fmt(direct);
+      fGrid.style.display = 'flex';
+      showPct(direct);
+      return;
+    }
+
+    var epley   = w * (1 + r / 30);
+    var brzycki = w * (36 / (37 - r));
+    var lander  = (100 * w) / (101.3 - 2.67123 * r);
+    var avg     = (epley + brzycki + lander) / 3;
+
+    mainEl.textContent = fmt(avg);
+    subEl.textContent = 'moyenne des trois formules';
+    subEl.style.display = 'block';
+    document.getElementById('val-epley').textContent   = fmt(epley);
+    document.getElementById('val-brzycki').textContent = fmt(brzycki);
+    document.getElementById('val-lander').textContent  = fmt(lander);
+    fGrid.style.display = 'flex';
+    showPct(avg);
+  }
+
+  function showPct(oneRM) {
+    var percs = [1, 0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60];
+    var ids   = ['p100','p95','p90','p85','p80','p75','p70','p65','p60'];
+    ids.forEach(function(id, i) {
+      document.getElementById(id).textContent = fmt(oneRM * percs[i]);
+    });
+    document.getElementById('pct-table').style.display = 'block';
+  }
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Día de la Semana — ¿Qué Día Fue Esa Fecha?</title>
+<meta name="description" content="Averiguá en qué día de la semana cayó cualquier fecha. Ingresá la fecha y ve al instante si fue lunes, martes, etc. Ideal para eventos históricos y planificación.">
+<link rel="canonical" href="https://calculate.website/es/day-of-week/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/day-of-week/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/day-of-week/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/day-of-week/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/day-of-week/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/day-of-week/">
+<meta property="og:title" content="Día de la Semana — calculate.website">
+<meta property="og:description" content="Calculá en qué día de la semana cayó cualquier fecha. Gratis y sin registro.">
+<meta property="og:url" content="https://calculate.website/es/day-of-week/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:480px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+input[type=date]:focus{border-color:var(--hi)}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi);text-align:center}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.result-day{font-size:52px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+.result-date{font-size:15px;color:rgba(255,255,255,.5)}
+.empty-state{color:rgba(255,255,255,.3);font-size:15px}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px}
+.week-cell{padding:8px 4px;border-radius:8px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,.3)}
+.week-cell.active{background:rgba(26,95,232,.4);color:white}
+.week-cell.weekend{color:rgba(255,100,100,.4)}
+.week-cell.weekend.active{background:rgba(239,68,68,.3);color:#FCA5A5}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Día de la Semana</h1>
+  <p class="sub">Ingresá cualquier fecha para saber en qué día de la semana cae o cayó.</p>
+
+  <div class="card">
+    <label>Fecha</label>
+    <input type="date" id="date-input" oninput="calculate()">
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Día de la semana</div>
+    <div id="result-day" class="result-day"><span class="empty-state">Seleccioná una fecha</span></div>
+    <div id="result-date" class="result-date"></div>
+    <div class="week-grid" id="week-grid"></div>
+  </div>
+</div>
+<script>
+var DAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+var MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+var SHORT=['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+var WEEKEND=[0,6];
+
+function calculate(){
+  var val=document.getElementById('date-input').value;
+  if(!val){
+    document.getElementById('result-day').innerHTML='<span class="empty-state">Seleccioná una fecha</span>';
+    document.getElementById('result-date').textContent='';
+    buildGrid(-1);return;
+  }
+  var p=val.split('-');
+  var d=new Date(+p[0],+p[1]-1,+p[2]);
+  var dow=d.getDay();
+  var isWeekend=(dow===0||dow===6);
+  document.getElementById('result-day').textContent=DAYS[dow];
+  document.getElementById('result-date').textContent=d.getDate()+' de '+MONTHS[d.getMonth()]+' de '+d.getFullYear();
+  if(isWeekend) document.getElementById('result-day').style.color='#FCA5A5';
+  else document.getElementById('result-day').style.color='white';
+  buildGrid(dow);
+}
+
+function buildGrid(active){
+  var grid=document.getElementById('week-grid');
+  grid.innerHTML='';
+  for(var i=0;i<7;i++){
+    var div=document.createElement('div');
+    div.className='week-cell'+(WEEKEND.indexOf(i)!==-1?' weekend':'')+(i===active?' active':'');
+    div.textContent=SHORT[i];
+    grid.appendChild(div);
+  }
+}
+
+buildGrid(-1);
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

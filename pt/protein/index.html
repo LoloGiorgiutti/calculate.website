@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Proteínas — Quanta Proteína Você Precisa? | calculate.website</title>
+<meta name="description" content="Calcule sua ingestão diária de proteína com base no seu peso, nível de atividade e objetivo — ganho de massa, perda de gordura ou manutenção. Resultado em gramas por dia.">
+<link rel="canonical" href="https://calculate.website/pt/protein/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/protein/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/protein/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/protein/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/protein/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/protein/">
+<meta property="og:title" content="Calculadora de Proteínas — calculate.website">
+<meta property="og:url" content="https://calculate.website/pt/protein/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+.field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.unit-toggle{display:flex;gap:6px;margin-bottom:16px}
+.unit-btn{padding:8px 18px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+.unit-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+.input-wrap{position:relative}
+.input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--hi)}
+select{width:100%;padding:13px 40px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2360647A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+select:focus{border-color:var(--hi)}
+.goal-chips{display:flex;gap:8px;flex-wrap:wrap}
+.goal-chip{flex:1;min-width:0;padding:10px 8px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center;line-height:1.3}
+.goal-chip:hover{border-color:var(--hi);color:var(--hi)}
+.goal-chip.active{background:var(--hi);border-color:var(--hi);color:#fff}
+.goal-chip .chip-icon{display:block;font-size:18px;margin-bottom:4px}
+.result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi);background:#0C1528}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.result-main span{font-size:24px;font-weight:600;opacity:.7}
+.result-range{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:24px}
+.empty-state{font-size:16px;color:rgba(255,255,255,.3);font-weight:400}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.stat-box{background:rgba(255,255,255,.05);border-radius:10px;padding:14px 16px}
+.stat-label{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.stat-value{font-size:20px;font-weight:700;color:white;letter-spacing:-.02em}
+.stat-unit{font-size:12px;font-weight:400;color:rgba(255,255,255,.4);margin-left:2px}
+.prot-bar-wrap{margin-bottom:20px}
+.prot-bar-label{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between}
+.prot-bar-track{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+.prot-bar-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.equiv-section{padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.equiv-label{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.equiv-list{display:flex;flex-direction:column;gap:8px}
+.equiv-row{display:flex;align-items:center;gap:10px}
+.equiv-icon{font-size:20px;width:28px;text-align:center;flex-shrink:0}
+.equiv-text{font-size:13px;color:rgba(255,255,255,.65);line-height:1.4}
+.equiv-qty{font-size:15px;font-weight:700;color:white;margin-right:4px}
+.info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5;margin-bottom:16px}
+.faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+.faq-item[open]>summary{color:var(--hi)}
+.faq-item[open]>summary::after{transform:rotate(45deg)}
+.faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quanta proteína preciso por dia?","acceptedAnswer":{"@type":"Answer","text":"Depende do seu objetivo. Para saúde geral: 1,2–1,6 g/kg de peso corporal. Para ganho de massa muscular: 1,8–2,2 g/kg. Para perda de gordura mantendo músculo: 1,6–2,0 g/kg."}},{"@type":"Question","name":"Quais alimentos têm mais proteína?","acceptedAnswer":{"@type":"Answer","text":"As melhores fontes incluem: peito de frango cozido (~31g/100g), atum em água (~26g/100g), carne bovina magra (~26g/100g), iogurte grego (~10g/100g), cottage (~12g/100g), ovos (~6g cada) e lentilhas cozidas (~9g/100g)."}},{"@type":"Question","name":"Preciso de suplementos de proteína?","acceptedAnswer":{"@type":"Answer","text":"Não. Uma dieta variada pode atender suas necessidades de proteína sem suplementos. Proteínas em pó (whey, caseína, vegetal) são práticas, mas não superiores às fontes alimentares naturais."}},{"@type":"Question","name":"O que acontece se eu comer proteína demais?","acceptedAnswer":{"@type":"Answer","text":"Para pessoas saudáveis sem doenças renais, uma ingestão alta de proteína é geralmente segura. O excesso é convertido em energia ou armazenado como gordura. Um aumento brusco pode causar desconforto digestivo. Se tiver alguma condição médica, consulte seu médico."}},{"@type":"Question","name":"Quanta proteína tem um ovo?","acceptedAnswer":{"@type":"Answer","text":"Um ovo grande contém cerca de 6–7 g de proteína. A clara fornece a maior parte (~4 g) com quase nenhuma gordura, enquanto a gema adiciona 2–3 g junto com gorduras saudáveis e micronutrientes."}}]}
+</script>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Calculadora de Proteínas</h1>
+  <p class="sub">Encontre sua ingestão ideal de proteínas com base no seu peso, nível de atividade e objetivo.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Unidades</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" onclick="setUnit('metric',this)">kg</button>
+        <button class="unit-btn" onclick="setUnit('imperial',this)">lbs</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Peso corporal</label>
+      <div class="input-wrap">
+        <input type="number" id="weight" placeholder="70" min="30" max="250" oninput="calculate()">
+        <span class="input-suffix" id="weight-suffix">kg</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Sexo biológico</label>
+      <select id="sex" onchange="calculate()">
+        <option value="m">Masculino</option>
+        <option value="f">Feminino</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Nível de atividade</label>
+      <select id="activity" onchange="calculate()">
+        <option value="sed">Sedentário — pouco ou nenhum exercício</option>
+        <option value="mod" selected>Moderado — 3 a 4 dias por semana</option>
+        <option value="act">Ativo — 5 a 6 dias por semana</option>
+        <option value="very">Muito ativo — diário + treino intenso</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Objetivo</label>
+      <div class="goal-chips">
+        <button class="goal-chip" onclick="setGoal('maint',this)">
+          <span class="chip-icon">⚖️</span>Manter
+        </button>
+        <button class="goal-chip active" onclick="setGoal('build',this)">
+          <span class="chip-icon">💪</span>Ganhar massa
+        </button>
+        <button class="goal-chip" onclick="setGoal('cut',this)">
+          <span class="chip-icon">🔥</span>Perder gordura
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Meta diária de proteína</div>
+    <div id="res-main" class="result-main"><span class="empty-state">Insira seu peso acima</span></div>
+    <div id="res-range" class="result-range" style="display:none"></div>
+
+    <div class="stats-grid" id="stats-grid" style="display:none">
+      <div class="stat-box">
+        <div class="stat-label">Por refeição (4×/dia)</div>
+        <div class="stat-value" id="res-per-meal">—<span class="stat-unit">g</span></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label" id="res-per-unit-label">Por kg de peso</div>
+        <div class="stat-value" id="res-per-unit">—</div>
+      </div>
+    </div>
+
+    <div class="prot-bar-wrap" id="prot-bar-wrap" style="display:none">
+      <div class="prot-bar-label">
+        <span id="bar-low-label">Baixo (0,8 g/kg)</span>
+        <span id="bar-high-label">Alto (2,2 g/kg)</span>
+      </div>
+      <div class="prot-bar-track">
+        <div class="prot-bar-fill" id="prot-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="equiv-section" id="equiv-section" style="display:none">
+      <div class="equiv-label">Isso equivale aproximadamente a…</div>
+      <div class="equiv-list" id="equiv-list"></div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    Os valores são baseados nas recomendações da ISSN e da OMS. As necessidades reais variam conforme a composição corporal, a idade e o tipo de treino. Consulte um nutricionista registrado para um plano personalizado.
+  </div>
+
+  <div class="faq-heading">Perguntas frequentes</div>
+  <details class="faq-item" open>
+    <summary>Quanta proteína preciso por dia?</summary>
+    <div class="faq-a">Depende do seu objetivo. Para saúde geral: <strong>1,2–1,6 g/kg</strong> de peso corporal. Para ganho de massa muscular: <strong>1,8–2,2 g/kg</strong>. Para perda de gordura mantendo músculo: <strong>1,6–2,0 g/kg</strong>. Esta calculadora aplica os intervalos conforme o objetivo selecionado.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Quais alimentos têm mais proteína?</summary>
+    <div class="faq-a">Melhores fontes: peito de frango cozido (~31g/100g), atum em água (~26g/100g), carne bovina magra (~26g/100g), iogurte grego (~10g/100g), cottage (~12g/100g), ovos (~6g cada) e lentilhas cozidas (~9g/100g).</div>
+  </details>
+  <details class="faq-item">
+    <summary>Preciso de suplementos de proteína?</summary>
+    <div class="faq-a">Não. Uma dieta variada pode atender suas necessidades sem suplementos. Proteínas em pó (whey, caseína, vegetal) são uma opção <strong>prática</strong> quando é difícil atingir a meta só com alimentos, mas não são superiores às fontes naturais.</div>
+  </details>
+  <details class="faq-item">
+    <summary>O que acontece se eu comer proteína demais?</summary>
+    <div class="faq-a">Para pessoas saudáveis sem doenças renais, uma ingestão alta de proteína é geralmente segura. O excesso é convertido em energia ou armazenado como gordura. Um aumento brusco pode causar desconforto digestivo. Se tiver alguma condição médica, consulte seu médico.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Quanta proteína tem um ovo?</summary>
+    <div class="faq-a">Um ovo grande contém cerca de <strong>6–7 g de proteína</strong>. A clara fornece a maior parte (~4 g) com quase nenhuma gordura, enquanto a gema adiciona 2–3 g junto com gorduras saudáveis, vitamina D e outros micronutrientes.</div>
+  </details>
+</div>
+
+<script>
+var unit='metric';
+var currentGoal='build';
+
+var TABLE={
+  sed:[0.8,1.2,1.2],
+  mod:[1.2,1.6,1.6],
+  act:[1.6,2.0,2.0],
+  very:[1.8,2.2,2.2]
+};
+var GOAL_IDX={maint:0,build:1,cut:2};
+
+function setUnit(u,btn){
+  unit=u;
+  document.querySelectorAll('.unit-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var isImp=unit==='imperial';
+  document.getElementById('weight-suffix').textContent=isImp?'lbs':'kg';
+  document.getElementById('weight').placeholder=isImp?'154':'70';
+  document.getElementById('res-per-unit-label').textContent=isImp?'Por lb de peso':'Por kg de peso';
+  document.getElementById('bar-low-label').textContent=isImp?'Baixo (0,36 g/lb)':'Baixo (0,8 g/kg)';
+  document.getElementById('bar-high-label').textContent=isImp?'Alto (1,0 g/lb)':'Alto (2,2 g/kg)';
+  calculate();
+}
+
+function setGoal(g,btn){
+  currentGoal=g;
+  document.querySelectorAll('.goal-chip').forEach(function(c){c.classList.remove('active');});
+  btn.classList.add('active');
+  calculate();
+}
+
+function calculate(){
+  var w=parseFloat(document.getElementById('weight').value);
+  var sex=document.getElementById('sex').value;
+  var act=document.getElementById('activity').value;
+
+  var minW=unit==='imperial'?66:30;
+  if(!w||isNaN(w)||w<minW){
+    document.getElementById('res-main').className='result-main';
+    document.getElementById('res-main').innerHTML='<span class="empty-state">Insira seu peso acima</span>';
+    document.getElementById('res-range').style.display='none';
+    document.getElementById('stats-grid').style.display='none';
+    document.getElementById('prot-bar-wrap').style.display='none';
+    document.getElementById('equiv-section').style.display='none';
+    return;
+  }
+
+  var kg=unit==='imperial'?w/2.20462:w;
+
+  var baseGperKg=TABLE[act][GOAL_IDX[currentGoal]];
+  var factor=sex==='f'?0.9:1.0;
+  var gPerKg=baseGperKg*factor;
+  var grams=Math.round(gPerKg*kg);
+  var rMin=Math.round((gPerKg-0.1)*kg);
+  var rMax=Math.round((gPerKg+0.1)*kg);
+  var perMeal=Math.round(grams/4);
+
+  var barPct=Math.min(100,Math.max(0,((gPerKg-0.8)/(2.2-0.8))*100));
+  var barColor=barPct>75
+    ?'linear-gradient(to right,#10B981,#34D399)'
+    :barPct>40
+      ?'linear-gradient(to right,#4F6BFF,#5B9EFF)'
+      :'linear-gradient(to right,#F59E0B,#FCD34D)';
+
+  document.getElementById('res-main').className='result-main';
+  document.getElementById('res-main').innerHTML=grams+'<span> g/dia</span>';
+  document.getElementById('res-range').textContent='Intervalo recomendado: '+rMin+' – '+rMax+' g/dia';
+  document.getElementById('res-range').style.display='';
+
+  var perUnitVal=unit==='imperial'
+    ?(gPerKg/2.20462).toFixed(2)+' g/lb'
+    :gPerKg.toFixed(1).replace('.',',')+' g/kg';
+  document.getElementById('res-per-meal').innerHTML=perMeal+'<span class="stat-unit">g</span>';
+  document.getElementById('res-per-unit').textContent=perUnitVal;
+  document.getElementById('stats-grid').style.display='grid';
+
+  document.getElementById('prot-bar-wrap').style.display='';
+  document.getElementById('prot-bar').style.width=barPct+'%';
+  document.getElementById('prot-bar').style.background=barColor;
+
+  var equiv=[
+    {icon:'🥚',name:'ovos inteiros',prot:6},
+    {icon:'🍗',name:'peito de frango (100g)',prot:31},
+    {icon:'🐟',name:'latas de atum (85g)',prot:22},
+    {icon:'🥛',name:'potes de iogurte grego (170g)',prot:17},
+    {icon:'🥩',name:'carne bovina magra (100g)',prot:26},
+  ];
+  var equivHTML=equiv.map(function(e){
+    var qty=Math.round(grams/e.prot);
+    return '<div class="equiv-row">'
+      +'<span class="equiv-icon">'+e.icon+'</span>'
+      +'<span class="equiv-text"><span class="equiv-qty">'+qty+'</span> '+e.name+'</span>'
+      +'</div>';
+  }).join('');
+  document.getElementById('equiv-list').innerHTML=equivHTML;
+  document.getElementById('equiv-section').style.display='';
+}
+
+calculate();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

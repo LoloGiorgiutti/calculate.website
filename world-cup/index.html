@@ -9,19 +9,24 @@
 <meta name="description" content="Real-time countdown to the FIFA World Cup 2026 opening match. Days, hours, minutes and seconds until the tournament begins in the United States, Canada and Mexico.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calculate.website/world-cup/">
-  <link rel="alternate" hreflang="x-default" href="https://calculate.website/world-cup/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/world-cup/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/world-cup/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/world-cup/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/world-cup/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/world-cup/">
 <meta property="og:title" content="World Cup 2026 Countdown — calculate.website">
 <meta property="og:description" content="Live countdown to the FIFA World Cup 2026 opening match in the USA.">
 <meta property="og:url" content="https://calculate.website/world-cup/">
+<meta property="og:type" content="website">
 <meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#09150a;--surface:#0f2210;--surface2:#142a15;--gold:#F4C430;--gold-soft:rgba(244,196,48,.12);--ink:#e8f0e8;--ink-light:#9ab89a;--ink-faint:#4a6b4a;--border:#1e3a1e;--radius:16px;--radius-sm:10px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
-header{background:rgba(9,21,10,.95);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
-.logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--gold)}
 .hero{min-height:calc(100svh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px 48px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(244,196,48,.07) 0%,transparent 70%);pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold-soft);border:1px solid rgba(244,196,48,.25);border-radius:99px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
@@ -41,7 +46,7 @@ header{background:rgba(9,21,10,.95);border-bottom:1px solid var(--border);paddin
 </style>
 </head>
 <body>
-<header><a class="logo" href="/">calculate<span>.website</span></a></header>
+<header></header>
 
 <div class="hero">
   <div class="hero-badge">🏆 FIFA World Cup 2026</div>
@@ -91,21 +96,25 @@ header{background:rgba(9,21,10,.95);border-bottom:1px solid var(--border);paddin
 </div>
 
 <script>
-// Opening match: June 11, 2026 at 20:00 CDT (UTC-5) = UTC+01:00 would be June 12 01:00
-// Mexico City is CDT (UTC-5) in June. 20:00 CDT = June 12 01:00 UTC
 var TARGET = new Date('2026-06-12T01:00:00Z').getTime();
-
+var FINAL  = new Date('2026-07-20T00:00:00Z').getTime();
 function pad(n){return String(n).padStart(2,'0');}
-
 function tick(){
   var now=Date.now();
   var diff=TARGET-now;
   if(diff<=0){
-    document.getElementById('cd-d').textContent='00';
-    document.getElementById('cd-h').textContent='00';
-    document.getElementById('cd-m').textContent='00';
-    document.getElementById('cd-s').textContent='00';
-    return;
+    var diffFinal=FINAL-now;
+    if(diffFinal<=0){
+      document.getElementById('cd-d').textContent='🏆';
+      document.getElementById('cd-h').textContent='🏆';
+      document.getElementById('cd-m').textContent='🏆';
+      document.getElementById('cd-s').textContent='🏆';
+      document.querySelector('.hero-sub').textContent='The FIFA World Cup 2026 has concluded!';
+      return;
+    }
+    document.querySelector('.hero h1').innerHTML='Tournament is<br><span>underway!</span>';
+    document.querySelector('.hero-sub').textContent='Time until the final · July 19, 2026 · MetLife Stadium';
+    diff=diffFinal;
   }
   var d=Math.floor(diff/86400000);
   var h=Math.floor((diff%86400000)/3600000);
@@ -116,7 +125,6 @@ function tick(){
   document.getElementById('cd-m').textContent=pad(m);
   document.getElementById('cd-s').textContent=pad(s);
 }
-
 tick();
 setInterval(tick,1000);
 </script>

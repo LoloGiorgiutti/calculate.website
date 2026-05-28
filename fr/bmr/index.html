@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Calories — MB / TDEE | calculate.website</title>
+<meta name="description" content="Calculez votre Métabolisme de Base (MB) et Dépense Énergétique Totale Journalière (DETJ). Trouvez exactement combien de calories vous brûlez par jour.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/bmr/">
+<link rel="alternate" hreflang="en"        href="https://calculate.website/bmr/">
+<link rel="alternate" hreflang="es"        href="https://calculate.website/es/bmr/">
+<link rel="alternate" hreflang="pt-BR"     href="https://calculate.website/pt/bmr/">
+<link rel="alternate" hreflang="fr"        href="https://calculate.website/fr/bmr/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/bmr/">
+<meta property="og:title"       content="Calculateur de Calories — MB / TDEE | calculate.website">
+<meta property="og:description" content="Calculez votre Métabolisme de Base (MB) et Dépense Énergétique Totale Journalière (DETJ). Trouvez exactement combien de calories vous brûlez par jour.">
+<meta property="og:url"         content="https://calculate.website/fr/bmr/">
+<meta property="og:type"        content="website">
+<meta property="og:image"       content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="fr_FR">
+<meta name="twitter:card"       content="summary_large_image">
+<meta name="twitter:image"      content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  .input-wrap{position:relative}
+  .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number]:focus{border-color:var(--hi)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .seg-btn{padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .seg-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .unit-toggle{display:flex;gap:8px;margin-bottom:16px}
+  .unit-btn{padding:7px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .unit-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
+  .activity-grid{display:flex;flex-direction:column;gap:6px}
+  .act-btn{padding:10px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:left;display:flex;justify-content:space-between;align-items:center}
+  .act-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--ink)}
+  .act-label{font-weight:600}
+  .act-sub{font-size:11px;opacity:.7}
+  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #4F6BFF}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-sub{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:20px}
+  .empty-state{font-size:16px;color:rgba(255,255,255,0.3)}
+  .tdee-grid{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+  .tdee-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;font-size:13px}
+  .tdee-row.hl{background:rgba(255,255,255,0.08)}
+  .tdee-lbl{color:rgba(255,255,255,0.6)}
+  .tdee-val{font-weight:700;color:white;font-size:16px}
+  .tdee-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle}
+  .tag-lose{background:rgba(59,130,246,.25);color:#93C5FD}
+  .tag-m{background:rgba(34,197,94,.25);color:#86EFAC}
+  .tag-gain{background:rgba(245,158,11,.25);color:#FCD34D}
+  .faq-section{max-width:520px;margin:0 auto;padding:0 20px 40px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .15s}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que le MB ?","acceptedAnswer":{"@type":"Answer","text":"Le MB (Métabolisme de Base) est le nombre de calories que votre corps brûle au repos complet pour maintenir les fonctions vitales comme la respiration, la circulation et la régulation de la température."}},{"@type":"Question","name":"Qu'est-ce que le DETJ ?","acceptedAnswer":{"@type":"Answer","text":"Le DETJ (Dépense Énergétique Totale Journalière) est le total des calories brûlées par jour, incluant l'activité physique. Il est égal à votre MB multiplié par un facteur d'activité."}},{"@type":"Question","name":"Comment utiliser le DETJ pour perdre du poids ?","acceptedAnswer":{"@type":"Answer","text":"Pour perdre du poids, consommez moins de calories que votre DETJ. Manger 500 kcal/jour de moins que votre DETJ produit une perte d'environ 0,45 kg de graisse par semaine."}},{"@type":"Question","name":"Quelle formule cette calculatrice utilise-t-elle ?","acceptedAnswer":{"@type":"Answer","text":"Cette calculatrice utilise la formule Mifflin-St Jeor : MB (homme) = 10×poids(kg) + 6,25×taille(cm) − 5×âge + 5 ; MB (femme) = le même − 161."}}]}
+</script>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Calories Journalières (MB / DETJ)</h1>
+  <p class="page-sub">Combien de calories brûlez-vous par jour ? Calculez votre métabolisme de base et votre dépense totale.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Sexe</label>
+      <div class="seg">
+        <button class="seg-btn active" id="btn-m" onclick="setSex('m')">Homme</button>
+        <button class="seg-btn" id="btn-f" onclick="setSex('f')">Femme</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Système d'unités</label>
+      <div class="unit-toggle">
+        <button class="unit-btn" id="btn-imperial" onclick="setUnits('imperial')">Impérial (lb / po)</button>
+        <button class="unit-btn active" id="btn-metric" onclick="setUnits('metric')">Métrique (kg / cm)</button>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Poids</label>
+        <div class="input-wrap">
+          <input type="number" id="weight" placeholder="75" min="20" max="300" oninput="calculate()">
+          <span class="input-suffix" id="suffix-weight">kg</span>
+        </div>
+      </div>
+      <div class="field">
+        <label id="lbl-height">Taille</label>
+        <div class="input-wrap">
+          <input type="number" id="height" placeholder="175" min="100" max="250" oninput="calculate()">
+          <span class="input-suffix" id="suffix-height">cm</span>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Âge</label>
+      <div class="input-wrap" style="max-width:140px">
+        <input type="number" id="age" placeholder="30" min="15" max="100" oninput="calculate()" style="padding-right:14px">
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Niveau d'activité</label>
+      <div class="activity-grid">
+        <button class="act-btn" id="act-1" onclick="setActivity(1.2)">
+          <span class="act-label">Sédentaire</span>
+          <span class="act-sub">Peu ou pas d'exercice</span>
+        </button>
+        <button class="act-btn" id="act-2" onclick="setActivity(1.375)">
+          <span class="act-label">Légèrement actif</span>
+          <span class="act-sub">1–3 jours/semaine</span>
+        </button>
+        <button class="act-btn active" id="act-3" onclick="setActivity(1.55)">
+          <span class="act-label">Modérément actif</span>
+          <span class="act-sub">3–5 jours/semaine</span>
+        </button>
+        <button class="act-btn" id="act-4" onclick="setActivity(1.725)">
+          <span class="act-label">Très actif</span>
+          <span class="act-sub">6–7 jours/semaine</span>
+        </button>
+        <button class="act-btn" id="act-5" onclick="setActivity(1.9)">
+          <span class="act-label">Extrêmement actif</span>
+          <span class="act-sub">Travail physique ou double entraînement</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Métabolisme de Base (MB)</div>
+    <div id="result-main" class="result-main"><span class="empty-state">Remplissez vos données</span></div>
+    <div id="result-sub" class="result-sub" style="display:none">calories/jour au repos (Mifflin-St Jeor)</div>
+    <div class="tdee-grid" id="tdee-grid" style="display:none">
+      <div class="tdee-row">
+        <span class="tdee-lbl">Perdre du poids <span class="tdee-tag tag-lose">−500 kcal</span></span>
+        <span class="tdee-val" id="val-lose">—</span>
+      </div>
+      <div class="tdee-row hl">
+        <span class="tdee-lbl">Maintenir le poids <span class="tdee-tag tag-m">DETJ</span></span>
+        <span class="tdee-val" id="val-maintain">—</span>
+      </div>
+      <div class="tdee-row">
+        <span class="tdee-lbl">Prendre du poids <span class="tdee-tag tag-gain">+500 kcal</span></span>
+        <span class="tdee-val" id="val-gain">—</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-heading">Comment fonctionnent le MB et le DETJ</div>
+  <div class="faq-a" style="padding:0 0 18px">
+    <p style="margin-bottom:12px"><strong>MB (Métabolisme de Base)</strong> est le nombre de calories dont votre corps a besoin juste pour rester en vie — respirer, pomper le sang, réguler la température. Il représente environ 60–75% de la dépense calorique totale quotidienne.</p>
+    <p style="margin-bottom:12px">Cette calculatrice utilise la <strong>formule Mifflin-St Jeor</strong>, la plus précise pour la population générale : MB masculin = 10×poids(kg) + 6,25×taille(cm) − 5×âge + 5. MB féminin = le même − 161. Multipliez par votre facteur d'activité pour obtenir le DETJ.</p>
+    <p>Pour <strong>perdre du poids</strong>, mangez 300–500 kcal en dessous de votre DETJ. Pour <strong>prendre du muscle</strong>, mangez 250–500 kcal au-dessus. Ajustez selon les résultats réels sur 2–3 semaines.</p>
+  </div>
+  <div class="faq-heading">Questions fréquentes</div>
+  <details class="faq-item" open>
+    <summary>Qu'est-ce que le MB ?</summary>
+    <div class="faq-a"><strong>MB (Métabolisme de Base)</strong> est le nombre de calories que votre corps brûle au repos complet pour maintenir les fonctions vitales comme la respiration, la circulation sanguine et la régulation de la température. C'est le minimum de calories nécessaires pour survivre.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Qu'est-ce que le DETJ ?</summary>
+    <div class="faq-a"><strong>DETJ (Dépense Énergétique Totale Journalière)</strong> est le total des calories brûlées par jour, incluant l'activité physique. Il est calculé en multipliant votre MB par un facteur d'activité allant de 1,2 (sédentaire) à 1,9 (extrêmement actif). C'est votre niveau calorique de maintien.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Quelle formule de MB est la plus précise ?</summary>
+    <div class="faq-a">La <strong>formule Mifflin-St Jeor</strong> (utilisée ici) est considérée comme la plus précise pour la plupart des personnes. L'ancienne formule Harris-Benedict tend à surestimer les calories, surtout pour les individus sédentaires.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Comment utiliser le DETJ pour perdre ou prendre du poids ?</summary>
+    <div class="faq-a">Pour <strong>perdre du poids</strong>, mangez moins de calories que votre DETJ. Un déficit de 500 kcal/jour produit environ 0,45 kg de perte de graisse par semaine. Pour <strong>prendre du poids</strong>, mangez plus — un surplus de 500 kcal/jour ajoute environ 0,45 kg par semaine. Suivez pendant 2–3 semaines et ajustez.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Le MB change-t-il avec l'âge ?</summary>
+    <div class="faq-a">Oui. Le MB diminue généralement avec l'âge à mesure que la masse musculaire décline naturellement. L'entraînement en force aide à préserver le muscle et à maintenir un MB plus élevé. Chaque décennie après 30 ans représente une baisse d'environ 2–3% du MB sans contre-mesures.</div>
+  </details>
+</div>
+<script>
+  var sex = 'm';
+  var units = 'metric';
+  var actFactor = 1.55;
+  var actIds    = ['act-1','act-2','act-3','act-4','act-5'];
+  var actVals   = [1.2, 1.375, 1.55, 1.725, 1.9];
+
+  function setSex(s) {
+    sex = s;
+    document.getElementById('btn-m').classList.toggle('active', s === 'm');
+    document.getElementById('btn-f').classList.toggle('active', s === 'f');
+    calculate();
+  }
+
+  function setUnits(u) {
+    units = u;
+    document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+    document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+    var wEl = document.getElementById('weight');
+    var hEl = document.getElementById('height');
+    if (u === 'metric') {
+      document.getElementById('suffix-weight').textContent = 'kg';
+      document.getElementById('suffix-height').textContent = 'cm';
+      document.getElementById('lbl-height').textContent = 'Taille';
+      wEl.placeholder = '75'; hEl.placeholder = '175';
+      wEl.min = 20; wEl.max = 300;
+      hEl.min = 100; hEl.max = 250;
+    } else {
+      document.getElementById('suffix-weight').textContent = 'lb';
+      document.getElementById('suffix-height').textContent = 'po';
+      document.getElementById('lbl-height').textContent = 'Taille (en pouces)';
+      wEl.placeholder = '165'; hEl.placeholder = '68';
+      wEl.min = 44; wEl.max = 660;
+      hEl.min = 39; hEl.max = 98;
+    }
+    wEl.value = '';
+    hEl.value = '';
+    calculate();
+  }
+
+  function setActivity(f) {
+    actFactor = f;
+    actIds.forEach(function(id, i) {
+      document.getElementById(id).classList.toggle('active', actVals[i] === f);
+    });
+    calculate();
+  }
+
+  function calculate() {
+    var wRaw = parseFloat(document.getElementById('weight').value) || 0;
+    var hRaw = parseFloat(document.getElementById('height').value) || 0;
+    var age  = parseFloat(document.getElementById('age').value) || 0;
+    var mainEl = document.getElementById('result-main');
+    var subEl  = document.getElementById('result-sub');
+    var gridEl = document.getElementById('tdee-grid');
+
+    if (!wRaw || !hRaw || !age) {
+      mainEl.innerHTML = '<span class="empty-state">Remplissez vos données</span>';
+      subEl.style.display = 'none';
+      gridEl.style.display = 'none';
+      return;
+    }
+
+    var weightKg = units === 'metric' ? wRaw : wRaw * 0.453592;
+    var heightCm = units === 'metric' ? hRaw : hRaw * 2.54;
+
+    var bmr = sex === 'm'
+      ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+      : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+
+    var tdee = bmr * actFactor;
+
+    mainEl.textContent = Math.round(bmr).toLocaleString('fr-FR') + ' kcal';
+    subEl.style.display = 'block';
+    gridEl.style.display = 'flex';
+
+    document.getElementById('val-lose').textContent     = Math.round(tdee - 500).toLocaleString('fr-FR') + ' kcal';
+    document.getElementById('val-maintain').textContent = Math.round(tdee).toLocaleString('fr-FR') + ' kcal';
+    document.getElementById('val-gain').textContent     = Math.round(tdee + 500).toLocaleString('fr-FR') + ' kcal';
+  }
+
+  setUnits('metric');
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

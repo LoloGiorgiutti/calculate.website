@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Vida em Números — Batimentos, Respirações e Mais | calculate.website</title>
+<meta name="description" content="Quantas vezes seu coração bateu? Quantas respirações você deu? Descubra estatísticas fascinantes sobre sua vida desde o nascimento.">
+<link rel="canonical" href="https://calculate.website/pt/life/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/life/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/life/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/life/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/life/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/life/">
+<meta property="og:title" content="Sua Vida em Números — Batimentos, Respirações e Mais | calculate.website">
+<meta property="og:description" content="Quantas vezes seu coração bateu? Quantas respirações você deu? Descubra estatísticas fascinantes sobre sua vida desde o nascimento.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://calculate.website/pt/life/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://calculate.website/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+input[type=date]:focus{border-color:var(--hi)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border)}
+.stat-icon{font-size:24px;margin-bottom:8px}
+.stat-val{font-size:22px;font-weight:700;color:var(--hi);letter-spacing:-.02em;line-height:1;margin-bottom:4px;word-break:break-word}
+.stat-lbl{font-size:12px;color:var(--ink-light);line-height:1.4}
+.empty{text-align:center;padding:40px 20px;color:var(--ink-faint);font-size:14px}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1>Sua Vida em Números</h1>
+  <p class="sub">Descubra estatísticas fascinantes sobre sua vida desde o nascimento.</p>
+
+  <div class="card">
+    <label>Sua data de nascimento</label>
+    <input type="date" id="birthdate" oninput="calculate()">
+  </div>
+
+  <div id="stats-area"><div class="empty">Insira sua data de nascimento para ver sua vida em números</div></div>
+</div>
+
+<script>
+function fmt(n){
+  if(n>=1e12) return (n/1e12).toFixed(2)+' tri.';
+  if(n>=1e9)  return (n/1e9).toFixed(2)+' bi.';
+  if(n>=1e6)  return (n/1e6).toFixed(2)+' mi.';
+  return Math.round(n).toLocaleString('pt-BR');
+}
+
+function calculate(){
+  var val=document.getElementById('birthdate').value;
+  if(!val){document.getElementById('stats-area').innerHTML='<div class="empty">Insira sua data de nascimento para ver sua vida em números</div>';return;}
+  var p=val.split('-');
+  var birth=new Date(+p[0],+p[1]-1,+p[2]);
+  var now=new Date();
+  if(birth>now){document.getElementById('stats-area').innerHTML='<div class="empty">A data deve ser no passado</div>';return;}
+  var seconds=(now-birth)/1000;
+  var minutes=seconds/60;
+  var hours=minutes/60;
+  var days=hours/24;
+
+  var stats=[
+    {icon:'❤️',val:fmt(seconds*1.1),lbl:'Batimentos cardíacos<br><span style="font-size:10px;color:var(--ink-faint)">méd. 66 bpm</span>'},
+    {icon:'🌬️',val:fmt(seconds/5),lbl:'Respirações<br><span style="font-size:10px;color:var(--ink-faint)">méd. ~12/min</span>'},
+    {icon:'👁️',val:fmt(seconds*15),lbl:'Vezes que piscou<br><span style="font-size:10px;color:var(--ink-faint)">méd. ~15/min</span>'},
+    {icon:'🛌',val:fmt(hours/3),lbl:'Horas dormindo<br><span style="font-size:10px;color:var(--ink-faint)">méd. 8h/dia</span>'},
+    {icon:'🚶',val:fmt(days*8000),lbl:'Passos dados<br><span style="font-size:10px;color:var(--ink-faint)">méd. ~8.000/dia</span>'},
+    {icon:'🍽️',val:fmt(days*3),lbl:'Refeições realizadas<br><span style="font-size:10px;color:var(--ink-faint)">méd. 3/dia</span>'},
+    {icon:'🌙',val:fmt(Math.floor(days)),lbl:'Dias que você está vivo/a'},
+    {icon:'🔬',val:fmt(seconds*2500000),lbl:'Novas células criadas<br><span style="font-size:10px;color:var(--ink-faint)">méd. ~2,5M/seg</span>'},
+  ];
+
+  var html='<div class="stats-grid">';
+  stats.forEach(function(s){
+    html+='<div class="stat-card"><div class="stat-icon">'+s.icon+'</div><div class="stat-val">'+s.val+'</div><div class="stat-lbl">'+s.lbl+'</div></div>';
+  });
+  html+='</div>';
+  document.getElementById('stats-area').innerHTML=html;
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

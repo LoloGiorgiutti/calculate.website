@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Dias entre Datas — Dias, Semanas e Meses | calculate.website</title>
+<meta name="description" content="Calcule quantos dias, semanas ou meses há entre duas datas. Inclui dias úteis e dias corridos. Ideal para prazos, contratos e contagens regressivas. Gratuito e instantâneo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/pt/days/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/days/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/days/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/days/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/days/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/days/">
+<meta property="og:title" content="Dias entre Datas — calculate.website">
+<meta property="og:description" content="Calcule dias, semanas ou meses entre duas datas. Suporte a dias úteis.">
+<meta property="og:url" content="https://calculate.website/pt/days/">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="pt_BR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
+  .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+  input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;cursor:pointer}
+  input[type=date]:focus{border-color:var(--hi)}
+  .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+  .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+  .result-main{font-size:52px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:4px}
+  .result-unit{font-size:20px;font-weight:400;opacity:0.5;margin-left:6px}
+  .result-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+  .result-rows{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat-box{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px}
+  .stat-val{font-size:22px;font-weight:700;color:white;letter-spacing:-0.02em}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+  .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
+  .toggle-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+  .toggle-lbl{font-size:14px;font-weight:500;color:var(--ink)}
+  .toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+  .toggle input{opacity:0;width:0;height:0}
+  .toggle-track{position:absolute;inset:0;background:var(--border);border-radius:99px;cursor:pointer;transition:background .2s}
+  .toggle input:checked + .toggle-track{background:var(--hi)}
+  .toggle-track::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .toggle input:checked + .toggle-track::after{transform:translateX(20px)}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <h1 class="page-title">Dias entre Datas</h1>
+  <p class="page-sub">Quantos dias há entre duas datas? Também exibido em semanas e meses.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>Data de início</label>
+      <input type="date" id="date1" oninput="calcular()">
+    </div>
+    <div class="field">
+      <label>Data de fim</label>
+      <input type="date" id="date2" oninput="calcular()">
+    </div>
+    <div class="field">
+      <div class="toggle-row">
+        <span class="toggle-lbl">Apenas dias úteis (Seg–Sex)</span>
+        <label class="toggle">
+          <input type="checkbox" id="business" onchange="calcular()">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-eyebrow">Diferença</div>
+    <div id="result-main" class="result-main"><span class="empty-state" style="font-size:16px">Selecione as datas</span></div>
+    <div id="result-sub" class="result-sub"></div>
+    <div id="result-rows" class="result-rows" style="display:none">
+      <div class="stat-box">
+        <div class="stat-val" id="r-weeks">—</div>
+        <div class="stat-lbl">Semanas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="r-months">—</div>
+        <div class="stat-lbl">Meses aprox.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var today=new Date();
+  var in30=new Date();in30.setDate(today.getDate()+30);
+  document.getElementById('date1').value=today.toISOString().split('T')[0];
+  document.getElementById('date2').value=in30.toISOString().split('T')[0];
+  calcular();
+
+  function calcular(){
+    var f1=new Date(document.getElementById('date1').value);
+    var f2=new Date(document.getElementById('date2').value);
+    var mainEl=document.getElementById('result-main');
+    var subEl=document.getElementById('result-sub');
+    var rowsEl=document.getElementById('result-rows');
+    if(isNaN(f1)||isNaN(f2)){
+      mainEl.innerHTML='<span class="empty-state" style="font-size:16px">Selecione as datas</span>';
+      subEl.textContent='';rowsEl.style.display='none';return;
+    }
+    var businessOnly=document.getElementById('business').checked;
+    var start=f1<f2?f1:f2;
+    var end=f1<f2?f2:f1;
+    var sign=f1<=f2?1:-1;
+    var days=0;
+    if(businessOnly){
+      var d=new Date(start);
+      while(d<end){
+        var dow=d.getDay();
+        if(dow!==0&&dow!==6)days++;
+        d.setDate(d.getDate()+1);
+      }
+    } else {
+      days=Math.round(Math.abs(end-start)/(1000*60*60*24));
+    }
+    days*=sign<0?-1:1;
+    var weeks=(Math.abs(days)/7).toFixed(1);
+    var months=(Math.abs(days)/30.44).toFixed(1);
+    var absDays=Math.abs(days);
+    mainEl.innerHTML=absDays.toLocaleString('pt-BR')+'<span class="result-unit">dia'+(absDays!==1?'s':'')+'</span>';
+    if(days<0) subEl.textContent='A data de início é posterior à data de fim';
+    else if(days===0) subEl.textContent='As datas são iguais';
+    else subEl.textContent=businessOnly?'dias úteis (Seg–Sex)':'dias corridos';
+    rowsEl.style.display='grid';
+    document.getElementById('r-weeks').textContent=weeks;
+    document.getElementById('r-months').textContent=months;
+  }
+</script>
+<style>
+  .faq-section{max-width:600px;margin:32px auto 0;padding:0 20px 60px}
+  .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#B4B8CC);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .faq-heading::after{content:'';flex:1;height:1px;background:var(--border,#D4D8E6)}
+  .faq-item{background:var(--surface,#fff);border:1px solid var(--border,#D4D8E6);border-radius:10px;margin-bottom:8px;overflow:hidden}
+  .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
+  .faq-item[open]>summary{color:var(--hi,#4F6BFF)}
+  .faq-item[open]>summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Como calculo o número de dias entre duas datas?","acceptedAnswer":{"@type":"Answer","text":"Subtraia a data de início da data de fim para obter o total de dias. Esta calculadora faz isso automaticamente — basta inserir as duas datas e ela mostra dias, semanas e meses instantaneamente."}},
+{"@type":"Question","name":"O que são dias úteis?","acceptedAnswer":{"@type":"Answer","text":"Dias úteis (também chamados de dias de trabalho) são de segunda a sexta-feira, excluindo fins de semana. Feriados não são excluídos automaticamente pois variam por país."}},
+{"@type":"Question","name":"Quantas semanas são 90 dias?","acceptedAnswer":{"@type":"Answer","text":"90 dias equivalem a exatamente 12,86 semanas (90 ÷ 7 = 12,857). Em meses, 90 dias equivalem a aproximadamente 2,96 meses (90 ÷ 30,44)."}},
+{"@type":"Question","name":"Como conto os dias para um prazo ou contrato?","acceptedAnswer":{"@type":"Answer","text":"Insira a data de início do contrato como Data de início e o vencimento como Data de fim. A calculadora mostrará o número exato de dias corridos, além de dias úteis se você ativar a opção."}}
+]}
+</script>
+<div class="faq-section">
+  <div class="faq-heading">Perguntas frequentes</div>
+  <details class="faq-item" open>
+    <summary>Como calculo o número de dias entre duas datas?</summary>
+    <div class="faq-a">Subtraia a data de início da data de fim para obter o total de dias. Esta calculadora faz isso automaticamente — basta inserir as duas datas e ela mostra <strong>dias, semanas e meses</strong> instantaneamente.</div>
+  </details>
+  <details class="faq-item">
+    <summary>O que são dias úteis?</summary>
+    <div class="faq-a">Dias úteis (também chamados de dias de trabalho) são <strong>de segunda a sexta-feira</strong>, excluindo fins de semana. Feriados não são excluídos automaticamente pois variam por país.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Quantas semanas são 90 dias?</summary>
+    <div class="faq-a">90 dias equivalem a exatamente <strong>12,86 semanas</strong> (90 ÷ 7 = 12,857). Em meses, 90 dias equivalem a aproximadamente <strong>2,96 meses</strong> (90 ÷ 30,44).</div>
+  </details>
+  <details class="faq-item">
+    <summary>Como conto os dias para um prazo ou contrato?</summary>
+    <div class="faq-a">Insira a data de início como <strong>Data de início</strong> e o vencimento como <strong>Data de fim</strong>. A calculadora mostra o número exato de dias corridos, e dias úteis se você ativar a opção.</div>
+  </details>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>
