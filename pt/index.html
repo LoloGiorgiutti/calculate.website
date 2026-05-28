@@ -113,23 +113,39 @@
 <script src="/nav.js"></script>
 <script>
 (function () {
+  /* ── Slugs que têm versão real em /pt/ ── */
+  var PT_PAGES = {
+    '/base-converter/':1,'/body-fat/':1,'/calories-burned/':1,'/compound-interest/':1,
+    '/countdown/':1,'/discount/':1,'/fractions/':1,'/fuel/':1,'/heart-rate/':1,
+    '/ideal-weight/':1,'/inflation/':1,'/memory/':1,'/mortgage/':1,'/pregnancy/':1,
+    '/roi/':1,'/salary/':1,'/scientific/':1,'/sleep/':1,'/statistics/':1,
+    '/timer/':1,'/triangle/':1,'/typing/':1,'/vat/':1,'/work-hours/':1
+  };
+
+  function ptLink(item) {
+    return PT_PAGES[item.u] ? '/pt' + item.u : item.u;
+  }
+
   var calcs = window.__CALCS || [];
   var catGrid = document.getElementById('hero-cat-grid');
   var hcCount = document.getElementById('hc-count');
+
   if (catGrid && calcs.length) {
     var total = calcs.reduce(function(s,c){ return s+c.items.length; }, 0);
     if (hcCount) hcCount.textContent = total + ' calculadoras';
-    calcs.slice(0,6).forEach(function(cat){
+    calcs.forEach(function(cat){
       var chip = document.createElement('a');
       chip.className = 'cat-chip';
       chip.href = '/pt/' + cat.slug + '/';
-      chip.innerHTML = '<span class="cat-chip-name">' + cat.label + '</span>'
+      chip.innerHTML = '<span class="cat-chip-name">' + (cat.label_pt || cat.label) + '</span>'
         + '<span class="cat-chip-n">' + cat.items.length + ' ferramentas</span>';
       catGrid.appendChild(chip);
     });
   }
+
   var root = document.getElementById('home-grid-root');
   if (!root || !calcs.length) return;
+
   function buildHomeGrid(country) {
     country = country || (typeof cwGetCountry === 'function' ? cwGetCountry() : 'global');
     var html = '';
@@ -142,19 +158,26 @@
       });
       if (items.length === 0) return;
       catIdx++;
-      html += '<div class="cat-block"><div class="cat-block-head"><div class="cat-title-wrap">'
-        + '<span class="cat-num">0' + catIdx + '</span>'
-        + '<h2 class="cat-title">' + (cat.title || cat.cat) + '</h2>'
+      var numStr = catIdx < 10 ? '0' + catIdx : '' + catIdx;
+      html += '<div class="cat-block">'
+        + '<div class="cat-block-head">'
+        + '<div class="cat-title-wrap">'
+        + '<span class="cat-num">' + numStr + '</span>'
+        + '<h2 class="cat-title">' + (cat.title_pt || cat.title || cat.cat) + '</h2>'
         + '<span class="cat-count">' + items.length + '</span>'
-        + '</div><a class="cat-link" href="/pt/' + cat.slug + '/">Ver todas →</a>'
+        + '</div>'
+        + '<a class="cat-link" href="/pt/' + cat.slug + '/">Ver todas →</a>'
         + '</div><div class="cards">';
       items.forEach(function(item){
-        var desc = item.hd || item.d;
-        html += '<a class="card" href="' + '/pt' + item.u + '">'
-          + '<span class="card-tag">' + cat.label + '</span>'
-          + '<div class="card-title">' + item.n + '</div>'
+        var name = item.n_pt || item.n;
+        var desc = item.d_pt || item.d;
+        var href = ptLink(item);
+        html += '<a class="card" href="' + href + '">'
+          + '<span class="card-tag">' + (cat.label_pt || cat.label) + '</span>'
+          + '<div class="card-title">' + name + '</div>'
           + '<div class="card-desc">' + desc + '</div>'
-          + '<span class="card-cta">Abrir →</span></a>';
+          + '<span class="card-cta">Abrir →</span>'
+          + '</a>';
       });
       html += '</div></div>';
     });
