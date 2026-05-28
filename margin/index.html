@@ -9,16 +9,17 @@
 <meta name="description" content="Calculate profit margin, markup, selling price or profit amount. Fill in any two fields and the other two are computed automatically. Free and instant.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calculate.website/margin/">
+  <link rel="alternate" hreflang="x-default" href="https://calculate.website/margin/">
 <meta property="og:title" content="Profit Margin Calculator — calculate.website">
 <meta property="og:description" content="Fill in any 2 fields — cost, margin %, price or profit — and the rest calculate automatically.">
 <meta property="og:url" content="https://calculate.website/margin/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="en_US">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F0F2F7;--surface:#fff;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
 .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--hi)}
 .hero{text-align:center;padding:40px 20px 24px;max-width:600px;margin:0 auto}
@@ -36,15 +37,15 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 .field-label{font-size:13px;font-weight:700;color:var(--ink)}
 .field-badge{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:99px}
 .badge-input{background:var(--hi-soft);color:var(--hi)}
-.badge-calc{background:#F0F2F7;color:var(--ink-faint)}
+.badge-calc{background:#F7F8FA;color:var(--ink-faint)}
 .field-bottom{display:flex;align-items:center;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;transition:border-color .15s}
 .field-row.active-input .field-bottom{border-color:var(--hi)}
-.field-bottom input{flex:1;border:none;background:transparent;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;color:var(--ink);outline:none;min-width:0}
+.field-bottom input{flex:1;border:none;background:transparent;padding:12px 14px;font-family:'Inter',sans-serif;font-size:17px;font-weight:600;color:var(--ink);outline:none;min-width:0}
 .field-bottom input::placeholder{color:var(--ink-faint);font-weight:400;font-size:15px}
 .field-bottom input.computed-val{color:var(--hi)}
-.cur-select{border:none;border-left:1px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--hi);padding:0 12px;height:100%;cursor:pointer;outline:none;flex-shrink:0}
+.cur-select{border:none;border-left:1px solid var(--border);background:transparent;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--hi);padding:0 12px;height:100%;cursor:pointer;outline:none;flex-shrink:0}
 .pct-label{padding:0 14px;font-size:17px;font-weight:600;color:var(--ink-faint);flex-shrink:0}
-.btn-clear{display:block;width:100%;padding:13px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;margin-bottom:16px}
+.btn-clear{display:block;width:100%;padding:13px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;margin-bottom:16px}
 .btn-clear:hover{background:var(--surface);color:var(--ink)}
 .info-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px}
 .info-title{font-size:13px;font-weight:700;margin-bottom:12px}
@@ -233,7 +234,7 @@ function clearAll(){
   .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
   .faq-item summary::-webkit-details-marker{display:none}
   .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
-  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary{color:var(--hi,#4F6BFF)}
   .faq-item[open]>summary::after{transform:rotate(45deg)}
   .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
 </style>

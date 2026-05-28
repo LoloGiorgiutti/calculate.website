@@ -9,16 +9,17 @@
 <meta name="description" content="Calculate your monthly loan payment, total interest, and full amortization schedule. Enter loan amount, interest rate, and term. Fixed-rate (French amortization) system.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calculate.website/loan/">
+  <link rel="alternate" hreflang="x-default" href="https://calculate.website/loan/">
 <meta property="og:title" content="Loan Calculator — calculate.website">
 <meta property="og:description" content="Calculate monthly payment, total interest and amortization schedule for any loan.">
 <meta property="og:url" content="https://calculate.website/loan/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="en_US">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
   .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
   .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
@@ -30,12 +31,12 @@
   .input-wrap{position:relative}
   .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
   .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
-  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+  input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
   input[type=number].with-prefix{padding-left:30px}
   input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
   input[type=number]:focus{border-color:var(--hi)}
   .term-chips{display:flex;gap:8px;flex-wrap:wrap}
-  .term-chip{padding:8px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
+  .term-chip{padding:8px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s}
   .term-chip.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
   .result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
   .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
@@ -57,7 +58,7 @@
   .empty-state{color:rgba(255,255,255,0.3);font-size:15px}
   .info-box{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;color:var(--ink-light);line-height:1.5}
   .info-box strong{color:var(--ink)}
-  .table-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);transition:all .15s;margin-bottom:16px}
+  .table-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);transition:all .15s;margin-bottom:16px}
   .table-toggle:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}
   .table-toggle .chevron{margin-left:auto;transition:transform .25s}
   .table-toggle.open .chevron{transform:rotate(180deg)}
@@ -299,7 +300,7 @@
   .faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink,#080A12)}
   .faq-item summary::-webkit-details-marker{display:none}
   .faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint,#B4B8CC);flex-shrink:0;transition:transform .2s;line-height:1}
-  .faq-item[open]>summary{color:var(--hi,#1A5FE8)}
+  .faq-item[open]>summary{color:var(--hi,#4F6BFF)}
   .faq-item[open]>summary::after{transform:rotate(45deg)}
   .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light,#60647A);line-height:1.65}
 </style>

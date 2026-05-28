@@ -8,22 +8,23 @@
 <meta name="description" content="Calculate X% of Y, what percentage X is of Y, percentage change between two values, and apply increases or discounts. Fill in two fields and the result appears automatically.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calculate.website/percentage/">
+  <link rel="alternate" hreflang="x-default" href="https://calculate.website/percentage/">
 <meta property="og:title" content="Percentage Calculator | calculate.website">
 <meta property="og:description" content="Fill in two values and the third calculates itself. X% of Y, percentage change, increases and discounts.">
 <meta property="og:url" content="https://calculate.website/percentage/">
 <meta property="og:type" content="website">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
   .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
   .page{max-width:580px;margin:0 auto;padding:36px 20px 60px}
   .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
   .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
   .mode-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-  .mode-tab{padding:8px 15px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;white-space:nowrap}
+  .mode-tab{padding:8px 15px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;white-space:nowrap}
   .mode-tab:hover{border-color:var(--hi);color:var(--hi)}
   .mode-tab.active{background:var(--hi);border-color:var(--hi);color:#fff}
   .card{background:var(--surface);border-radius:var(--radius);padding:24px;border:1px solid var(--border);margin-bottom:14px}
@@ -36,7 +37,7 @@
   .tri-field{display:flex;flex-direction:column;gap:5px}
   .tri-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);height:13px;transition:color .15s}
   .tri-lbl.auto-lbl{color:var(--hi)}
-  .tri-inp{width:120px;padding:13px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s,background .15s,color .15s;text-align:center}
+  .tri-inp{width:120px;padding:13px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s,background .15s,color .15s;text-align:center}
   .tri-inp:focus{border-color:var(--hi)}
   .tri-inp.pct-inp{padding-right:26px}
   .tri-inp.wide-inp{width:150px}
@@ -65,10 +66,10 @@
   .hist-item:last-child{margin-bottom:0}
   .hist-formula{font-size:12px;color:var(--ink-light);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .hist-result{font-size:13px;font-weight:700;color:var(--hi);flex-shrink:0}
-  .hist-clear{font-size:11px;color:var(--ink-faint);background:none;border:none;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif;margin-left:8px}
+  .hist-clear{font-size:11px;color:var(--ink-faint);background:none;border:none;cursor:pointer;padding:0;font-family:'Inter',sans-serif;margin-left:8px}
   .hist-clear:hover{color:var(--ink)}
   .ap-tabs{display:flex;gap:8px;margin-bottom:18px}
-  .ap-tab{flex:1;padding:9px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .ap-tab{flex:1;padding:9px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
   .ap-tab.active{background:var(--hi);border-color:var(--hi);color:#fff}
   @media(max-width:480px){
     .tri-inp{width:95px;font-size:14px}

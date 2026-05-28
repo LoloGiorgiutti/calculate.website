@@ -4,20 +4,22 @@
 <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reaction Time Test — How Fast Are Your Reflexes?</title>
 <meta name="description" content="Test your reaction time in milliseconds. Click when the circle turns green. See your average, personal best, and how you compare. Free online reaction time test.">
 <link rel="canonical" href="https://calculate.website/reaction-time/">
+  <link rel="alternate" hreflang="x-default" href="https://calculate.website/reaction-time/">
 <meta property="og:title" content="Reaction Time Test — calculate.website">
 <meta property="og:description" content="Test your reaction speed in milliseconds. Average, personal best and rating included.">
 <meta property="og:url" content="https://calculate.website/reaction-time/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="en_US">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F0F2F7;--surface:#fff;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
 .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--hi)}
 .hero{text-align:center;padding:40px 20px 24px;max-width:600px;margin:0 auto}
@@ -47,7 +49,7 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 .avg-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:13px}
 .avg-label{color:var(--ink-light)}
 .avg-val{font-weight:700;font-size:18px;color:var(--hi)}
-.btn-reset{display:block;width:100%;padding:14px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:background .15s,color .15s;margin-top:4px}
+.btn-reset{display:block;width:100%;padding:14px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:background .15s,color .15s;margin-top:4px}
 .btn-reset:hover{background:var(--surface);color:var(--ink)}
 .info-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
 .info-title{font-size:13px;font-weight:700;margin-bottom:10px}
@@ -93,7 +95,7 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
     <div class="info-grid">
       <div class="info-item"><div class="info-range" style="color:#e74c3c">&lt; 150 ms</div><div class="info-desc">Impossible / suspicious</div></div>
       <div class="info-item"><div class="info-range" style="color:#27ae60">150–200 ms</div><div class="info-desc">Elite reflexes 🐱</div></div>
-      <div class="info-item"><div class="info-range" style="color:#1A5FE8">200–250 ms</div><div class="info-desc">Above average</div></div>
+      <div class="info-item"><div class="info-range" style="color:#4F6BFF">200–250 ms</div><div class="info-desc">Above average</div></div>
       <div class="info-item"><div class="info-range" style="color:#60647A">250–350 ms</div><div class="info-desc">Average person</div></div>
       <div class="info-item"><div class="info-range" style="color:#e67e22">350–500 ms</div><div class="info-desc">Room to improve</div></div>
       <div class="info-item"><div class="info-range" style="color:#B4B8CC">&gt; 500 ms</div><div class="info-desc">Keep practicing!</div></div>
@@ -114,8 +116,8 @@ var sub=document.getElementById('circle-sub');
 function getRating(ms){
   if(ms<150) return {text:'Suspicious 🤔',color:'#e74c3c'};
   if(ms<200) return {text:'Elite! 🐱',color:'#27ae60'};
-  if(ms<250) return {text:'Very fast!',color:'#1A5FE8'};
-  if(ms<300) return {text:'Above average',color:'#1A5FE8'};
+  if(ms<250) return {text:'Very fast!',color:'#4F6BFF'};
+  if(ms<300) return {text:'Above average',color:'#4F6BFF'};
   if(ms<350) return {text:'Average',color:'#60647A'};
   if(ms<500) return {text:'Room to improve',color:'#e67e22'};
   return {text:'Keep practicing!',color:'#B4B8CC'};

@@ -8,11 +8,12 @@
 <meta name="description" content="Solve direct and inverse proportion problems instantly. Enter three values and get the fourth. Great for scaling recipes, maps, currency and more.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calculate.website/rule-of-three/">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="alternate" hreflang="x-default" href="https://calculate.website/rule-of-three/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#F0F2F7;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#1A5FE8;--hi-soft:#EEF3FD;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
   .logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
   .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
@@ -21,7 +22,7 @@
   .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
   .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
   label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
-  input[type=number],input[type=text]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
+  input[type=number],input[type=text]{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s}
   input[type=number]:focus,input[type=text]:focus{border-color:var(--hi)}
   .prop-grid{display:grid;grid-template-columns:1fr 32px 1fr;gap:10px;align-items:center}
   .prop-eq{text-align:center;font-size:20px;color:var(--ink-faint);font-weight:300;padding-top:24px}
@@ -30,9 +31,9 @@
   .unknown-field input{background:var(--hi-soft);border-color:var(--hi);color:var(--hi);font-weight:700}
   .unknown-field input::placeholder{color:rgba(26,95,232,0.4)}
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .seg-btn{padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .seg-btn{padding:10px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
   .seg-btn.active{background:var(--hi-soft);border-color:var(--hi);color:var(--hi)}
-  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #1A5FE8}
+  .result-card{border-radius:var(--radius);padding:28px;margin-bottom:16px;background:#0C1528;border-top:4px solid #4F6BFF}
   .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
   .result-main{font-size:56px;font-weight:700;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
   .result-formula{font-size:13px;color:rgba(255,255,255,0.35);font-family:monospace;margin-bottom:4px}
