@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Pourcentage — calculate.website</title>
+<meta name="description" content="Calculez X% de Y, quel pourcentage X est de Y, la variation en pourcentage et appliquez des augmentations ou remises. Remplissez deux champs et le résultat apparaît automatiquement.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/percentage/">
+<link rel="alternate" hreflang="en"    href="https://calculate.website/percentage/">
+<link rel="alternate" hreflang="es"    href="https://calculate.website/es/percentage/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/percentage/">
+<link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/percentage/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/percentage/">
+<meta property="og:title" content="Calculateur de Pourcentage | calculate.website">
+<meta property="og:description" content="Remplissez deux champs et le troisième se calcule automatiquement. X% de Y, variation en pourcentage, augmentations et remises.">
+<meta property="og:url" content="https://calculate.website/fr/percentage/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://calculate.website/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .page{max-width:580px;margin:0 auto;padding:36px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+  .mode-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .mode-tab{padding:8px 15px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;white-space:nowrap}
+  .mode-tab:hover{border-color:var(--hi);color:var(--hi)}
+  .mode-tab.active{background:var(--hi);border-color:var(--hi);color:#fff}
+  .card{background:var(--surface);border-radius:var(--radius);padding:24px;border:1px solid var(--border);margin-bottom:14px}
+  .card-title{font-size:15px;font-weight:700;margin-bottom:4px}
+  .card-hint{font-size:12px;color:var(--ink-faint);margin-bottom:22px;display:flex;align-items:center;gap:5px}
+  .hint-dot{width:6px;height:6px;border-radius:50%;background:var(--hi);opacity:.5;flex-shrink:0}
+  .formula-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+  .tri-op{font-size:20px;font-weight:600;color:var(--ink-faint);padding-bottom:13px;flex-shrink:0}
+  .tri-eq{font-size:22px;font-weight:700;color:var(--hi);padding-bottom:12px;flex-shrink:0}
+  .tri-field{display:flex;flex-direction:column;gap:5px}
+  .tri-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);height:13px;transition:color .15s}
+  .tri-lbl.auto-lbl{color:var(--hi)}
+  .tri-inp{width:120px;padding:13px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s,background .15s,color .15s;text-align:center}
+  .tri-inp:focus{border-color:var(--hi)}
+  .tri-inp.pct-inp{padding-right:26px}
+  .tri-inp.wide-inp{width:150px}
+  .tri-inp.is-computed{background:var(--hi-soft);border-color:#BFDBFE;color:var(--hi);cursor:default}
+  .pct-wrap{position:relative;display:inline-flex;align-items:center}
+  .pct-wrap .pct-sign{position:absolute;right:10px;font-size:13px;font-weight:700;color:var(--ink-faint);pointer-events:none}
+  .pct-wrap .tri-inp.is-computed ~ .pct-sign{color:var(--hi)}
+  .result-box{background:linear-gradient(135deg,#0C1528 0%,#1a2540 100%);border-radius:var(--radius);padding:24px;text-align:center;border-top:3px solid var(--hi);display:none;margin-bottom:14px}
+  .result-box.visible{display:block}
+  .result-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+  .result-val{font-size:44px;font-weight:700;color:#fff;letter-spacing:-0.04em;line-height:1;margin-bottom:8px}
+  .result-val sup{font-size:22px;vertical-align:super}
+  .result-detail{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6}
+  .sign-badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;vertical-align:middle}
+  .sign-pos{background:#D1FAE5;color:#065F46}
+  .sign-neg{background:#FEE2E2;color:#991B1B}
+  .sign-zero{background:#F3F4F6;color:#6B7280}
+  .examples{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+  .ex-chip{padding:5px 11px;border-radius:99px;background:var(--hi-soft);border:1px solid #BFDBFE;font-size:11px;font-weight:600;color:var(--hi);cursor:pointer;transition:all .15s}
+  .ex-chip:hover{background:var(--hi);color:#fff}
+  .history-section{margin-bottom:14px;display:none}
+  .history-heading{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .history-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .hist-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:6px;cursor:pointer;transition:border-color .15s;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .hist-item:hover{border-color:var(--hi)}
+  .hist-item:last-child{margin-bottom:0}
+  .hist-formula{font-size:12px;color:var(--ink-light);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hist-result{font-size:13px;font-weight:700;color:var(--hi);flex-shrink:0}
+  .hist-clear{font-size:11px;color:var(--ink-faint);background:none;border:none;cursor:pointer;padding:0;font-family:'Inter',sans-serif;margin-left:8px}
+  .hist-clear:hover{color:var(--ink)}
+  .ap-tabs{display:flex;gap:8px;margin-bottom:18px}
+  .ap-tab{flex:1;padding:9px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;text-align:center}
+  .ap-tab.active{background:var(--hi);border-color:var(--hi);color:#fff}
+  @media(max-width:480px){.tri-inp{width:95px;font-size:14px}.tri-inp.wide-inp{width:120px}.formula-row{gap:6px}.result-val{font-size:36px}}
+</style>
+</head>
+<body>
+<header></header>
+
+<div class="page">
+  <h1 class="page-title">Calculateur de Pourcentage</h1>
+  <p class="page-sub">Remplissez deux champs et le troisième se calcule automatiquement.</p>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="setMode('m1',this)">X% de Y</button>
+    <button class="mode-tab"        onclick="setMode('m2',this)">Quel % est X de Y ?</button>
+    <button class="mode-tab"        onclick="setMode('m3',this)">Variation %</button>
+    <button class="mode-tab"        onclick="setMode('m4',this)">Augmentation / Remise</button>
+  </div>
+
+  <div class="result-box" id="result-box">
+    <div class="result-eyebrow" id="res-eyebrow">Résultat</div>
+    <div class="result-val" id="res-val">—</div>
+    <div class="result-detail" id="res-detail"></div>
+  </div>
+
+  <div class="history-section" id="history-section">
+    <div class="history-heading">Calculs récents <button class="hist-clear" onclick="clearHistory()">✕ Effacer</button></div>
+    <div id="history-list"></div>
+  </div>
+
+  <!-- MODE 1: X% de Y = Z -->
+  <div id="m1" class="card">
+    <div class="card-title">Combien fait X% de Y ?</div>
+    <div class="card-hint"><span class="hint-dot"></span>Remplissez deux champs, le troisième se calcule automatiquement</div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m1-pct">Pourcentage</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m1-pct" placeholder="15" min="0">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+      <span class="tri-op">de</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m1-total">Total</div>
+        <input class="tri-inp wide-inp" type="number" id="m1-total" placeholder="200" min="0">
+      </div>
+      <span class="tri-eq">=</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m1-res">Résultat</div>
+        <input class="tri-inp wide-inp" type="number" id="m1-res" placeholder="30" min="0">
+      </div>
+    </div>
+    <div class="examples">
+      <span class="ex-chip" onclick="loadM1(10,1000,null)">10% de 1 000</span>
+      <span class="ex-chip" onclick="loadM1(20,500,null)">20% de 500</span>
+      <span class="ex-chip" onclick="loadM1(15,null,30)">15% de quoi = 30</span>
+      <span class="ex-chip" onclick="loadM1(null,200,50)">Quel % est 50 de 200 ?</span>
+    </div>
+  </div>
+
+  <!-- MODE 2: X est quel % de Y -->
+  <div id="m2" class="card" style="display:none">
+    <div class="card-title">Quel pourcentage est X de Y ?</div>
+    <div class="card-hint"><span class="hint-dot"></span>Remplissez deux champs, le troisième se calcule automatiquement</div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m2-parte">Partie</div>
+        <input class="tri-inp wide-inp" type="number" id="m2-parte" placeholder="30" min="0">
+      </div>
+      <span class="tri-op">est</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m2-pct">Pourcentage</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m2-pct" placeholder="15" min="0">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+      <span class="tri-op">de</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m2-total">Total</div>
+        <input class="tri-inp wide-inp" type="number" id="m2-total" placeholder="200" min="0">
+      </div>
+    </div>
+    <div class="examples">
+      <span class="ex-chip" onclick="loadM2(30,null,200)">30 de 200</span>
+      <span class="ex-chip" onclick="loadM2(1,null,4)">1 de 4</span>
+      <span class="ex-chip" onclick="loadM2(null,25,800)">Combien fait 25% de 800 ?</span>
+      <span class="ex-chip" onclick="loadM2(750,null,1000)">750 de 1 000</span>
+    </div>
+  </div>
+
+  <!-- MODE 3: Variation en pourcentage -->
+  <div id="m3" class="card" style="display:none">
+    <div class="card-title">Variation en pourcentage entre deux nombres</div>
+    <div class="card-hint"><span class="hint-dot"></span>Remplissez deux champs, le troisième se calcule automatiquement</div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m3-antes">Valeur initiale</div>
+        <input class="tri-inp wide-inp" type="number" id="m3-antes" placeholder="100">
+      </div>
+      <span class="tri-op">→</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m3-despues">Valeur finale</div>
+        <input class="tri-inp wide-inp" type="number" id="m3-despues" placeholder="150">
+      </div>
+      <span class="tri-eq">=</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m3-vari">Variation</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m3-vari" placeholder="50">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="examples">
+      <span class="ex-chip" onclick="loadM3(100,150,null)">100 → 150</span>
+      <span class="ex-chip" onclick="loadM3(1000,800,null)">baisse 1 000 → 800</span>
+      <span class="ex-chip" onclick="loadM3(2000,3500,null)">salaire 2 000 € → 3 500 €</span>
+      <span class="ex-chip" onclick="loadM3(null,1210,21)">+21% → quelle était la base ?</span>
+    </div>
+  </div>
+
+  <!-- MODE 4: Augmentation / Remise -->
+  <div id="m4" class="card" style="display:none">
+    <div class="card-title">Appliquer une augmentation ou une remise</div>
+    <div class="card-hint"><span class="hint-dot"></span>Remplissez deux champs, le troisième se calcule automatiquement</div>
+    <div class="ap-tabs">
+      <button class="ap-tab active" id="ap-up"   onclick="setApType('up')">⬆️ Augmentation</button>
+      <button class="ap-tab"        id="ap-down" onclick="setApType('down')">⬇️ Remise</button>
+    </div>
+    <div class="formula-row">
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m4-base">Valeur de base</div>
+        <input class="tri-inp wide-inp" type="number" id="m4-base" placeholder="1000" min="0">
+      </div>
+      <span class="tri-op" id="ap-op-sign">+</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m4-pct">Pourcentage</div>
+        <div class="pct-wrap">
+          <input class="tri-inp pct-inp" type="number" id="m4-pct" placeholder="20" min="0">
+          <span class="pct-sign">%</span>
+        </div>
+      </div>
+      <span class="tri-eq">=</span>
+      <div class="tri-field">
+        <div class="tri-lbl" id="lbl-m4-res">Résultat</div>
+        <input class="tri-inp wide-inp" type="number" id="m4-res" placeholder="1200" min="0">
+      </div>
+    </div>
+    <div class="examples" id="ap-examples">
+      <span class="ex-chip" onclick="loadM4(100,20,null,'up')">100 € + 20% TVA</span>
+      <span class="ex-chip" onclick="loadM4(500,30,null,'down')">500 € − 30% soldes</span>
+      <span class="ex-chip" onclick="loadM4(null,20,1200,'up')">+20% → quelle base ?</span>
+      <span class="ex-chip" onclick="loadM4(null,50,300,'down')">−50% → quel original ?</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function fmtN(n, maxDec){
+  if(!isFinite(n)||isNaN(n)) return '—';
+  var dec = (maxDec===undefined) ? (Math.abs(n-Math.round(n))<0.005?0:2) : maxDec;
+  return n.toLocaleString('fr-FR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+function fmtPct(n){
+  if(!isFinite(n)||isNaN(n)) return '—';
+  return n.toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:4})+'%';
+}
+function val(id){ return parseFloat(document.getElementById(id).value); }
+
+function showResult(eyebrow, valHTML, detail){
+  document.getElementById('res-eyebrow').textContent = eyebrow;
+  document.getElementById('res-val').innerHTML = valHTML;
+  document.getElementById('res-detail').innerHTML = detail;
+  document.getElementById('result-box').classList.add('visible');
+  var tmpDiv = document.createElement('div');
+  tmpDiv.innerHTML = valHTML;
+  saveToHistory(eyebrow + ' → ' + detail, tmpDiv.textContent.trim());
+}
+function hideResult(){ document.getElementById('result-box').classList.remove('visible'); }
+
+function makeTri(fids, computeFn, onResult){
+  var queue = [];
+  fids.forEach(function(id){
+    document.getElementById(id).addEventListener('input', function(){
+      var empty = this.value.trim() === '';
+      queue = queue.filter(function(q){ return q !== id; });
+      if(!empty){ queue.push(id); if(queue.length > 2) queue.shift(); }
+      tick();
+    });
+  });
+  function tick(){
+    var outId = fids.find(function(f){ return !queue.includes(f); }) || queue[0];
+    var inputFids = fids.filter(function(f){ return f !== outId; });
+    fids.forEach(function(f){
+      var el=document.getElementById(f), lbl=document.getElementById('lbl-'+f);
+      var isOut = f===outId && queue.length>=1;
+      el.classList.toggle('is-computed', isOut && queue.length>0);
+      if(lbl) lbl.classList.toggle('auto-lbl', isOut && queue.length>=1);
+      if(lbl && isOut && queue.length>=1) lbl.textContent = 'auto';
+      if(lbl && (!isOut || queue.length===0)) lbl.textContent = lbl.dataset.orig || lbl.textContent;
+    });
+    var v = {};
+    inputFids.forEach(function(f){ v[f] = val(f); });
+    if(Object.values(v).some(isNaN)){ document.getElementById(outId).value=''; hideResult(); return; }
+    var result = computeFn(outId, v);
+    var outEl = document.getElementById(outId);
+    if(!isFinite(result)||isNaN(result)){ outEl.value=''; hideResult(); return; }
+    outEl.value = result;
+    var all = Object.assign({}, v); all[outId] = result;
+    if(onResult) onResult(outId, all);
+  }
+}
+
+document.querySelectorAll('[id^="lbl-"]').forEach(function(el){ el.dataset.orig = el.textContent; });
+
+/* MODE 1 */
+makeTri(['m1-pct','m1-total','m1-res'],
+  function(outId,v){
+    if(outId==='m1-res')   return (v['m1-pct']/100)*v['m1-total'];
+    if(outId==='m1-total') return v['m1-pct']===0?NaN:v['m1-res']*100/v['m1-pct'];
+    return v['m1-total']===0?NaN:(v['m1-res']/v['m1-total'])*100;
+  },
+  function(outId,a){
+    var pct=a['m1-pct'],tot=a['m1-total'],res=a['m1-res'];
+    if(outId==='m1-res')
+      showResult(fmtPct(pct)+' de '+fmtN(tot), fmtN(res), fmtPct(pct)+' de '+fmtN(tot)+' = '+fmtN(res));
+    else if(outId==='m1-total')
+      showResult('Base quand '+fmtN(res)+' vaut '+fmtPct(pct), fmtN(tot), fmtN(res)+' représente '+fmtPct(pct)+' de '+fmtN(tot));
+    else
+      showResult('Quel % est '+fmtN(res)+' de '+fmtN(tot)+' ?', fmtPct(pct), fmtN(res)+' représente '+fmtPct(pct)+' de '+fmtN(tot));
+  }
+);
+function loadM1(pct,tot,res){
+  [['m1-pct',pct],['m1-total',tot],['m1-res',res]].forEach(function(p){
+    var el=document.getElementById(p[0]); el.value=p[1]!==null?p[1]:''; el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* MODE 2 */
+makeTri(['m2-parte','m2-pct','m2-total'],
+  function(outId,v){
+    if(outId==='m2-pct')   return v['m2-total']===0?NaN:(v['m2-parte']/v['m2-total'])*100;
+    if(outId==='m2-total') return v['m2-pct']===0?NaN:v['m2-parte']*100/v['m2-pct'];
+    return (v['m2-pct']/100)*v['m2-total'];
+  },
+  function(outId,a){
+    var pt=a['m2-parte'],pct=a['m2-pct'],tot=a['m2-total'];
+    if(outId==='m2-pct')
+      showResult('Quel % est '+fmtN(pt)+' de '+fmtN(tot)+' ?', fmtPct(pct), fmtN(pt)+' représente '+fmtPct(pct)+' de '+fmtN(tot));
+    else if(outId==='m2-total')
+      showResult('Si '+fmtN(pt)+' vaut '+fmtPct(pct), fmtN(tot), 'Le total est '+fmtN(tot));
+    else
+      showResult(fmtPct(pct)+' de '+fmtN(tot), fmtN(pt), fmtN(pt)+' représente '+fmtPct(pct)+' de '+fmtN(tot));
+  }
+);
+function loadM2(pt,pct,tot){
+  [['m2-parte',pt],['m2-pct',pct],['m2-total',tot]].forEach(function(p){
+    var el=document.getElementById(p[0]); el.value=p[1]!==null?p[1]:''; el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* MODE 3 */
+makeTri(['m3-antes','m3-despues','m3-vari'],
+  function(outId,v){
+    if(outId==='m3-vari')    return v['m3-antes']===0?NaN:((v['m3-despues']-v['m3-antes'])/Math.abs(v['m3-antes']))*100;
+    if(outId==='m3-despues') return v['m3-antes']*(1+v['m3-vari']/100);
+    return (1+v['m3-vari']/100)===0?NaN:v['m3-despues']/(1+v['m3-vari']/100);
+  },
+  function(outId,a){
+    var ant=a['m3-antes'],des=a['m3-despues'],v=a['m3-vari'];
+    var pos=v>0, zero=v===0;
+    var cls=zero?'sign-zero':pos?'sign-pos':'sign-neg';
+    var lbl=zero?'Aucun changement':pos?'▲ Hausse':'▼ Baisse';
+    var sign=v>0?'+':'';
+    if(outId==='m3-vari')
+      showResult('Variation de '+fmtN(ant)+' à '+fmtN(des),
+        '<span class="sign-badge '+cls+'">'+lbl+'</span><br><span style="font-size:36px">'+sign+fmtPct(v)+'</span>',
+        'Différence absolue : '+(des-ant>=0?'+':'')+fmtN(des-ant));
+    else if(outId==='m3-despues')
+      showResult('En appliquant '+sign+fmtPct(v)+' à '+fmtN(ant), fmtN(des),
+        fmtN(ant)+' '+(pos?'a augmenté de':'a diminué de')+' '+fmtPct(Math.abs(v))+' = '+fmtN(des));
+    else
+      showResult('Si le résultat est '+fmtN(des)+' avec '+sign+fmtPct(v), fmtN(ant),
+        'La valeur initiale était '+fmtN(ant));
+  }
+);
+function loadM3(ant,des,v){
+  [['m3-antes',ant],['m3-despues',des],['m3-vari',v]].forEach(function(p){
+    var el=document.getElementById(p[0]); el.value=p[1]!==null?p[1]:''; el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* MODE 4 */
+var apType = 'up';
+function factor(){ return apType==='up'?1:-1; }
+makeTri(['m4-base','m4-pct','m4-res'],
+  function(outId,v){
+    if(outId==='m4-res') return v['m4-base']*(1+factor()*v['m4-pct']/100);
+    if(outId==='m4-base'){ var ff=1+factor()*v['m4-pct']/100; return ff===0?NaN:v['m4-res']/ff; }
+    if(v['m4-base']===0) return NaN;
+    return (v['m4-res']/v['m4-base']-1)*factor()*100;
+  },
+  function(outId,a){
+    var base=a['m4-base'],pct=a['m4-pct'],res=a['m4-res'];
+    var word=apType==='up'?'avec une augmentation de':'avec une remise de';
+    var sign=apType==='up'?'+':'−';
+    var diff=Math.abs(res-base);
+    if(outId==='m4-res')
+      showResult(fmtN(base)+' '+sign+' '+fmtPct(pct), fmtN(res),
+        fmtN(base)+' '+word+' '+fmtPct(pct)+' = '+fmtN(res)+'<br>'+(apType==='up'?'Hausse : +':'Économie : ')+fmtN(diff));
+    else if(outId==='m4-base')
+      showResult('Original avant '+sign+fmtPct(pct), fmtN(base),
+        'Le résultat '+fmtN(res)+' correspond à une base de '+fmtN(base));
+    else
+      showResult('Quel % sépare '+fmtN(base)+' de '+fmtN(res)+' ?', fmtPct(pct),
+        'La différence de '+fmtN(diff)+' représente '+fmtPct(pct));
+  }
+);
+function setApType(type){
+  apType=type;
+  document.getElementById('ap-up').classList.toggle('active',type==='up');
+  document.getElementById('ap-down').classList.toggle('active',type==='down');
+  document.getElementById('ap-op-sign').textContent=type==='up'?'+':'−';
+  ['m4-base','m4-pct','m4-res'].forEach(function(id){
+    var el=document.getElementById(id); if(el.value.trim()) el.dispatchEvent(new Event('input'));
+  });
+}
+function loadM4(base,pct,res,type){
+  if(type&&type!==apType) setApType(type);
+  [['m4-base',base],['m4-pct',pct],['m4-res',res]].forEach(function(p){
+    var el=document.getElementById(p[0]); el.value=p[1]!==null?p[1]:''; el.dispatchEvent(new Event('input'));
+  });
+}
+
+/* Historique */
+var HIST_KEY='pct_history_fr', MAX_HIST=5;
+function saveToHistory(formula,result){
+  var hist=getHistory();
+  if(hist.length&&hist[0].formula===formula&&hist[0].result===result) return;
+  hist.unshift({formula:formula,result:result,ts:Date.now()});
+  if(hist.length>MAX_HIST) hist.length=MAX_HIST;
+  try{localStorage.setItem(HIST_KEY,JSON.stringify(hist));}catch(e){}
+  renderHistory();
+}
+function getHistory(){ try{return JSON.parse(localStorage.getItem(HIST_KEY))||[];}catch(e){return[];} }
+function clearHistory(){ try{localStorage.removeItem(HIST_KEY);}catch(e){} renderHistory(); }
+function escHist(s){ return String(s).replace(/'/g,"\\'"); }
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function restoreHist(formula,result){
+  document.getElementById('res-detail').textContent=formula;
+  document.getElementById('res-val').textContent=result;
+  document.getElementById('result-box').classList.add('visible');
+}
+function renderHistory(){
+  var hist=getHistory();
+  var section=document.getElementById('history-section'), list=document.getElementById('history-list');
+  if(!hist.length){section.style.display='none';return;}
+  section.style.display='block';
+  list.innerHTML=hist.map(function(h){
+    return '<div class="hist-item" onclick="restoreHist(\''+escHist(h.formula)+'\',\''+escHist(h.result)+'\')">'+
+      '<span class="hist-formula">'+escHtml(h.formula)+'</span>'+
+      '<span class="hist-result">'+escHtml(h.result)+'</span></div>';
+  }).join('');
+}
+renderHistory();
+
+/* Changement de mode */
+function setMode(id,btn){
+  ['m1','m2','m3','m4'].forEach(function(m){ document.getElementById(m).style.display=m===id?'block':'none'; });
+  document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  hideResult();
+  document.querySelectorAll('[id^="lbl-"]').forEach(function(el){ if(el.dataset.orig) el.textContent=el.dataset.orig; el.classList.remove('auto-lbl'); });
+  document.querySelectorAll('.tri-inp').forEach(function(el){ el.classList.remove('is-computed'); });
+}
+</script>
+
+<script src="/nav.js"></script>
+</body>
+</html>
