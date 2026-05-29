@@ -63,6 +63,10 @@ input[type=number]:focus{border-color:var(--hi)}
 .field.is-target .freq-n{background:var(--surface)!important;border-color:var(--border)!important;color:var(--ink)!important;font-weight:500}
 .field.is-target .freq-sep{color:var(--hi);opacity:.65}
 .field.is-target .freq-sel{border-color:var(--hi)}
+input[type=number].no-sfx{padding-right:12px}
+input[type=date]{width:100%;height:46px;padding:0 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s,background .15s,color .15s;cursor:pointer}
+input[type=date]:focus{border-color:var(--hi)}
+.field.is-target input[type=date]{background:var(--hi-soft)!important;border-color:var(--hi)!important;color:var(--hi)!important;font-weight:700}
 </style>
 </head>
 <body>
@@ -91,17 +95,16 @@ input[type=number]:focus{border-color:var(--hi)}
         <select id="freq-unit" class="freq-sel">
           <option value="days">días</option>
           <option value="weeks">semanas</option>
-          <option value="fortnights">quincenas</option>
+
           <option value="months" selected>meses</option>
           <option value="years">años</option>
         </select>
       </div>
     </div>
     <div class="field" id="field-years">
-      <label for="years">Período</label>
+      <label for="years">Fecha objetivo</label>
       <div class="input-wrap">
-        <input type="number" id="years" placeholder="10" min="0" step="0.5">
-        <span class="input-suffix">años</span>
+        <input type="date" id="years">
       </div>
     </div>
     <div class="field" id="field-goal">
@@ -112,10 +115,17 @@ input[type=number]:focus{border-color:var(--hi)}
       </div>
     </div>
     <div class="field" id="field-rate">
-      <label for="rate">Tasa de interés anual <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:var(--ink-faint)">(opcional)</span></label>
-      <div class="input-wrap">
-        <input type="number" id="rate" placeholder="0" min="0" step="0.25">
-        <span class="input-suffix">%/año</span>
+      <label for="rate">Tasa de interés <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:var(--ink-faint)">(opcional)</span></label>
+      <div class="contrib-wrap">
+        <div class="input-wrap contrib-amount">
+          <input type="number" id="rate" placeholder="0" min="0" step="0.25">
+          <span class="input-suffix">%</span>
+        </div>
+        <select id="rate-unit" class="freq-sel">
+          <option value="daily">diaria</option>
+          <option value="monthly">mensual</option>
+          <option value="annual" selected>anual</option>
+        </select>
       </div>
     </div>
   </div>
@@ -130,8 +140,11 @@ input[type=number]:focus{border-color:var(--hi)}
 var MAIN=['initial','monthly','years','goal'];
 var ALL=['initial','monthly','years','goal','rate'];
 var fillOrder=[];
-var FREQ={days:365,weeks:52,fortnights:24,months:12,years:1};
+var FREQ={days:365,weeks:52,months:12,years:1};
 function getFreq(){var n=parseFloat(document.getElementById('freq-n').value)||1;var unit=document.getElementById('freq-unit').value;return FREQ[unit]/n;}
+function getYears(){var v=document.getElementById('years').value;if(!v||v.trim()==='')return null;var p=v.split('-');var tgt=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));var now=new Date();now.setHours(0,0,0,0);var diff=tgt-now;if(diff<=0)return null;return diff/(365.25*86400000);}
+var RATE_CONV={daily:365,monthly:12,annual:1};
+function getRateAnnual(){var v=getV('rate');if(v===null)return null;var u=document.getElementById('rate-unit').value;if(u==='annual')return v;return(Math.pow(1+v/100,RATE_CONV[u])-1)*100;}
 
 function getTarget(){
   var empties=MAIN.filter(function(f){return document.getElementById(f).value.trim()==='';});
@@ -150,6 +163,7 @@ function calcN(fv,pv,pmt,r){
 }
 
 function fmt(n){return'$'+Math.round(Math.abs(n)).toLocaleString('es-AR');}
+function fmtDate(d){return d.toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'});}
 function fmtYr(n){
   var y=Math.floor(n),m=Math.round((n-y)*12);
   if(m===12){y++;m=0;}
@@ -177,6 +191,8 @@ ALL.forEach(function(f){
 });
 document.getElementById('freq-n').addEventListener('input',function(){highlight();calculate();});
 document.getElementById('freq-unit').addEventListener('change',function(){highlight();calculate();});
+document.getElementById('years').addEventListener('change',function(){fillOrder=fillOrder.filter(function(id){return id!=='years';});if(this.value.trim()!=='')fillOrder.push('years');highlight();calculate();});
+document.getElementById('rate-unit').addEventListener('change',function(){highlight();calculate();});
 
 function getV(id){
   var v=document.getElementById(id).value.trim();
@@ -189,9 +205,9 @@ function calculate(){
   if(t===null){document.getElementById('result-card').style.display='none';return;}
   var pv  =t!=='initial'?getV('initial'):null;
   var pmt =t!=='monthly'?getV('monthly'):null;
-  var yrs =t!=='years'  ?getV('years')  :null;
+  var yrs =t!=='years'  ?getYears()  :null;
   var fv  =t!=='goal'   ?getV('goal')   :null;
-  var rAnn=getV('rate');
+  var rAnn=getRateAnnual();
   var f=getFreq();
   var r=rAnn!==null?Math.pow(1+rAnn/100,1/f)-1:0;
   var n=yrs!==null?yrs*f:null;
@@ -208,7 +224,8 @@ function calculate(){
   if(result===null||isNaN(result)||!isFinite(result)){clr();return;}
 
   var inp=document.getElementById(t);
-  inp.value=(t==='years')?Math.round(result*10)/10:Math.round(result);
+  if(t==='years'){var ms=Date.now()+result*365.25*86400000;var d=new Date(ms);inp.value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  else inp.value=Math.round(result);
 
   var sPV =t==='initial'?result:(pv||0);
   var sPMT=t==='monthly'?result:(pmt||0);
@@ -225,7 +242,11 @@ function calculate(){
     +'<div class="result-row">'
     +'<span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Saldo final</span>'
     +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
-  if(t==='years')html+='<div class="result-note">→ '+fmtYr(result)+'</div>';
+  var yrsForNote=t==='years'?result:getYears();
+  if(yrsForNote!==null&&yrsForNote>0){
+    if(t==='years'){var nd=new Date(Date.now()+result*365.25*86400000);html+='<div class="result-note">→ '+fmtDate(nd)+' · '+fmtYr(result)+'</div>';}
+    else html+='<div class="result-note">→ '+fmtYr(yrsForNote)+'</div>';
+  }
   document.getElementById('result-rows').innerHTML=html;
   document.getElementById('result-card').style.display='block';
 }
