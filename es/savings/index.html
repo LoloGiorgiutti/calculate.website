@@ -137,7 +137,7 @@ input[type=date]:focus{border-color:var(--hi)}
 </div>
 
 <script>
-var MAIN=['initial','monthly','years','goal'];
+var MAIN=['monthly','years','goal'];
 var ALL=['initial','monthly','years','goal','rate'];
 var fillOrder=[];
 var FREQ={days:365,weeks:52,months:12,years:1};
@@ -203,7 +203,7 @@ function getV(id){
 function calculate(){
   var t=getTarget();
   if(t===null){document.getElementById('result-card').style.display='none';return;}
-  var pv  =t!=='initial'?getV('initial'):null;
+  var pv  =getV('initial')||0;
   var pmt =t!=='monthly'?getV('monthly'):null;
   var yrs =t!=='years'  ?getYears()  :null;
   var fv  =t!=='goal'   ?getV('goal')   :null;
@@ -213,11 +213,10 @@ function calculate(){
   var n=yrs!==null?yrs*f:null;
   var result=null;
   try{
-    if(t==='goal'){if(pv===null||pmt===null||n===null||n<=0){clr();return;}result=calcFV(pv,pmt,r,n);}
-    else if(t==='initial'){if(pmt===null||n===null||n<=0||fv===null){clr();return;}result=calcPV(fv,pmt,r,n);}
-    else if(t==='monthly'){if(pv===null||n===null||n<=0||fv===null){clr();return;}result=calcPMT(fv,pv,r,n);}
+    if(t==='goal'){if(pmt===null||n===null||n<=0){clr();return;}result=calcFV(pv,pmt,r,n);}
+    else if(t==='monthly'){if(n===null||n<=0||fv===null){clr();return;}result=calcPMT(fv,pv,r,n);}
     else if(t==='years'){
-      if(pv===null||pmt===null||fv===null||fv<=0){clr();return;}
+      if(pmt===null||fv===null||fv<=0){clr();return;}
       var periods=calcN(fv,pv,pmt,r);result=periods!==null?periods/f:null;
     }
   }catch(e){clr();return;}
@@ -227,7 +226,7 @@ function calculate(){
   if(t==='years'){var ms=Date.now()+result*365.25*86400000;var d=new Date(ms);inp.value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   else inp.value=Math.round(result);
 
-  var sPV =t==='initial'?result:(pv||0);
+  var sPV =pv;
   var sPMT=t==='monthly'?result:(pmt||0);
   var sYrs=t==='years'  ?result:(yrs||0);
   var sFV =t==='goal'   ?result:(fv||0);
