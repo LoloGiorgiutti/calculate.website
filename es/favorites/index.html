@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis Favoritos — calculate.website</title>
+<meta name="description" content="Tus calculadoras guardadas en calculate.website.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://calculate.website/es/favorites/">
+<link rel="alternate" hreflang="en"    href="https://calculate.website/favorites/">
+<link rel="alternate" hreflang="es"    href="https://calculate.website/es/favorites/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/favorites/">
+<link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/favorites/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/favorites/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#080A12;--ink-light:#60647A;--ink-3:#858AA0;--ink-faint:#B4B8CC;--accent:#4F6BFF;--accent-soft:#EEF1FF;--line:#E4E7EE;--line-2:#F0F1F5;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:960px;margin:0 auto;padding:40px 24px 80px}
+.page-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.page-title{font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.page-sub{font-size:15px;color:var(--ink-light);margin-bottom:36px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:13px;padding:20px;cursor:pointer;transition:all .18s;position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--accent);background:var(--bg);transform:translateY(-2px);box-shadow:0 10px 28px rgba(79,107,255,.09)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.card-icon{font-size:24px;line-height:1}
+.card-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);padding:3px 8px;background:var(--accent-soft);border-radius:4px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.card-title{font-size:16px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px;color:var(--ink)}
+.card-desc{font-size:13px;color:var(--ink-3);line-height:1.55;margin-bottom:14px;flex:1}
+.card-cta{font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;margin-top:auto}
+.empty-state{text-align:center;padding:80px 24px}
+.empty-icon{font-size:48px;margin-bottom:16px}
+.empty-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.empty-sub{font-size:15px;color:var(--ink-light);margin-bottom:24px}
+.empty-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--accent);color:#fff;border-radius:var(--radius-sm);font-weight:700;font-size:14px;text-decoration:none;transition:background .15s}
+.empty-btn:hover{background:#3d56e0}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}.page{padding:28px 16px 60px}}
+</style>
+</head>
+<body>
+<header></header>
+<div class="page">
+  <div class="page-eyebrow">★ Favoritos</div>
+  <h1 class="page-title">Mis Favoritos</h1>
+  <p class="page-sub" id="fav-count">Tus calculadoras guardadas.</p>
+  <div id="fav-grid"></div>
+</div>
+<script src="/nav.js"></script>
+<script>
+(function(){
+  var FAV_KEY = 'calc_favorites';
+  var calcs = window.__CALCS || [];
+  var favs;
+  try { favs = JSON.parse(localStorage.getItem(FAV_KEY)||'[]'); } catch(e){ favs=[]; }
+
+  var grid = document.getElementById('fav-grid');
+  var countEl = document.getElementById('fav-count');
+
+  /* Build slug → item+category lookup */
+  var lookup = {};
+  calcs.forEach(function(cat){
+    cat.items.forEach(function(item){
+      var slug = item.u.replace(/^\//,'').replace(/\/$/,'');
+      lookup[slug] = { item: item, cat: cat };
+    });
+  });
+
+  function render(){
+    favs = (function(){ try{ return JSON.parse(localStorage.getItem(FAV_KEY)||'[]'); }catch(e){ return []; } })();
+    if(favs.length === 0){
+      countEl.textContent = 'Tus calculadoras guardadas.';
+      grid.innerHTML = '<div class="empty-state">'
+        + '<div class="empty-icon">☆</div>'
+        + '<div class="empty-title">Aún no tienes calculadoras guardadas</div>'
+        + '<div class="empty-sub">Marca con estrella cualquier calculadora para guardarla aquí.</div>'
+        + '<a class="empty-btn" href="/es/">Ver todas las calculadoras →</a>'
+        + '</div>';
+      return;
+    }
+    var n = favs.length;
+    countEl.textContent = n + ' calculadora' + (n !== 1 ? 's' : '') + ' guardada' + (n !== 1 ? 's' : '') + '.';
+    var html = '<div class="cards">';
+    var found = 0;
+    favs.forEach(function(slug){
+      var entry = lookup[slug];
+      if(!entry) return;
+      found++;
+      var item = entry.item, cat = entry.cat;
+      var name = item.n_es || item.n;
+      var desc = item.d_es || item.d;
+      var label = cat.label_es || cat.label;
+      html += '<a class="card" href="/es/' + slug + '/">'
+        + '<div class="card-top">'
+        + '<span class="card-icon">' + (item.icon||'🔢') + '</span>'
+        + '<span class="card-tag">' + label + '</span>'
+        + '</div>'
+        + '<div class="card-title">' + name + '</div>'
+        + '<div class="card-desc">' + desc + '</div>'
+        + '<span class="card-cta">Abrir →</span>'
+        + '</a>';
+    });
+    html += '</div>';
+    if(found === 0){
+      grid.innerHTML = '<div class="empty-state">'
+        + '<div class="empty-icon">☆</div>'
+        + '<div class="empty-title">Aún no tienes calculadoras guardadas</div>'
+        + '<div class="empty-sub">Marca con estrella cualquier calculadora para guardarla aquí.</div>'
+        + '<a class="empty-btn" href="/es/">Ver todas las calculadoras →</a>'
+        + '</div>';
+    } else {
+      grid.innerHTML = html;
+    }
+  }
+
+  render();
+
+  /* When a star is clicked on this page, remove the card from DOM */
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('[data-fav-slug]') : null;
+    if(!btn || !btn.classList.contains('fav-btn')) return;
+    var slug = btn.getAttribute('data-fav-slug');
+    setTimeout(function(){
+      if(!cwIsFav(slug)){
+        var card = btn.parentElement;
+        if(card && card.classList.contains('card')){
+          card.style.transition = 'opacity .25s, transform .25s';
+          card.style.opacity = '0';
+          card.style.transform = 'scale(.95)';
+          setTimeout(function(){
+            card.remove();
+            if(!document.querySelector('.cards .card')){
+              render();
+            } else {
+              var remaining = document.querySelectorAll('.cards .card').length;
+              countEl.textContent = remaining + ' calculadora' + (remaining !== 1 ? 's' : '') + ' guardada' + (remaining !== 1 ? 's' : '') + '.';
+            }
+          }, 260);
+        }
+      }
+    }, 20);
+  });
+})();
+</script>
+</body>
+</html>

@@ -706,6 +706,38 @@
     '.share-btn:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}',
     '.share-btn.nv-copied{border-color:#16a34a !important;color:#16a34a !important}',
     '.share-wrap{max-width:520px;margin:0 auto;padding:0 20px 24px}',
+    '.share-row{display:flex;gap:8px;}',
+
+    /* ── FAVORITES CSS ────────────────────────────────────────────────────── */
+    /* Card star (visible on hover or when active) */
+    '.fav-btn{position:absolute;top:8px;right:8px;background:none;border:none;',
+    'cursor:pointer;font-size:15px;line-height:1;padding:4px 5px;',
+    'color:rgba(120,120,140,.35);transition:color .15s,transform .12s;',
+    'z-index:2;opacity:0;pointer-events:none;border-radius:6px;}',
+    '.card:hover .fav-btn,.fav-btn.active{opacity:1;pointer-events:auto;}',
+    '.fav-btn:hover,.fav-btn.active{color:#FBBF24;}',
+    '.fav-btn:hover{transform:scale(1.2);}',
+    /* Inline save button (share-wrap) */
+    '.fav-save-btn{flex-shrink:0;display:flex;align-items:center;gap:6px;',
+    'padding:11px 14px;background:var(--surface,#fff);border:1.5px solid var(--border,#D4D8E6);',
+    'border-radius:var(--radius-sm,10px);font-family:inherit;font-size:13px;font-weight:600;',
+    'color:var(--ink-light,#60647A);cursor:pointer;transition:all .15s;white-space:nowrap;}',
+    '.fav-save-btn:hover{border-color:#FBBF24;color:#D97706;}',
+    '.fav-save-btn.active{border-color:#FBBF24;color:#D97706;background:rgba(251,191,36,.06);}',
+    /* Header favorites button */
+    '.fav-hdr-btn{display:flex;align-items:center;gap:4px;background:none;border:none;',
+    'cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;',
+    'padding:5px 8px;border-radius:7px;transition:all .15s;flex-shrink:0;line-height:1;}',
+    'html[data-theme="dark"] .fav-hdr-btn{color:rgba(255,255,255,.45);}',
+    'html:not([data-theme="dark"]) .fav-hdr-btn{color:rgba(10,14,26,.38);}',
+    'html[data-theme="dark"] .fav-hdr-btn:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);}',
+    'html:not([data-theme="dark"]) .fav-hdr-btn:hover{background:rgba(10,14,26,.06);color:rgba(10,14,26,.7);}',
+    'html[data-theme="dark"] .fav-hdr-btn.has-favs .fav-hdr-star{color:#FBBF24;}',
+    'html:not([data-theme="dark"]) .fav-hdr-btn.has-favs .fav-hdr-star{color:#D97706;}',
+    '.fav-badge{display:none;align-items:center;justify-content:center;',
+    'min-width:15px;height:15px;background:#FBBF24;color:#000;',
+    'font-size:10px;font-weight:800;border-radius:99px;padding:0 4px;line-height:1;',
+    'margin-left:1px;}',
 
     /* ── DESKTOP RESPONSIVE (≥768px) ──────────────────────────────────────── */
     /* Expand calculator content from mobile 520px to desktop 720px.           */
@@ -1144,12 +1176,24 @@
     hdrLeft.appendChild(btn);
     hdrLeft.appendChild(logoEl);
 
-    /* Right group: lang-sel-mob (mobile) + lang-seg (desktop) + country + theme */
+    /* Right group: lang-sel-mob (mobile) + lang-seg (desktop) + country + fav + theme */
     var hdrRight = document.createElement('div');
     hdrRight.className = 'hdr-right';
     hdrRight.appendChild(langSelMob);
     hdrRight.appendChild(langSeg);
     hdrRight.appendChild(cwCountryBtn);
+
+    /* Favorites header button */
+    var _favLangCode2 = (document.documentElement.lang||'en').substring(0,2);
+    var _favLabelMap = {es:'Favoritos',pt:'Favoritos',fr:'Favoris',en:'Favorites'};
+    var _favPagePrefix = (['es','pt','fr'].indexOf(_favLangCode2)>=0) ? '/'+_favLangCode2 : '';
+    var favHdrBtn = document.createElement('button');
+    favHdrBtn.className = 'fav-hdr-btn';
+    favHdrBtn.title = _favLabelMap[_favLangCode2]||'Favorites';
+    favHdrBtn.innerHTML = '<span class="fav-hdr-star">★</span><span class="fav-badge" style="display:none">0</span>';
+    favHdrBtn.onclick = function(){ window.location.href = _favPagePrefix + '/favorites/'; };
+    hdrRight.appendChild(favHdrBtn);
+
     hdrRight.appendChild(themeBtn);
 
     /* Replace header content entirely */
@@ -1687,6 +1731,52 @@
     }
   });
 
+  /* ── FAVORITES ─────────────────────────────────────────────────────────── */
+  var FAV_KEY = 'calc_favorites';
+  function cwGetFavs(){try{return JSON.parse(localStorage.getItem(FAV_KEY)||'[]');}catch(e){return[];}}
+  function cwSetFavs(f){try{localStorage.setItem(FAV_KEY,JSON.stringify(f));}catch(e){}}
+  /* Strip /es/, /pt/, /fr/ prefix and leading/trailing slashes → slug */
+  function cwNormSlug(u){return(u||'').replace(/^\/(es|pt|fr)\//,'/').replace(/^\//,'').replace(/\/$/,'');}
+  function cwIsFav(slug){return cwGetFavs().indexOf(slug)>=0;}
+  function cwUpdateFavBadge(){
+    var n=cwGetFavs().length;
+    document.querySelectorAll('.fav-badge').forEach(function(b){
+      b.textContent=n;b.style.display=n>0?'inline-flex':'none';
+    });
+    document.querySelectorAll('.fav-hdr-btn').forEach(function(b){
+      b.classList.toggle('has-favs',n>0);
+    });
+  }
+  function cwToggleFav(slug){
+    var f=cwGetFavs(),i=f.indexOf(slug);
+    if(i>=0)f.splice(i,1);else f.push(slug);
+    cwSetFavs(f);
+    var active=i<0;
+    cwUpdateFavBadge();
+    /* Sync all buttons on the page that share this slug */
+    document.querySelectorAll('[data-fav-slug="'+slug+'"]').forEach(function(b){
+      b.classList.toggle('active',active);
+      var star=b.querySelector('.fav-star');
+      if(star)star.textContent=active?'★':'☆';
+      else if(b.classList.contains('fav-btn'))b.textContent=active?'★':'☆';
+      var txt=b.querySelector('.fav-save-txt');
+      if(txt){
+        var lang=(document.documentElement.lang||'en').substring(0,2);
+        var s={es:['Guardar','Guardado'],pt:['Salvar','Salvo'],fr:['Sauvegarder','Sauvegardé'],en:['Save','Saved']};
+        var pair=s[lang]||s.en;
+        txt.textContent=active?pair[1]:pair[0];
+      }
+    });
+    return active;
+  }
+  /* Expose globally for favorites page and individual calc pages */
+  window.cwGetFavs=cwGetFavs;
+  window.cwSetFavs=cwSetFavs;
+  window.cwToggleFav=cwToggleFav;
+  window.cwIsFav=cwIsFav;
+  window.cwUpdateFavBadge=cwUpdateFavBadge;
+  window.cwNormSlug=cwNormSlug;
+
   /* ── SHARE ───────────────────────────────────────────────── */
   window.shareCalc = function() {
     var url = window.location.href.split('?')[0];
@@ -1708,17 +1798,55 @@
   /* Backwards compat alias */
   window.compartir = window.shareCalc;
 
-  /* ── AUTO-INJECT SHARE BUTTON ────────────────────────────── */
+  /* ── AUTO-INJECT SHARE + SAVE BUTTONS ──────────────────────────────────── */
   (function() {
     var path = window.location.pathname.replace(/\/$/, '') || '/';
-    var skip = ['/', '/health', '/finance', '/math', '/dates', '/games', '/world-cup',
-                '/about', '/privacy', '/terms', '/all'];
-    if (skip.indexOf(path) !== -1) return;
+    var skipPaths = ['/', '/health', '/finance', '/math', '/dates', '/games', '/world-cup',
+                     '/about', '/privacy', '/terms', '/favorites', '/all',
+                     '/es','/pt','/fr',
+                     '/es/health','/es/finance','/es/math','/es/dates','/es/games',
+                     '/pt/health','/pt/finance','/pt/math','/pt/dates','/pt/games',
+                     '/fr/health','/fr/finance','/fr/math','/fr/dates','/fr/games',
+                     '/es/about','/es/privacy','/es/terms','/es/favorites',
+                     '/pt/about','/pt/privacy','/pt/terms','/pt/favorites',
+                     '/fr/about','/fr/privacy','/fr/terms','/fr/favorites'];
+    if (skipPaths.indexOf(path) !== -1) return;
 
     var svgShare = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+
+    var pageSlug = cwNormSlug(path);
+    /* Only show save button if slug matches a known calculator */
+    var isKnownCalc = pageSlug && window.__CALCS && window.__CALCS.some(function(cat){
+      return cat.items.some(function(it){ return it.u === '/' + pageSlug + '/'; });
+    });
+
     var wrap = document.createElement('div');
     wrap.className = 'share-wrap';
-    wrap.innerHTML = '<button class="share-btn" onclick="shareCalc()">' + svgShare + ' Share</button>';
+    var row = document.createElement('div');
+    row.className = 'share-row';
+
+    /* Save / Favorites button */
+    if (isKnownCalc) {
+      var _fl = (document.documentElement.lang||'en').substring(0,2);
+      var _saveLabels = {es:['Guardar','Guardado'],pt:['Salvar','Salvo'],fr:['Sauvegarder','Sauvegardé'],en:['Save','Saved']};
+      var _pair = _saveLabels[_fl] || _saveLabels.en;
+      var isFavNow = cwIsFav(pageSlug);
+      var favSaveBtn = document.createElement('button');
+      favSaveBtn.className = 'fav-save-btn' + (isFavNow ? ' active' : '');
+      favSaveBtn.setAttribute('data-fav-slug', pageSlug);
+      favSaveBtn.innerHTML = '<span class="fav-star">' + (isFavNow?'★':'☆') + '</span>'
+        + ' <span class="fav-save-txt">' + (isFavNow?_pair[1]:_pair[0]) + '</span>';
+      favSaveBtn.onclick = function(){ cwToggleFav(pageSlug); };
+      row.appendChild(favSaveBtn);
+    }
+
+    var shareBtn = document.createElement('button');
+    shareBtn.className = 'share-btn';
+    shareBtn.style.flex = '1';
+    shareBtn.innerHTML = svgShare + ' Share';
+    shareBtn.onclick = function(){ shareCalc(); };
+    row.appendChild(shareBtn);
+    wrap.appendChild(row);
 
     var related = document.querySelector('.related-section');
     var footer = document.querySelector('footer');
@@ -1728,6 +1856,47 @@
       footer.parentNode.insertBefore(wrap, footer);
     } else {
       document.body.appendChild(wrap);
+    }
+  })();
+
+  /* ── FAVORITES: CARD STARS ──────────────────────────────────────────────── */
+  /* Inject a ☆ star into every .card[href] on the page (home + category pages).
+     Visible on hover; stays visible (★ yellow) when marked as favorite.        */
+  (function(){
+    function initFavStars(){
+      document.querySelectorAll('a.card[href]').forEach(function(card){
+        if(card.querySelector('.fav-btn')) return; // already done
+        var slug = cwNormSlug(card.getAttribute('href'));
+        if(!slug) return;
+        // Ensure card has relative positioning for absolute star
+        var cs = window.getComputedStyle(card).position;
+        if(cs === 'static') card.style.position = 'relative';
+        var active = cwIsFav(slug);
+        var btn = document.createElement('button');
+        btn.className = 'fav-btn' + (active ? ' active' : '');
+        btn.textContent = active ? '★' : '☆';
+        btn.title = 'Save to favorites';
+        btn.setAttribute('data-fav-slug', slug);
+        btn.onclick = function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          cwToggleFav(slug);
+        };
+        card.appendChild(btn);
+      });
+      cwUpdateFavBadge();
+    }
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', initFavStars);
+    } else {
+      initFavStars();
+    }
+    /* Re-run after home grid is rebuilt (country / language change) */
+    window.addEventListener('cwGridRebuilt', initFavStars);
+    /* Wrap __cwRebuildHome if it exists (homepage) */
+    var _orig = window.__cwRebuildHome;
+    if(typeof _orig === 'function'){
+      window.__cwRebuildHome = function(c){ _orig(c); setTimeout(initFavStars, 30); };
     }
   })();
 
@@ -1888,5 +2057,13 @@
       inject();
     }
   })();
+
+  /* ── FAVORITES: INITIAL BADGE UPDATE ───────────────────────────────────── */
+  /* Run after DOM is ready so the header badge reflects localStorage count.  */
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', cwUpdateFavBadge);
+  } else {
+    cwUpdateFavBadge();
+  }
 
 })();
