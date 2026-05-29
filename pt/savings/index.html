@@ -52,6 +52,17 @@ input[type=number]:focus{border-color:var(--hi)}
 .result-row-val.hi.pos{color:#86EFAC}
 .result-divider{height:1px;background:rgba(255,255,255,.08);margin:2px 0}
 .result-note{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace}
+.contrib-wrap{display:flex;gap:8px;align-items:center}
+.contrib-amount{flex:1;min-width:0}
+.freq-sep{font-size:13px;color:var(--ink-light);white-space:nowrap;flex-shrink:0}
+.freq-n{width:52px;height:46px;padding:0 6px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;text-align:center;-moz-appearance:textfield;appearance:textfield;transition:border-color .15s,background .15s,color .15s}
+.freq-n::-webkit-inner-spin-button,.freq-n::-webkit-outer-spin-button{-webkit-appearance:none}
+.freq-n:focus{border-color:var(--hi)}
+.freq-sel{height:46px;padding:0 28px 0 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2360647A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;transition:border-color .15s}
+.freq-sel:focus{border-color:var(--hi)}
+.field.is-target .freq-n{background:var(--surface)!important;border-color:var(--border)!important;color:var(--ink)!important;font-weight:500}
+.field.is-target .freq-sep{color:var(--hi);opacity:.65}
+.field.is-target .freq-sel{border-color:var(--hi)}
 </style>
 </head>
 <body>
@@ -69,10 +80,21 @@ input[type=number]:focus{border-color:var(--hi)}
       </div>
     </div>
     <div class="field" id="field-monthly">
-      <label for="monthly">Aporte mensal</label>
-      <div class="input-wrap">
-        <span class="input-prefix">R$</span>
-        <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0">
+      <label for="monthly">Aporte</label>
+      <div class="contrib-wrap">
+        <div class="input-wrap contrib-amount">
+          <span class="input-prefix">R$</span>
+          <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0">
+        </div>
+        <span class="freq-sep">a cada</span>
+        <input type="number" id="freq-n" class="freq-n" value="1" min="1" step="1">
+        <select id="freq-unit" class="freq-sel">
+          <option value="days">dias</option>
+          <option value="weeks">semanas</option>
+          <option value="fortnights">quinzenas</option>
+          <option value="months" selected>meses</option>
+          <option value="years">anos</option>
+        </select>
       </div>
     </div>
     <div class="field" id="field-years">
@@ -108,6 +130,8 @@ input[type=number]:focus{border-color:var(--hi)}
 var MAIN=['initial','monthly','years','goal'];
 var ALL=['initial','monthly','years','goal','rate'];
 var fillOrder=[];
+var FREQ={days:365,weeks:52,fortnights:24,months:12,years:1};
+function getFreq(){var n=parseFloat(document.getElementById('freq-n').value)||1;var unit=document.getElementById('freq-unit').value;return FREQ[unit]/n;}
 
 function getTarget(){
   var empties=MAIN.filter(function(f){return document.getElementById(f).value.trim()==='';});
@@ -151,6 +175,8 @@ ALL.forEach(function(f){
     calculate();
   });
 });
+document.getElementById('freq-n').addEventListener('input',function(){highlight();calculate();});
+document.getElementById('freq-unit').addEventListener('change',function(){highlight();calculate();});
 
 function getV(id){
   var v=document.getElementById(id).value.trim();
@@ -166,8 +192,9 @@ function calculate(){
   var yrs =t!=='years'  ?getV('years')  :null;
   var fv  =t!=='goal'   ?getV('goal')   :null;
   var rAnn=getV('rate');
-  var r=rAnn!==null?(rAnn/100)/12:0;
-  var n=yrs!==null?yrs*12:null;
+  var f=getFreq();
+  var r=rAnn!==null?Math.pow(1+rAnn/100,1/f)-1:0;
+  var n=yrs!==null?yrs*f:null;
   var result=null;
   try{
     if(t==='goal'){if(pv===null||pmt===null||n===null||n<=0){clr();return;}result=calcFV(pv,pmt,r,n);}
@@ -175,7 +202,7 @@ function calculate(){
     else if(t==='monthly'){if(pv===null||n===null||n<=0||fv===null){clr();return;}result=calcPMT(fv,pv,r,n);}
     else if(t==='years'){
       if(pv===null||pmt===null||fv===null||fv<=0){clr();return;}
-      var months=calcN(fv,pv,pmt,r);result=months!==null?months/12:null;
+      var periods=calcN(fv,pv,pmt,r);result=periods!==null?periods/f:null;
     }
   }catch(e){clr();return;}
   if(result===null||isNaN(result)||!isFinite(result)){clr();return;}
@@ -187,7 +214,7 @@ function calculate(){
   var sPMT=t==='monthly'?result:(pmt||0);
   var sYrs=t==='years'  ?result:(yrs||0);
   var sFV =t==='goal'   ?result:(fv||0);
-  var dep=sPV+sPMT*sYrs*12,int_=sFV-dep;
+  var dep=sPV+sPMT*sYrs*f,int_=sFV-dep;
   var html=
     '<div class="result-row"><span class="result-row-lbl">Total depositado</span>'
     +'<span class="result-row-val">'+fmt(dep)+'</span></div>'
