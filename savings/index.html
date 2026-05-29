@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/savings/">
 <link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/">
 <meta property="og:title" content="Savings Calculator — calculate.website">
-<meta property="og:description" content="Solve for any savings variable: goal, time, contributions, or interest rate.">
+<meta property="og:description" content="Leave any field blank and it calculates automatically.">
 <meta property="og:url" content="https://calculate.website/savings/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="en_US">
@@ -29,11 +29,7 @@ h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
 .sub{font-size:14px;color:var(--ink-light);line-height:1.6;margin-bottom:28px}
 .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
 .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
-.field-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light)}
-.solve-pill{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 11px;border-radius:99px;border:1.5px solid var(--border);background:transparent;color:var(--ink-faint);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1.5}
-.solve-pill:hover{border-color:var(--hi);color:var(--hi)}
-.solve-pill.active{background:var(--hi);border-color:var(--hi);color:#fff;cursor:default}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:7px}
 .input-wrap{position:relative}
 .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
 .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
@@ -43,6 +39,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 input[type=number]:focus{border-color:var(--hi)}
 .field.is-target input[type=number]{background:var(--hi-soft)!important;border-color:var(--hi)!important;color:var(--hi)!important;font-weight:800}
 .field.is-target input[type=number]:disabled{opacity:1;cursor:default}
+.field.is-target label{color:var(--hi)}
 .result-card{background:#0C1528;border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;border-top:3px solid var(--hi)}
 .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
 .result-rows{display:flex;flex-direction:column;gap:10px}
@@ -60,60 +57,41 @@ input[type=number]:focus{border-color:var(--hi)}
 <header></header>
 <div class="page">
   <h1>💰 Savings Calculator</h1>
-  <p class="sub">Fill in any 4 fields. Click <strong>Solve →</strong> on the one you want to find and it calculates automatically.</p>
+  <p class="sub">Leave any one field blank — it calculates automatically from the rest.</p>
 
   <div class="card">
     <div class="field" id="field-initial">
-      <div class="field-top">
-        <label for="initial">Initial savings</label>
-        <button class="solve-pill" id="pill-initial" onclick="setTarget('initial')">Solve →</button>
-      </div>
+      <label for="initial">Initial savings</label>
       <div class="input-wrap">
         <span class="input-prefix">$</span>
-        <input type="number" id="initial" class="has-prefix" placeholder="1,000" min="0" oninput="calculate()">
+        <input type="number" id="initial" class="has-prefix" placeholder="1,000" min="0">
       </div>
     </div>
-
     <div class="field" id="field-monthly">
-      <div class="field-top">
-        <label for="monthly">Monthly contribution</label>
-        <button class="solve-pill" id="pill-monthly" onclick="setTarget('monthly')">Solve →</button>
-      </div>
+      <label for="monthly">Monthly contribution</label>
       <div class="input-wrap">
         <span class="input-prefix">$</span>
-        <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0" oninput="calculate()">
+        <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0">
       </div>
     </div>
-
     <div class="field" id="field-years">
-      <div class="field-top">
-        <label for="years">Period</label>
-        <button class="solve-pill" id="pill-years" onclick="setTarget('years')">Solve →</button>
-      </div>
+      <label for="years">Period</label>
       <div class="input-wrap">
-        <input type="number" id="years" placeholder="10" min="0" step="0.5" oninput="calculate()">
+        <input type="number" id="years" placeholder="10" min="0" step="0.5">
         <span class="input-suffix">yrs</span>
       </div>
     </div>
-
     <div class="field" id="field-goal">
-      <div class="field-top">
-        <label for="goal">Goal (final balance)</label>
-        <button class="solve-pill" id="pill-goal" onclick="setTarget('goal')">Solve →</button>
-      </div>
+      <label for="goal">Goal (final balance)</label>
       <div class="input-wrap">
         <span class="input-prefix">$</span>
-        <input type="number" id="goal" class="has-prefix" placeholder="50,000" min="0" oninput="calculate()">
+        <input type="number" id="goal" class="has-prefix" placeholder="50,000" min="0">
       </div>
     </div>
-
     <div class="field" id="field-rate">
-      <div class="field-top">
-        <label for="rate">Annual interest rate</label>
-        <button class="solve-pill" id="pill-rate" onclick="setTarget('rate')">Solve →</button>
-      </div>
+      <label for="rate">Annual interest rate</label>
       <div class="input-wrap">
-        <input type="number" id="rate" placeholder="0" min="0" step="0.25" oninput="calculate()">
+        <input type="number" id="rate" placeholder="0" min="0" step="0.25">
         <span class="input-suffix">%/yr</span>
       </div>
     </div>
@@ -126,78 +104,45 @@ input[type=number]:focus{border-color:var(--hi)}
 </div>
 
 <script>
-var TARGET='goal';
-var ALL=['initial','monthly','years','goal','rate'];
+var TARGET = 'goal';
+var ALL = ['initial','monthly','years','goal','rate'];
 
 /* ── Math ── */
-function calcFV(pv,pmt,r,n){
-  if(r<1e-10)return pv+pmt*n;
-  var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r;
-}
-function calcPV(fv,pmt,r,n){
-  if(n<=0)return null;
-  if(r<1e-10)return fv-pmt*n;
-  var fn=Math.pow(1+r,n);return(fv-pmt*(fn-1)/r)/fn;
-}
-function calcPMT(fv,pv,r,n){
-  if(n<=0)return null;
-  if(r<1e-10)return(fv-pv)/n;
-  var fn=Math.pow(1+r,n);
-  if(Math.abs(fn-1)<1e-10)return null;
-  return(fv-pv*fn)*r/(fn-1);
-}
+function calcFV(pv,pmt,r,n){if(r<1e-10)return pv+pmt*n;var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r;}
+function calcPV(fv,pmt,r,n){if(n<=0)return null;if(r<1e-10)return fv-pmt*n;var fn=Math.pow(1+r,n);return(fv-pmt*(fn-1)/r)/fn;}
+function calcPMT(fv,pv,r,n){if(n<=0)return null;if(r<1e-10)return(fv-pv)/n;var fn=Math.pow(1+r,n);if(Math.abs(fn-1)<1e-10)return null;return(fv-pv*fn)*r/(fn-1);}
 function calcN(fv,pv,pmt,r){
-  if(r<1e-10){
-    if(Math.abs(pmt)<0.01)return null;
-    var n=(fv-pv)/pmt;return n>0?n:null;
-  }
-  var A=pv+pmt/r,B=fv+pmt/r;
-  if(A<=0||B<=0)return null;
-  var n=Math.log(B/A)/Math.log(1+r);
-  return n>0?n:null;
+  if(r<1e-10){if(Math.abs(pmt)<0.01)return null;var n=(fv-pv)/pmt;return n>0?n:null;}
+  var A=pv+pmt/r,B=fv+pmt/r;if(A<=0||B<=0)return null;
+  var n=Math.log(B/A)/Math.log(1+r);return n>0?n:null;
 }
 function calcRate(fv,pv,pmt,n){
   if(n<=0)return null;
-  function f(r){
-    if(Math.abs(r)<1e-12)return pv+pmt*n-fv;
-    var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r-fv;
-  }
+  function f(r){if(Math.abs(r)<1e-12)return pv+pmt*n-fv;var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r-fv;}
   if(f(0)>=0)return 0;
-  var hi=0.1;
-  while(f(hi)<0&&hi<100)hi*=2;
-  if(f(hi)<0)return null;
-  var lo=0;
-  for(var i=0;i<100;i++){var mid=(lo+hi)/2;if(hi-lo<1e-12)break;if(f(mid)<0)lo=mid;else hi=mid;}
+  var hi=0.1;while(f(hi)<0&&hi<100)hi*=2;if(f(hi)<0)return null;
+  var lo=0;for(var i=0;i<100;i++){var mid=(lo+hi)/2;if(hi-lo<1e-12)break;if(f(mid)<0)lo=mid;else hi=mid;}
   return(lo+hi)/2;
 }
 
-/* ── Formatting ── */
+/* ── Format ── */
 function fmt(n){return'$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
 function fmtYr(n){
   var y=Math.floor(n),m=Math.round((n-y)*12);
   if(m===12){y++;m=0;}
-  var s='';
-  if(y>0)s+=y+(y===1?' year':' years');
+  var s='';if(y>0)s+=y+(y===1?' year':' years');
   if(m>0)s+=(s?' ':'')+m+(m===1?' month':' months');
   return s||'< 1 month';
 }
 
-/* ── UI ── */
+/* ── Target management ── */
 function setTarget(id){
   TARGET=id;
   ALL.forEach(function(f){
-    var pill=document.getElementById('pill-'+f);
     var inp=document.getElementById(f);
     var field=document.getElementById('field-'+f);
-    if(f===id){
-      pill.className='solve-pill active';pill.textContent='◎ Solving';
-      inp.disabled=true;inp.value='';
-      field.classList.add('is-target');
-    } else {
-      pill.className='solve-pill';pill.textContent='Solve →';
-      inp.disabled=false;
-      field.classList.remove('is-target');
-    }
+    if(f===id){inp.disabled=true;inp.value='';field.classList.add('is-target');}
+    else{inp.disabled=false;field.classList.remove('is-target');}
   });
   calculate();
 }
@@ -205,33 +150,38 @@ function setTarget(id){
 function filled(id){var v=document.getElementById(id).value.trim();return v!==''&&!isNaN(parseFloat(v));}
 function getV(id){return parseFloat(document.getElementById(id).value)||0;}
 
+/* ── Listeners ── */
+ALL.forEach(function(f){
+  document.getElementById(f).addEventListener('input',function(){
+    /* If user clears a non-target field → that field becomes the new target */
+    if(this.value.trim()===''&&f!==TARGET){
+      setTarget(f);
+    } else {
+      calculate();
+    }
+  });
+});
+
+/* ── Calculate ── */
 function calculate(){
-  var pv   =TARGET!=='initial'?(filled('initial')?getV('initial'):null):null;
-  var pmt  =TARGET!=='monthly'?(filled('monthly')?getV('monthly'):null):null;
-  var yrs  =TARGET!=='years'  ?(filled('years')  ?getV('years')  :null):null;
-  var fv   =TARGET!=='goal'   ?(filled('goal')   ?getV('goal')   :null):null;
-  var rAnn =TARGET!=='rate'   ?getV('rate'):null; /* defaults 0 if empty */
-  var r    =rAnn!==null?(rAnn/100)/12:0;
-  var n    =yrs!==null?yrs*12:null;
+  var pv  =TARGET!=='initial'?(filled('initial')?getV('initial'):null):null;
+  var pmt =TARGET!=='monthly'?(filled('monthly')?getV('monthly'):null):null;
+  var yrs =TARGET!=='years'  ?(filled('years')  ?getV('years')  :null):null;
+  var fv  =TARGET!=='goal'   ?(filled('goal')   ?getV('goal')   :null):null;
+  var rAnn=TARGET!=='rate'   ?getV('rate'):null;
+  var r=rAnn!==null?(rAnn/100)/12:0;
+  var n=yrs!==null?yrs*12:null;
   var result=null;
   try{
-    if(TARGET==='goal'){
-      if(pv===null||pmt===null||n===null||n<=0){clr();return;}
-      result=calcFV(pv,pmt,r,n);
-    } else if(TARGET==='initial'){
-      if(pmt===null||n===null||n<=0||fv===null){clr();return;}
-      result=calcPV(fv,pmt,r,n);
-    } else if(TARGET==='monthly'){
-      if(pv===null||n===null||n<=0||fv===null){clr();return;}
-      result=calcPMT(fv,pv,r,n);
-    } else if(TARGET==='years'){
+    if(TARGET==='goal'){if(pv===null||pmt===null||n===null||n<=0){clr();return;}result=calcFV(pv,pmt,r,n);}
+    else if(TARGET==='initial'){if(pmt===null||n===null||n<=0||fv===null){clr();return;}result=calcPV(fv,pmt,r,n);}
+    else if(TARGET==='monthly'){if(pv===null||n===null||n<=0||fv===null){clr();return;}result=calcPMT(fv,pv,r,n);}
+    else if(TARGET==='years'){
       if(pv===null||pmt===null||fv===null||fv<=0){clr();return;}
-      var months=calcN(fv,pv,pmt,r);
-      result=months!==null?months/12:null;
+      var months=calcN(fv,pv,pmt,r);result=months!==null?months/12:null;
     } else if(TARGET==='rate'){
       if(pv===null||pmt===null||n===null||n<=0||fv===null||fv<=0){clr();return;}
-      var mr=calcRate(fv,pv,pmt,n);
-      result=mr!==null?mr*12*100:null;
+      var mr=calcRate(fv,pv,pmt,n);result=mr!==null?mr*12*100:null;
     }
   }catch(e){clr();return;}
   if(result===null||isNaN(result)||!isFinite(result)){clr();return;}
@@ -241,14 +191,11 @@ function calculate(){
   else if(TARGET==='rate')inp.value=Math.round(result*100)/100;
   else inp.value=Math.round(result);
 
-  /* Summary */
   var sPV =TARGET==='initial'?result:(pv||0);
   var sPMT=TARGET==='monthly'?result:(pmt||0);
   var sYrs=TARGET==='years'  ?result:(yrs||0);
   var sFV =TARGET==='goal'   ?result:(fv||0);
-  var sN  =sYrs*12;
-  var dep =sPV+sPMT*sN;
-  var int_=sFV-dep;
+  var dep=sPV+sPMT*sYrs*12,int_=sFV-dep;
   var html=
     '<div class="result-row"><span class="result-row-lbl">Total deposited</span>'
     +'<span class="result-row-val">'+fmt(dep)+'</span></div>'
@@ -261,19 +208,15 @@ function calculate(){
     +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
   if(TARGET==='years')html+='<div class="result-note">→ '+fmtYr(result)+'</div>';
   if(TARGET==='rate'){
-    var ann=Math.round(result*100)/100;
-    var mon=Math.round(result/12*100)/100;
+    var ann=Math.round(result*100)/100,mon=Math.round(result/12*100)/100;
     html+='<div class="result-note">→ '+ann+'% annual ('+mon+'% monthly)</div>';
   }
   document.getElementById('result-rows').innerHTML=html;
   document.getElementById('result-card').style.display='block';
 }
+function clr(){document.getElementById(TARGET).value='';document.getElementById('result-card').style.display='none';}
 
-function clr(){
-  document.getElementById(TARGET).value='';
-  document.getElementById('result-card').style.display='none';
-}
-
+/* Init — goal is the default "unknown" */
 setTarget('goal');
 </script>
 <script src="/nav.js"></script>

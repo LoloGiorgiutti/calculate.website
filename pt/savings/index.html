@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculadora de Poupança — Resolva Qualquer Variável | calculate.website</title>
-<meta name="description" content="Calculadora de poupança que resolve qualquer variável: valor inicial, aporte mensal, período, meta ou taxa de juros. Grátis e instantânea.">
+<meta name="description" content="Calculadora de poupança que resolve qualquer variável. Deixe um campo em branco e ele é calculado automaticamente.">
 <link rel="canonical" href="https://calculate.website/pt/savings/">
 <link rel="alternate" hreflang="en"    href="https://calculate.website/savings/">
 <link rel="alternate" hreflang="es"    href="https://calculate.website/es/savings/">
@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/savings/">
 <link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/">
 <meta property="og:title" content="Calculadora de Poupança — calculate.website">
-<meta property="og:description" content="Resolva qualquer variável: meta, tempo, aportes ou taxa de juros.">
+<meta property="og:description" content="Deixe um campo em branco e ele é calculado automaticamente.">
 <meta property="og:url" content="https://calculate.website/pt/savings/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="pt_BR">
@@ -29,11 +29,7 @@ h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
 .sub{font-size:14px;color:var(--ink-light);line-height:1.6;margin-bottom:28px}
 .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
 .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
-.field-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light)}
-.solve-pill{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 11px;border-radius:99px;border:1.5px solid var(--border);background:transparent;color:var(--ink-faint);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1.5}
-.solve-pill:hover{border-color:var(--hi);color:var(--hi)}
-.solve-pill.active{background:var(--hi);border-color:var(--hi);color:#fff;cursor:default}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:7px}
 .input-wrap{position:relative}
 .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
 .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
@@ -43,6 +39,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 input[type=number]:focus{border-color:var(--hi)}
 .field.is-target input[type=number]{background:var(--hi-soft)!important;border-color:var(--hi)!important;color:var(--hi)!important;font-weight:800}
 .field.is-target input[type=number]:disabled{opacity:1;cursor:default}
+.field.is-target label{color:var(--hi)}
 .result-card{background:#0C1528;border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;border-top:3px solid var(--hi)}
 .result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
 .result-rows{display:flex;flex-direction:column;gap:10px}
@@ -60,60 +57,41 @@ input[type=number]:focus{border-color:var(--hi)}
 <header></header>
 <div class="page">
   <h1>💰 Calculadora de Poupança</h1>
-  <p class="sub">Preencha 4 campos. Clique em <strong>Calcular →</strong> no que deseja descobrir e ele é resolvido automaticamente.</p>
+  <p class="sub">Deixe um campo em branco — ele é calculado automaticamente a partir dos outros.</p>
 
   <div class="card">
     <div class="field" id="field-initial">
-      <div class="field-top">
-        <label for="initial">Poupança inicial</label>
-        <button class="solve-pill" id="pill-initial" onclick="setTarget('initial')">Calcular →</button>
-      </div>
+      <label for="initial">Poupança inicial</label>
       <div class="input-wrap">
         <span class="input-prefix">R$</span>
-        <input type="number" id="initial" class="has-prefix" placeholder="1.000" min="0" oninput="calculate()">
+        <input type="number" id="initial" class="has-prefix" placeholder="1.000" min="0">
       </div>
     </div>
-
     <div class="field" id="field-monthly">
-      <div class="field-top">
-        <label for="monthly">Aporte mensal</label>
-        <button class="solve-pill" id="pill-monthly" onclick="setTarget('monthly')">Calcular →</button>
-      </div>
+      <label for="monthly">Aporte mensal</label>
       <div class="input-wrap">
         <span class="input-prefix">R$</span>
-        <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0" oninput="calculate()">
+        <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0">
       </div>
     </div>
-
     <div class="field" id="field-years">
-      <div class="field-top">
-        <label for="years">Período</label>
-        <button class="solve-pill" id="pill-years" onclick="setTarget('years')">Calcular →</button>
-      </div>
+      <label for="years">Período</label>
       <div class="input-wrap">
-        <input type="number" id="years" placeholder="10" min="0" step="0.5" oninput="calculate()">
+        <input type="number" id="years" placeholder="10" min="0" step="0.5">
         <span class="input-suffix">anos</span>
       </div>
     </div>
-
     <div class="field" id="field-goal">
-      <div class="field-top">
-        <label for="goal">Meta (saldo final)</label>
-        <button class="solve-pill" id="pill-goal" onclick="setTarget('goal')">Calcular →</button>
-      </div>
+      <label for="goal">Meta (saldo final)</label>
       <div class="input-wrap">
         <span class="input-prefix">R$</span>
-        <input type="number" id="goal" class="has-prefix" placeholder="50.000" min="0" oninput="calculate()">
+        <input type="number" id="goal" class="has-prefix" placeholder="50.000" min="0">
       </div>
     </div>
-
     <div class="field" id="field-rate">
-      <div class="field-top">
-        <label for="rate">Taxa de juros anual</label>
-        <button class="solve-pill" id="pill-rate" onclick="setTarget('rate')">Calcular →</button>
-      </div>
+      <label for="rate">Taxa de juros anual</label>
       <div class="input-wrap">
-        <input type="number" id="rate" placeholder="0" min="0" step="0.25" oninput="calculate()">
+        <input type="number" id="rate" placeholder="0" min="0" step="0.25">
         <span class="input-suffix">%/ano</span>
       </div>
     </div>
@@ -146,12 +124,11 @@ function calcRate(fv,pv,pmt,n){
   return(lo+hi)/2;
 }
 
-function fmt(n){return'R$ '+Math.round(Math.abs(n)).toLocaleString('pt-BR');}
+function fmt(n){return'R$ '+Math.round(Math.abs(n)).toLocaleString('pt-BR');}
 function fmtYr(n){
   var y=Math.floor(n),m=Math.round((n-y)*12);
   if(m===12){y++;m=0;}
-  var s='';
-  if(y>0)s+=y+(y===1?' ano':' anos');
+  var s='';if(y>0)s+=y+(y===1?' ano':' anos');
   if(m>0)s+=(s?' ':'')+m+(m===1?' mês':' meses');
   return s||'< 1 mês';
 }
@@ -159,23 +136,23 @@ function fmtYr(n){
 function setTarget(id){
   TARGET=id;
   ALL.forEach(function(f){
-    var pill=document.getElementById('pill-'+f);
     var inp=document.getElementById(f);
     var field=document.getElementById('field-'+f);
-    if(f===id){
-      pill.className='solve-pill active';pill.textContent='◎ Calculando';
-      inp.disabled=true;inp.value='';
-      field.classList.add('is-target');
-    } else {
-      pill.className='solve-pill';pill.textContent='Calcular →';
-      inp.disabled=false;field.classList.remove('is-target');
-    }
+    if(f===id){inp.disabled=true;inp.value='';field.classList.add('is-target');}
+    else{inp.disabled=false;field.classList.remove('is-target');}
   });
   calculate();
 }
 
 function filled(id){var v=document.getElementById(id).value.trim();return v!==''&&!isNaN(parseFloat(v));}
 function getV(id){return parseFloat(document.getElementById(id).value)||0;}
+
+ALL.forEach(function(f){
+  document.getElementById(f).addEventListener('input',function(){
+    if(this.value.trim()===''&&f!==TARGET){setTarget(f);}
+    else{calculate();}
+  });
+});
 
 function calculate(){
   var pv  =TARGET!=='initial'?(filled('initial')?getV('initial'):null):null;
@@ -209,8 +186,7 @@ function calculate(){
   var sPMT=TARGET==='monthly'?result:(pmt||0);
   var sYrs=TARGET==='years'  ?result:(yrs||0);
   var sFV =TARGET==='goal'   ?result:(fv||0);
-  var dep =sPV+sPMT*sYrs*12;
-  var int_=sFV-dep;
+  var dep=sPV+sPMT*sYrs*12,int_=sFV-dep;
   var html=
     '<div class="result-row"><span class="result-row-lbl">Total depositado</span>'
     +'<span class="result-row-val">'+fmt(dep)+'</span></div>'
@@ -223,14 +199,12 @@ function calculate(){
     +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
   if(TARGET==='years')html+='<div class="result-note">→ '+fmtYr(result)+'</div>';
   if(TARGET==='rate'){
-    var ann=Math.round(result*100)/100;
-    var mon=Math.round(result/12*100)/100;
+    var ann=Math.round(result*100)/100,mon=Math.round(result/12*100)/100;
     html+='<div class="result-note">→ '+ann+'% anual ('+mon+'% mensal)</div>';
   }
   document.getElementById('result-rows').innerHTML=html;
   document.getElementById('result-card').style.display='block';
 }
-
 function clr(){document.getElementById(TARGET).value='';document.getElementById('result-card').style.display='none';}
 
 setTarget('goal');

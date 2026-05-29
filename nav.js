@@ -697,16 +697,42 @@
     '.related-icon{font-size:24px;line-height:1}',
     '.related-name{font-size:12px;font-weight:600;line-height:1.3;color:var(--ink)}',
 
-    /* ── SHARE BUTTON ─────────────────────────────────────────────────────── */
-    '.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;',
-    'padding:11px 16px;background:var(--surface);border:1.5px solid var(--border);',
-    'border-radius:var(--radius-sm);font-family:"DM Sans",sans-serif;font-size:13px;',
-    'font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;',
-    'width:100%;margin-bottom:0}',
+    /* ── SHARE PANEL ─────────────────────────────────────────────────────── */
+    '.share-wrap{max-width:520px;margin:0 auto;padding:0 20px 24px}',
+    '.share-row{display:flex;flex-wrap:wrap;gap:8px;}',
+    /* Share panel buttons — pill style */
+    '.sp-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;',
+    'padding:9px 15px;background:var(--surface);border:1.5px solid var(--border);',
+    'border-radius:99px;font-family:inherit;font-size:13px;',
+    'font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;white-space:nowrap;}',
+    '.sp-btn:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}',
+    '.sp-btn.sp-copied{border-color:#16a34a !important;color:#16a34a !important;background:rgba(22,163,74,.06) !important}',
+    /* Legacy .share-btn alias (keep for any pages that hardcode it) */
+    '.share-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;',
+    'padding:9px 15px;background:var(--surface);border:1.5px solid var(--border);',
+    'border-radius:99px;font-family:inherit;font-size:13px;',
+    'font-weight:600;color:var(--ink-light);cursor:pointer;transition:all .15s;}',
     '.share-btn:hover{border-color:var(--hi);color:var(--hi);background:var(--hi-soft)}',
     '.share-btn.nv-copied{border-color:#16a34a !important;color:#16a34a !important}',
-    '.share-wrap{max-width:520px;margin:0 auto;padding:0 20px 24px}',
-    '.share-row{display:flex;gap:8px;}',
+    /* Embed modal */
+    '.embed-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;',
+    'display:flex;align-items:center;justify-content:center;padding:20px;}',
+    '.embed-modal{background:#0C1528;border-radius:16px;padding:28px;',
+    'max-width:500px;width:100%;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.5);}',
+    '.embed-modal-ttl{font-size:17px;font-weight:700;color:#fff;margin-bottom:6px;}',
+    '.embed-modal-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:18px;}',
+    '.embed-code{background:#060d1a;border:1px solid rgba(255,255,255,.1);border-radius:10px;',
+    'padding:14px 16px;font-family:"JetBrains Mono",monospace;font-size:12px;color:#86EFAC;',
+    'line-height:1.7;word-break:break-all;margin-bottom:14px;user-select:all;cursor:text;}',
+    '.embed-copy-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;',
+    'border-radius:10px;border:1.5px solid rgba(255,255,255,.2);background:transparent;',
+    'color:rgba(255,255,255,.7);font-weight:600;font-size:13px;cursor:pointer;',
+    'font-family:inherit;transition:all .15s;}',
+    '.embed-copy-btn:hover{border-color:rgba(255,255,255,.5);color:#fff;}',
+    '.embed-close{position:absolute;top:14px;right:14px;background:none;border:none;',
+    'color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;padding:4px 8px;',
+    'border-radius:6px;line-height:1;}',
+    '.embed-close:hover{color:#fff;background:rgba(255,255,255,.1);}',
 
     /* ── FAVORITES CSS ────────────────────────────────────────────────────── */
     /* Card star (visible on hover or when active) */
@@ -747,7 +773,7 @@
     '.page{max-width:720px!important;}',
     '.faq-section{max-width:720px!important;}',
     '.related-section{max-width:720px!important;}',
-    '.share-wrap{max-width:720px!important;}',
+    '.share-wrap{max-width:720px!important;padding-left:0!important;padding-right:0!important;}',
     '}',
 
     /* ── THEME TOGGLE ─────────────────────────────────────────────────────── */
@@ -1777,7 +1803,7 @@
   window.cwUpdateFavBadge=cwUpdateFavBadge;
   window.cwNormSlug=cwNormSlug;
 
-  /* ── SHARE ───────────────────────────────────────────────── */
+  /* ── SHARE helpers ─────────────────────────────────────────────────────── */
   window.shareCalc = function() {
     var url = window.location.href.split('?')[0];
     var title = document.title;
@@ -1789,16 +1815,61 @@
         btns.forEach(function(btn) {
           var orig = btn.innerHTML;
           btn.classList.add('nv-copied');
-          btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Link copied!';
+          btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
           setTimeout(function() { btn.classList.remove('nv-copied'); btn.innerHTML = orig; }, 2000);
         });
       });
     }
   };
-  /* Backwards compat alias */
   window.compartir = window.shareCalc;
 
-  /* ── AUTO-INJECT SHARE + SAVE BUTTONS ──────────────────────────────────── */
+  /* Embed modal */
+  window.showEmbedModal = function() {
+    var existing = document.querySelector('.embed-ov');
+    if (existing) { existing.remove(); return; }
+    var url = window.location.href.split('?')[0];
+    var code = '<iframe src="' + url + '" width="380" height="600" frameborder="0" style="border-radius:16px;overflow:hidden" allowtransparency="true"></iframe>';
+    var _lang = (document.documentElement.lang||'en').substring(0,2);
+    var _ttl  = {es:'Insertar esta calculadora',pt:'Incorporar esta calculadora',fr:'Intégrer cette calculatrice',en:'Embed this calculator'};
+    var _sub  = {es:'Pega este código en cualquier sitio web:',pt:'Cole este código em qualquer site:',fr:'Collez ce code sur n\'importe quel site :',en:'Paste this code on any website:'};
+    var _cpy  = {es:'Copiar código',pt:'Copiar código',fr:'Copier le code',en:'Copy code'};
+    var svgCpyIco = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+    var svgChk = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>';
+    var ov = document.createElement('div');
+    ov.className = 'embed-ov';
+    ov.onclick = function(e){ if(e.target===ov) ov.remove(); };
+    var modal = document.createElement('div');
+    modal.className = 'embed-modal';
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'embed-close';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.onclick = function(){ ov.remove(); };
+    var ttl = document.createElement('div'); ttl.className='embed-modal-ttl'; ttl.textContent=_ttl[_lang]||_ttl.en;
+    var sub = document.createElement('div'); sub.className='embed-modal-sub'; sub.textContent=_sub[_lang]||_sub.en;
+    var codeEl = document.createElement('div'); codeEl.className='embed-code'; codeEl.textContent=code;
+    var cpyBtn = document.createElement('button'); cpyBtn.className='embed-copy-btn';
+    cpyBtn.innerHTML = svgCpyIco + ' ' + (_cpy[_lang]||_cpy.en);
+    cpyBtn.onclick = function(){
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(code).then(function(){
+          var orig=cpyBtn.innerHTML;
+          cpyBtn.innerHTML=svgChk+' Copied!';
+          setTimeout(function(){cpyBtn.innerHTML=orig;},2000);
+        });
+      }
+    };
+    modal.appendChild(closeBtn);
+    modal.appendChild(ttl);
+    modal.appendChild(sub);
+    modal.appendChild(codeEl);
+    modal.appendChild(cpyBtn);
+    ov.appendChild(modal);
+    document.body.appendChild(ov);
+    function onEsc(e){if(e.key==='Escape'){ov.remove();document.removeEventListener('keydown',onEsc);}}
+    document.addEventListener('keydown',onEsc);
+  };
+
+  /* ── AUTO-INJECT SHARE PANEL ────────────────────────────────────────────── */
   (function() {
     var path = window.location.pathname.replace(/\/$/, '') || '/';
     var skipPaths = ['/', '/health', '/finance', '/math', '/dates', '/games', '/world-cup',
@@ -1812,40 +1883,112 @@
                      '/fr/about','/fr/privacy','/fr/terms','/fr/favorites'];
     if (skipPaths.indexOf(path) !== -1) return;
 
-    var svgShare = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
-
+    var _lang = (document.documentElement.lang||'en').substring(0,2);
     var pageSlug = cwNormSlug(path);
-    /* Only show save button if slug matches a known calculator */
     var isKnownCalc = pageSlug && window.__CALCS && window.__CALCS.some(function(cat){
       return cat.items.some(function(it){ return it.u === '/' + pageSlug + '/'; });
     });
+
+    /* SVG icons */
+    var iStar  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>';
+    var iCopy  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+    var iShare = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+    var iWA    = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.67-1.6-.91-2.19-.24-.57-.48-.5-.67-.5-.17 0-.37-.03-.57-.03s-.52.07-.79.38c-.27.3-1.03 1.01-1.03 2.46s1.06 2.85 1.2 3.05c.15.2 2.08 3.17 5.04 4.44.7.3 1.25.49 1.68.62.7.22 1.34.19 1.85.12.56-.08 1.73-.71 1.97-1.4.24-.69.24-1.28.17-1.4-.07-.12-.27-.2-.57-.34z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.11-1.34C8.55 21.54 10.23 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.7 0-3.29-.44-4.67-1.21l-.33-.2-3.03.8.81-2.96-.22-.36C3.49 14.96 3 13.54 3 12 3 7.03 7.03 3 12 3s9 4.03 9 9-4.03 9-9 9z"/></svg>';
+    var iX     = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.257 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+    var iEmbed = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>';
+    var iCheck = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>';
+
+    /* Localised labels */
+    var _saveL  = {es:['Guardar','Guardado'],pt:['Salvar','Salvo'],fr:['Sauvegarder','Sauvegardé'],en:['Save','Saved']};
+    var _copyL  = {es:'Copiar enlace',pt:'Copiar link',fr:'Copier le lien',en:'Copy link'};
+    var _shareL = {es:'Compartir',pt:'Compartilhar',fr:'Partager',en:'Share'};
+    var _embedL = {es:'Insertar',pt:'Incorporar',fr:'Intégrer',en:'Embed'};
+    var _pair   = _saveL[_lang] || _saveL.en;
 
     var wrap = document.createElement('div');
     wrap.className = 'share-wrap';
     var row = document.createElement('div');
     row.className = 'share-row';
 
-    /* Save / Favorites button */
+    /* 1 — Save (favorites) */
     if (isKnownCalc) {
-      var _fl = (document.documentElement.lang||'en').substring(0,2);
-      var _saveLabels = {es:['Guardar','Guardado'],pt:['Salvar','Salvo'],fr:['Sauvegarder','Sauvegardé'],en:['Save','Saved']};
-      var _pair = _saveLabels[_fl] || _saveLabels.en;
       var isFavNow = cwIsFav(pageSlug);
       var favSaveBtn = document.createElement('button');
-      favSaveBtn.className = 'fav-save-btn' + (isFavNow ? ' active' : '');
+      favSaveBtn.className = 'sp-btn fav-save-btn' + (isFavNow ? ' active' : '');
       favSaveBtn.setAttribute('data-fav-slug', pageSlug);
       favSaveBtn.innerHTML = '<span class="fav-star">' + (isFavNow?'★':'☆') + '</span>'
-        + ' <span class="fav-save-txt">' + (isFavNow?_pair[1]:_pair[0]) + '</span>';
+        + '<span class="fav-save-txt">' + (isFavNow?_pair[1]:_pair[0]) + '</span>';
       favSaveBtn.onclick = function(){ cwToggleFav(pageSlug); };
       row.appendChild(favSaveBtn);
     }
 
-    var shareBtn = document.createElement('button');
-    shareBtn.className = 'share-btn';
-    shareBtn.style.flex = '1';
-    shareBtn.innerHTML = svgShare + ' Share';
-    shareBtn.onclick = function(){ shareCalc(); };
-    row.appendChild(shareBtn);
+    /* 2 — Copy link */
+    var copyBtn = document.createElement('button');
+    copyBtn.className = 'sp-btn';
+    copyBtn.innerHTML = iCopy + ' ' + (_copyL[_lang]||_copyL.en);
+    copyBtn.onclick = function(){
+      var url = window.location.href.split('?')[0];
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(url).then(function(){
+          var orig=copyBtn.innerHTML;
+          copyBtn.classList.add('sp-copied');
+          copyBtn.innerHTML=iCheck+' Copied!';
+          setTimeout(function(){copyBtn.classList.remove('sp-copied');copyBtn.innerHTML=orig;},2000);
+        });
+      }
+    };
+    row.appendChild(copyBtn);
+
+    /* 3 — Share (native) */
+    if (navigator.share || true) { /* always show, fallback to copy */
+      var shareBtn = document.createElement('button');
+      shareBtn.className = 'sp-btn share-btn';
+      shareBtn.innerHTML = iShare + ' ' + (_shareL[_lang]||_shareL.en);
+      shareBtn.onclick = function(){
+        var url=window.location.href.split('?')[0];
+        if(navigator.share){
+          navigator.share({title:document.title,url:url}).catch(function(){});
+        } else if(navigator.clipboard){
+          navigator.clipboard.writeText(url).then(function(){
+            var orig=shareBtn.innerHTML;
+            shareBtn.classList.add('sp-copied');
+            shareBtn.innerHTML=iCheck+' Copied!';
+            setTimeout(function(){shareBtn.classList.remove('sp-copied');shareBtn.innerHTML=orig;},2000);
+          });
+        }
+      };
+      row.appendChild(shareBtn);
+    }
+
+    /* 4 — WhatsApp */
+    var waBtn = document.createElement('button');
+    waBtn.className = 'sp-btn';
+    waBtn.innerHTML = iWA + ' WhatsApp';
+    waBtn.onclick = function(){
+      var url=encodeURIComponent(window.location.href.split('?')[0]);
+      var txt=encodeURIComponent(document.title);
+      window.open('https://wa.me/?text='+txt+'%20'+url,'_blank','noopener');
+    };
+    row.appendChild(waBtn);
+
+    /* 5 — X */
+    var xBtn = document.createElement('button');
+    xBtn.className = 'sp-btn';
+    xBtn.innerHTML = iX + ' X';
+    xBtn.onclick = function(){
+      var url=encodeURIComponent(window.location.href.split('?')[0]);
+      var txt=encodeURIComponent(document.title);
+      window.open('https://x.com/intent/tweet?url='+url+'&text='+txt,'_blank','noopener');
+    };
+    row.appendChild(xBtn);
+
+    /* 6 — Embed */
+    var embedBtn = document.createElement('button');
+    embedBtn.className = 'sp-btn';
+    embedBtn.innerHTML = iEmbed + ' ' + (_embedL[_lang]||_embedL.en);
+    embedBtn.onclick = function(){ window.showEmbedModal(); };
+    row.appendChild(embedBtn);
+
     wrap.appendChild(row);
 
     var related = document.querySelector('.related-section');
