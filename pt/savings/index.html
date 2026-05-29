@@ -58,7 +58,7 @@ input[type=number]:focus{border-color:var(--hi)}
 <header></header>
 <div class="page">
   <h1>💰 Calculadora de Poupança</h1>
-  <p class="sub">Preencha quaisquer quatro campos — o quinto é calculado automaticamente.</p>
+  <p class="sub">Preencha três campos — o quarto é calculado automaticamente. A taxa é opcional.</p>
 
   <div class="card">
     <div class="field" id="field-initial">
@@ -90,9 +90,9 @@ input[type=number]:focus{border-color:var(--hi)}
       </div>
     </div>
     <div class="field" id="field-rate">
-      <label for="rate">Taxa de juros anual</label>
+      <label for="rate">Taxa de juros anual <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:var(--ink-faint)">(opcional)</span></label>
       <div class="input-wrap">
-        <input type="number" id="rate" placeholder="5" min="0" step="0.25">
+        <input type="number" id="rate" placeholder="0" min="0" step="0.25">
         <span class="input-suffix">%/ano</span>
       </div>
     </div>
@@ -105,13 +105,15 @@ input[type=number]:focus{border-color:var(--hi)}
 </div>
 
 <script>
+var MAIN=['initial','monthly','years','goal'];
 var ALL=['initial','monthly','years','goal','rate'];
-var DEFAULT_TARGET='goal';
-var userFilled=[];
+var fillOrder=[];
 
 function getTarget(){
-  if(userFilled.indexOf(DEFAULT_TARGET)===-1)return DEFAULT_TARGET;
-  return userFilled[0];
+  var empties=MAIN.filter(function(f){return document.getElementById(f).value.trim()==='';});
+  if(empties.length===1)return empties[0];
+  if(empties.length===0&&fillOrder.length>0)return fillOrder[0];
+  return null;
 }
 
 function calcFV(pv,pmt,r,n){if(r<1e-10)return pv+pmt*n;var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r;}
@@ -121,14 +123,6 @@ function calcN(fv,pv,pmt,r){
   if(r<1e-10){if(Math.abs(pmt)<0.01)return null;var n=(fv-pv)/pmt;return n>0?n:null;}
   var A=pv+pmt/r,B=fv+pmt/r;if(A<=0||B<=0)return null;
   var n=Math.log(B/A)/Math.log(1+r);return n>0?n:null;
-}
-function calcRate(fv,pv,pmt,n){
-  if(n<=0)return null;
-  function f(r){if(Math.abs(r)<1e-12)return pv+pmt*n-fv;var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r-fv;}
-  if(f(0)>=0)return 0;
-  var hi=0.1;while(f(hi)<0&&hi<100)hi*=2;if(f(hi)<0)return null;
-  var lo=0;for(var i=0;i<100;i++){var mid=(lo+hi)/2;if(hi-lo<1e-12)break;if(f(mid)<0)lo=mid;else hi=mid;}
-  return(lo+hi)/2;
 }
 
 function fmt(n){return'R$ '+Math.round(Math.abs(n)).toLocaleString('pt-BR');}
@@ -149,8 +143,10 @@ function highlight(){
 
 ALL.forEach(function(f){
   document.getElementById(f).addEventListener('input',function(){
-    userFilled=userFilled.filter(function(id){return id!==f;});
-    if(this.value.trim()!=='')userFilled.push(f);
+    if(MAIN.indexOf(f)!==-1){
+      fillOrder=fillOrder.filter(function(id){return id!==f;});
+      if(this.value.trim()!=='')fillOrder.push(f);
+    }
     highlight();
     calculate();
   });
@@ -164,12 +160,13 @@ function getV(id){
 
 function calculate(){
   var t=getTarget();
+  if(t===null){document.getElementById('result-card').style.display='none';return;}
   var pv  =t!=='initial'?getV('initial'):null;
   var pmt =t!=='monthly'?getV('monthly'):null;
   var yrs =t!=='years'  ?getV('years')  :null;
   var fv  =t!=='goal'   ?getV('goal')   :null;
-  var rAnn=t!=='rate'   ?getV('rate')   :null;
-  var r=(rAnn!==null)?(rAnn/100)/12:0;
+  var rAnn=getV('rate');
+  var r=rAnn!==null?(rAnn/100)/12:0;
   var n=yrs!==null?yrs*12:null;
   var result=null;
   try{
@@ -179,17 +176,12 @@ function calculate(){
     else if(t==='years'){
       if(pv===null||pmt===null||fv===null||fv<=0){clr();return;}
       var months=calcN(fv,pv,pmt,r);result=months!==null?months/12:null;
-    }else if(t==='rate'){
-      if(pv===null||pmt===null||n===null||n<=0||fv===null||fv<=0){clr();return;}
-      var mr=calcRate(fv,pv,pmt,n);result=mr!==null?mr*12*100:null;
     }
   }catch(e){clr();return;}
   if(result===null||isNaN(result)||!isFinite(result)){clr();return;}
 
   var inp=document.getElementById(t);
-  if(t==='years')inp.value=Math.round(result*10)/10;
-  else if(t==='rate')inp.value=Math.round(result*100)/100;
-  else inp.value=Math.round(result);
+  inp.value=(t==='years')?Math.round(result*10)/10:Math.round(result);
 
   var sPV =t==='initial'?result:(pv||0);
   var sPMT=t==='monthly'?result:(pmt||0);
@@ -207,14 +199,14 @@ function calculate(){
     +'<span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Saldo final</span>'
     +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
   if(t==='years')html+='<div class="result-note">→ '+fmtYr(result)+'</div>';
-  if(t==='rate'){
-    var ann=Math.round(result*100)/100,mon=Math.round(result/12*100)/100;
-    html+='<div class="result-note">→ '+ann+'% anual ('+mon+'% mensal)</div>';
-  }
   document.getElementById('result-rows').innerHTML=html;
   document.getElementById('result-card').style.display='block';
 }
-function clr(){document.getElementById(getTarget()).value='';document.getElementById('result-card').style.display='none';}
+function clr(){
+  var t=getTarget();
+  if(t)document.getElementById(t).value='';
+  document.getElementById('result-card').style.display='none';
+}
 
 highlight();
 </script>

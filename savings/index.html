@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/savings/">
 <link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/">
 <meta property="og:title" content="Savings Calculator — calculate.website">
-<meta property="og:description" content="Leave any field blank and it calculates automatically.">
+<meta property="og:description" content="Leave one field blank — it calculates automatically.">
 <meta property="og:url" content="https://calculate.website/savings/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="en_US">
@@ -58,7 +58,7 @@ input[type=number]:focus{border-color:var(--hi)}
 <header></header>
 <div class="page">
   <h1>💰 Savings Calculator</h1>
-  <p class="sub">Fill in any four fields — the fifth calculates automatically.</p>
+  <p class="sub">Fill in three fields — the fourth calculates automatically. Interest rate is optional.</p>
 
   <div class="card">
     <div class="field" id="field-initial">
@@ -90,9 +90,9 @@ input[type=number]:focus{border-color:var(--hi)}
       </div>
     </div>
     <div class="field" id="field-rate">
-      <label for="rate">Annual interest rate</label>
+      <label for="rate">Annual interest rate <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:var(--ink-faint)">(optional)</span></label>
       <div class="input-wrap">
-        <input type="number" id="rate" placeholder="5" min="0" step="0.25">
+        <input type="number" id="rate" placeholder="0" min="0" step="0.25">
         <span class="input-suffix">%/yr</span>
       </div>
     </div>
@@ -105,22 +105,24 @@ input[type=number]:focus{border-color:var(--hi)}
 </div>
 
 <script>
-var ALL=['initial','monthly','years','goal','rate'];
-
 /*
-  Logic: 'goal' is the default auto-solved field.
-  userFilled = fields the user has explicitly typed in, in order (oldest first).
-  - While 'goal' is NOT in userFilled → goal is always the target.
-  - Once user types in 'goal' → userFilled[0] (the first field they ever typed) becomes the target.
-  - This means: fill initial, monthly, years → goal auto-calculates.
-    Then type in goal → initial (the oldest) auto-recalculates. Natural and intuitive.
+  Logic:
+  - MAIN = the 4 core fields. Rate is always optional (empty = 0%).
+  - getTarget(): if exactly 1 MAIN field is empty → solve for it.
+                 if all 4 MAIN fields are filled → solve for the one filled earliest (fillOrder[0]).
+                 otherwise (0 or 2+ empty) → nothing to solve yet.
+  - fillOrder tracks which MAIN fields the user has typed in, oldest first.
+  - No field is ever disabled. All are always editable.
 */
-var DEFAULT_TARGET='goal';
-var userFilled=[]; // user-typed fields, oldest-first
+var MAIN=['initial','monthly','years','goal'];
+var ALL=['initial','monthly','years','goal','rate'];
+var fillOrder=[];
 
 function getTarget(){
-  if(userFilled.indexOf(DEFAULT_TARGET)===-1)return DEFAULT_TARGET;
-  return userFilled[0];
+  var empties=MAIN.filter(function(f){return document.getElementById(f).value.trim()==='';});
+  if(empties.length===1)return empties[0];
+  if(empties.length===0&&fillOrder.length>0)return fillOrder[0];
+  return null;
 }
 
 /* ── Math ── */
@@ -161,9 +163,10 @@ function highlight(){
 /* ── Listeners ── */
 ALL.forEach(function(f){
   document.getElementById(f).addEventListener('input',function(){
-    // Remove from list then re-add at end if non-empty (tracks typing order)
-    userFilled=userFilled.filter(function(id){return id!==f;});
-    if(this.value.trim()!=='')userFilled.push(f);
+    if(MAIN.indexOf(f)!==-1){
+      fillOrder=fillOrder.filter(function(id){return id!==f;});
+      if(this.value.trim()!=='')fillOrder.push(f);
+    }
     highlight();
     calculate();
   });
@@ -178,12 +181,13 @@ function getV(id){
 
 function calculate(){
   var t=getTarget();
+  if(t===null){document.getElementById('result-card').style.display='none';return;}
   var pv  =t!=='initial'?getV('initial'):null;
   var pmt =t!=='monthly'?getV('monthly'):null;
   var yrs =t!=='years'  ?getV('years')  :null;
   var fv  =t!=='goal'   ?getV('goal')   :null;
-  var rAnn=t!=='rate'   ?getV('rate')   :null;
-  var r=(rAnn!==null)?(rAnn/100)/12:0;
+  var rAnn=getV('rate'); // always optional
+  var r=rAnn!==null?(rAnn/100)/12:0;
   var n=yrs!==null?yrs*12:null;
   var result=null;
   try{
@@ -193,17 +197,12 @@ function calculate(){
     else if(t==='years'){
       if(pv===null||pmt===null||fv===null||fv<=0){clr();return;}
       var months=calcN(fv,pv,pmt,r);result=months!==null?months/12:null;
-    }else if(t==='rate'){
-      if(pv===null||pmt===null||n===null||n<=0||fv===null||fv<=0){clr();return;}
-      var mr=calcRate(fv,pv,pmt,n);result=mr!==null?mr*12*100:null;
     }
   }catch(e){clr();return;}
   if(result===null||isNaN(result)||!isFinite(result)){clr();return;}
 
   var inp=document.getElementById(t);
-  if(t==='years')inp.value=Math.round(result*10)/10;
-  else if(t==='rate')inp.value=Math.round(result*100)/100;
-  else inp.value=Math.round(result);
+  inp.value=(t==='years')?Math.round(result*10)/10:Math.round(result);
 
   var sPV =t==='initial'?result:(pv||0);
   var sPMT=t==='monthly'?result:(pmt||0);
@@ -221,14 +220,14 @@ function calculate(){
     +'<span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Final balance</span>'
     +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
   if(t==='years')html+='<div class="result-note">→ '+fmtYr(result)+'</div>';
-  if(t==='rate'){
-    var ann=Math.round(result*100)/100,mon=Math.round(result/12*100)/100;
-    html+='<div class="result-note">→ '+ann+'% annual ('+mon+'% monthly)</div>';
-  }
   document.getElementById('result-rows').innerHTML=html;
   document.getElementById('result-card').style.display='block';
 }
-function clr(){document.getElementById(getTarget()).value='';document.getElementById('result-card').style.display='none';}
+function clr(){
+  var t=getTarget();
+  if(t)document.getElementById(t).value='';
+  document.getElementById('result-card').style.display='none';
+}
 
 highlight();
 </script>
