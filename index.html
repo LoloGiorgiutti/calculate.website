@@ -320,7 +320,7 @@
   if (catGrid && calcs.length) {
     var total = calcs.reduce(function(s, c){ return s + c.items.length; }, 0);
     if (hcCount) hcCount.textContent = total + ' calculators';
-    calcs.slice(0, 6).forEach(function (cat) {
+    calcs.forEach(function (cat) {
       var chip = document.createElement('a');
       chip.className = 'cat-chip';
       chip.href = '/' + cat.slug + '/';
