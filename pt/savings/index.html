@@ -244,8 +244,18 @@ function calculate(){
     +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
   var yrsForNote=t==='years'?result:getYears();
   if(yrsForNote!==null&&yrsForNote>0){
-    if(t==='years'){var nd=new Date(Date.now()+result*365.25*86400000);html+='<div class="result-note">→ '+fmtDate(nd)+' · '+fmtYr(result)+'</div>';}
-    else html+='<div class="result-note">→ '+fmtYr(yrsForNote)+'</div>';
+    var _td=Math.round(yrsForNote*365.25),_tw=Math.floor(_td/7);
+    var _n=new Date();_n.setHours(0,0,0,0);
+    var _e=new Date(_n.getTime()+yrsForNote*365.25*86400000);
+    var _ey=_e.getFullYear()-_n.getFullYear(),_em=_e.getMonth()-_n.getMonth(),_ed=_e.getDate()-_n.getDate();
+    if(_ed<0){_em--;_ed+=new Date(_e.getFullYear(),_e.getMonth(),0).getDate();}
+    if(_em<0){_ey--;_em+=12;}
+    var _dp=[];if(_ey>0)_dp.push(_ey+(_ey===1?' ano':' anos'));if(_em>0)_dp.push(_em+(_em===1?' mês':' meses'));if(_ed>0)_dp.push(_ed+(_ed===1?' dia':' dias'));
+    var _nl=[];
+    if(t==='years'){var nd=new Date(Date.now()+result*365.25*86400000);_nl.push('→ '+fmtDate(nd));}
+    _nl.push(_dp.join(' ')||'< 1 dia');
+    _nl.push(_tw+' semanas · '+_td+' dias');
+    html+='<div class="result-note">'+_nl.join('<br>')+'</div>';
   }
   document.getElementById('result-rows').innerHTML=html;
   document.getElementById('result-card').style.display='block';
