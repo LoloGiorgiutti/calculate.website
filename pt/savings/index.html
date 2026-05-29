@@ -106,7 +106,13 @@ input[type=number]:focus{border-color:var(--hi)}
 
 <script>
 var ALL=['initial','monthly','years','goal','rate'];
-var order=['goal','initial','monthly','years','rate'];
+var DEFAULT_TARGET='goal';
+var userFilled=[];
+
+function getTarget(){
+  if(userFilled.indexOf(DEFAULT_TARGET)===-1)return DEFAULT_TARGET;
+  return userFilled[0];
+}
 
 function calcFV(pv,pmt,r,n){if(r<1e-10)return pv+pmt*n;var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r;}
 function calcPV(fv,pmt,r,n){if(n<=0)return null;if(r<1e-10)return fv-pmt*n;var fn=Math.pow(1+r,n);return(fv-pmt*(fn-1)/r)/fn;}
@@ -134,9 +140,6 @@ function fmtYr(n){
   return s||'< 1 mês';
 }
 
-function getTarget(){return order[0];}
-function touch(id){order=order.filter(function(f){return f!==id;});order.push(id);}
-
 function highlight(){
   var t=getTarget();
   ALL.forEach(function(f){
@@ -146,7 +149,8 @@ function highlight(){
 
 ALL.forEach(function(f){
   document.getElementById(f).addEventListener('input',function(){
-    touch(f);
+    userFilled=userFilled.filter(function(id){return id!==f;});
+    if(this.value.trim()!=='')userFilled.push(f);
     highlight();
     calculate();
   });

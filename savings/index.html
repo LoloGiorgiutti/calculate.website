@@ -106,8 +106,22 @@ input[type=number]:focus{border-color:var(--hi)}
 
 <script>
 var ALL=['initial','monthly','years','goal','rate'];
-// LRU: order[0] = least recently touched by user = auto-solved field
-var order=['goal','initial','monthly','years','rate'];
+
+/*
+  Logic: 'goal' is the default auto-solved field.
+  userFilled = fields the user has explicitly typed in, in order (oldest first).
+  - While 'goal' is NOT in userFilled → goal is always the target.
+  - Once user types in 'goal' → userFilled[0] (the first field they ever typed) becomes the target.
+  - This means: fill initial, monthly, years → goal auto-calculates.
+    Then type in goal → initial (the oldest) auto-recalculates. Natural and intuitive.
+*/
+var DEFAULT_TARGET='goal';
+var userFilled=[]; // user-typed fields, oldest-first
+
+function getTarget(){
+  if(userFilled.indexOf(DEFAULT_TARGET)===-1)return DEFAULT_TARGET;
+  return userFilled[0];
+}
 
 /* ── Math ── */
 function calcFV(pv,pmt,r,n){if(r<1e-10)return pv+pmt*n;var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r;}
@@ -137,10 +151,6 @@ function fmtYr(n){
   return s||'< 1 month';
 }
 
-/* ── LRU ── */
-function getTarget(){return order[0];}
-function touch(id){order=order.filter(function(f){return f!==id;});order.push(id);}
-
 function highlight(){
   var t=getTarget();
   ALL.forEach(function(f){
@@ -151,7 +161,9 @@ function highlight(){
 /* ── Listeners ── */
 ALL.forEach(function(f){
   document.getElementById(f).addEventListener('input',function(){
-    touch(f);
+    // Remove from list then re-add at end if non-empty (tracks typing order)
+    userFilled=userFilled.filter(function(id){return id!==f;});
+    if(this.value.trim()!=='')userFilled.push(f);
     highlight();
     calculate();
   });
