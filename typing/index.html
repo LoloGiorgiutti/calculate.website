@@ -61,7 +61,7 @@ textarea.typing-input:focus{border-color:var(--accent)}
       <div class="stat" id="stat-time"><div class="stat-val" id="time-val">60</div><div class="stat-lbl">Seconds</div></div>
     </div>
     <div class="text-display" id="text-display"></div>
-    <textarea class="typing-input" id="typing-input" placeholder="Click here and start typing..." oninput="onType()" disabled></textarea>
+    <textarea class="typing-input" id="typing-input" placeholder="Click here and start typing..." disabled></textarea>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="startTest()">Start / Restart</button>
       <button class="btn btn-secondary" onclick="changeText()">New text</button>
@@ -107,30 +107,8 @@ function startTest(){
   document.getElementById('result').innerHTML='';
   renderText();
 }
-function onType(){
-  if(!testRunning){
-    startTime=Date.now();testRunning=true;
-    timerInterval=setInterval(function(){
-      timeLeft--;
-      document.getElementById('time-val').textContent=timeLeft;
-      if(timeLeft<=0){clearInterval(timerInterval);endTest();}
-    },1000);
-  }
-  var input=document.getElementById('typing-input').value;
-  var parts=input.split(' ');
-  typed=parts.slice(0,-1);
-  var current=parts[parts.length-1];
-  if(input.endsWith(' ')&&typed.length<words.length){
-    typed=parts.slice(0,-1);document.getElementById('typing-input').value='';
-  }
-  var correct=typed.filter(function(w,i){return w===words[i];}).length;
-  var elapsed=(Date.now()-startTime)/60000;
-  var wpm=elapsed>0?Math.round(correct/elapsed):0;
-  document.getElementById('wpm-val').textContent=wpm;
-  if(typed.length>0){document.getElementById('acc-val').textContent=Math.round(correct/typed.length*100)+'%';}
-  renderText();
-  if(typed.length>=words.length){clearInterval(timerInterval);endTest();}
-}
+function startTimer(){if(testRunning)return;startTime=Date.now();testRunning=true;timerInterval=setInterval(function(){timeLeft--;document.getElementById('time-val').textContent=timeLeft;if(timeLeft<=0){clearInterval(timerInterval);endTest();}},1000);}
+function updateStats(){var correct=typed.filter(function(w,i){return w===words[i];}).length;var elapsed=startTime?(Date.now()-startTime)/60000:0;var wpm=elapsed>0?Math.round(correct/elapsed):0;document.getElementById('wpm-val').textContent=wpm;if(typed.length>0){document.getElementById('acc-val').textContent=Math.round(correct/typed.length*100)+'%';}}
 function endTest(){
   testRunning=false;document.getElementById('typing-input').disabled=true;
   var elapsed=(Date.now()-startTime)/60000;
@@ -145,6 +123,22 @@ function endTest(){
     +'</div></div>';
 }
 startTest();
+document.getElementById('typing-input').addEventListener('keydown',function(e){
+  if(e.key===' '||e.keyCode===32){
+    e.preventDefault();
+    var word=this.value.trim();
+    if(!word)return;
+    startTimer();
+    typed.push(word);
+    this.value='';
+    renderText();
+    updateStats();
+    if(typed.length>=words.length){clearInterval(timerInterval);endTest();}
+  }
+});
+document.getElementById('typing-input').addEventListener('input',function(){
+  startTimer();renderText();updateStats();
+});
 </script>
 </body>
 </html>

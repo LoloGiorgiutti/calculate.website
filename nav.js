@@ -729,9 +729,18 @@
     /* ── LIGHT MODE: HERO SECTIONS ───────────────────────────────────────── */
     'html:not([data-theme="dark"]) .hero,',
     'html:not([data-theme="dark"]) .hero-wrap,',
-    'html:not([data-theme="dark"]) .cat-hero{',
+    'html:not([data-theme="dark"]) .cat-hero,',
+    'html:not([data-theme="dark"]) .page-hero{',
     'background:transparent !important;',
     'color:#0A0E1A !important;}',
+    'html:not([data-theme="dark"]) .page-hero::before{display:none !important;}',
+    'html:not([data-theme="dark"]) .page-hero h1{color:#0A0E1A !important;}',
+    'html:not([data-theme="dark"]) .page-hero p{color:#5A607A !important;}',
+    'html:not([data-theme="dark"]) .page-hero .breadcrumb,',
+    'html:not([data-theme="dark"]) .page-hero .breadcrumb a,',
+    'html:not([data-theme="dark"]) .page-hero .breadcrumb .curr,',
+    'html:not([data-theme="dark"]) .page-hero .bc,',
+    'html:not([data-theme="dark"]) .page-hero .bc a{color:rgba(10,14,26,.45) !important;}',
     'html:not([data-theme="dark"]) .calc-result{',
     'background:linear-gradient(135deg,#EEF1FF 0%,#F7F8FA 100%) !important;',
     'color:#0A0E1A !important;}',
@@ -877,6 +886,13 @@
     'html[data-theme="dark"] .calc-sub{color:#9BA0B8 !important;}',
     'html[data-theme="dark"] .mode-tab{background:#0E1525 !important;border-color:#1F2438 !important;color:#9BA0B8 !important;}',
     'html[data-theme="dark"] .field input:not([type="range"]){background:#0E1525 !important;color:#E2E4F0 !important;}',
+
+    /* Active/selected buttons in dark mode */
+    'html[data-theme="dark"] .seg-btn.active,',
+    'html[data-theme="dark"] .unit-btn.active{',
+    'background:rgba(79,107,255,.18) !important;border-color:#4F6BFF !important;color:#4F6BFF !important;}',
+    'html[data-theme="dark"] .act-btn.active{',
+    'background:rgba(79,107,255,.12) !important;border-color:#4F6BFF !important;color:#E2E4F0 !important;}',
 
     /* Site footer */
     '.site-footer{border-top:1px solid var(--line,#E4E7EE);padding:28px 32px;font-size:12px;font-family:"JetBrains Mono",monospace;color:var(--ink-3,#858AA0);}',
