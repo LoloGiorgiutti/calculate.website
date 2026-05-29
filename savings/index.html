@@ -6,15 +6,16 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9523976383161076" crossorigin="anonymous"></script>
 <meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Savings Calculator — How Fast Will Your Money Grow?</title>
-<meta name="description" content="Calculate how your savings will grow over time with regular monthly deposits and compound interest. See your balance year by year. Free and instant.">
+<title>Savings Calculator — Solve for Any Variable | calculate.website</title>
+<meta name="description" content="Savings calculator that solves for any missing variable: initial amount, monthly contribution, time period, goal, or interest rate. Free and instant.">
 <link rel="canonical" href="https://calculate.website/savings/">
-  <link rel="alternate" hreflang="en" href="https://calculate.website/savings/">
-  <link rel="alternate" hreflang="es" href="https://calculate.website/es/savings/">
-  <link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/savings/">
-  <link rel="alternate" hreflang="fr" href="https://calculate.website/fr/savings/">
-  <link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/">
+<link rel="alternate" hreflang="en"    href="https://calculate.website/savings/">
+<link rel="alternate" hreflang="es"    href="https://calculate.website/es/savings/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/savings/">
+<link rel="alternate" hreflang="fr"    href="https://calculate.website/fr/savings/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/">
 <meta property="og:title" content="Savings Calculator — calculate.website">
+<meta property="og:description" content="Solve for any savings variable: goal, time, contributions, or interest rate.">
 <meta property="og:url" content="https://calculate.website/savings/">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:locale" content="en_US">
@@ -25,128 +26,255 @@
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
 .page{max-width:520px;margin:0 auto;padding:36px 20px 60px}
 h1{font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
-.sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.sub{font-size:14px;color:var(--ink-light);line-height:1.6;margin-bottom:28px}
 .card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border)}
 .field{margin-bottom:18px}.field:last-child{margin-bottom:0}
-label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px}
+.field-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light)}
+.solve-pill{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 11px;border-radius:99px;border:1.5px solid var(--border);background:transparent;color:var(--ink-faint);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1.5}
+.solve-pill:hover{border-color:var(--hi);color:var(--hi)}
+.solve-pill.active{background:var(--hi);border-color:var(--hi);color:#fff;cursor:default}
 .input-wrap{position:relative}
 .input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:15px;pointer-events:none;font-weight:500}
 .input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:13px;pointer-events:none}
-input[type=number]{width:100%;padding:13px 44px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s;-moz-appearance:textfield}
+input[type=number]{width:100%;padding:13px 52px 13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:var(--ink);background:var(--surface);outline:none;transition:border-color .15s,background .15s,color .15s;-moz-appearance:textfield;appearance:textfield}
 input[type=number].has-prefix{padding-left:30px}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 input[type=number]:focus{border-color:var(--hi)}
-.result-card{background:#0C1528;border-radius:var(--radius);padding:28px;margin-bottom:16px;border-top:3px solid var(--hi)}
-.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
-.result-main{font-size:42px;font-weight:700;color:white;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
-.result-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px}
-.result-rows{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.field.is-target input[type=number]{background:var(--hi-soft)!important;border-color:var(--hi)!important;color:var(--hi)!important;font-weight:800}
+.field.is-target input[type=number]:disabled{opacity:1;cursor:default}
+.result-card{background:#0C1528;border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;border-top:3px solid var(--hi)}
+.result-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
+.result-rows{display:flex;flex-direction:column;gap:10px}
 .result-row{display:flex;justify-content:space-between;align-items:center}
 .result-row-lbl{font-size:13px;color:rgba(255,255,255,.5)}
-.result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,.85)}
+.result-row-val{font-size:14px;font-weight:600;color:rgba(255,255,255,.85);font-family:'JetBrains Mono',monospace}
 .result-row-val.pos{color:#86EFAC}
+.result-row-val.hi{color:#fff;font-size:15px;font-weight:800}
+.result-row-val.hi.pos{color:#86EFAC}
 .result-divider{height:1px;background:rgba(255,255,255,.08);margin:2px 0}
-.empty-state{color:rgba(255,255,255,.3);font-size:15px}
+.result-note{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace}
 </style>
 </head>
 <body>
 <header></header>
 <div class="page">
-  <h1>Savings Calculator</h1>
-  <p class="sub">See how your savings will grow over time with deposits and compound interest.</p>
+  <h1>💰 Savings Calculator</h1>
+  <p class="sub">Fill in any 4 fields. Click <strong>Solve →</strong> on the one you want to find and it calculates automatically.</p>
 
   <div class="card">
-    <div class="field">
-      <label>Initial savings</label>
+    <div class="field" id="field-initial">
+      <div class="field-top">
+        <label for="initial">Initial savings</label>
+        <button class="solve-pill" id="pill-initial" onclick="setTarget('initial')">Solve →</button>
+      </div>
       <div class="input-wrap">
         <span class="input-prefix">$</span>
-        <input type="number" id="initial" class="has-prefix" placeholder="1000" min="0" oninput="calculate()">
+        <input type="number" id="initial" class="has-prefix" placeholder="1,000" min="0" oninput="calculate()">
       </div>
     </div>
-    <div class="field">
-      <label>Monthly deposit</label>
+
+    <div class="field" id="field-monthly">
+      <div class="field-top">
+        <label for="monthly">Monthly contribution</label>
+        <button class="solve-pill" id="pill-monthly" onclick="setTarget('monthly')">Solve →</button>
+      </div>
       <div class="input-wrap">
         <span class="input-prefix">$</span>
         <input type="number" id="monthly" class="has-prefix" placeholder="200" min="0" oninput="calculate()">
       </div>
     </div>
-    <div class="field">
-      <label>Annual interest rate (APY)</label>
+
+    <div class="field" id="field-years">
+      <div class="field-top">
+        <label for="years">Period</label>
+        <button class="solve-pill" id="pill-years" onclick="setTarget('years')">Solve →</button>
+      </div>
       <div class="input-wrap">
-        <input type="number" id="rate" placeholder="5" min="0" step="0.25" oninput="calculate()">
-        <span class="input-suffix">%</span>
+        <input type="number" id="years" placeholder="10" min="0" step="0.5" oninput="calculate()">
+        <span class="input-suffix">yrs</span>
       </div>
     </div>
-    <div class="field">
-      <label>Time period</label>
+
+    <div class="field" id="field-goal">
+      <div class="field-top">
+        <label for="goal">Goal (final balance)</label>
+        <button class="solve-pill" id="pill-goal" onclick="setTarget('goal')">Solve →</button>
+      </div>
       <div class="input-wrap">
-        <input type="number" id="years" placeholder="10" min="1" max="50" oninput="calculate()">
-        <span class="input-suffix">years</span>
+        <span class="input-prefix">$</span>
+        <input type="number" id="goal" class="has-prefix" placeholder="50,000" min="0" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="field" id="field-rate">
+      <div class="field-top">
+        <label for="rate">Annual interest rate</label>
+        <button class="solve-pill" id="pill-rate" onclick="setTarget('rate')">Solve →</button>
+      </div>
+      <div class="input-wrap">
+        <input type="number" id="rate" placeholder="0" min="0" step="0.25" oninput="calculate()">
+        <span class="input-suffix">%/yr</span>
       </div>
     </div>
   </div>
 
-  <div class="result-card">
-    <div class="result-eyebrow">Final balance</div>
-    <div id="result-main" class="result-main"><span class="empty-state">Fill in the fields</span></div>
-    <div id="result-sub" class="result-sub"></div>
-    <div id="result-rows" class="result-rows" style="display:none">
-      <div class="result-row">
-        <span class="result-row-lbl">Total deposited</span>
-        <span class="result-row-val" id="r-deposited">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-row-lbl">Interest earned</span>
-        <span class="result-row-val pos" id="r-interest">—</span>
-      </div>
-      <div class="result-divider"></div>
-      <div class="result-row">
-        <span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Total balance</span>
-        <span class="result-row-val pos" id="r-total">—</span>
-      </div>
-    </div>
+  <div class="result-card" id="result-card" style="display:none">
+    <div class="result-eyebrow">Breakdown</div>
+    <div id="result-rows" class="result-rows"></div>
   </div>
 </div>
 
 <script>
-function fmt(n){
-  if(Math.abs(n)>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
-  return '$'+Math.round(n).toLocaleString('en-US');
+var TARGET='goal';
+var ALL=['initial','monthly','years','goal','rate'];
+
+/* ── Math ── */
+function calcFV(pv,pmt,r,n){
+  if(r<1e-10)return pv+pmt*n;
+  var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r;
 }
+function calcPV(fv,pmt,r,n){
+  if(n<=0)return null;
+  if(r<1e-10)return fv-pmt*n;
+  var fn=Math.pow(1+r,n);return(fv-pmt*(fn-1)/r)/fn;
+}
+function calcPMT(fv,pv,r,n){
+  if(n<=0)return null;
+  if(r<1e-10)return(fv-pv)/n;
+  var fn=Math.pow(1+r,n);
+  if(Math.abs(fn-1)<1e-10)return null;
+  return(fv-pv*fn)*r/(fn-1);
+}
+function calcN(fv,pv,pmt,r){
+  if(r<1e-10){
+    if(Math.abs(pmt)<0.01)return null;
+    var n=(fv-pv)/pmt;return n>0?n:null;
+  }
+  var A=pv+pmt/r,B=fv+pmt/r;
+  if(A<=0||B<=0)return null;
+  var n=Math.log(B/A)/Math.log(1+r);
+  return n>0?n:null;
+}
+function calcRate(fv,pv,pmt,n){
+  if(n<=0)return null;
+  function f(r){
+    if(Math.abs(r)<1e-12)return pv+pmt*n-fv;
+    var fn=Math.pow(1+r,n);return pv*fn+pmt*(fn-1)/r-fv;
+  }
+  if(f(0)>=0)return 0;
+  var hi=0.1;
+  while(f(hi)<0&&hi<100)hi*=2;
+  if(f(hi)<0)return null;
+  var lo=0;
+  for(var i=0;i<100;i++){var mid=(lo+hi)/2;if(hi-lo<1e-12)break;if(f(mid)<0)lo=mid;else hi=mid;}
+  return(lo+hi)/2;
+}
+
+/* ── Formatting ── */
+function fmt(n){return'$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
+function fmtYr(n){
+  var y=Math.floor(n),m=Math.round((n-y)*12);
+  if(m===12){y++;m=0;}
+  var s='';
+  if(y>0)s+=y+(y===1?' year':' years');
+  if(m>0)s+=(s?' ':'')+m+(m===1?' month':' months');
+  return s||'< 1 month';
+}
+
+/* ── UI ── */
+function setTarget(id){
+  TARGET=id;
+  ALL.forEach(function(f){
+    var pill=document.getElementById('pill-'+f);
+    var inp=document.getElementById(f);
+    var field=document.getElementById('field-'+f);
+    if(f===id){
+      pill.className='solve-pill active';pill.textContent='◎ Solving';
+      inp.disabled=true;inp.value='';
+      field.classList.add('is-target');
+    } else {
+      pill.className='solve-pill';pill.textContent='Solve →';
+      inp.disabled=false;
+      field.classList.remove('is-target');
+    }
+  });
+  calculate();
+}
+
+function filled(id){var v=document.getElementById(id).value.trim();return v!==''&&!isNaN(parseFloat(v));}
+function getV(id){return parseFloat(document.getElementById(id).value)||0;}
 
 function calculate(){
-  var initial=parseFloat(document.getElementById('initial').value)||0;
-  var monthly=parseFloat(document.getElementById('monthly').value)||0;
-  var rate=parseFloat(document.getElementById('rate').value)||0;
-  var years=parseInt(document.getElementById('years').value)||0;
+  var pv   =TARGET!=='initial'?(filled('initial')?getV('initial'):null):null;
+  var pmt  =TARGET!=='monthly'?(filled('monthly')?getV('monthly'):null):null;
+  var yrs  =TARGET!=='years'  ?(filled('years')  ?getV('years')  :null):null;
+  var fv   =TARGET!=='goal'   ?(filled('goal')   ?getV('goal')   :null):null;
+  var rAnn =TARGET!=='rate'   ?getV('rate'):null; /* defaults 0 if empty */
+  var r    =rAnn!==null?(rAnn/100)/12:0;
+  var n    =yrs!==null?yrs*12:null;
+  var result=null;
+  try{
+    if(TARGET==='goal'){
+      if(pv===null||pmt===null||n===null||n<=0){clr();return;}
+      result=calcFV(pv,pmt,r,n);
+    } else if(TARGET==='initial'){
+      if(pmt===null||n===null||n<=0||fv===null){clr();return;}
+      result=calcPV(fv,pmt,r,n);
+    } else if(TARGET==='monthly'){
+      if(pv===null||n===null||n<=0||fv===null){clr();return;}
+      result=calcPMT(fv,pv,r,n);
+    } else if(TARGET==='years'){
+      if(pv===null||pmt===null||fv===null||fv<=0){clr();return;}
+      var months=calcN(fv,pv,pmt,r);
+      result=months!==null?months/12:null;
+    } else if(TARGET==='rate'){
+      if(pv===null||pmt===null||n===null||n<=0||fv===null||fv<=0){clr();return;}
+      var mr=calcRate(fv,pv,pmt,n);
+      result=mr!==null?mr*12*100:null;
+    }
+  }catch(e){clr();return;}
+  if(result===null||isNaN(result)||!isFinite(result)){clr();return;}
 
-  var mainEl=document.getElementById('result-main');
-  var subEl=document.getElementById('result-sub');
-  var rowsEl=document.getElementById('result-rows');
+  var inp=document.getElementById(TARGET);
+  if(TARGET==='years')inp.value=Math.round(result*10)/10;
+  else if(TARGET==='rate')inp.value=Math.round(result*100)/100;
+  else inp.value=Math.round(result);
 
-  if((!initial&&!monthly)||!years){
-    mainEl.innerHTML='<span class="empty-state">Fill in the fields</span>';
-    subEl.textContent='';rowsEl.style.display='none';return;
+  /* Summary */
+  var sPV =TARGET==='initial'?result:(pv||0);
+  var sPMT=TARGET==='monthly'?result:(pmt||0);
+  var sYrs=TARGET==='years'  ?result:(yrs||0);
+  var sFV =TARGET==='goal'   ?result:(fv||0);
+  var sN  =sYrs*12;
+  var dep =sPV+sPMT*sN;
+  var int_=sFV-dep;
+  var html=
+    '<div class="result-row"><span class="result-row-lbl">Total deposited</span>'
+    +'<span class="result-row-val">'+fmt(dep)+'</span></div>'
+    +'<div class="result-row"><span class="result-row-lbl">Interest earned</span>'
+    +'<span class="result-row-val '+(int_>=0?'pos':'')+'">'+
+    (int_>=0?'+ ':'− ')+fmt(int_)+'</span></div>'
+    +'<div class="result-divider"></div>'
+    +'<div class="result-row">'
+    +'<span class="result-row-lbl" style="color:rgba(255,255,255,.85);font-weight:600">Final balance</span>'
+    +'<span class="result-row-val hi pos">'+fmt(sFV)+'</span></div>';
+  if(TARGET==='years')html+='<div class="result-note">→ '+fmtYr(result)+'</div>';
+  if(TARGET==='rate'){
+    var ann=Math.round(result*100)/100;
+    var mon=Math.round(result/12*100)/100;
+    html+='<div class="result-note">→ '+ann+'% annual ('+mon+'% monthly)</div>';
   }
-
-  // Monthly compound
-  var monthlyRate=(rate/100)/12;
-  var months=years*12;
-  var balance=initial;
-  for(var m=0;m<months;m++){
-    balance=balance*(1+monthlyRate)+monthly;
-  }
-
-  var totalDeposited=initial+monthly*months;
-  var interest=balance-totalDeposited;
-
-  mainEl.innerHTML='$'+Math.round(balance).toLocaleString('en-US');
-  subEl.textContent='after '+years+' year'+(years===1?'':'s')+' at '+rate+'% APY';
-  rowsEl.style.display='flex';
-  document.getElementById('r-deposited').textContent=fmt(totalDeposited);
-  document.getElementById('r-interest').textContent='+ '+fmt(interest);
-  document.getElementById('r-total').textContent=fmt(balance);
+  document.getElementById('result-rows').innerHTML=html;
+  document.getElementById('result-card').style.display='block';
 }
+
+function clr(){
+  document.getElementById(TARGET).value='';
+  document.getElementById('result-card').style.display='none';
+}
+
+setTarget('goal');
 </script>
 <script src="/nav.js"></script>
 </body>
