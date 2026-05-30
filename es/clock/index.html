@@ -66,6 +66,18 @@
   .faq-item[open]>summary{color:var(--hi)}
   .faq-item[open]>summary::after{transform:rotate(45deg)}
   .faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+  .clock-tz-sel{padding:7px 10px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);cursor:pointer}
+  .clock-tz-sel:focus{outline:none}
+  html:not([data-theme="dark"]) .clock-card{background:#fff;box-shadow:0 1px 4px rgba(8,10,18,.1)}
+  html:not([data-theme="dark"]) .clock-time{color:var(--ink)}
+  html:not([data-theme="dark"]) .clock-date{color:var(--ink-light)}
+  html:not([data-theme="dark"]) .clock-tz{color:var(--ink-faint)}
+  html:not([data-theme="dark"]) .clock-btn{color:var(--ink-light);border-color:var(--border)}
+  html:not([data-theme="dark"]) .clock-btn:hover{color:var(--ink);border-color:var(--ink)}
+  html:not([data-theme="dark"]) .clock-btn.active{background:var(--hi);border-color:var(--hi);color:white}
+  html:not([data-theme="dark"]) .clock-tz-sel{background:var(--surface);border-color:var(--border);color:var(--ink-light)}
+  html:not([data-theme="dark"]) .fs-btn{color:var(--ink-faint);border-color:var(--border)}
+  html:not([data-theme="dark"]) .fs-btn:hover{color:var(--ink);border-color:var(--ink)}
 </style>
 </head>
 <body>
@@ -91,6 +103,17 @@
     <div class="clock-actions">
       <button class="clock-btn active" id="btn-24" onclick="setFormat(24)">24h</button>
       <button class="clock-btn" id="btn-12" onclick="setFormat(12)">12h</button>
+      <select id="tz-select" class="clock-tz-sel" onchange="setTimezone(this.value)">
+        <option value="local">Local</option>
+        <option value="America/New_York">New York</option>
+        <option value="Europe/London">London</option>
+        <option value="Europe/Paris">Paris</option>
+        <option value="America/Argentina/Buenos_Aires">Buenos Aires</option>
+        <option value="America/Sao_Paulo">São Paulo</option>
+        <option value="Asia/Dubai">Dubai</option>
+        <option value="Asia/Tokyo">Tokyo</option>
+        <option value="Australia/Sydney">Sydney</option>
+      </select>
     </div>
   </div>
 
@@ -140,8 +163,10 @@
 </div>
 <script>
   var hourFormat = 24;
+  var timezone = 'local';
   var DAYS   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
   var MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var TZ_CITIES = {'America/New_York':'New York','Europe/London':'Londres','Europe/Paris':'París','America/Argentina/Buenos_Aires':'Buenos Aires','America/Sao_Paulo':'São Paulo','Asia/Dubai':'Dubái','Asia/Tokyo':'Tokio','Australia/Sydney':'Sídney'};
 
   function setFormat(f) {
     hourFormat = f;
@@ -149,13 +174,21 @@
     document.getElementById('btn-12').classList.toggle('active', f === 12);
   }
 
-  function getNow() { return new Date(); }
+  function setTimezone(tz) { timezone = tz; }
+
+  function getNow() {
+    var now = new Date();
+    if (timezone !== 'local') {
+      try { return new Date(now.toLocaleString('en-US', {timeZone: timezone})); } catch(e) {}
+    }
+    return now;
+  }
 
   function getTZLabel() {
+    if (timezone !== 'local') return TZ_CITIES[timezone] || timezone.split('/').pop().replace(/_/g,' ');
     try {
       var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      var parts = tz.split('/');
-      var city = parts[parts.length - 1].replace(/_/g, ' ');
+      var city = TZ_CITIES[tz] || tz.split('/').pop().replace(/_/g,' ');
       return 'Hora local · ' + city;
     } catch(e) { return 'Hora local'; }
   }
