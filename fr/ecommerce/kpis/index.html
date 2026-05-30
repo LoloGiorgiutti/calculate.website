@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eCommerce KPIs — ROAS, CAC, LTV, Margin | calculate.website</title>
-<meta name="description" content="Calculate real ROAS, break-even ROAS, CAC, LTV, net margin and more. Three detail levels: basic, complete and total. Real-time.">
-<link rel="canonical" href="https://calculate.website/ecommerce/kpis/">
+<title>KPIs eCommerce — ROAS, CAC, LTV, Marge | calculate.website</title>
+<meta name="description" content="Calculez votre ROAS réel, BE ROAS, CAC, LTV, marge nette et plus. Trois niveaux de détail : basique, complet et total. En temps réel.">
+<link rel="canonical" href="https://calculate.website/fr/ecommerce/kpis/">
 <link rel="alternate" hreflang="en" href="https://calculate.website/ecommerce/kpis/">
 <link rel="alternate" hreflang="es" href="https://calculate.website/es/ecommerce/kpis/">
 <link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/ecommerce/kpis/">
 <link rel="alternate" hreflang="fr" href="https://calculate.website/fr/ecommerce/kpis/">
 <link rel="alternate" hreflang="x-default" href="https://calculate.website/ecommerce/kpis/">
-<meta property="og:title" content="eCommerce KPIs — ROAS, CAC, LTV, Margin">
-<meta property="og:description" content="Calculate real ROAS, BE ROAS, CAC, LTV and net margin. Three detail levels, real-time.">
-<meta property="og:url" content="https://calculate.website/ecommerce/kpis/">
+<meta property="og:title" content="KPIs eCommerce — ROAS, CAC, LTV, Marge">
+<meta property="og:description" content="Calculez ROAS réel, BE ROAS, CAC, LTV et marge nette. Trois niveaux de détail, en temps réel.">
+<meta property="og:url" content="https://calculate.website/fr/ecommerce/kpis/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -56,10 +56,8 @@
 
   .page{max-width:960px;margin:-44px auto 0;padding:0 24px 80px;position:relative;z-index:2;display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
 
-  /* Panel izquierdo */
   .left-panel{}
 
-  /* Level tabs */
   .level-tabs{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
   .level-tab{padding:12px 16px;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;font-size:13px;font-weight:600;color:var(--ink-3);cursor:pointer;transition:all .15s;text-align:left;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:10px}
   .level-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -67,7 +65,6 @@
   .level-tab-badge{font-size:10px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.2);margin-left:auto}
   .level-tab:not(.active) .level-tab-badge{background:var(--accent-soft);color:var(--accent)}
 
-  /* Card inputs */
   .card{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:20px;margin-bottom:12px}
   .card-title{font-size:11px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace;margin-bottom:14px}
   .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
@@ -83,7 +80,6 @@
   .cur-select{border:1.5px solid var(--line);border-radius:0 10px 10px 0;border-left:none;background:var(--bg);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);padding:0 8px;cursor:pointer;outline:none}
   .input-wrap.with-select input{border-radius:10px 0 0 10px}
 
-  /* Right panel */
   .right-panel{}
   .kpi-group{margin-bottom:16px}
   .group-title{font-size:11px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.1em;font-family:'JetBrains Mono',monospace;margin-bottom:10px;display:flex;align-items:center;gap:10px}
@@ -123,30 +119,28 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="breadcrumb">
-      <a href="/">Home</a>
+      <a href="/fr/">Accueil</a>
       <span class="sep">/</span>
-      <a href="/ecommerce/">eCommerce</a>
+      <a href="/fr/ecommerce/">eCommerce</a>
       <span class="sep">/</span>
-      <span class="curr">eCommerce KPIs</span>
+      <span class="curr">KPIs eCommerce</span>
     </div>
-    <h1>📊 eCommerce KPIs</h1>
-    <p>Real ROAS, BE ROAS, CAC, LTV and more. Choose your detail level and get all your KPIs in real time.</p>
+    <h1>📊 KPIs eCommerce</h1>
+    <p>ROAS réel, BE ROAS, CAC, LTV et plus. Choisissez votre niveau de détail et obtenez tous vos KPIs en temps réel.</p>
   </div>
 </section>
 
 <div class="page">
 
-  <!-- LEFT PANEL -->
   <div class="left-panel">
 
-    <!-- Level selector -->
     <div class="level-tabs">
       <button class="level-tab active" id="ltab-basico" onclick="setLevel('basico')">
-        📊 Basic
+        📊 Basique
         <span class="level-tab-badge">4 KPIs</span>
       </button>
       <button class="level-tab" id="ltab-completo" onclick="setLevel('completo')">
-        📈 Complete
+        📈 Complet
         <span class="level-tab-badge">9 KPIs</span>
       </button>
       <button class="level-tab" id="ltab-total" onclick="setLevel('total')">
@@ -155,12 +149,11 @@
       </button>
     </div>
 
-    <!-- Basic inputs -->
     <div class="card">
-      <div class="card-title">Basic level</div>
+      <div class="card-title">Niveau basique</div>
 
       <div class="field">
-        <label>Ad spend</label>
+        <label>Investissement publicitaire</label>
         <div class="input-wrap with-select">
           <input type="number" id="inversion" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcAll()">
           <select class="cur-select" id="cur-inv" onchange="calcAll()"><option>ARS</option><option>USD</option><option>EUR</option></select>
@@ -168,7 +161,7 @@
       </div>
 
       <div class="field">
-        <label>Revenue from ads</label>
+        <label>Revenus générés par les ads</label>
         <div class="input-wrap with-select">
           <input type="number" id="ingresos" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcAll()">
           <select class="cur-select" id="cur-ing" onchange="calcAll()"><option>ARS</option><option>USD</option><option>EUR</option></select>
@@ -176,7 +169,7 @@
       </div>
 
       <div class="field">
-        <label>Product cost (% of selling price)</label>
+        <label>Coût produit (% du prix de vente)</label>
         <div class="input-wrap has-suffix">
           <input type="number" id="costo-pct" inputmode="decimal" placeholder="40" min="0" max="100" step="any" oninput="calcAll()">
           <span class="input-suffix">%</span>
@@ -184,7 +177,7 @@
       </div>
 
       <div class="field">
-        <label>Average selling price</label>
+        <label>Prix de vente moyen</label>
         <div class="input-wrap with-select">
           <input type="number" id="precio-venta" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcAll()">
           <select class="cur-select" id="cur-pv" onchange="calcAll()"><option>ARS</option><option>USD</option><option>EUR</option></select>
@@ -192,26 +185,25 @@
       </div>
     </div>
 
-    <!-- Complete inputs -->
     <div class="card" id="card-completo" style="display:none">
-      <div class="card-title">Complete level</div>
+      <div class="card-title">Niveau complet</div>
 
       <div class="field">
-        <label>Visits / Sessions</label>
+        <label>Visites / Sessions</label>
         <div class="input-wrap">
           <input type="number" id="visitas" inputmode="numeric" placeholder="0" min="0" step="1" oninput="calcAll()">
         </div>
       </div>
 
       <div class="field">
-        <label>Number of orders</label>
+        <label>Nombre de commandes</label>
         <div class="input-wrap">
           <input type="number" id="ordenes" inputmode="numeric" placeholder="0" min="0" step="1" oninput="calcAll()">
         </div>
       </div>
 
       <div class="field">
-        <label>Operational cost</label>
+        <label>Coût opérationnel</label>
         <div class="input-wrap has-suffix">
           <input type="number" id="costo-op-pct" inputmode="decimal" placeholder="10" min="0" max="100" step="any" oninput="calcAll()">
           <span class="input-suffix">%</span>
@@ -219,12 +211,11 @@
       </div>
     </div>
 
-    <!-- Total inputs -->
     <div class="card" id="card-total" style="display:none">
-      <div class="card-title">Total level</div>
+      <div class="card-title">Niveau total</div>
 
       <div class="field">
-        <label>Return rate</label>
+        <label>Taux de retours</label>
         <div class="input-wrap has-suffix">
           <input type="number" id="dev-pct" inputmode="decimal" placeholder="2" min="0" max="100" step="any" oninput="calcAll()">
           <span class="input-suffix">%</span>
@@ -232,14 +223,14 @@
       </div>
 
       <div class="field">
-        <label>Purchases per customer per year (frequency)</label>
+        <label>Achats par client par an (fréquence)</label>
         <div class="input-wrap">
           <input type="number" id="frecuencia" inputmode="decimal" placeholder="2" min="0" step="any" oninput="calcAll()">
         </div>
       </div>
 
       <div class="field">
-        <label>Customer lifetime (months)</label>
+        <label>Durée de vie client (mois)</label>
         <div class="input-wrap">
           <input type="number" id="vida-meses" inputmode="numeric" placeholder="24" min="0" step="1" oninput="calcAll()">
         </div>
@@ -248,98 +239,93 @@
 
   </div>
 
-  <!-- RIGHT PANEL: KPIs -->
   <div class="right-panel" id="kpi-panel">
 
-    <!-- Group: Profitability -->
     <div class="kpi-group">
-      <div class="group-title">Profitability</div>
+      <div class="group-title">Rentabilité</div>
       <div class="kpi-grid">
         <div class="kpi-card" id="k-roas">
-          <div class="kpi-name">Real ROAS</div>
+          <div class="kpi-name">ROAS Réel</div>
           <div class="kpi-value" id="v-roas">—</div>
-          <div class="kpi-desc">Revenue per unit of ad spend</div>
+          <div class="kpi-desc">Revenus par unité investie en publicité</div>
         </div>
         <div class="kpi-card" id="k-be-roas">
           <div class="kpi-name">BE ROAS</div>
           <div class="kpi-value" id="v-be-roas">—</div>
-          <div class="kpi-desc">Minimum ROAS to break even</div>
+          <div class="kpi-desc">ROAS minimum pour ne pas perdre d'argent</div>
         </div>
         <div class="kpi-card" id="k-rentable" style="grid-column:1/-1">
-          <div class="kpi-name">Is it profitable?</div>
+          <div class="kpi-name">Est-ce rentable ?</div>
           <div class="kpi-value" id="v-rentable">—</div>
-          <div class="kpi-desc" id="desc-rentable">Comparing real ROAS vs BE ROAS</div>
+          <div class="kpi-desc" id="desc-rentable">Comparaison ROAS réel vs BE ROAS</div>
         </div>
       </div>
     </div>
 
-    <!-- Group: Margin -->
     <div class="kpi-group">
-      <div class="group-title">Margin</div>
+      <div class="group-title">Marge</div>
       <div class="kpi-grid">
         <div class="kpi-card" id="k-margen-bruto">
-          <div class="kpi-name">Gross margin</div>
+          <div class="kpi-name">Marge brute</div>
           <div class="kpi-value" id="v-margen-bruto">—</div>
-          <div class="kpi-desc">Profit on selling price, before operations</div>
+          <div class="kpi-desc">Profit sur prix de vente, avant opérations</div>
         </div>
         <div class="kpi-card hidden" id="k-margen-neto">
-          <div class="kpi-name">Net margin</div>
+          <div class="kpi-name">Marge nette</div>
           <div class="kpi-value" id="v-margen-neto">—</div>
-          <div class="kpi-desc">Gross margin minus operating costs</div>
+          <div class="kpi-desc">Marge brute moins coûts opérationnels</div>
         </div>
         <div class="kpi-card hidden" id="k-be-roas-neto">
-          <div class="kpi-name">Net BE ROAS</div>
+          <div class="kpi-name">BE ROAS net</div>
           <div class="kpi-value" id="v-be-roas-neto">—</div>
-          <div class="kpi-desc">Minimum ROAS including operating costs</div>
+          <div class="kpi-desc">ROAS minimum avec coûts opérationnels inclus</div>
         </div>
       </div>
     </div>
 
-    <!-- Group: Conversion -->
     <div class="kpi-group hidden" id="g-conversion">
       <div class="group-title">Conversion</div>
       <div class="kpi-grid">
         <div class="kpi-card" id="k-cvr">
-          <div class="kpi-name">Conversion rate</div>
+          <div class="kpi-name">Taux de conversion</div>
           <div class="kpi-value" id="v-cvr">—</div>
-          <div class="kpi-desc">Orders over total visits</div>
+          <div class="kpi-desc">Commandes sur visites totales</div>
         </div>
         <div class="kpi-card" id="k-cac">
           <div class="kpi-name">CAC</div>
           <div class="kpi-value" id="v-cac">—</div>
-          <div class="kpi-desc">Customer acquisition cost</div>
+          <div class="kpi-desc">Coût d'acquisition par client</div>
         </div>
         <div class="kpi-card" id="k-ticket">
-          <div class="kpi-name">Average order value</div>
+          <div class="kpi-name">Panier moyen</div>
           <div class="kpi-value" id="v-ticket">—</div>
-          <div class="kpi-desc">Revenue divided by number of orders</div>
+          <div class="kpi-desc">Revenus divisés par nombre de commandes</div>
         </div>
       </div>
     </div>
 
-    <!-- Group: Customer value -->
     <div class="kpi-group hidden" id="g-valor">
-      <div class="group-title">Customer value</div>
+      <div class="group-title">Valeur client</div>
       <div class="kpi-grid">
         <div class="kpi-card" id="k-roas-neto">
-          <div class="kpi-name">Net real ROAS</div>
+          <div class="kpi-name">ROAS net réel</div>
           <div class="kpi-value" id="v-roas-neto">—</div>
-          <div class="kpi-desc">ROAS adjusted for returns</div>
+          <div class="kpi-desc">ROAS ajusté par les retours</div>
         </div>
         <div class="kpi-card" id="k-ltv">
           <div class="kpi-name">LTV</div>
           <div class="kpi-value" id="v-ltv">—</div>
-          <div class="kpi-desc">Customer lifetime value</div>
+          <div class="kpi-desc">Valeur vie client</div>
         </div>
         <div class="kpi-card" id="k-ltvcac">
           <div class="kpi-name">LTV / CAC</div>
           <div class="kpi-value" id="v-ltvcac">—</div>
-          <div class="kpi-desc">Good if above 3x. Ideal above 5x</div>
+          <div class="kpi-desc">Bon si dépasse 3x. Idéal au-dessus de 5x</div>
         </div>
         <div class="kpi-card" id="k-mer">
           <div class="kpi-name">MER</div>
           <div class="kpi-value" id="v-mer">—</div>
-          <div class="kpi-desc">Marketing Efficiency Ratio: total revenue / spend</div>
+          <div class="kpi-desc">Marketing Efficiency Ratio : revenus totaux / investissement</div>
         </div>
       </div>
     </div>
@@ -360,11 +346,9 @@ function setLevel(l) {
   document.getElementById('card-completo').style.display = (l==='completo'||l==='total') ? '' : 'none';
   document.getElementById('card-total').style.display = l==='total' ? '' : 'none';
 
-  // Groups
   document.getElementById('g-conversion').classList.toggle('hidden', l==='basico');
   document.getElementById('g-valor').classList.toggle('hidden', l!=='total');
 
-  // Extra KPIs
   document.getElementById('k-margen-neto').classList.toggle('hidden', l==='basico');
   document.getElementById('k-be-roas-neto').classList.toggle('hidden', l==='basico');
 
@@ -378,17 +362,17 @@ function getNum(id, def) {
 
 function fmt(v, dec) {
   if (!isFinite(v)) return '—';
-  return v.toLocaleString('en-US', {minimumFractionDigits:dec||0, maximumFractionDigits:dec||2});
+  return v.toLocaleString('fr-FR', {minimumFractionDigits:dec||0, maximumFractionDigits:dec||2});
 }
 
 function fmtX(v) {
   if (!isFinite(v) || v <= 0) return '—';
-  return v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) + 'x';
+  return v.toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + 'x';
 }
 
 function fmtPct(v) {
   if (!isFinite(v)) return '—';
-  return v.toLocaleString('en-US', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
+  return v.toLocaleString('fr-FR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
 }
 
 function setKpi(id, val, cls) {
@@ -404,7 +388,6 @@ function calcAll() {
   var precioVenta = getNum('precio-venta');
   var cur = document.getElementById('cur-inv').value;
 
-  // Basic
   var roas = inv > 0 ? ing / inv : 0;
   var margenBruto = 100 - costoPct;
   var beRoas = margenBruto > 0 ? 100 / margenBruto : 0;
@@ -416,19 +399,18 @@ function calcAll() {
   setKpi('v-margen-bruto', costoPct > 0 ? fmtPct(margenBruto) : '—', margenBruto > 30 ? 'good' : margenBruto > 15 ? '' : 'bad');
 
   if (rentable) {
-    var rentVal = esRentable ? '✓ Yes, profitable' : '✗ Not profitable';
+    var rentVal = esRentable ? '✓ Oui, rentable' : '✗ Pas rentable';
     setKpi('v-rentable', rentVal, esRentable ? 'good' : 'bad');
     document.getElementById('desc-rentable').textContent = esRentable
-      ? 'Real ROAS (' + fmtX(roas) + ') exceeds BE ROAS (' + fmtX(beRoas) + ')'
-      : 'Real ROAS (' + fmtX(roas) + ') is below BE ROAS (' + fmtX(beRoas) + ')';
+      ? 'ROAS réel (' + fmtX(roas) + ') dépasse le BE ROAS (' + fmtX(beRoas) + ')'
+      : 'ROAS réel (' + fmtX(roas) + ') est en dessous du BE ROAS (' + fmtX(beRoas) + ')';
   } else {
     setKpi('v-rentable', '—');
-    document.getElementById('desc-rentable').textContent = 'Fill in spend, revenue and product cost';
+    document.getElementById('desc-rentable').textContent = 'Renseignez investissement, revenus et coût produit';
   }
 
   if (level === 'basico') return;
 
-  // Complete
   var visitas = getNum('visitas');
   var ordenes = getNum('ordenes');
   var costoOpPct = getNum('costo-op-pct', 0);
@@ -447,7 +429,6 @@ function calcAll() {
 
   if (level !== 'total') return;
 
-  // Total
   var devPct = getNum('dev-pct', 0);
   var frecuencia = getNum('frecuencia', 1);
   var vidaMeses = getNum('vida-meses', 12);

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eCommerce Margin Calculator — Platforms, Shipping, Ads | calculate.website</title>
-<meta name="description" content="Calculate your real ecommerce margin including platform fees (Mercado Libre, Shopify, WooCommerce), shipping, payment gateway and ads. Real-time.">
-<link rel="canonical" href="https://calculate.website/ecommerce/margen/">
+<title>Calculadora de Margem Ecommerce — Plataformas, Envio, Ads | calculate.website</title>
+<meta name="description" content="Calcule sua margem real incluindo comissões de plataforma (Mercado Livre, Shopify, WooCommerce), frete, gateway de pagamento e investimento em ads. Em tempo real.">
+<link rel="canonical" href="https://calculate.website/pt/ecommerce/margen/">
 <link rel="alternate" hreflang="en" href="https://calculate.website/ecommerce/margen/">
 <link rel="alternate" hreflang="es" href="https://calculate.website/es/ecommerce/margen/">
 <link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/ecommerce/margen/">
 <link rel="alternate" hreflang="fr" href="https://calculate.website/fr/ecommerce/margen/">
 <link rel="alternate" hreflang="x-default" href="https://calculate.website/ecommerce/margen/">
-<meta property="og:title" content="eCommerce Margin Calculator — Platforms, Shipping, Ads">
-<meta property="og:description" content="Real margin with platform fees, shipping, gateway and ads. Profitability indicator in real time.">
-<meta property="og:url" content="https://calculate.website/ecommerce/margen/">
+<meta property="og:title" content="Calculadora de Margem Ecommerce — Plataformas, Envio, Ads">
+<meta property="og:description" content="Margem real com comissões, frete, gateway e ads. Indicador de lucratividade em tempo real.">
+<meta property="og:url" content="https://calculate.website/pt/ecommerce/margen/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://calculate.website/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -56,7 +56,6 @@
 
   .page{max-width:940px;margin:-44px auto 0;padding:0 24px 80px;position:relative;z-index:2;display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start}
 
-  /* Inputs card */
   .inputs-card{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:24px}
   .card-title{font-size:11px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace;margin-bottom:18px}
 
@@ -78,7 +77,6 @@
   .toggle-btn{padding:3px 10px;border:1.5px solid var(--line);border-radius:6px;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:600;background:var(--bg);color:var(--ink-3);cursor:pointer;transition:all .12s}
   .toggle-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
-  /* Result card */
   .result-card{background:var(--dark-2);border:1.5px solid var(--dark-line);border-radius:16px;padding:24px;color:#fff}
   .res-header{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--dark-line);display:flex;justify-content:space-between;align-items:center}
   .res-precio-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.35);margin-bottom:4px}
@@ -133,26 +131,24 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="breadcrumb">
-      <a href="/">Home</a>
+      <a href="/pt/">Início</a>
       <span class="sep">/</span>
-      <a href="/ecommerce/">eCommerce</a>
+      <a href="/pt/ecommerce/">eCommerce</a>
       <span class="sep">/</span>
-      <span class="curr">eCommerce Margin</span>
+      <span class="curr">Margem de Ecommerce</span>
     </div>
-    <h1>💰 eCommerce Margin</h1>
-    <p>Calculate your real margin including platform fees, shipping, payment gateway and ad spend. Real-time.</p>
+    <h1>💰 Margem de Ecommerce</h1>
+    <p>Calcule sua margem real incluindo comissões de plataforma, frete, gateway de pagamento e investimento publicitário. Em tempo real.</p>
   </div>
 </section>
 
 <div class="page">
 
-  <!-- INPUTS -->
   <div class="inputs-card">
-    <div class="card-title">Sale data</div>
+    <div class="card-title">Dados da venda</div>
 
-    <!-- Selling price -->
     <div class="field">
-      <label>Selling price</label>
+      <label>Preço de venda</label>
       <div class="field-row">
         <div class="input-wrap">
           <input type="number" id="precio" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcMargen()">
@@ -163,12 +159,11 @@
       </div>
     </div>
 
-    <!-- Product cost -->
     <div class="field">
-      <label>Product cost</label>
+      <label>Custo do produto</label>
       <div class="toggle-row">
-        <button class="toggle-btn active" id="btn-costo-monto" onclick="setCostoMode('monto')">$ Amount</button>
-        <button class="toggle-btn" id="btn-costo-pct" onclick="setCostoMode('pct')">% Percentage</button>
+        <button class="toggle-btn active" id="btn-costo-monto" onclick="setCostoMode('monto')">$ Valor</button>
+        <button class="toggle-btn" id="btn-costo-pct" onclick="setCostoMode('pct')">% Porcentagem</button>
       </div>
       <div class="input-wrap has-suffix" id="wrap-costo">
         <input type="number" id="costo" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcMargen()">
@@ -176,53 +171,48 @@
       </div>
     </div>
 
-    <!-- Platform -->
     <div class="field">
-      <label>Sales platform</label>
+      <label>Plataforma de venda</label>
       <select class="plat-select" id="plataforma" onchange="onPlatChange()">
-        <option value="13">Mercado Libre (13%)</option>
-        <option value="3">Tienda Nube (3%)</option>
+        <option value="13">Mercado Livre (13%)</option>
+        <option value="3">Tray / Nuvemshop (3%)</option>
         <option value="2">Shopify (2%)</option>
         <option value="0">WooCommerce (0%)</option>
-        <option value="custom">Custom</option>
+        <option value="custom">Personalizado</option>
       </select>
     </div>
     <div class="field" id="field-plat-custom" style="display:none">
-      <label>Custom commission</label>
+      <label>Comissão personalizada</label>
       <div class="input-wrap has-suffix">
         <input type="number" id="plat-custom" inputmode="decimal" placeholder="0" min="0" max="100" step="any" oninput="calcMargen()">
         <span class="input-suffix">%</span>
       </div>
     </div>
 
-    <!-- Shipping -->
     <div class="field">
-      <label>Shipping cost to customer</label>
+      <label>Custo de envio ao cliente</label>
       <div class="input-wrap">
         <input type="number" id="envio" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcMargen()">
       </div>
     </div>
 
-    <!-- Gateway -->
     <div class="field">
-      <label>Payment gateway fee</label>
+      <label>Comissão gateway de pagamento</label>
       <div class="input-wrap has-suffix">
         <input type="number" id="pasarela" inputmode="decimal" placeholder="3" value="3" min="0" max="100" step="any" oninput="calcMargen()">
         <span class="input-suffix">%</span>
       </div>
     </div>
 
-    <!-- Ads -->
     <div class="field">
-      <label>Ad spend (per sale)</label>
+      <label>Investimento em ads (por venda)</label>
       <div class="input-wrap">
         <input type="number" id="ads" inputmode="decimal" placeholder="0" min="0" step="any" oninput="calcMargen()">
       </div>
     </div>
 
-    <!-- Other -->
     <div class="field">
-      <label>Other costs</label>
+      <label>Outros custos</label>
       <div class="input-wrap has-suffix">
         <input type="number" id="otros" inputmode="decimal" placeholder="0" min="0" max="100" step="any" oninput="calcMargen()">
         <span class="input-suffix">%</span>
@@ -231,11 +221,10 @@
 
   </div>
 
-  <!-- RESULT -->
   <div class="result-card">
     <div class="res-header">
       <div>
-        <div class="res-precio-label">Selling price</div>
+        <div class="res-precio-label">Preço de venda</div>
         <div class="res-precio-val" id="r-precio">—</div>
       </div>
       <div class="semaforo green hidden" id="semaforo">
@@ -244,42 +233,42 @@
       </div>
     </div>
 
-    <div class="desglose-title">Cost breakdown</div>
+    <div class="desglose-title">Detalhamento de custos</div>
     <div class="desglose-row">
-      <span class="desglose-name">Product cost</span>
+      <span class="desglose-name">Custo do produto</span>
       <span class="desglose-val neg" id="r-costo">—</span>
     </div>
     <div class="desglose-row">
-      <span class="desglose-name">Platform fee</span>
+      <span class="desglose-name">Comissão plataforma</span>
       <span class="desglose-val neg" id="r-plataforma">—</span>
     </div>
     <div class="desglose-row">
-      <span class="desglose-name">Shipping cost</span>
+      <span class="desglose-name">Custo de envio</span>
       <span class="desglose-val neg" id="r-envio">—</span>
     </div>
     <div class="desglose-row">
-      <span class="desglose-name">Gateway fee</span>
+      <span class="desglose-name">Comissão gateway</span>
       <span class="desglose-val neg" id="r-pasarela">—</span>
     </div>
     <div class="desglose-row" id="row-ads">
-      <span class="desglose-name">Ad spend</span>
+      <span class="desglose-name">Investimento ads</span>
       <span class="desglose-val neg" id="r-ads">—</span>
     </div>
     <div class="desglose-row" id="row-otros">
-      <span class="desglose-name">Other costs</span>
+      <span class="desglose-name">Outros custos</span>
       <span class="desglose-val neg" id="r-otros">—</span>
     </div>
 
     <div class="margenes-grid">
       <div class="margen-block">
-        <div class="margen-label">Gross margin</div>
+        <div class="margen-label">Margem bruta</div>
         <div class="margen-val" id="r-mb">—</div>
-        <div class="margen-sub" id="r-gb">Gross profit: —</div>
+        <div class="margen-sub" id="r-gb">Lucro bruto: —</div>
       </div>
       <div class="margen-block">
-        <div class="margen-label">Net margin</div>
+        <div class="margen-label">Margem líquida</div>
         <div class="margen-val" id="r-mn">—</div>
-        <div class="margen-sub" id="r-gn">Net profit: —</div>
+        <div class="margen-sub" id="r-gn">Lucro líquido: —</div>
       </div>
     </div>
 
@@ -289,14 +278,14 @@
         <div class="extra-val" id="r-markup">—</div>
       </div>
       <div class="extra-block">
-        <div class="extra-label">Net profit</div>
+        <div class="extra-label">Lucro nominal</div>
         <div class="extra-val" id="r-ganancia">—</div>
       </div>
     </div>
 
     <div class="be-roas-block hidden" id="be-roas-block">
       <div>
-        <div class="be-roas-label">BE ROAS (minimum for profitability)</div>
+        <div class="be-roas-label">BE ROAS (mínimo para lucratividade)</div>
       </div>
       <div class="be-roas-val" id="r-be-roas">—</div>
     </div>
@@ -332,12 +321,12 @@ function getNum(id, def) {
 
 function fmt(v, cur) {
   if (!isFinite(v)) return '—';
-  return cur + ' ' + v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  return cur + ' ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
 }
 
 function fmtPct(v) {
   if (!isFinite(v)) return '—';
-  return v.toLocaleString('en-US', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
+  return v.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
 }
 
 function colorMargen(v) {
@@ -356,7 +345,6 @@ function calcMargen() {
   var ads = getNum('ads');
   var otrosPct = getNum('otros');
 
-  // Product cost
   var costoProducto;
   if (costoMode === 'pct') {
     var costoPct = getNum('costo-pct', 0) || getNum('costo', 0);
@@ -377,7 +365,6 @@ function calcMargen() {
   var gananciaNetaSinAds = gananciaNeta + ads;
   var beRoas = gananciaNetaSinAds > 0 ? precio / gananciaNetaSinAds : 0;
 
-  // Display
   document.getElementById('r-precio').textContent = precio > 0 ? fmt(precio, cur) : '—';
   document.getElementById('r-costo').textContent = precio > 0 ? '−' + fmt(costoProducto, cur) : '—';
   document.getElementById('r-plataforma').textContent = precio > 0 ? '−' + fmt(costoPlatforma, cur) : '—';
@@ -393,34 +380,31 @@ function calcMargen() {
   mbEl.className = 'margen-val ' + colorMargen(margenBruto);
   mnEl.className = 'margen-val ' + colorMargen(margenNeto);
 
-  document.getElementById('r-gb').textContent = 'Gross profit: ' + (precio > 0 ? fmt(gananciaBruta, cur) : '—');
-  document.getElementById('r-gn').textContent = 'Net profit: ' + (precio > 0 ? fmt(gananciaNeta, cur) : '—');
+  document.getElementById('r-gb').textContent = 'Lucro bruto: ' + (precio > 0 ? fmt(gananciaBruta, cur) : '—');
+  document.getElementById('r-gn').textContent = 'Lucro líquido: ' + (precio > 0 ? fmt(gananciaNeta, cur) : '—');
   document.getElementById('r-markup').textContent = costoProducto > 0 ? fmtPct(markup) : '—';
   document.getElementById('r-ganancia').textContent = precio > 0 ? fmt(gananciaNeta, cur) : '—';
 
-  // Traffic light
   var sem = document.getElementById('semaforo');
   var semTxt = document.getElementById('semaforo-txt');
   if (precio > 0) {
     sem.classList.remove('hidden');
     var col = colorMargen(margenNeto);
     sem.className = 'semaforo ' + col;
-    semTxt.textContent = col==='green' ? 'Profitable' : col==='yellow' ? 'Low margin' : 'Loss';
+    semTxt.textContent = col==='green' ? 'Lucrativo' : col==='yellow' ? 'Margem baixa' : 'Prejuízo';
   } else {
     sem.classList.add('hidden');
   }
 
-  // BE ROAS
   var beBlock = document.getElementById('be-roas-block');
   if (ads > 0 && precio > 0) {
     beBlock.classList.remove('hidden');
-    document.getElementById('r-be-roas').textContent = beRoas > 0 ? beRoas.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) + 'x' : '—';
+    document.getElementById('r-be-roas').textContent = beRoas > 0 ? beRoas.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + 'x' : '—';
   } else {
     beBlock.classList.add('hidden');
   }
 }
 
-// Initialize
 setCostoMode('monto');
 calcMargen();
 </script>
