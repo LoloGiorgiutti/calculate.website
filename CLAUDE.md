@@ -331,6 +331,29 @@ This is a temporary fallback — replace with a real translated page as soon as 
 
 ---
 
+## ⚠️ Text contrast — mandatory rule for ALL pages
+
+**Never use `--ink-3` (`#858AA0`) for text smaller than 18px in body text or functional labels.**
+Its contrast ratio on white (`#fff`) is ~3.2:1 — fails WCAG AA (requires 4.5:1).
+
+### Approved text color usage:
+| Use case | Variable | Light mode | Dark mode |
+|---|---|---|---|
+| Body text, headings, primary labels | `var(--ink)` | `#0A0E1A` | `#E2E4F0` |
+| Secondary labels, field labels, section titles | `var(--ink-2)` | `#363B4F` | `#9BA0B8` |
+| Placeholder text, hints, decorative only | `var(--ink-3)` | `#858AA0` | `#606580` |
+
+### Hardcoded color anti-patterns to never use:
+- `color:rgba(10,14,26,.4)` on white/light bg → very low contrast. Use `var(--ink-3)` at minimum, or `var(--ink-2)` for small text.
+- `background:#f0f0f8`, `#f5f5f5`, `#e0e0f0` on buttons/cards → these are hardcoded light colors that become invisible in dark mode. Always use CSS variables or add explicit `html[data-theme="dark"]` overrides.
+- `color:rgba(255,255,255,.4)` is fine only inside elements that have a dark background themselves (e.g., inside `.clock-card` dark bg).
+
+### Dark mode — custom components must be explicitly handled:
+nav.js automatically handles: `.card`, `.result-card`, `input`, `select`, `textarea`, `.faq-item`, `.related-card`, and the site header/footer.
+For any custom component NOT in that list (e.g., `.display`, `.btn-fn`, `.kpi-card`), you MUST add `html[data-theme="dark"]` override rules inside the page's `<style>` block.
+
+---
+
 ## Things NOT to do
 - No frameworks, bundlers, or npm packages
 - No DM Sans — always Inter
