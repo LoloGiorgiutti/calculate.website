@@ -59,14 +59,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     <div class="field">
       <label for="rate">Taux de TVA (%)</label>
       <input type="number" id="rate" min="0" max="100" step="0.1" value="20">
-      <div class="presets">
-        <button class="preset" onclick="setRate(20)">FR 20%</button>
-        <button class="preset" onclick="setRate(10)">FR taux réduit 10%</button>
-        <button class="preset" onclick="setRate(5.5)">FR 5,5%</button>
-        <button class="preset" onclick="setRate(21)">BE 21%</button>
-        <button class="preset" onclick="setRate(7.7)">CH 7,7%</button>
-        <button class="preset" onclick="setRate(0)">Exonéré 0%</button>
-      </div>
+      <div class="presets" id="presets"></div>
     </div>
     <div id="result"><div class="empty">Saisissez un prix ci-dessus</div></div>
   </div>
@@ -75,6 +68,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 <script>
 var mode='add';
 var priceEl=document.getElementById('price'),rateEl=document.getElementById('rate'),resEl=document.getElementById('result'),plbl=document.getElementById('price-lbl');
+var COUNTRY_VAT={'US':0,'GB':20,'CA':5,'AU':10,'IE':23,'NZ':15,'SG':9,'AE':5,'AR':21,'MX':16,'CL':19,'CO':19,'PE':18,'UY':22,'VE':16,'EC':12,'BO':13,'PY':10,'CR':13,'PA':7,'DO':18,'PR':11.5,'GT':12,'SV':13,'HN':15,'NI':15,'CU':0,'ES':21,'BR':17,'PT':23,'FR':20,'BE':21,'CH':8.1,'DE':19,'AT':20,'SE':25,'NO':25,'DK':25,'FI':25.5,'NL':21,'IT':22,'GR':24};
+var BASE_RATES=[5,10,15,16,19,20,21,23,25];
+function renderPresets(cr){var rates=BASE_RATES.slice();if(cr!==null&&rates.indexOf(cr)===-1)rates.unshift(cr);var html=rates.slice(0,7).map(function(r){return '<button class="preset" onclick="setRate('+r+')">'+r+'%</button>';}).join('');html+='<button class="preset" onclick="setRate(0)">0%</button>';document.getElementById('presets').innerHTML=html;}
+function initVAT(){try{var c=localStorage.getItem('cw-country');var cr=(c&&COUNTRY_VAT[c]!==undefined)?COUNTRY_VAT[c]:null;rateEl.value=(cr!==null)?cr:20;renderPresets(cr);}catch(e){renderPresets(null);}calc();}
 function fmt(n){return n.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function setRate(v){rateEl.value=v;calc();}
 function setMode(m){mode=m;document.getElementById('btn-add').classList.toggle('active',m==='add');document.getElementById('btn-rem').classList.toggle('active',m==='remove');plbl.textContent=m==='add'?'Prix (HT, sans TVA)':'Prix (TTC, avec TVA)';calc();}
@@ -90,6 +87,7 @@ function calc(){
     +'<div class="result-row"><div class="rrl">Taux TVA</div><div class="rrv">'+rate+'%</div></div></div></div>';
 }
 priceEl.addEventListener('input',calc);rateEl.addEventListener('input',calc);
+initVAT();
 </script>
 </body>
 </html>
