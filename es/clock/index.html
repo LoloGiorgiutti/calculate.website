@@ -155,6 +155,23 @@
   var hourFormat = 24;
   var DAYS   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
   var MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var COUNTRY_TZ = {
+    'US':'America/New_York','GB':'Europe/London','CA':'America/Toronto',
+    'AU':'Australia/Sydney','IE':'Europe/Dublin','NZ':'Pacific/Auckland',
+    'SG':'Asia/Singapore','AE':'Asia/Dubai',
+    'AR':'America/Argentina/Buenos_Aires','MX':'America/Mexico_City',
+    'CL':'America/Santiago','CO':'America/Bogota','PE':'America/Lima',
+    'UY':'America/Montevideo','VE':'America/Caracas','EC':'America/Guayaquil',
+    'BO':'America/La_Paz','PY':'America/Asuncion','CR':'America/Costa_Rica',
+    'PA':'America/Panama','DO':'America/Santo_Domingo','PR':'America/Puerto_Rico',
+    'GT':'America/Guatemala','SV':'America/El_Salvador','HN':'America/Tegucigalpa',
+    'NI':'America/Managua','CU':'America/Havana','ES':'Europe/Madrid',
+    'BR':'America/Sao_Paulo','PT':'Europe/Lisbon','FR':'Europe/Paris',
+    'BE':'Europe/Brussels','CH':'Europe/Zurich','DE':'Europe/Berlin',
+    'AT':'Europe/Vienna','SE':'Europe/Stockholm','NO':'Europe/Oslo',
+    'DK':'Europe/Copenhagen','FI':'Europe/Helsinki','NL':'Europe/Amsterdam',
+    'IT':'Europe/Rome','GR':'Europe/Athens'
+  };
 
   function setFormat(f) {
     hourFormat = f;
@@ -162,12 +179,28 @@
     document.getElementById('btn-12').classList.toggle('active', f === 12);
   }
 
+  function getActiveTZ() {
+    try {
+      var c = localStorage.getItem('cw-country');
+      if (c && COUNTRY_TZ[c]) return COUNTRY_TZ[c];
+    } catch(e) {}
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e) {}
+    return null;
+  }
+
   function getNow() {
-    try { return new Date(new Date().toLocaleString('en-US', {timeZone: 'America/Argentina/Buenos_Aires'})); } catch(e) {}
+    var tz = getActiveTZ();
+    if (tz) {
+      try { return new Date(new Date().toLocaleString('en-US', {timeZone: tz})); } catch(e) {}
+    }
     return new Date();
   }
 
-  function getTZLabel() { return 'Buenos Aires'; }
+  function getTZLabel() {
+    var tz = getActiveTZ();
+    if (!tz) return 'Hora local';
+    return tz.split('/').pop().replace(/_/g,' ');
+  }
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
