@@ -814,6 +814,9 @@
     'html:not([data-theme="dark"]) .hero .breadcrumb a,',
     'html:not([data-theme="dark"]) .hero-wrap .breadcrumb a,',
     'html:not([data-theme="dark"]) .cat-hero .breadcrumb a{color:rgba(10,14,26,.45) !important;}',
+    /* .bc and .sub are the breadcrumb/subtitle classes used across all older-template pages */
+    'html:not([data-theme="dark"]) .hero .bc,html:not([data-theme="dark"]) .hero .bc a,html:not([data-theme="dark"]) .hero .bc span{color:rgba(10,14,26,.45) !important;}',
+    'html:not([data-theme="dark"]) .hero .sub{color:#363B4F !important;}',
 
     'html:not([data-theme="dark"]) body{background:#F7F8FA !important;}',
 
