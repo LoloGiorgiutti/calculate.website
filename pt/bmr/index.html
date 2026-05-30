@@ -64,6 +64,7 @@
   .tag-lose{background:rgba(59,130,246,.25);color:#93C5FD}
   .tag-m{background:rgba(34,197,94,.25);color:#86EFAC}
   .tag-gain{background:rgba(245,158,11,.25);color:#FCD34D}
+  @media(min-width:680px){.page{max-width:960px}.main-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.faq-section{max-width:960px}}
   .faq-section{max-width:520px;margin:0 auto;padding:0 20px 40px}
   .faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
   .faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -85,6 +86,7 @@
   <h1 class="page-title">Calorias Diárias (TMB / TDEE)</h1>
   <p class="page-sub">Quantas calorias você precisa por dia? Calcule sua Taxa Metabólica Basal e Gasto Total.</p>
 
+  <div class="main-cols">
   <div class="card">
     <div class="field">
       <label>Sexo</label>
@@ -150,17 +152,17 @@
   </div>
 
   <div class="result-card">
-    <div class="result-eyebrow">Taxa Metabólica Basal (TMB)</div>
-    <div id="result-main" class="result-main"><span class="empty-state">Preencha seus dados</span></div>
-    <div id="result-sub" class="result-sub" style="display:none">calorias/dia em repouso (Mifflin-St Jeor)</div>
+    <div class="result-eyebrow">Calorias de Manutenção (TDEE)</div>
+    <div id="hero-tdee" class="result-main"><span class="empty-state">Preencha seus dados</span></div>
+    <div id="result-sub" class="result-sub" style="display:none">calorias/dia no seu nível de atividade</div>
     <div class="tdee-grid" id="tdee-grid" style="display:none">
+      <div class="tdee-row">
+        <span class="tdee-lbl">Taxa Metabólica Basal (TMB) <span class="tdee-tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.5)">em repouso</span></span>
+        <span class="tdee-val" id="result-main">—</span>
+      </div>
       <div class="tdee-row">
         <span class="tdee-lbl">Emagrecer <span class="tdee-tag tag-lose">−500 kcal</span></span>
         <span class="tdee-val" id="val-lose">—</span>
-      </div>
-      <div class="tdee-row hl">
-        <span class="tdee-lbl">Manter peso <span class="tdee-tag tag-m">TDEE</span></span>
-        <span class="tdee-val" id="val-maintain">—</span>
       </div>
       <div class="tdee-row">
         <span class="tdee-lbl">Ganhar peso <span class="tdee-tag tag-gain">+500 kcal</span></span>
@@ -168,6 +170,7 @@
       </div>
     </div>
   </div>
+  </div><!-- /main-cols -->
 </div>
 
 <div class="faq-section">
@@ -251,12 +254,13 @@
     var wRaw = parseFloat(document.getElementById('weight').value) || 0;
     var hRaw = parseFloat(document.getElementById('height').value) || 0;
     var age  = parseFloat(document.getElementById('age').value) || 0;
+    var heroEl = document.getElementById('hero-tdee');
     var mainEl = document.getElementById('result-main');
     var subEl  = document.getElementById('result-sub');
     var gridEl = document.getElementById('tdee-grid');
 
     if (!wRaw || !hRaw || !age) {
-      mainEl.innerHTML = '<span class="empty-state">Preencha seus dados</span>';
+      heroEl.innerHTML = '<span class="empty-state">Preencha seus dados</span>';
       subEl.style.display = 'none';
       gridEl.style.display = 'none';
       return;
@@ -271,13 +275,13 @@
 
     var tdee = bmr * actFactor;
 
+    heroEl.textContent = Math.round(tdee).toLocaleString('pt-BR') + ' kcal';
     mainEl.textContent = Math.round(bmr).toLocaleString('pt-BR') + ' kcal';
     subEl.style.display = 'block';
     gridEl.style.display = 'flex';
 
-    document.getElementById('val-lose').textContent     = Math.round(tdee - 500).toLocaleString('pt-BR') + ' kcal';
-    document.getElementById('val-maintain').textContent = Math.round(tdee).toLocaleString('pt-BR') + ' kcal';
-    document.getElementById('val-gain').textContent     = Math.round(tdee + 500).toLocaleString('pt-BR') + ' kcal';
+    document.getElementById('val-lose').textContent = Math.round(tdee - 500).toLocaleString('pt-BR') + ' kcal';
+    document.getElementById('val-gain').textContent = Math.round(tdee + 500).toLocaleString('pt-BR') + ' kcal';
   }
 
   setUnits('metric');

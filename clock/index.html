@@ -80,7 +80,7 @@
 
 <div class="page">
   <h1 class="page-title">Digital Clock</h1>
-  <p class="page-sub">Real-time digital clock with date, timezone selector and full-screen mode.</p>
+  <p class="page-sub">Real-time digital clock with fullscreen mode and day statistics.</p>
 
   <div class="clock-card">
     <button class="fs-btn" onclick="enterFullscreen()" title="Full screen">
@@ -118,58 +118,6 @@
     </div>
   </div>
 
-  <div class="tz-card">
-    <label>Timezone</label>
-    <select id="tz-select" onchange="setTimezone(this.value)">
-      <option value="local">Local time (auto-detect)</option>
-      <optgroup label="Americas">
-        <option value="America/New_York">New York (ET)</option>
-        <option value="America/Chicago">Chicago (CT)</option>
-        <option value="America/Denver">Denver (MT)</option>
-        <option value="America/Los_Angeles">Los Angeles (PT)</option>
-        <option value="America/Anchorage">Anchorage (AKT)</option>
-        <option value="Pacific/Honolulu">Honolulu (HT)</option>
-        <option value="America/Toronto">Toronto (ET)</option>
-        <option value="America/Vancouver">Vancouver (PT)</option>
-        <option value="America/Sao_Paulo">São Paulo (BRT)</option>
-        <option value="America/Argentina/Buenos_Aires">Buenos Aires (ART)</option>
-        <option value="America/Mexico_City">Mexico City (CST)</option>
-        <option value="America/Bogota">Bogotá (COT)</option>
-        <option value="America/Lima">Lima (PET)</option>
-      </optgroup>
-      <optgroup label="Europe">
-        <option value="Europe/London">London (GMT/BST)</option>
-        <option value="Europe/Paris">Paris (CET)</option>
-        <option value="Europe/Berlin">Berlin (CET)</option>
-        <option value="Europe/Madrid">Madrid (CET)</option>
-        <option value="Europe/Rome">Rome (CET)</option>
-        <option value="Europe/Amsterdam">Amsterdam (CET)</option>
-        <option value="Europe/Zurich">Zurich (CET)</option>
-        <option value="Europe/Stockholm">Stockholm (CET)</option>
-        <option value="Europe/Moscow">Moscow (MSK)</option>
-        <option value="Europe/Istanbul">Istanbul (TRT)</option>
-        <option value="Europe/Warsaw">Warsaw (CET)</option>
-      </optgroup>
-      <optgroup label="Asia & Pacific">
-        <option value="Asia/Dubai">Dubai (GST)</option>
-        <option value="Asia/Kolkata">Mumbai / Delhi (IST)</option>
-        <option value="Asia/Bangkok">Bangkok (ICT)</option>
-        <option value="Asia/Singapore">Singapore (SGT)</option>
-        <option value="Asia/Shanghai">Beijing / Shanghai (CST)</option>
-        <option value="Asia/Tokyo">Tokyo (JST)</option>
-        <option value="Asia/Seoul">Seoul (KST)</option>
-        <option value="Asia/Hong_Kong">Hong Kong (HKT)</option>
-        <option value="Australia/Sydney">Sydney (AEST)</option>
-        <option value="Pacific/Auckland">Auckland (NZST)</option>
-      </optgroup>
-      <optgroup label="Africa">
-        <option value="Africa/Cairo">Cairo (EET)</option>
-        <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
-        <option value="Africa/Lagos">Lagos (WAT)</option>
-        <option value="Africa/Nairobi">Nairobi (EAT)</option>
-      </optgroup>
-    </select>
-  </div>
 </div>
 
 <div class="faq-section">
@@ -193,7 +141,6 @@
 </div>
 <script>
   var hourFormat = 24;
-  var timezone   = 'local';
   var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -203,29 +150,15 @@
     document.getElementById('btn-12').classList.toggle('active', f === 12);
   }
 
-  function setTimezone(tz) {
-    timezone = tz;
-  }
-
-  function getNow() {
-    var now = new Date();
-    if (timezone !== 'local') {
-      try {
-        var str = now.toLocaleString('en-US', { timeZone: timezone });
-        return new Date(str);
-      } catch(e) {}
-    }
-    return now;
-  }
+  function getNow() { return new Date(); }
 
   function getTZLabel() {
-    if (timezone === 'local') {
-      var offset = -(new Date().getTimezoneOffset());
-      var h = Math.floor(Math.abs(offset) / 60);
-      var m = Math.abs(offset) % 60;
-      return 'Local time (UTC' + (offset >= 0 ? '+' : '') + (offset < 0 ? '-' : '') + h + (m ? ':' + String(m).padStart(2,'0') : '') + ')';
-    }
-    return timezone.replace('_', ' ');
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      var parts = tz.split('/');
+      var city = parts[parts.length - 1].replace(/_/g, ' ');
+      return 'Local time · ' + city;
+    } catch(e) { return 'Local time'; }
   }
 
   function pad(n) { return String(n).padStart(2, '0'); }
