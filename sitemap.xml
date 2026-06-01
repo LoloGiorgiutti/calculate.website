@@ -1800,4 +1800,102 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- NEW CALCULATORS — 2026-06-01 -->
+  <!-- Geometry Calculator -->
+  <url>
+    <loc>https://calculate.website/geometry/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/geometry/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/geometry/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/geometry/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/geometry/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/geometry/"/>
+  </url>
+  <url><loc>https://calculate.website/es/geometry/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/geometry/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/geometry/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- LCM & GCD Calculator -->
+  <url>
+    <loc>https://calculate.website/lcm/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/lcm/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/lcm/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/lcm/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/lcm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/lcm/"/>
+  </url>
+  <url><loc>https://calculate.website/es/lcm/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/lcm/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/lcm/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Word & Character Counter -->
+  <url>
+    <loc>https://calculate.website/word-counter/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/word-counter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/word-counter/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/word-counter/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/word-counter/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/word-counter/"/>
+  </url>
+  <url><loc>https://calculate.website/es/word-counter/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/word-counter/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/word-counter/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Weighted Average / GPA Calculator -->
+  <url>
+    <loc>https://calculate.website/weighted-average/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/weighted-average/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/weighted-average/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/weighted-average/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/weighted-average/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/weighted-average/"/>
+  </url>
+  <url><loc>https://calculate.website/es/weighted-average/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/weighted-average/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/weighted-average/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Category pages ES/PT/FR (added 2026-06-01) -->
+  <url><loc>https://calculate.website/es/health/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/pt/health/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/fr/health/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/es/finance/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/pt/finance/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/fr/finance/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/es/math/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/pt/math/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/fr/math/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/es/dates/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/pt/dates/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/fr/dates/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/es/games/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/pt/games/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/fr/games/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/es/ecommerce/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/pt/ecommerce/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://calculate.website/fr/ecommerce/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- eCommerce sub-pages ES/PT/FR -->
+  <url><loc>https://calculate.website/es/ecommerce/kpis/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/ecommerce/kpis/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/ecommerce/kpis/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/es/ecommerce/margen/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/ecommerce/margen/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/ecommerce/margen/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/es/ecommerce/proyeccion/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/ecommerce/proyeccion/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/ecommerce/proyeccion/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/es/ecommerce/envio-china/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/pt/ecommerce/envio-china/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calculate.website/fr/ecommerce/envio-china/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
 </urlset>
