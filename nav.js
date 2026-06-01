@@ -1771,23 +1771,33 @@
   /* ── RELATED CALCULATORS ─────────────────────────────────── */
   (function(){
     var path = window.location.pathname.replace(/\/$/, '') || '/';
+    /* Strip language prefix so we can match against EN URLs in CALCS */
+    var enPath = path.replace(/^\/(es|pt|fr)(\/|$)/, '/').replace(/\/$/, '') || '/';
+    var langPrefix = CW_LANG !== 'en' ? '/' + CW_LANG : '';
+    var nameKey = CW_LANG !== 'en' ? 'n_' + CW_LANG : 'n';
+
     var curCat = null;
     CALCS.forEach(function(cat){
       cat.items.forEach(function(item){
-        if(item.u.replace(/\/$/, '') === path) curCat = cat;
+        if(item.u.replace(/\/$/, '') === enPath) curCat = cat;
       });
     });
     if(!curCat || curCat.items.length < 2) return;
 
-    var others = curCat.items.filter(function(i){ return i.u.replace(/\/$/, '') !== path; });
+    var others = curCat.items.filter(function(i){ return i.u.replace(/\/$/, '') !== enPath; });
     others = others.slice().sort(function(){ return Math.random() - 0.5; }).slice(0, 3);
 
-    var html = '<div class="related-section"><div class="related-heading">Related calculators</div>'
+    var headings = {en:'Related calculators', es:'Calculadoras relacionadas', pt:'Calculadoras relacionadas', fr:'Calculateurs associés'};
+    var heading = headings[CW_LANG] || headings.en;
+
+    var html = '<div class="related-section"><div class="related-heading">' + heading + '</div>'
              + '<div class="related-grid">';
     others.forEach(function(item){
-      html += '<a class="related-card" href="' + item.u + '">'
+      var name = item[nameKey] || item.n;
+      var url  = langPrefix + item.u;
+      html += '<a class="related-card" href="' + url + '">'
             + '<span class="related-icon">' + (item.icon || '🔢') + '</span>'
-            + '<span class="related-name">' + item.n + '</span>'
+            + '<span class="related-name">' + name + '</span>'
             + '</a>';
     });
     html += '</div></div>';
