@@ -287,7 +287,7 @@ function solveCylinder(){
   setF('cy-TA',total);
 }
 function solve(){
-  document.querySelectorAll('.shape-panel[data-shape="'+currentShape+'"] input:not([readonly])').forEach(function(el){
+  document.querySelectorAll('.shape-panel[data-shape="'+currentShape+'"] input:not([readonly]).computed').forEach(function(el){
     if(document.activeElement!==el){el.classList.remove('computed');}
   });
   if(currentShape==='square')solveSquare();

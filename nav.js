@@ -408,6 +408,110 @@
       { q: '¿Cuándo se retiene Ganancias?', a: 'Se retiene Ganancias 4ª categoría cuando el salario bruto supera el mínimo no imponible fijado por la AFIP. Los valores se actualizan periódicamente. El empleador actúa como agente de retención.' },
       { q: '¿Es lo mismo sueldo bruto que remuneración?', a: 'En general sí: el sueldo bruto es la remuneración total antes de descuentos. Incluye sueldo básico, adicionales, horas extras, antigüedad y cualquier otro rubro remunerativo.' },
     ],
+
+    /* ── GEOMETRY ── */
+    '/geometry': [
+      { q: 'How does the bidirectional solver work?', a: 'Fill in any known property (side, area, volume, etc.) and the calculator automatically computes all other properties. You can start from any value — the calculator figures out which formulas to apply.' },
+      { q: 'What shapes does this calculator support?', a: 'Square, Circle, Equilateral Triangle, Rectangle, Cube, Sphere, Square Pyramid and Cylinder. Each shape lets you calculate area, perimeter, volume, diagonals and more from any single known measurement.' },
+      { q: 'What units does it use?', a: 'The calculator works with any consistent unit. If you enter dimensions in centimeters, results are in cm, cm² and cm³. If you use meters, results are in m, m² and m³ — just be consistent.' },
+      { q: 'Why are some fields highlighted in blue?', a: 'Blue fields are auto-calculated. Fields with a white background are where you enter your known values. When you change any input, the blue fields update automatically.' },
+    ],
+    '/es/geometry': [
+      { q: '¿Cómo funciona el solver bidireccional?', a: 'Completá cualquier propiedad conocida (lado, área, volumen, etc.) y la calculadora calcula automáticamente todas las demás. Podés empezar desde cualquier valor — la calculadora determina qué fórmulas aplicar.' },
+      { q: '¿Qué figuras incluye esta calculadora?', a: 'Cuadrado, Círculo, Triángulo Equilátero, Rectángulo, Cubo, Esfera, Pirámide cuadrangular y Cilindro. Cada figura permite calcular área, perímetro, volumen, diagonales y más desde cualquier medida conocida.' },
+      { q: '¿Qué unidades usa?', a: 'La calculadora funciona con cualquier unidad consistente. Si ingresás en centímetros, los resultados son en cm, cm² y cm³. Si usás metros, serán en m, m² y m³ — solo mantené la consistencia.' },
+      { q: '¿Por qué algunos campos se resaltan en azul?', a: 'Los campos azules son calculados automáticamente. Los campos con fondo blanco son donde ingresás tus valores conocidos. Al cambiar cualquier input, los campos azules se actualizan al instante.' },
+    ],
+    '/pt/geometry': [
+      { q: 'Como funciona o solver bidirecional?', a: 'Preencha qualquer propriedade conhecida (lado, área, volume, etc.) e a calculadora calcula automaticamente todas as demais. Você pode começar por qualquer valor — a calculadora determina quais fórmulas aplicar.' },
+      { q: 'Quais figuras esta calculadora suporta?', a: 'Quadrado, Círculo, Triângulo Equilátero, Retângulo, Cubo, Esfera, Pirâmide de base quadrada e Cilindro. Cada figura permite calcular área, perímetro, volume, diagonais e mais a partir de qualquer medida conhecida.' },
+      { q: 'Que unidades ela usa?', a: 'A calculadora funciona com qualquer unidade consistente. Se você inserir em centímetros, os resultados serão em cm, cm² e cm³. Se usar metros, serão em m, m² e m³ — apenas mantenha a consistência.' },
+      { q: 'Por que alguns campos ficam destacados em azul?', a: 'Campos azuis são calculados automaticamente. Campos com fundo branco são onde você insere os valores conhecidos. Ao alterar qualquer entrada, os campos azuis se atualizam instantaneamente.' },
+    ],
+    '/fr/geometry': [
+      { q: 'Comment fonctionne le solveur bidirectionnel ?', a: 'Remplissez n\'importe quelle propriété connue (côté, aire, volume, etc.) et la calculatrice calcule automatiquement toutes les autres. Vous pouvez commencer par n\'importe quelle valeur — la calculatrice détermine les formules à appliquer.' },
+      { q: 'Quelles figures cette calculatrice supporte-t-elle ?', a: 'Carré, Cercle, Triangle Équilatéral, Rectangle, Cube, Sphère, Pyramide à base carrée et Cylindre. Chaque figure permet de calculer l\'aire, le périmètre, le volume, les diagonales et plus à partir de n\'importe quelle mesure connue.' },
+      { q: 'Quelles unités utilise-t-elle ?', a: 'La calculatrice fonctionne avec n\'importe quelle unité cohérente. Si vous entrez en centimètres, les résultats sont en cm, cm² et cm³. Si vous utilisez des mètres, ce sera en m, m² et m³ — restez simplement cohérent.' },
+      { q: 'Pourquoi certains champs sont-ils surlignés en bleu ?', a: 'Les champs bleus sont calculés automatiquement. Les champs à fond blanc sont ceux où vous saisissez vos valeurs connues. Lorsque vous modifiez une entrée, les champs bleus se mettent à jour instantanément.' },
+    ],
+
+    /* ── LCM & GCD ── */
+    '/lcm': [
+      { q: 'What is the Least Common Multiple (LCM)?', a: 'The LCM of two or more integers is the smallest positive integer that is divisible by all of them. For example, LCM(4, 6) = 12, because 12 is the smallest number divisible by both 4 and 6.' },
+      { q: 'What is the Greatest Common Divisor (GCD)?', a: 'The GCD (also called GCF or HCF) is the largest positive integer that divides each of the given numbers without a remainder. For example, GCD(12, 18) = 6.' },
+      { q: 'What is prime factorization?', a: 'Prime factorization breaks a number into a product of prime numbers. For example, 12 = 2² × 3 and 18 = 2 × 3². The GCD uses the minimum exponent of shared primes, and the LCM uses the maximum.' },
+      { q: 'Where are LCM and GCD used in practice?', a: 'LCM is used to find a common denominator when adding fractions. GCD is used to simplify fractions to their lowest terms. Both are fundamental in number theory and cryptography.' },
+    ],
+    '/es/lcm': [
+      { q: '¿Qué es el Mínimo Común Múltiplo (MCM)?', a: 'El MCM de dos o más enteros es el número entero positivo más pequeño que es divisible por todos ellos. Por ejemplo, MCM(4, 6) = 12, porque 12 es el número más pequeño divisible por 4 y 6.' },
+      { q: '¿Qué es el Máximo Común Divisor (MCD)?', a: 'El MCD es el número entero positivo más grande que divide a cada uno de los números dados sin dejar resto. Por ejemplo, MCD(12, 18) = 6.' },
+      { q: '¿Qué es la factorización en primos?', a: 'La factorización prima descompone un número en producto de números primos. Por ejemplo, 12 = 2² × 3 y 18 = 2 × 3². El MCD usa el menor exponente de los primos comunes, y el MCM usa el mayor.' },
+      { q: '¿Para qué se usan en la práctica?', a: 'El MCM se usa para encontrar el denominador común al sumar fracciones. El MCD se usa para simplificar fracciones a su mínima expresión. Ambos son fundamentales en teoría de números y criptografía.' },
+    ],
+    '/pt/lcm': [
+      { q: 'O que é o Mínimo Múltiplo Comum (MMC)?', a: 'O MMC de dois ou mais inteiros é o menor inteiro positivo divisível por todos eles. Por exemplo, MMC(4, 6) = 12, pois 12 é o menor número divisível por 4 e 6.' },
+      { q: 'O que é o Máximo Divisor Comum (MDC)?', a: 'O MDC é o maior inteiro positivo que divide cada um dos números dados sem deixar resto. Por exemplo, MDC(12, 18) = 6.' },
+      { q: 'O que é a fatoração em números primos?', a: 'A fatoração prima decompõe um número em produto de números primos. Por exemplo, 12 = 2² × 3 e 18 = 2 × 3². O MDC usa o menor expoente dos primos comuns, e o MMC usa o maior.' },
+      { q: 'Onde MMC e MDC são usados na prática?', a: 'O MMC é usado para encontrar o denominador comum ao somar frações. O MDC é usado para simplificar frações à mínima expressão. Ambos são fundamentais em teoria dos números e criptografia.' },
+    ],
+    '/fr/lcm': [
+      { q: 'Qu\'est-ce que le Plus Petit Commun Multiple (PPCM) ?', a: 'Le PPCM de deux entiers ou plus est le plus petit entier positif divisible par chacun d\'eux. Par exemple, PPCM(4, 6) = 12, car 12 est le plus petit nombre divisible par 4 et 6.' },
+      { q: 'Qu\'est-ce que le Plus Grand Commun Diviseur (PGCD) ?', a: 'Le PGCD est le plus grand entier positif qui divise chacun des nombres donnés sans reste. Par exemple, PGCD(12, 18) = 6.' },
+      { q: 'Qu\'est-ce que la décomposition en facteurs premiers ?', a: 'La décomposition en facteurs premiers exprime un nombre comme produit de nombres premiers. Par exemple, 12 = 2² × 3 et 18 = 2 × 3². Le PGCD utilise l\'exposant minimum des primes communs, le PPCM utilise le maximum.' },
+      { q: 'Où PPCM et PGCD sont-ils utilisés en pratique ?', a: 'Le PPCM sert à trouver le dénominateur commun pour additionner des fractions. Le PGCD sert à simplifier des fractions à leur expression irréductible. Tous deux sont fondamentaux en théorie des nombres et en cryptographie.' },
+    ],
+
+    /* ── WORD COUNTER ── */
+    '/word-counter': [
+      { q: 'How does the word count work?', a: 'Words are counted by splitting the text on whitespace (spaces, tabs, newlines) and filtering empty chunks. Punctuation attached to words (like "hello," or "end.") counts as part of that word.' },
+      { q: 'How is reading time estimated?', a: 'Reading time is calculated at 200 words per minute — the average silent reading speed for adults. A 1,000-word article would take approximately 5 minutes to read.' },
+      { q: 'Does it count sentences and paragraphs?', a: 'Yes. Sentences are split by periods, exclamation marks, and question marks. Paragraphs are split by blank lines (double line breaks). Single line breaks are not counted as paragraph separators.' },
+      { q: 'What is the character count used for?', a: 'Character counts are essential for social media (Twitter/X has a 280-character limit), SMS messaging, SEO meta descriptions (155–160 characters recommended), and academic submissions with character limits.' },
+    ],
+    '/es/word-counter': [
+      { q: '¿Cómo funciona el contador de palabras?', a: 'Las palabras se cuentan dividiendo el texto por espacios en blanco y filtrando fragmentos vacíos. La puntuación unida a palabras ("hola," o "fin.") cuenta como parte de esa palabra.' },
+      { q: '¿Cómo se estima el tiempo de lectura?', a: 'El tiempo de lectura se calcula a 200 palabras por minuto — la velocidad promedio de lectura silenciosa para adultos. Un artículo de 1.000 palabras tarda aproximadamente 5 minutos en leerse.' },
+      { q: '¿Cuenta oraciones y párrafos?', a: 'Sí. Las oraciones se dividen por puntos, signos de exclamación e interrogación. Los párrafos se separan por líneas en blanco (doble salto de línea). Un salto de línea simple no cuenta como separador de párrafo.' },
+      { q: '¿Para qué sirve el conteo de caracteres?', a: 'El conteo de caracteres es esencial para redes sociales (Twitter/X tiene límite de 280 caracteres), mensajes SMS, meta descripciones SEO (se recomiendan 155–160 caracteres) y trabajos académicos con límite de caracteres.' },
+    ],
+    '/pt/word-counter': [
+      { q: 'Como funciona a contagem de palavras?', a: 'As palavras são contadas dividindo o texto por espaços em branco e filtrando fragmentos vazios. A pontuação anexada às palavras ("olá," ou "fim.") conta como parte dessa palavra.' },
+      { q: 'Como o tempo de leitura é estimado?', a: 'O tempo de leitura é calculado a 200 palavras por minuto — a velocidade média de leitura silenciosa para adultos. Um artigo de 1.000 palavras leva aproximadamente 5 minutos para ser lido.' },
+      { q: 'Ele conta frases e parágrafos?', a: 'Sim. As frases são divididas por pontos, exclamações e interrogações. Os parágrafos são separados por linhas em branco (dupla quebra de linha). Uma quebra de linha simples não conta como separador de parágrafo.' },
+      { q: 'Para que serve a contagem de caracteres?', a: 'A contagem de caracteres é essencial para redes sociais (Twitter/X tem limite de 280 caracteres), SMS, meta descrições de SEO (recomenda-se 155–160 caracteres) e trabalhos acadêmicos com limite de caracteres.' },
+    ],
+    '/fr/word-counter': [
+      { q: 'Comment fonctionne le compteur de mots ?', a: 'Les mots sont comptés en divisant le texte par les espaces blancs et en filtrant les fragments vides. La ponctuation attachée aux mots ("bonjour," ou "fin.") compte comme faisant partie de ce mot.' },
+      { q: 'Comment le temps de lecture est-il estimé ?', a: 'Le temps de lecture est calculé à 200 mots par minute — la vitesse moyenne de lecture silencieuse pour les adultes. Un article de 1 000 mots prend environ 5 minutes à lire.' },
+      { q: 'Compte-t-il les phrases et les paragraphes ?', a: 'Oui. Les phrases sont divisées par les points, les points d\'exclamation et d\'interrogation. Les paragraphes sont séparés par des lignes vides (double saut de ligne). Un simple saut de ligne ne compte pas comme séparateur de paragraphe.' },
+      { q: 'À quoi sert le comptage de caractères ?', a: 'Le comptage de caractères est essentiel pour les réseaux sociaux (Twitter/X a une limite de 280 caractères), les SMS, les méta-descriptions SEO (155–160 caractères recommandés) et les soumissions académiques avec limite de caractères.' },
+    ],
+
+    /* ── WEIGHTED AVERAGE ── */
+    '/weighted-average': [
+      { q: 'What is a weighted average?', a: 'A weighted average assigns a different importance (weight) to each value before averaging. For example, if a final exam counts 60% and assignments count 40%, the final exam has more influence on the overall grade.' },
+      { q: 'How is a weighted average calculated?', a: 'Multiply each grade by its weight, sum those products, then divide by the total weight. Formula: Σ(grade × weight) ÷ Σ(weights). This calculator does it automatically as you type.' },
+      { q: 'What grade scale should I use?', a: 'Choose 0–10 for European/LATAM systems, 0–100 for US/percent systems, or 0–20 for France. The scale only affects what grades you enter — the weighted average formula is identical in all cases.' },
+      { q: 'What is the difference between weighted and simple average?', a: 'A simple average treats all subjects equally. A weighted average accounts for different credit hours or importance. If all weights are equal, the weighted average equals the simple average.' },
+    ],
+    '/es/weighted-average': [
+      { q: '¿Qué es el promedio ponderado?', a: 'El promedio ponderado asigna una importancia diferente (peso) a cada valor antes de promediar. Por ejemplo, si el examen final vale 60% y las tareas 40%, el examen influye más en la nota final.' },
+      { q: '¿Cómo se calcula el promedio ponderado?', a: 'Se multiplica cada nota por su peso, se suman esos productos y se divide por el peso total. Fórmula: Σ(nota × peso) ÷ Σ(pesos). Esta calculadora lo hace automáticamente mientras escribís.' },
+      { q: '¿Qué escala de notas debo usar?', a: 'Elegí 0–10 para sistemas europeos/LATAM, 0–100 para sistemas de porcentaje, o 0–20 para Francia. La escala solo afecta qué notas ingresás — la fórmula del promedio ponderado es idéntica en todos los casos.' },
+      { q: '¿Cuál es la diferencia entre promedio ponderado y simple?', a: 'El promedio simple trata todas las materias por igual. El ponderado considera diferentes créditos o importancia. Si todos los pesos son iguales, el promedio ponderado coincide con el simple.' },
+    ],
+    '/pt/weighted-average': [
+      { q: 'O que é média ponderada?', a: 'A média ponderada atribui uma importância diferente (peso) a cada valor antes de calcular a média. Por exemplo, se a prova final vale 60% e as tarefas 40%, a prova influencia mais na nota final.' },
+      { q: 'Como se calcula a média ponderada?', a: 'Multiplica-se cada nota pelo seu peso, soma-se esses produtos e divide-se pelo peso total. Fórmula: Σ(nota × peso) ÷ Σ(pesos). Esta calculadora faz isso automaticamente enquanto você digita.' },
+      { q: 'Qual escala de notas devo usar?', a: 'Escolha 0–10 para sistemas europeus/LATAM, 0–100 para sistemas de porcentagem, ou 0–20 para a França. A escala só afeta quais notas você insere — a fórmula da média ponderada é idêntica em todos os casos.' },
+      { q: 'Qual a diferença entre média ponderada e média simples?', a: 'A média simples trata todas as disciplinas igualmente. A ponderada considera diferentes créditos ou importâncias. Se todos os pesos forem iguais, a média ponderada coincide com a média simples.' },
+    ],
+    '/fr/weighted-average': [
+      { q: 'Qu\'est-ce qu\'une moyenne pondérée ?', a: 'Une moyenne pondérée attribue une importance différente (coefficient) à chaque valeur avant de calculer la moyenne. Par exemple, si l\'examen final compte pour 60% et les devoirs pour 40%, l\'examen a plus d\'influence sur la note finale.' },
+      { q: 'Comment calcule-t-on une moyenne pondérée ?', a: 'On multiplie chaque note par son coefficient, on additionne ces produits, puis on divise par la somme des coefficients. Formule : Σ(note × coeff) ÷ Σ(coefficients). Cette calculatrice le fait automatiquement au fil de la saisie.' },
+      { q: 'Quelle échelle de notes utiliser ?', a: 'Choisissez 0–20 pour le système français, 0–10 pour les systèmes européens/latino-américains, ou 0–100 pour les systèmes en pourcentage. L\'échelle n\'affecte que les notes saisies — la formule est identique dans tous les cas.' },
+      { q: 'Quelle est la différence entre moyenne pondérée et moyenne simple ?', a: 'La moyenne simple traite toutes les matières de façon égale. La moyenne pondérée tient compte des différents coefficients. Si tous les coefficients sont égaux, la moyenne pondérée est identique à la moyenne simple.' },
+    ],
   };
 
   /* ── LANGUAGE DETECTION (from URL path) ────────────────────────────────── */
