@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weighted Average Calculator — calculate.website</title>
+<meta name="description" content="Calculate your weighted average or GPA. Add subjects with their grade and weight and get your weighted average, simple average, and total weight instantly.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/weighted-average/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/weighted-average/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/weighted-average/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/weighted-average/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/weighted-average/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/weighted-average/">
+<meta property="og:title" content="Weighted Average Calculator — calculate.website">
+<meta property="og:description" content="Calculate weighted average or GPA. Add subjects with grade and weight.">
+<meta property="og:url" content="https://calculate.website/weighted-average/">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--radius:16px}
+html[data-theme="dark"]{--bg:#0E1525;--surface:#141929;--ink:#E2E4F0;--ink-2:#9BA0B8;--ink-3:#606580;--line:#1F2438;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(26px,5vw,42px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
+.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto}
+main{max-width:600px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.scale-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.scale-label{font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.scale-btns{display:flex;gap:8px}
+.grade-scale-btn{padding:7px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);font-size:13px;font-weight:600;color:var(--ink-3);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.grade-scale-btn.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.col-headers{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:6px}
+.col-header{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.grade-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}
+.grade-row input{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s;width:100%;-moz-appearance:textfield}
+.grade-row input::-webkit-outer-spin-button,.grade-row input::-webkit-inner-spin-button{-webkit-appearance:none}
+.grade-row input:focus{border-color:var(--accent)}
+.remove-btn{background:none;border:1.5px solid var(--line);border-radius:8px;width:34px;height:38px;cursor:pointer;font-size:16px;color:var(--ink-3);transition:all .15s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.remove-btn:hover{border-color:#ef4444;color:#ef4444}
+.add-btn{margin-top:8px;padding:10px 18px;border:1.5px dashed var(--line);border-radius:10px;background:none;font-size:13px;font-weight:600;color:var(--ink-3);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;width:100%}
+.add-btn:hover{border-color:var(--accent);color:var(--accent)}
+#result-section{display:none}
+.result-card{background:linear-gradient(135deg,#0C1528,#1a2540);border-radius:var(--radius);padding:28px;text-align:center;border-top:3px solid var(--accent)}
+.result-big{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;letter-spacing:-0.04em;line-height:1;margin-bottom:8px}
+.result-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.result-row-sec{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.result-sec-item{text-align:center}
+.result-sec-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px}
+.result-sec-val{font-size:22px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+<header></header>
+<div class="hero">
+  <div class="bc"><a href="/">Home</a><span>›</span><a href="/math/">Math</a><span>›</span>Weighted Average</div>
+  <h1>⚖️ Weighted Average</h1>
+  <p class="sub">Calculate your weighted average or GPA. Add subjects with their grade and weight.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="scale-row">
+      <span class="scale-label">Grade scale:</span>
+      <div class="scale-btns">
+        <button class="grade-scale-btn active" data-max="10" onclick="setScale(10)">0–10</button>
+        <button class="grade-scale-btn" data-max="100" onclick="setScale(100)">0–100</button>
+        <button class="grade-scale-btn" data-max="20" onclick="setScale(20)">0–20</button>
+      </div>
+    </div>
+    <div class="col-headers">
+      <div class="col-header">Subject</div>
+      <div class="col-header">Grade</div>
+      <div class="col-header">Weight</div>
+      <div class="col-header"></div>
+    </div>
+    <div id="rows-container"></div>
+    <button class="add-btn" onclick="addRow()">+ Add subject</button>
+  </div>
+  <div id="result-section">
+    <div class="result-card">
+      <div class="result-label">Weighted Average</div>
+      <div class="result-big" id="r-weighted">—</div>
+      <div class="result-row-sec">
+        <div class="result-sec-item">
+          <div class="result-sec-label">Simple Average</div>
+          <div class="result-sec-val" id="r-unweighted">—</div>
+        </div>
+        <div class="result-sec-item">
+          <div class="result-sec-label">Total Weight</div>
+          <div class="result-sec-val" id="r-totalweight">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+var T={subject:'Subject'};
+var gradeMax=10;
+function setScale(max){
+  gradeMax=max;
+  document.querySelectorAll('.grade-scale-btn').forEach(function(b){b.classList.toggle('active',parseInt(b.dataset.max)===max);});
+  document.querySelectorAll('.grade-input').forEach(function(inp){inp.max=max;inp.placeholder=max===10?'7.5':max===100?'85':'14';});
+  calculate();
+}
+function addRow(subj,grade,weight){
+  var div=document.createElement('div');
+  div.className='grade-row';
+  div.innerHTML='<input class="subj-input" type="text" placeholder="'+T.subject+'" value="'+(subj||'')+'">'
+    +'<input class="grade-input" type="number" placeholder="'+(gradeMax===10?'7.5':gradeMax===100?'85':'14')+'" min="0" max="'+gradeMax+'" step="any" value="'+(grade!==undefined?grade:'')+'" oninput="calculate()">'
+    +'<input class="weight-input" type="number" placeholder="1" min="0" step="any" value="'+(weight!==undefined?weight:'')+'" oninput="calculate()">'
+    +'<button class="remove-btn" onclick="removeRow(this)">×</button>';
+  document.getElementById('rows-container').appendChild(div);
+  calculate();
+}
+function removeRow(btn){btn.closest('.grade-row').remove();calculate();}
+function calculate(){
+  var rows=document.querySelectorAll('.grade-row');
+  var weightedSum=0,weightSum=0,gradeSum=0,gradeCount=0;
+  rows.forEach(function(row){
+    var g=parseFloat(row.querySelector('.grade-input').value);
+    var w=parseFloat(row.querySelector('.weight-input').value);
+    if(!isNaN(g)&&!isNaN(w)&&w>0){weightedSum+=g*w;weightSum+=w;}
+    if(!isNaN(g)){gradeSum+=g;gradeCount++;}
+  });
+  var res=document.getElementById('result-section');
+  if(weightSum===0&&gradeCount===0){res.style.display='none';return;}
+  res.style.display='';
+  var wa=weightSum>0?weightedSum/weightSum:null;
+  var ua=gradeCount>0?gradeSum/gradeCount:null;
+  var elW=document.getElementById('r-weighted');
+  elW.textContent=wa!==null?wa.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'—';
+  document.getElementById('r-unweighted').textContent=ua!==null?ua.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'—';
+  document.getElementById('r-totalweight').textContent=weightSum>0?weightSum.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2}):'—';
+  var pct=wa!==null?(wa/gradeMax)*100:0;
+  var col=pct>=70?'#16a34a':pct>=50?'#d97706':'#dc2626';
+  elW.style.color=col;
+}
+for(var i=0;i<4;i++) addRow();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

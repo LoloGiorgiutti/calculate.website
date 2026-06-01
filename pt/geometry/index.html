@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Geometria — Figuras, Área, Volume | calculate.website</title>
+<meta name="description" content="Calculadora de geometria inteligente. Preencha qualquer propriedade conhecida de uma figura — lado, área, volume, perímetro, diagonal — e as demais são calculadas automaticamente.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/pt/geometry/">
+<link rel="alternate" hreflang="en" href="https://calculate.website/geometry/">
+<link rel="alternate" hreflang="es" href="https://calculate.website/es/geometry/">
+<link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/geometry/">
+<link rel="alternate" hreflang="fr" href="https://calculate.website/fr/geometry/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/geometry/">
+<meta property="og:title" content="Calculadora de Geometria — Figuras, Área, Volume | calculate.website">
+<meta property="og:description" content="Calculadora inteligente: preencha qualquer propriedade conhecida e as demais são calculadas automaticamente.">
+<meta property="og:url" content="https://calculate.website/pt/geometry/">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#fff;--ink:#0A0E1A;--ink-2:#363B4F;--ink-3:#858AA0;--line:#E4E7EE;--accent:#4F6BFF;--accent-soft:#EEF1FF;--radius:16px}
+html[data-theme="dark"]{--bg:#0E1525;--surface:#141929;--ink:#E2E4F0;--ink-2:#9BA0B8;--ink-3:#606580;--line:#1F2438;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.hero{background:#0A0E1A;color:#fff;padding:48px 20px 72px;text-align:center}
+.bc{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}.bc a{color:rgba(255,255,255,.4)}.bc a:hover{color:#fff}.bc span{margin:0 6px;opacity:.4}
+h1{font-size:clamp(26px,5vw,42px);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
+.sub{font-size:16px;color:rgba(255,255,255,.6);max-width:560px;margin:0 auto}
+main{max-width:640px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 4px 24px rgba(10,14,26,.06);margin-bottom:16px}
+.shape-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.shape-tab{padding:10px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);font-size:13px;font-weight:600;color:var(--ink-3);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;white-space:nowrap}
+.shape-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.shape-tab:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.shape-hint{font-size:12px;color:var(--ink-3);margin-bottom:16px;padding:10px 14px;background:var(--accent-soft);border-radius:8px;border:1px solid rgba(79,107,255,.2)}
+.fields-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:20px}
+@media(max-width:480px){.fields-grid{grid-template-columns:1fr}}
+.field-item label{display:block;font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+.input-wrap{position:relative}
+.input-wrap input{width:100%;padding:11px 48px 11px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);outline:none;transition:border-color .15s,background .15s,color .15s;box-sizing:border-box;-moz-appearance:textfield}
+.input-wrap input::-webkit-outer-spin-button,.input-wrap input::-webkit-inner-spin-button{-webkit-appearance:none}
+.input-wrap input:focus{border-color:var(--accent);background:#fff}
+.input-wrap input.computed{background:var(--accent-soft);border-color:rgba(79,107,255,.3);color:var(--accent)}
+html[data-theme="dark"] .input-wrap input.computed{background:rgba(79,107,255,.12);color:#93B4FF}
+.field-unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--ink-3);pointer-events:none}
+.field-formula{font-size:11px;color:var(--ink-3);margin-top:4px;font-family:'JetBrains Mono',monospace}
+.clear-btn{padding:10px 20px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);font-size:13px;font-weight:600;color:var(--ink-3);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.clear-btn:hover{border-color:var(--ink);color:var(--ink)}
+</style>
+</head>
+<body>
+<header></header>
+<div class="hero">
+  <div class="bc"><a href="/pt/">Início</a><span>›</span><a href="/pt/math/">Matemática</a><span>›</span>Geometria</div>
+  <h1>📐 Calculadora de Geometria</h1>
+  <p class="sub">Calculadora inteligente: preencha qualquer propriedade conhecida e as demais são calculadas automaticamente.</p>
+</div>
+<main>
+  <div class="card">
+    <div class="shape-tabs">
+      <button class="shape-tab active" data-shape="square" onclick="setShape('square')">🟦 Quadrado</button>
+      <button class="shape-tab" data-shape="circle" onclick="setShape('circle')">⭕ Círculo</button>
+      <button class="shape-tab" data-shape="eqtriangle" onclick="setShape('eqtriangle')">🔺 Triângulo Equilátero</button>
+      <button class="shape-tab" data-shape="rectangle" onclick="setShape('rectangle')">🔷 Retângulo</button>
+      <button class="shape-tab" data-shape="cube" onclick="setShape('cube')">🧊 Cubo</button>
+      <button class="shape-tab" data-shape="sphere" onclick="setShape('sphere')">🌐 Esfera</button>
+      <button class="shape-tab" data-shape="pyramid" onclick="setShape('pyramid')">📐 Pirâmide</button>
+      <button class="shape-tab" data-shape="cylinder" onclick="setShape('cylinder')">🪣 Cilindro</button>
+    </div>
+    <div class="shape-hint">Preencha qualquer valor conhecido — os demais são calculados automaticamente.</div>
+
+    <!-- QUADRADO -->
+    <div class="shape-panel" data-shape="square">
+      <div class="fields-grid">
+        <div class="field-item"><label>Lado (a)</label><div class="input-wrap"><input type="number" id="sq-a" min="0" step="any" placeholder="ex. 5" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">a</div></div>
+        <div class="field-item"><label>Área (A)</label><div class="input-wrap"><input type="number" id="sq-A" min="0" step="any" placeholder="ex. 25" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">A = a²</div></div>
+        <div class="field-item"><label>Perímetro (P)</label><div class="input-wrap"><input type="number" id="sq-P" min="0" step="any" placeholder="ex. 20" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">P = 4a</div></div>
+        <div class="field-item"><label>Diagonal (d)</label><div class="input-wrap"><input type="number" id="sq-d" min="0" step="any" placeholder="ex. 7.07" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">d = a√2</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- CÍRCULO -->
+    <div class="shape-panel" data-shape="circle" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Raio (r)</label><div class="input-wrap"><input type="number" id="ci-r" min="0" step="any" placeholder="ex. 5" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">r</div></div>
+        <div class="field-item"><label>Diâmetro (D)</label><div class="input-wrap"><input type="number" id="ci-D" min="0" step="any" placeholder="ex. 10" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">D = 2r</div></div>
+        <div class="field-item"><label>Circunferência (C)</label><div class="input-wrap"><input type="number" id="ci-C" min="0" step="any" placeholder="ex. 31.4" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">C = 2πr</div></div>
+        <div class="field-item"><label>Área (A)</label><div class="input-wrap"><input type="number" id="ci-A" min="0" step="any" placeholder="ex. 78.5" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">A = πr²</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- TRIÂNGULO EQUILÁTERO -->
+    <div class="shape-panel" data-shape="eqtriangle" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Lado (a)</label><div class="input-wrap"><input type="number" id="et-a" min="0" step="any" placeholder="ex. 6" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">a</div></div>
+        <div class="field-item"><label>Perímetro (P)</label><div class="input-wrap"><input type="number" id="et-P" min="0" step="any" placeholder="ex. 18" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">P = 3a</div></div>
+        <div class="field-item"><label>Área (A)</label><div class="input-wrap"><input type="number" id="et-A" min="0" step="any" placeholder="ex. 15.6" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">A = (√3/4)a²</div></div>
+        <div class="field-item"><label>Altura (h)</label><div class="input-wrap"><input type="number" id="et-h" min="0" step="any" placeholder="ex. 5.2" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">h = (√3/2)a</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- RETÂNGULO -->
+    <div class="shape-panel" data-shape="rectangle" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Comprimento (l)</label><div class="input-wrap"><input type="number" id="re-l" min="0" step="any" placeholder="ex. 8" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">l</div></div>
+        <div class="field-item"><label>Largura (w)</label><div class="input-wrap"><input type="number" id="re-w" min="0" step="any" placeholder="ex. 5" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">w</div></div>
+        <div class="field-item"><label>Área (A)</label><div class="input-wrap"><input type="number" id="re-A" min="0" step="any" placeholder="ex. 40" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">A = l·w</div></div>
+        <div class="field-item"><label>Perímetro (P)</label><div class="input-wrap"><input type="number" id="re-P" min="0" step="any" placeholder="ex. 26" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">P = 2(l+w)</div></div>
+        <div class="field-item"><label>Diagonal (d)</label><div class="input-wrap"><input type="number" id="re-d" min="0" step="any" placeholder="ex. 9.43" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">d = √(l²+w²)</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- CUBO -->
+    <div class="shape-panel" data-shape="cube" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Lado (a)</label><div class="input-wrap"><input type="number" id="cu-a" min="0" step="any" placeholder="ex. 4" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">a</div></div>
+        <div class="field-item"><label>Volume (V)</label><div class="input-wrap"><input type="number" id="cu-V" min="0" step="any" placeholder="ex. 64" oninput="solve()"><span class="field-unit">cm³</span></div><div class="field-formula">V = a³</div></div>
+        <div class="field-item"><label>Área superficial (S)</label><div class="input-wrap"><input type="number" id="cu-S" min="0" step="any" placeholder="ex. 96" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">S = 6a²</div></div>
+        <div class="field-item"><label>Diagonal da face (fd)</label><div class="input-wrap"><input type="number" id="cu-fd" min="0" step="any" placeholder="ex. 5.66" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">fd = a√2</div></div>
+        <div class="field-item"><label>Diagonal espacial (sd)</label><div class="input-wrap"><input type="number" id="cu-sd" min="0" step="any" placeholder="ex. 6.93" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">sd = a√3</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- ESFERA -->
+    <div class="shape-panel" data-shape="sphere" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Raio (r)</label><div class="input-wrap"><input type="number" id="sp-r" min="0" step="any" placeholder="ex. 5" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">r</div></div>
+        <div class="field-item"><label>Diâmetro (D)</label><div class="input-wrap"><input type="number" id="sp-D" min="0" step="any" placeholder="ex. 10" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">D = 2r</div></div>
+        <div class="field-item"><label>Volume (V)</label><div class="input-wrap"><input type="number" id="sp-V" min="0" step="any" placeholder="ex. 523.6" oninput="solve()"><span class="field-unit">cm³</span></div><div class="field-formula">V = (4/3)πr³</div></div>
+        <div class="field-item"><label>Área superficial (S)</label><div class="input-wrap"><input type="number" id="sp-S" min="0" step="any" placeholder="ex. 314.2" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">S = 4πr²</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- PIRÂMIDE -->
+    <div class="shape-panel" data-shape="pyramid" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Base (a)</label><div class="input-wrap"><input type="number" id="py-a" min="0" step="any" placeholder="ex. 6" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">a (base quadrada)</div></div>
+        <div class="field-item"><label>Altura (h)</label><div class="input-wrap"><input type="number" id="py-h" min="0" step="any" placeholder="ex. 4" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">h</div></div>
+        <div class="field-item"><label>Volume (V)</label><div class="input-wrap"><input type="number" id="py-V" min="0" step="any" placeholder="ex. 48" oninput="solve()"><span class="field-unit">cm³</span></div><div class="field-formula">V = a²h/3</div></div>
+        <div class="field-item"><label>Apótema</label><div class="input-wrap"><input type="number" id="py-sl" readonly class="computed"><span class="field-unit">cm</span></div><div class="field-formula">sl = √(h²+(a/2)²)</div></div>
+        <div class="field-item"><label>Área lateral</label><div class="input-wrap"><input type="number" id="py-LA" readonly class="computed"><span class="field-unit">cm²</span></div><div class="field-formula">LA = 2a·sl</div></div>
+        <div class="field-item"><label>Área total</label><div class="input-wrap"><input type="number" id="py-TA" readonly class="computed"><span class="field-unit">cm²</span></div><div class="field-formula">TA = a²+LA</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+
+    <!-- CILINDRO -->
+    <div class="shape-panel" data-shape="cylinder" style="display:none">
+      <div class="fields-grid">
+        <div class="field-item"><label>Raio (r)</label><div class="input-wrap"><input type="number" id="cy-r" min="0" step="any" placeholder="ex. 3" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">r</div></div>
+        <div class="field-item"><label>Altura (h)</label><div class="input-wrap"><input type="number" id="cy-h" min="0" step="any" placeholder="ex. 8" oninput="solve()"><span class="field-unit">cm</span></div><div class="field-formula">h</div></div>
+        <div class="field-item"><label>Volume (V)</label><div class="input-wrap"><input type="number" id="cy-V" min="0" step="any" placeholder="ex. 226" oninput="solve()"><span class="field-unit">cm³</span></div><div class="field-formula">V = πr²h</div></div>
+        <div class="field-item"><label>Área lateral</label><div class="input-wrap"><input type="number" id="cy-LA" min="0" step="any" placeholder="ex. 150.8" oninput="solve()"><span class="field-unit">cm²</span></div><div class="field-formula">LA = 2πrh</div></div>
+        <div class="field-item"><label>Área total</label><div class="input-wrap"><input type="number" id="cy-TA" readonly class="computed"><span class="field-unit">cm²</span></div><div class="field-formula">TA = 2πr(r+h)</div></div>
+      </div>
+      <button class="clear-btn" onclick="clearShape()">Limpar</button>
+    </div>
+  </div>
+</main>
+<script>
+var currentShape='square';
+function setShape(s){currentShape=s;document.querySelectorAll('.shape-tab').forEach(function(t){t.classList.toggle('active',t.dataset.shape===s);});document.querySelectorAll('.shape-panel').forEach(function(p){p.style.display=p.dataset.shape===s?'':'none';});}
+function getF(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?null:v;}
+function setF(id,val){var el=document.getElementById(id);if(document.activeElement!==el){el.value=val!==null?round(val):'';if(!el.hasAttribute('readonly'))el.classList.toggle('computed',val!==null);}}
+function round(v){if(Math.abs(v)>=1000)return Math.round(v*100)/100;return Math.round(v*10000)/10000;}
+function solveSquare(){var a=getF('sq-a'),A=getF('sq-A'),P=getF('sq-P'),d=getF('sq-d');var src=null;if(a!==null)src=a;else if(A!==null)src=Math.sqrt(A);else if(P!==null)src=P/4;else if(d!==null)src=d/Math.sqrt(2);if(src===null||src<=0)return;if(getF('sq-a')===null)setF('sq-a',src);if(getF('sq-A')===null)setF('sq-A',src*src);if(getF('sq-P')===null)setF('sq-P',4*src);if(getF('sq-d')===null)setF('sq-d',src*Math.sqrt(2));}
+function solveCircle(){var r=getF('ci-r'),D=getF('ci-D'),C=getF('ci-C'),A=getF('ci-A');var src=null;if(r!==null)src=r;else if(D!==null)src=D/2;else if(C!==null)src=C/(2*Math.PI);else if(A!==null)src=Math.sqrt(A/Math.PI);if(src===null||src<=0)return;if(getF('ci-r')===null)setF('ci-r',src);if(getF('ci-D')===null)setF('ci-D',2*src);if(getF('ci-C')===null)setF('ci-C',2*Math.PI*src);if(getF('ci-A')===null)setF('ci-A',Math.PI*src*src);}
+function solveEqTriangle(){var a=getF('et-a'),P=getF('et-P'),A=getF('et-A'),h=getF('et-h');var src=null,sq3=Math.sqrt(3);if(a!==null)src=a;else if(P!==null)src=P/3;else if(A!==null)src=Math.sqrt(4*A/sq3);else if(h!==null)src=2*h/sq3;if(src===null||src<=0)return;if(getF('et-a')===null)setF('et-a',src);if(getF('et-P')===null)setF('et-P',3*src);if(getF('et-A')===null)setF('et-A',sq3/4*src*src);if(getF('et-h')===null)setF('et-h',sq3/2*src);}
+function solveRectangle(){var l=getF('re-l'),w=getF('re-w'),A=getF('re-A'),P=getF('re-P'),d=getF('re-d');var ll=null,ww=null;if(l!==null&&w!==null){ll=l;ww=w;}else if(l!==null&&A!==null&&l>0){ll=l;ww=A/l;}else if(l!==null&&P!==null){ll=l;ww=P/2-l;}else if(l!==null&&d!==null&&d>l){ll=l;ww=Math.sqrt(d*d-l*l);}else if(w!==null&&A!==null&&w>0){ll=A/w;ww=w;}else if(w!==null&&P!==null){ll=P/2-w;ww=w;}else if(w!==null&&d!==null&&d>w){ll=Math.sqrt(d*d-w*w);ww=w;}else if(A!==null&&P!==null){var disc=P*P/16-A;if(disc>=0){var sq=Math.sqrt(disc);ll=P/4+sq;ww=P/4-sq;}}else if(A!==null&&d!==null){var lw2=Math.sqrt(Math.max(0,d*d-2*A));var lw1=Math.sqrt(d*d+2*A);ll=(lw1+lw2)/2;ww=(lw1-lw2)/2;}else if(P!==null&&d!==null){var s=P/2;var prod=(s*s-d*d)/2;var disc2=s*s/4-prod;if(disc2>=0){var sq2=Math.sqrt(disc2);ll=s/2+sq2;ww=s/2-sq2;}}if(ll===null||ww===null||ll<=0||ww<=0)return;if(getF('re-l')===null)setF('re-l',ll);if(getF('re-w')===null)setF('re-w',ww);if(getF('re-A')===null)setF('re-A',ll*ww);if(getF('re-P')===null)setF('re-P',2*(ll+ww));if(getF('re-d')===null)setF('re-d',Math.sqrt(ll*ll+ww*ww));}
+function solveCube(){var a=getF('cu-a'),V=getF('cu-V'),S=getF('cu-S'),fd=getF('cu-fd'),sd=getF('cu-sd');var src=null;if(a!==null)src=a;else if(V!==null)src=Math.pow(V,1/3);else if(S!==null)src=Math.sqrt(S/6);else if(fd!==null)src=fd/Math.sqrt(2);else if(sd!==null)src=sd/Math.sqrt(3);if(src===null||src<=0)return;if(getF('cu-a')===null)setF('cu-a',src);if(getF('cu-V')===null)setF('cu-V',src*src*src);if(getF('cu-S')===null)setF('cu-S',6*src*src);if(getF('cu-fd')===null)setF('cu-fd',src*Math.sqrt(2));if(getF('cu-sd')===null)setF('cu-sd',src*Math.sqrt(3));}
+function solveSphere(){var r=getF('sp-r'),D=getF('sp-D'),V=getF('sp-V'),S=getF('sp-S');var src=null;if(r!==null)src=r;else if(D!==null)src=D/2;else if(V!==null)src=Math.pow(3*V/(4*Math.PI),1/3);else if(S!==null)src=Math.sqrt(S/(4*Math.PI));if(src===null||src<=0)return;if(getF('sp-r')===null)setF('sp-r',src);if(getF('sp-D')===null)setF('sp-D',2*src);if(getF('sp-V')===null)setF('sp-V',4/3*Math.PI*src*src*src);if(getF('sp-S')===null)setF('sp-S',4*Math.PI*src*src);}
+function solvePyramid(){var a=getF('py-a'),h=getF('py-h'),V=getF('py-V');var aa=null,hh=null;if(a!==null&&h!==null){aa=a;hh=h;}else if(V!==null&&a!==null&&a>0){aa=a;hh=3*V/(a*a);}else if(V!==null&&h!==null&&h>0){aa=Math.sqrt(3*V/h);hh=h;}if(aa===null||hh===null||aa<=0||hh<=0)return;if(getF('py-a')===null)setF('py-a',aa);if(getF('py-h')===null)setF('py-h',hh);var sl=Math.sqrt(hh*hh+(aa/2)*(aa/2));var volume=aa*aa*hh/3;var LA=2*aa*sl;var TA=aa*aa+LA;if(getF('py-V')===null)setF('py-V',volume);setF('py-sl',sl);setF('py-LA',LA);setF('py-TA',TA);}
+function solveCylinder(){var r=getF('cy-r'),h=getF('cy-h'),V=getF('cy-V'),LA=getF('cy-LA');var rr=null,hh=null;if(r!==null&&h!==null){rr=r;hh=h;}else if(V!==null&&r!==null&&r>0){rr=r;hh=V/(Math.PI*r*r);}else if(V!==null&&h!==null&&h>0){rr=Math.sqrt(V/(Math.PI*h));hh=h;}else if(LA!==null&&r!==null&&r>0){rr=r;hh=LA/(2*Math.PI*r);}else if(LA!==null&&h!==null&&h>0){rr=LA/(2*Math.PI*h);hh=h;}if(rr===null||hh===null||rr<=0||hh<=0)return;if(getF('cy-r')===null)setF('cy-r',rr);if(getF('cy-h')===null)setF('cy-h',hh);var volume=Math.PI*rr*rr*hh;var lat=2*Math.PI*rr*hh;var total=2*Math.PI*rr*(rr+hh);if(getF('cy-V')===null)setF('cy-V',volume);if(getF('cy-LA')===null)setF('cy-LA',lat);setF('cy-TA',total);}
+function solve(){document.querySelectorAll('.shape-panel[data-shape="'+currentShape+'"] input:not([readonly])').forEach(function(el){if(document.activeElement!==el){el.classList.remove('computed');}});if(currentShape==='square')solveSquare();else if(currentShape==='circle')solveCircle();else if(currentShape==='eqtriangle')solveEqTriangle();else if(currentShape==='rectangle')solveRectangle();else if(currentShape==='cube')solveCube();else if(currentShape==='sphere')solveSphere();else if(currentShape==='pyramid')solvePyramid();else if(currentShape==='cylinder')solveCylinder();}
+function clearShape(){var panel=document.querySelector('.shape-panel[data-shape="'+currentShape+'"]');panel.querySelectorAll('input:not([readonly])').forEach(function(inp){inp.value='';inp.classList.remove('computed');});panel.querySelectorAll('input[readonly]').forEach(function(inp){inp.value='';});}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
