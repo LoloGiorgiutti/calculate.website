@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur PPCM — Plus Petit Commun Multiple | calculate.website</title>
+<meta name="description" content="Calculez le Plus Petit Commun Multiple (PPCM) et le Plus Grand Commun Diviseur (PGCD) de jusqu'à 10 nombres. Factorisation première étape par étape. Calculateur PPCM gratuit.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/fr/lcm/">
+<link rel="alternate" hreflang="en"       href="https://calculate.website/lcm/">
+<link rel="alternate" hreflang="es"       href="https://calculate.website/es/lcm/">
+<link rel="alternate" hreflang="pt-BR"    href="https://calculate.website/pt/lcm/">
+<link rel="alternate" hreflang="fr"       href="https://calculate.website/fr/lcm/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/lcm/">
+<meta property="og:title" content="Calculateur PPCM | calculate.website">
+<meta property="og:description" content="Trouvez le Plus Petit Commun Multiple et le Plus Grand Commun Diviseur de jusqu'à 10 nombres, avec factorisation première étape par étape.">
+<meta property="og:url" content="https://calculate.website/fr/lcm/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+.page{max-width:580px;margin:0 auto;padding:36px 20px 60px}
+.page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+.page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:28px}
+.inputs-wrap{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.num-input{width:90px;padding:12px 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--ink);background:var(--surface);outline:none;text-align:center;transition:border-color .15s;-moz-appearance:textfield}
+.num-input::-webkit-outer-spin-button,.num-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.num-input:focus{border-color:var(--hi)}
+.results-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.res-card{background:linear-gradient(135deg,#0C1528 0%,#1a2540 100%);border-radius:var(--radius);padding:22px;text-align:center;border-top:3px solid var(--hi)}
+.res-card.gcd-card{border-top-color:#22C55E}
+.res-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.res-value{font-size:40px;font-weight:700;color:#fff;letter-spacing:-0.04em;line-height:1;word-break:break-all}
+.steps-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px;display:none}
+.steps-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.step-row{display:flex;gap:10px;margin-bottom:10px;font-size:13px;line-height:1.5}
+.step-num{font-weight:700;color:var(--hi);min-width:20px;font-family:'JetBrains Mono',monospace}
+.step-text{color:var(--ink-light)}
+.factor-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.factor-chip{background:var(--hi-soft);border:1px solid #BFDBFE;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--hi);font-family:'JetBrains Mono',monospace}
+.examples{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}
+.ex-chip{padding:5px 11px;border-radius:99px;background:var(--hi-soft);border:1px solid #BFDBFE;font-size:11px;font-weight:600;color:var(--hi);cursor:pointer;transition:all .15s}
+.ex-chip:hover{background:var(--hi);color:#fff}
+.faq-section{max-width:580px;margin:0 auto;padding:0 20px 40px}
+.faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;line-height:1}
+.faq-item[open]>summary{color:var(--hi)}
+.faq-item[open]>summary::after{content:'−'}
+.faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+code{background:var(--hi-soft);border-radius:4px;padding:1px 5px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--hi)}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+
+<div class="page">
+  <h1 class="page-title">Calculateur de PPCM</h1>
+  <p class="page-sub">Trouvez le Plus Petit Commun Multiple et le Plus Grand Commun Diviseur de jusqu'à 10 nombres. Les résultats se mettent à jour au fur et à mesure.</p>
+
+  <div class="inputs-wrap" id="inputs-wrap">
+    <input class="num-input" type="number" min="1" step="1" placeholder="4" oninput="calc()" id="n0">
+    <input class="num-input" type="number" min="1" step="1" placeholder="6" oninput="calc()" id="n1">
+    <input class="num-input" type="number" min="1" step="1" placeholder="+" oninput="addIfLast(this);calc()" id="n2">
+  </div>
+
+  <div class="examples">
+    <span class="ex-chip" onclick="loadEx([4,6])">PPCM(4, 6)</span>
+    <span class="ex-chip" onclick="loadEx([12,18])">PPCM(12, 18)</span>
+    <span class="ex-chip" onclick="loadEx([8,10,15])">PPCM(8, 10, 15)</span>
+    <span class="ex-chip" onclick="loadEx([6,14,21])">PPCM(6, 14, 21)</span>
+    <span class="ex-chip" onclick="loadEx([3,5,7,11])">PPCM(3, 5, 7, 11)</span>
+  </div>
+
+  <div class="results-row" id="results-row" style="display:none">
+    <div class="res-card">
+      <div class="res-label">PPCM</div>
+      <div class="res-value" id="r-lcm">—</div>
+    </div>
+    <div class="res-card gcd-card">
+      <div class="res-label">PGCD</div>
+      <div class="res-value" id="r-gcd">—</div>
+    </div>
+  </div>
+
+  <div class="steps-card" id="steps-card">
+    <div class="steps-title">Étape par étape</div>
+    <div id="steps-body"></div>
+  </div>
+</div>
+
+<script>
+function gcd(a,b){a=Math.abs(Math.round(a));b=Math.abs(Math.round(b));while(b){var t=b;b=a%b;a=t;}return a;}
+function lcm(a,b){var g=gcd(a,b);return g===0?0:(Math.abs(a)/g)*Math.abs(b);}
+function primeFactors(n){
+  n=Math.abs(Math.round(n));
+  var factors={};
+  if(n<2) return factors;
+  for(var d=2;d*d<=n;d++){while(n%d===0){factors[d]=(factors[d]||0)+1;n=Math.floor(n/d);}}
+  if(n>1) factors[n]=(factors[n]||0)+1;
+  return factors;
+}
+function formatFactors(f){
+  return Object.entries(f).map(function(e){return e[1]>1?e[0]+'^'+e[1]:e[0];}).join(' × ');
+}
+function getNumbers(){
+  var nums=[];
+  document.querySelectorAll('.num-input').forEach(function(el){
+    var v=parseInt(el.value);
+    if(!isNaN(v)&&v>=1) nums.push(v);
+  });
+  return nums;
+}
+function calc(){
+  var nums=getNumbers();
+  if(nums.length<2){document.getElementById('results-row').style.display='none';document.getElementById('steps-card').style.display='none';return;}
+  var curLcm=nums[0],curGcd=nums[0];
+  for(var i=1;i<nums.length;i++){curLcm=lcm(curLcm,nums[i]);curGcd=gcd(curGcd,nums[i]);}
+  document.getElementById('r-lcm').textContent=curLcm.toLocaleString('fr');
+  document.getElementById('r-gcd').textContent=curGcd.toLocaleString('fr');
+  document.getElementById('results-row').style.display='grid';
+  var steps=[];
+  var allFactors=nums.map(primeFactors);
+  steps.push('<div class="step-row"><div class="step-num">1</div><div class="step-text">Factorisations premières :<div class="factor-grid">'+
+    nums.map(function(n,i){return '<div class="factor-chip">'+n+' = '+formatFactors(allFactors[i])+'</div>';}).join('')+'</div></div></div>');
+  var maxExp={};
+  allFactors.forEach(function(f){Object.entries(f).forEach(function(e){var p=e[0],ex=e[1];if(!maxExp[p]||ex>maxExp[p]) maxExp[p]=ex;});});
+  var lcmParts=Object.entries(maxExp).map(function(e){return e[1]>1?e[0]+'^'+e[1]:e[0];}).join(' × ');
+  steps.push('<div class="step-row"><div class="step-num">2</div><div class="step-text">Prendre la plus haute puissance de chaque facteur premier :<br><strong>PPCM = '+lcmParts+' = '+curLcm.toLocaleString('fr')+'</strong></div></div>');
+  if(nums.length===2){
+    steps.push('<div class="step-row"><div class="step-num">3</div><div class="step-text">Vérification : PPCM × PGCD = '+curLcm.toLocaleString('fr')+' × '+curGcd.toLocaleString('fr')+' = '+(curLcm*curGcd).toLocaleString('fr')+' = '+nums[0]+' × '+nums[1]+' = '+(nums[0]*nums[1]).toLocaleString('fr')+'</div></div>');
+  }
+  document.getElementById('steps-body').innerHTML=steps.join('');
+  document.getElementById('steps-card').style.display='block';
+}
+function addIfLast(el){
+  var inputs=document.querySelectorAll('.num-input');
+  if(el!==inputs[inputs.length-1]) return;
+  if(inputs.length>=10) return;
+  if(el.value.trim()==='') return;
+  var wrap=document.getElementById('inputs-wrap');
+  var newEl=document.createElement('input');
+  newEl.className='num-input';newEl.type='number';newEl.min='1';newEl.step='1';newEl.placeholder='+';
+  newEl.oninput=function(){addIfLast(newEl);calc();};
+  wrap.appendChild(newEl);
+}
+function loadEx(arr){
+  var wrap=document.getElementById('inputs-wrap');
+  wrap.innerHTML='';
+  for(var i=0;i<Math.max(arr.length+1,3);i++){
+    var el=document.createElement('input');
+    el.className='num-input';el.type='number';el.min='1';el.step='1';
+    el.placeholder=i<arr.length?arr[i]:'+';
+    if(i<arr.length) el.value=arr[i];
+    (function(e){e.oninput=function(){addIfLast(e);calc();};})(el);
+    el.id='n'+i;
+    wrap.appendChild(el);
+  }
+  calc();
+}
+</script>
+
+<div class="faq-section">
+  <div class="faq-heading">Questions fréquentes</div>
+  <details class="faq-item" open>
+    <summary>Qu'est-ce que le Plus Petit Commun Multiple (PPCM) ?</summary>
+    <div class="faq-a">Le PPCM de deux entiers ou plus est le plus petit entier positif divisible par tous ces entiers. Par exemple, <strong>PPCM(4, 6) = 12</strong> car 12 est le plus petit nombre divisible à la fois par 4 et par 6.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>Comment le PPCM est-il calculé ?</summary>
+    <div class="faq-a">La méthode la plus efficace utilise la relation <code>PPCM(a,b) = |a × b| / PGCD(a,b)</code>. Le PGCD est trouvé par l'algorithme d'Euclide. Pour plusieurs nombres le PPCM est calculé itérativement : <code>PPCM(a,b,c) = PPCM(PPCM(a,b), c)</code>.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Quelle est la différence entre PPCM et PGCD ?</summary>
+    <div class="faq-a">Le <strong>PGCD</strong> (Plus Grand Commun Diviseur) est le plus grand nombre qui divise exactement tous les entiers. Le <strong>PPCM</strong> est le plus petit nombre que tous les entiers divisent exactement. Ils sont liés par : <code>PPCM(a,b) × PGCD(a,b) = a × b</code>.</div>
+  </details>
+  <details class="faq-item">
+    <summary>À quoi sert le PPCM ?</summary>
+    <div class="faq-a">Le PPCM est utilisé pour <strong>additionner ou soustraire des fractions</strong> (trouver un dénominateur commun), planifier des événements récurrents à cycles différents, et résoudre des problèmes de théorie des nombres et d'arithmétique modulaire.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Peut-on calculer le PPCM de plus de deux nombres ?</summary>
+    <div class="faq-a">Oui. On calcule le PPCM des deux premiers, puis le PPCM de ce résultat avec le troisième nombre, et ainsi de suite. Ce calculateur prend en charge <strong>jusqu'à 10 nombres</strong> à la fois.</div>
+  </details>
+</div>
+
+<script src="/nav.js"></script>
+</body>
+</html>

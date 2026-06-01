@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador de Palabras — Caracteres, Oraciones y Tiempo de Lectura | calculate.website</title>
+<meta name="description" content="Contá palabras, caracteres, oraciones, párrafos y estimá el tiempo de lectura al instante. Pegá o escribí cualquier texto y las estadísticas se actualizan en tiempo real.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calculate.website/es/word-counter/">
+<link rel="alternate" hreflang="en"       href="https://calculate.website/word-counter/">
+<link rel="alternate" hreflang="es"       href="https://calculate.website/es/word-counter/">
+<link rel="alternate" hreflang="pt-BR"    href="https://calculate.website/pt/word-counter/">
+<link rel="alternate" hreflang="fr"       href="https://calculate.website/fr/word-counter/">
+<link rel="alternate" hreflang="x-default" href="https://calculate.website/word-counter/">
+<meta property="og:title" content="Contador de Palabras | calculate.website">
+<meta property="og:description" content="Contá palabras, caracteres, oraciones y tiempo de lectura al instante. Pegá cualquier texto y las estadísticas aparecen automáticamente.">
+<meta property="og:url" content="https://calculate.website/es/word-counter/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F8FA;--surface:#FFF;--ink:#080A12;--ink-light:#60647A;--ink-faint:#B4B8CC;--hi:#4F6BFF;--hi-soft:#EEF1FF;--border:#D4D8E6;--radius:16px;--radius-sm:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}.logo span{color:var(--hi)}
+.page{max-width:680px;margin:0 auto;padding:36px 20px 60px}
+.page-title{font-size:26px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+.page-sub{font-size:14px;color:var(--ink-light);line-height:1.5;margin-bottom:24px}
+.textarea-wrap{position:relative;margin-bottom:20px}
+textarea{width:100%;min-height:200px;padding:16px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:var(--ink);background:var(--surface);outline:none;resize:vertical;transition:border-color .15s}
+textarea:focus{border-color:var(--hi)}
+textarea::placeholder{color:var(--ink-faint)}
+.clear-btn{position:absolute;top:12px;right:12px;background:var(--border);border:none;border-radius:99px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--ink-light);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.clear-btn:hover{background:var(--hi);color:#fff}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:480px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;text-align:center;transition:border-color .15s}
+.stat-card:hover{border-color:var(--hi)}
+.stat-value{font-size:32px;font-weight:700;color:var(--hi);letter-spacing:-0.04em;line-height:1;margin-bottom:4px}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.reading-card{background:linear-gradient(135deg,#0C1528 0%,#1a2540 100%);border-radius:var(--radius);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;border-top:3px solid var(--hi)}
+.reading-label{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.reading-value{font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.03em}
+.density-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.density-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.density-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.density-word{font-size:13px;font-weight:600;color:var(--ink);min-width:100px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.density-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.density-bar{height:100%;background:var(--hi);border-radius:3px;transition:width .3s}
+.density-count{font-size:12px;color:var(--ink-faint);min-width:24px;text-align:right}
+.placeholder-text{font-size:13px;color:var(--ink-faint);text-align:center;padding:16px 0}
+.faq-section{max-width:680px;margin:0 auto;padding:0 20px 40px}
+.faq-heading{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.faq-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.faq-item summary{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--ink-faint);flex-shrink:0;line-height:1}
+.faq-item[open]>summary{color:var(--hi)}
+.faq-item[open]>summary::after{content:'−'}
+.faq-a{padding:0 16px 14px;font-size:13px;color:var(--ink-light);line-height:1.65}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">calculate<span>.website</span></a>
+</header>
+
+<div class="page">
+  <h1 class="page-title">Contador de Palabras</h1>
+  <p class="page-sub">Pega o escribí tu texto abajo. Palabras, caracteres, oraciones y tiempo de lectura se actualizan al instante.</p>
+
+  <div class="textarea-wrap">
+    <textarea id="txt" placeholder="Pegá o escribí tu texto aquí…" oninput="analyze()"></textarea>
+    <button class="clear-btn" onclick="clearText()">Limpiar</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-value" id="s-words">0</div><div class="stat-label">Palabras</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-chars">0</div><div class="stat-label">Caracteres</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-chars-ns">0</div><div class="stat-label">Chars (sin espacios)</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-sent">0</div><div class="stat-label">Oraciones</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-para">0</div><div class="stat-label">Párrafos</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-unique">0</div><div class="stat-label">Palabras únicas</div></div>
+  </div>
+
+  <div class="reading-card">
+    <div><div class="reading-label">Tiempo de lectura estimado</div><div class="reading-value" id="s-read">—</div></div>
+    <div><div class="reading-label">Tiempo al hablar</div><div class="reading-value" id="s-speak">—</div></div>
+  </div>
+
+  <div class="density-section">
+    <div class="density-title">Palabras más frecuentes</div>
+    <div id="density-list"><div class="placeholder-text">Escribí algo para ver las palabras más frecuentes.</div></div>
+  </div>
+</div>
+
+<script>
+var STOP = new Set(['el','la','los','las','un','una','unos','unas','y','o','pero','en','de','del','al','con','por','para','que','se','su','sus','es','son','fue','han','hay','no','si','más','lo','le','les','me','te','nos','como','muy','ya','cuando','donde','todo','todos','esta','este','estos','estas','ese','esa','esos','esas','mi','tu','ser','estar','tiene','tienen','una','del']);
+
+function words(txt){
+  return txt.trim()===''?[]:(txt.trim().split(/\s+/).filter(function(w){return w.length>0;}));
+}
+function sentences(txt){
+  if(txt.trim()==='') return 0;
+  var matches = txt.match(/[^.!?]*[.!?]+/g);
+  if(!matches) return 1;
+  return matches.filter(function(s){return s.trim().length>0;}).length || 1;
+}
+function paragraphs(txt){
+  if(txt.trim()==='') return 0;
+  return txt.split(/\n{2,}/).filter(function(p){return p.trim().length>0;}).length || (txt.trim().length>0?1:0);
+}
+function fmtTime(mins){
+  if(mins<1) return Math.ceil(mins*60)+' seg';
+  var m=Math.round(mins);
+  if(m<60) return m+' min';
+  return Math.floor(m/60)+'h '+( m%60 ? (m%60)+'m' : '');
+}
+
+function analyze(){
+  var txt = document.getElementById('txt').value;
+  var ws = words(txt);
+  var wc = ws.length;
+  set('s-words', wc.toLocaleString('es'));
+  set('s-chars', txt.length.toLocaleString('es'));
+  set('s-chars-ns', txt.replace(/\s/g,'').length.toLocaleString('es'));
+  set('s-sent', sentences(txt).toLocaleString('es'));
+  set('s-para', paragraphs(txt).toLocaleString('es'));
+
+  var lower = ws.map(function(w){return w.toLowerCase().replace(/[^a-záéíóúüñ0-9'-]/g,'');}).filter(function(w){return w.length>0;});
+  var unique = new Set(lower);
+  set('s-unique', unique.size.toLocaleString('es'));
+
+  if(wc>0){
+    set('s-read', fmtTime(wc/238));
+    set('s-speak', fmtTime(wc/130));
+  } else {
+    set('s-read','—'); set('s-speak','—');
+  }
+
+  var freq={};
+  lower.forEach(function(w){if(!STOP.has(w)&&w.length>1){freq[w]=(freq[w]||0)+1;}});
+  var sorted=Object.entries(freq).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+  var list=document.getElementById('density-list');
+  if(!sorted.length){list.innerHTML='<div class="placeholder-text">Escribí algo para ver las palabras más frecuentes.</div>';return;}
+  var max=sorted[0][1];
+  list.innerHTML=sorted.map(function(e){
+    var pct=Math.round(e[1]/max*100);
+    return '<div class="density-row"><div class="density-word">'+esc(e[0])+'</div><div class="density-bar-wrap"><div class="density-bar" style="width:'+pct+'%"></div></div><div class="density-count">'+e[1]+'</div></div>';
+  }).join('');
+}
+
+function set(id,v){document.getElementById(id).textContent=v;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function clearText(){document.getElementById('txt').value='';analyze();}
+</script>
+
+<div class="faq-section">
+  <div class="faq-heading">Preguntas frecuentes</div>
+  <details class="faq-item" open>
+    <summary>¿Cómo se cuentan las palabras?</summary>
+    <div class="faq-a">Las palabras se cuentan separando el texto por espacios en blanco y filtrando los tokens vacíos. Las palabras con guión como <strong>bien-conocido</strong> cuentan como una sola palabra.</div>
+  </details>
+  <details class="faq-item" open>
+    <summary>¿Qué velocidad de lectura usa la calculadora?</summary>
+    <div class="faq-a">Se asume una velocidad de lectura promedio de <strong>238 palabras por minuto</strong>, la mediana encontrada en estudios a gran escala. El tiempo al hablar usa <strong>130 ppm</strong>, típico de una presentación clara.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿El conteo de caracteres incluye espacios?</summary>
+    <div class="faq-a">Se muestran ambos: <strong>Caracteres</strong> incluye todos los caracteres incluyendo espacios; <strong>Chars (sin espacios)</strong> elimina los espacios antes de contar.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Cómo se cuentan las oraciones?</summary>
+    <div class="faq-a">Las oraciones se detectan contando la puntuación final: puntos, signos de exclamación y de interrogación. Si no se encuentra puntuación, el texto se cuenta como una sola oración.</div>
+  </details>
+  <details class="faq-item">
+    <summary>¿Hay un límite de caracteres?</summary>
+    <div class="faq-a">No hay un límite fijo — la herramienta funciona con textos de cualquier longitud. Los textos muy largos pueden tardar una fracción de segundo más en procesar el análisis de frecuencia.</div>
+  </details>
+</div>
+
+<script src="/nav.js"></script>
+</body>
+</html>
