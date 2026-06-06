@@ -1,64 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- HOMEPAGES -->
   <url>
     <loc>https://calculate.website/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/"/>
   </url>
   <url>
     <loc>https://calculate.website/pt/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/"/>
   </url>
   <url>
     <loc>https://calculate.website/fr/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/"/>
   </url>
-
-  <!-- STATIC PAGES: About / Privacy / Terms -->
   <url>
     <loc>https://calculate.website/about/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/about/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/about/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/about/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/about/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/about/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/about/</loc>
@@ -83,11 +54,6 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/privacy/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/privacy/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/privacy/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/privacy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/privacy/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/privacy/</loc>
@@ -112,11 +78,6 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/terms/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/terms/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/terms/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/terms/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/terms/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/terms/</loc>
@@ -136,19 +97,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-
-  <!-- CALCULATORS -->
-  <!-- 1rm -->
   <url>
     <loc>https://calculate.website/1rm/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/1rm/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/1rm/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/1rm/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/1rm/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/1rm/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/1rm/</loc>
@@ -168,18 +121,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- age -->
   <url>
     <loc>https://calculate.website/age/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/age/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/age/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/age/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/age/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/age/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/age/</loc>
@@ -199,28 +145,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- aguinaldo -->
   <url>
     <loc>https://calculate.website/aguinaldo/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/aguinaldo/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/aguinaldo/"/>
   </url>
-
-  <!-- base-converter -->
   <url>
     <loc>https://calculate.website/base-converter/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/base-converter/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/base-converter/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/base-converter/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/base-converter/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/base-converter/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/base-converter/</loc>
@@ -240,18 +175,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- bmi -->
   <url>
     <loc>https://calculate.website/bmi/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/bmi/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/bmi/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/bmi/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/bmi/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/bmi/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/bmi/</loc>
@@ -271,18 +199,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- bmr -->
   <url>
     <loc>https://calculate.website/bmr/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/bmr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/bmr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/bmr/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/bmr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/bmr/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/bmr/</loc>
@@ -302,18 +223,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- body-fat -->
   <url>
     <loc>https://calculate.website/body-fat/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/body-fat/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/body-fat/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/body-fat/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/body-fat/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/body-fat/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/body-fat/</loc>
@@ -333,18 +247,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- calories-burned -->
   <url>
     <loc>https://calculate.website/calories-burned/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/calories-burned/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/calories-burned/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/calories-burned/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/calories-burned/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/calories-burned/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/calories-burned/</loc>
@@ -364,18 +271,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- clock -->
   <url>
     <loc>https://calculate.website/clock/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/clock/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/clock/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/clock/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/clock/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/clock/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/clock/</loc>
@@ -395,18 +295,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- compound-interest -->
   <url>
     <loc>https://calculate.website/compound-interest/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/compound-interest/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/compound-interest/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/compound-interest/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/compound-interest/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/compound-interest/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/compound-interest/</loc>
@@ -426,18 +319,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- countdown -->
   <url>
     <loc>https://calculate.website/countdown/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/countdown/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/countdown/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/countdown/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/countdown/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/countdown/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/countdown/</loc>
@@ -457,18 +343,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- cps -->
   <url>
     <loc>https://calculate.website/cps/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/cps/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/cps/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/cps/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/cps/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/cps/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/cps/</loc>
@@ -488,18 +367,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- crypto-dca -->
   <url>
     <loc>https://calculate.website/crypto-dca/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/crypto-dca/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/crypto-dca/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/crypto-dca/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/crypto-dca/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/crypto-dca/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/crypto-dca/</loc>
@@ -519,18 +391,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- crypto-pl -->
   <url>
     <loc>https://calculate.website/crypto-pl/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/crypto-pl/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/crypto-pl/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/crypto-pl/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/crypto-pl/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/crypto-pl/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/crypto-pl/</loc>
@@ -550,18 +415,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- day-of-week -->
   <url>
     <loc>https://calculate.website/day-of-week/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/day-of-week/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/day-of-week/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/day-of-week/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/day-of-week/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/day-of-week/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/day-of-week/</loc>
@@ -581,18 +439,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- days -->
   <url>
     <loc>https://calculate.website/days/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/days/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/days/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/days/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/days/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/days/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/days/</loc>
@@ -612,18 +463,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- discount -->
   <url>
     <loc>https://calculate.website/discount/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/discount/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/discount/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/discount/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/discount/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/discount/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/discount/</loc>
@@ -643,18 +487,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- fractions -->
   <url>
     <loc>https://calculate.website/fractions/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/fractions/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/fractions/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/fractions/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/fractions/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/fractions/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/fractions/</loc>
@@ -674,18 +511,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- fuel -->
   <url>
     <loc>https://calculate.website/fuel/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/fuel/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/fuel/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/fuel/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/fuel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/fuel/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/fuel/</loc>
@@ -705,18 +535,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- heart-rate -->
   <url>
     <loc>https://calculate.website/heart-rate/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/heart-rate/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/heart-rate/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/heart-rate/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/heart-rate/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/heart-rate/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/heart-rate/</loc>
@@ -736,18 +559,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- hydration -->
   <url>
     <loc>https://calculate.website/hydration/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/hydration/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/hydration/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/hydration/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/hydration/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/hydration/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/hydration/</loc>
@@ -767,18 +583,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- ideal-weight -->
   <url>
     <loc>https://calculate.website/ideal-weight/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/ideal-weight/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/ideal-weight/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/ideal-weight/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/ideal-weight/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/ideal-weight/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/ideal-weight/</loc>
@@ -798,18 +607,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- inflation -->
   <url>
     <loc>https://calculate.website/inflation/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/inflation/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/inflation/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/inflation/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/inflation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/inflation/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/inflation/</loc>
@@ -829,18 +631,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- keyboard -->
   <url>
     <loc>https://calculate.website/keyboard/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/keyboard/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/keyboard/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/keyboard/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/keyboard/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/keyboard/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/keyboard/</loc>
@@ -860,18 +655,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- life -->
   <url>
     <loc>https://calculate.website/life/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/life/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/life/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/life/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/life/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/life/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/life/</loc>
@@ -891,18 +679,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- loan -->
   <url>
     <loc>https://calculate.website/loan/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/loan/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/loan/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/loan/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/loan/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/loan/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/loan/</loc>
@@ -922,18 +703,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- margin -->
   <url>
     <loc>https://calculate.website/margin/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/margin/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/margin/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/margin/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/margin/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/margin/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/margin/</loc>
@@ -953,18 +727,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- memory -->
   <url>
     <loc>https://calculate.website/memory/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/memory/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/memory/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/memory/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/memory/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/memory/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/memory/</loc>
@@ -984,18 +751,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- mortgage -->
   <url>
     <loc>https://calculate.website/mortgage/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/mortgage/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/mortgage/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/mortgage/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/mortgage/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/mortgage/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/mortgage/</loc>
@@ -1015,18 +775,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- percentage -->
   <url>
     <loc>https://calculate.website/percentage/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/percentage/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/percentage/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/percentage/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/percentage/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/percentage/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/percentage/</loc>
@@ -1046,18 +799,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- pregnancy -->
   <url>
     <loc>https://calculate.website/pregnancy/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/pregnancy/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/pregnancy/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/pregnancy/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/pregnancy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/pregnancy/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/pregnancy/</loc>
@@ -1077,18 +823,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- protein -->
   <url>
     <loc>https://calculate.website/protein/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/protein/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/protein/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/protein/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/protein/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/protein/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/protein/</loc>
@@ -1108,18 +847,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- random -->
   <url>
     <loc>https://calculate.website/random/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/random/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/random/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/random/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/random/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/random/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/random/</loc>
@@ -1139,18 +871,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- reaction-time -->
   <url>
     <loc>https://calculate.website/reaction-time/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/reaction-time/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/reaction-time/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/reaction-time/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/reaction-time/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/reaction-time/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/reaction-time/</loc>
@@ -1170,18 +895,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- roi -->
   <url>
     <loc>https://calculate.website/roi/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/roi/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/roi/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/roi/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/roi/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/roi/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/roi/</loc>
@@ -1201,18 +919,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- rule-of-three -->
   <url>
     <loc>https://calculate.website/rule-of-three/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/rule-of-three/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/rule-of-three/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/rule-of-three/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/rule-of-three/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/rule-of-three/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/rule-of-three/</loc>
@@ -1232,18 +943,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- salary -->
   <url>
     <loc>https://calculate.website/salary/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/salary/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/salary/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/salary/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/salary/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/salary/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/salary/</loc>
@@ -1263,18 +967,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- savings -->
   <url>
     <loc>https://calculate.website/savings/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/savings/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/savings/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/savings/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/savings/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/savings/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/savings/</loc>
@@ -1294,18 +991,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- scientific -->
   <url>
     <loc>https://calculate.website/scientific/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/scientific/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/scientific/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/scientific/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/scientific/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/scientific/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/scientific/</loc>
@@ -1325,18 +1015,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- sleep -->
   <url>
     <loc>https://calculate.website/sleep/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/sleep/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/sleep/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/sleep/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/sleep/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/sleep/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/sleep/</loc>
@@ -1356,18 +1039,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- statistics -->
   <url>
     <loc>https://calculate.website/statistics/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/statistics/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/statistics/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/statistics/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/statistics/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/statistics/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/statistics/</loc>
@@ -1387,28 +1063,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- sueldo-neto -->
   <url>
     <loc>https://calculate.website/sueldo-neto/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/sueldo-neto/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/sueldo-neto/"/>
   </url>
-
-  <!-- timer -->
   <url>
     <loc>https://calculate.website/timer/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/timer/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/timer/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/timer/</loc>
@@ -1428,18 +1093,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- tip -->
   <url>
     <loc>https://calculate.website/tip/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/tip/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/tip/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/tip/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/tip/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/tip/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/tip/</loc>
@@ -1459,18 +1117,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- triangle -->
   <url>
     <loc>https://calculate.website/triangle/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/triangle/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/triangle/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/triangle/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/triangle/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/triangle/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/triangle/</loc>
@@ -1490,18 +1141,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- typing -->
   <url>
     <loc>https://calculate.website/typing/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/typing/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/typing/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/typing/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/typing/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/typing/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/typing/</loc>
@@ -1521,18 +1165,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- unit-converter -->
   <url>
     <loc>https://calculate.website/unit-converter/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/unit-converter/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/unit-converter/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/unit-converter/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/unit-converter/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/unit-converter/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/unit-converter/</loc>
@@ -1552,18 +1189,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- vat -->
   <url>
     <loc>https://calculate.website/vat/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/vat/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/vat/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/vat/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/vat/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/vat/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/vat/</loc>
@@ -1583,18 +1213,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- weight-loss -->
   <url>
     <loc>https://calculate.website/weight-loss/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/weight-loss/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/weight-loss/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/weight-loss/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/weight-loss/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/weight-loss/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/weight-loss/</loc>
@@ -1614,18 +1237,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- work-hours -->
   <url>
     <loc>https://calculate.website/work-hours/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/work-hours/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/work-hours/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/work-hours/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/work-hours/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/work-hours/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/work-hours/</loc>
@@ -1645,18 +1261,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- world-cup -->
   <url>
     <loc>https://calculate.website/world-cup/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/world-cup/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/world-cup/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/world-cup/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/world-cup/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/world-cup/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/world-cup/</loc>
@@ -1676,18 +1285,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- zodiac -->
   <url>
     <loc>https://calculate.website/zodiac/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/zodiac/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/zodiac/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/zodiac/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/zodiac/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/zodiac/"/>
   </url>
   <url>
     <loc>https://calculate.website/es/zodiac/</loc>
@@ -1707,8 +1309,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- AR-ONLY CALCULATORS -->
   <url>
     <loc>https://calculate.website/aguinaldo/</loc>
     <lastmod>2026-05-28</lastmod>
@@ -1799,103 +1399,281 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- NEW CALCULATORS — 2026-06-01 -->
-  <!-- Geometry Calculator -->
   <url>
     <loc>https://calculate.website/geometry/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/geometry/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/geometry/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/geometry/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/geometry/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/geometry/"/>
   </url>
-  <url><loc>https://calculate.website/es/geometry/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/geometry/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/geometry/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-
-  <!-- LCM & GCD Calculator -->
+  <url>
+    <loc>https://calculate.website/es/geometry/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/geometry/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/geometry/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://calculate.website/lcm/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/lcm/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/lcm/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/lcm/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/lcm/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/lcm/"/>
   </url>
-  <url><loc>https://calculate.website/es/lcm/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/lcm/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/lcm/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-
-  <!-- Word & Character Counter -->
+  <url>
+    <loc>https://calculate.website/es/lcm/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/lcm/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/lcm/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://calculate.website/word-counter/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/word-counter/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/word-counter/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/word-counter/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/word-counter/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/word-counter/"/>
   </url>
-  <url><loc>https://calculate.website/es/word-counter/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/word-counter/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/word-counter/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-
-  <!-- Weighted Average / GPA Calculator -->
+  <url>
+    <loc>https://calculate.website/es/word-counter/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/word-counter/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/word-counter/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://calculate.website/weighted-average/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://calculate.website/weighted-average/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://calculate.website/es/weighted-average/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://calculate.website/pt/weighted-average/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://calculate.website/fr/weighted-average/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://calculate.website/weighted-average/"/>
   </url>
-  <url><loc>https://calculate.website/es/weighted-average/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/weighted-average/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/weighted-average/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-
-  <!-- Category pages ES/PT/FR (added 2026-06-01) -->
-  <url><loc>https://calculate.website/es/health/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/pt/health/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/fr/health/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/es/finance/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/pt/finance/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/fr/finance/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/es/math/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/pt/math/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/fr/math/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/es/dates/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/pt/dates/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/fr/dates/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/es/games/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/pt/games/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/fr/games/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/es/ecommerce/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/pt/ecommerce/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://calculate.website/fr/ecommerce/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <!-- eCommerce sub-pages ES/PT/FR -->
-  <url><loc>https://calculate.website/es/ecommerce/kpis/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/ecommerce/kpis/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/ecommerce/kpis/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/es/ecommerce/margen/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/ecommerce/margen/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/ecommerce/margen/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/es/ecommerce/proyeccion/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/ecommerce/proyeccion/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/ecommerce/proyeccion/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/es/ecommerce/envio-china/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/pt/ecommerce/envio-china/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calculate.website/fr/ecommerce/envio-china/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url>
+    <loc>https://calculate.website/es/weighted-average/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/weighted-average/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/weighted-average/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/health/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/health/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/health/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/finance/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/finance/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/finance/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/math/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/math/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/math/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/dates/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/dates/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/dates/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/games/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/games/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/games/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/ecommerce/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/ecommerce/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/ecommerce/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/ecommerce/kpis/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/ecommerce/kpis/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/ecommerce/kpis/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/ecommerce/margen/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/ecommerce/margen/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/ecommerce/margen/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/ecommerce/proyeccion/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/ecommerce/proyeccion/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/ecommerce/proyeccion/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/es/ecommerce/envio-china/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/pt/ecommerce/envio-china/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://calculate.website/fr/ecommerce/envio-china/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
 </urlset>
